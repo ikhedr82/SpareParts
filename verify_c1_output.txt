@@ -1,0 +1,37 @@
+C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: Ô¿» Unable to compile TypeScript:
+verify_chargeback_law.ts(40,13): error TS2353: Object literal may only specify known properties, and 'sellingPrice' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'.
+verify_chargeback_law.ts(57,21): error TS2353: Object literal may only specify known properties, and 'price' does not exist in type '(Without<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput> & OrderItemUncheckedCreateWithoutOrderInput) | (Without<...> & OrderItemCreateWithoutOrderInput) | OrderItemCreateWithoutOrderInput[] | OrderItemUncheckedCreateWithoutOrderInput[]'.
+verify_chargeback_law.ts(101,9): error TS2322: Type '{ id: string; tenantId: string; branchId: string; orderId: string; returnNumber: string; status: "REQUESTED"; reason: "WRONG_ITEM"; }' is not assignable to type '(Without<ReturnCreateInput, ReturnUncheckedCreateInput> & ReturnUncheckedCreateInput) | (Without<...> & ReturnCreateInput)'.
+  Type '{ id: string; tenantId: string; branchId: string; orderId: string; returnNumber: string; status: "REQUESTED"; reason: "WRONG_ITEM"; }' is not assignable to type 'Without<ReturnUncheckedCreateInput, ReturnCreateInput> & ReturnCreateInput'.
+    Type '{ id: string; tenantId: string; branchId: string; orderId: string; returnNumber: string; status: "REQUESTED"; reason: "WRONG_ITEM"; }' is not assignable to type 'Without<ReturnUncheckedCreateInput, ReturnCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+verify_chargeback_law.ts(132,13): error TS2353: Object literal may only specify known properties, and 'orderId' does not exist in type '(Without<DeliveryExceptionCreateInput, DeliveryExceptionUncheckedCreateInput> & DeliveryExceptionUncheckedCreateInput) | (Without<...> & DeliveryExceptionCreateInput)'.
+verify_chargeback_law.ts(157,9): error TS2322: Type '{ id: string; tenantId: string; branchId: string; orderId: string; returnNumber: string; status: "RECEIVED"; reason: "DEFECTIVE"; }' is not assignable to type '(Without<ReturnCreateInput, ReturnUncheckedCreateInput> & ReturnUncheckedCreateInput) | (Without<...> & ReturnCreateInput)'.
+  Type '{ id: string; tenantId: string; branchId: string; orderId: string; returnNumber: string; status: "RECEIVED"; reason: "DEFECTIVE"; }' is not assignable to type 'Without<ReturnUncheckedCreateInput, ReturnCreateInput> & ReturnCreateInput'.
+    Type '{ id: string; tenantId: string; branchId: string; orderId: string; returnNumber: string; status: "RECEIVED"; reason: "DEFECTIVE"; }' is not assignable to type 'Without<ReturnUncheckedCreateInput, ReturnCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+verify_chargeback_law.ts(211,21): error TS2353: Object literal may only specify known properties, and 'price' does not exist in type '(Without<OrderItemCreateWithoutOrderInput, OrderItemUncheckedCreateWithoutOrderInput> & OrderItemUncheckedCreateWithoutOrderInput) | (Without<...> & OrderItemCreateWithoutOrderInput) | OrderItemCreateWithoutOrderInput[] | OrderItemUncheckedCreateWithoutOrderInput[]'.
+verify_chargeback_law.ts(222,13): error TS2353: Object literal may only specify known properties, and 'orderId' does not exist in type '(Without<DeliveryExceptionCreateInput, DeliveryExceptionUncheckedCreateInput> & DeliveryExceptionUncheckedCreateInput) | (Without<...> & DeliveryExceptionCreateInput)'.
+
+    at createTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1893:10
+    at Object.require.extensions.<computed> [as .ts] (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  diagnosticCodes: [
+    2353, 2353,
+    2322, 2353,
+    2322, 2353,
+    2353
+  ]
+}

@@ -1,0 +1,37 @@
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +13ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInventoryModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSalesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReturnsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInventoryController {/inventory}:[39m[38;5;3m +7ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSalesController {/sales}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReturnsController {/returns}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/returns, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/returns, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/returns/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentsController {/payments}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/sale/:saleId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16788  - [39m01/02/2026, 23:36:55 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+Application is running on: http://[::1]:3000
+[TenantAwarePrismaService ERROR] model: Sale, operation: findUnique TypeError: Cannot read properties of undefined (reading 'sale')
+    at Array.$allOperations (C:\Spare Parts\Project\dist\prisma\tenant-aware-prisma.service.js:51:69)
+    at C:\Spare Parts\Project\node_modules\@prisma\client\runtime\library.js:31:9494
+    at o (C:\Spare Parts\Project\node_modules\@prisma\client\runtime\library.js:121:1018)
+    at PrismaPromise.then (C:\Spare Parts\Project\node_modules\@prisma\client\runtime\library.js:121:1114)
+[Nest] 16788  - 01/02/2026, 23:37:09   ERROR [ExceptionsHandler] Cannot read properties of undefined (reading 'sale')
+TypeError: Cannot read properties of undefined (reading 'sale')
+    at Array.$allOperations (C:\Spare Parts\Project\dist\prisma\tenant-aware-prisma.service.js:51:69)
+    at C:\Spare Parts\Project\node_modules\@prisma\client\runtime\library.js:31:9494
+    at o (C:\Spare Parts\Project\node_modules\@prisma\client\runtime\library.js:121:1018)
+    at PrismaPromise.then (C:\Spare Parts\Project\node_modules\@prisma\client\runtime\library.js:121:1114)

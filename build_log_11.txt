@@ -1,0 +1,128 @@
+
+> partstack@1.0.0 build
+> nest build
+
+src/logistics/commercial-safety.service.ts:61:21 - error TS2353: Object literal may only specify known properties, and 'parentReturnId' does not exist in type '(Without<OrderCreateInput, OrderUncheckedCreateInput> & OrderUncheckedCreateInput) | (Without<...> & OrderCreateInput)'.
+
+61                     parentReturnId: returnId,
+                       ~~~~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:70239:5
+    70239     data: XOR<OrderCreateInput, OrderUncheckedCreateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: OrderSelect<DefaultArgs>; omit?: OrderOmit<DefaultArgs>; include?: OrderInclude<DefaultArgs>; data: (Without<...> & OrderUncheckedCreateInput) | (Without<...> & OrderCreateInput); }'
+src/logistics/commercial-safety.service.ts:118:21 - error TS2559: Type 'string' has no properties in common with type 'UserCreateNestedOneWithoutRefundsInput'.
+
+118                     createdBy: userId
+                        ~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:100256:5
+    100256     createdBy: UserCreateNestedOneWithoutRefundsInput
+               ~~~~~~~~~
+    The expected type comes from property 'createdBy' which is declared here on type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'
+src/logistics/delivery-exceptions.service.ts:46:21 - error TS2353: Object literal may only specify known properties, and 'exceptionResolved' does not exist in type '(Without<TripStopUpdateInput, TripStopUncheckedUpdateInput> & TripStopUncheckedUpdateInput) | (Without<...> & TripStopUpdateInput)'.
+
+46                     exceptionResolved: false,
+                       ~~~~~~~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:84561:5
+    84561     data: XOR<TripStopUpdateInput, TripStopUncheckedUpdateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: TripStopSelect<DefaultArgs>; omit?: TripStopOmit<DefaultArgs>; include?: TripStopInclude<DefaultArgs>; data: (Without<...> & TripStopUncheckedUpdateInput) | (Without<...> & TripStopUpdateInput); where: TripStopWhereUniqueInput; }'
+src/logistics/delivery-exceptions.service.ts:98:29 - error TS2353: Object literal may only specify known properties, and 'exceptionResolved' does not exist in type '(Without<TripStopUpdateInput, TripStopUncheckedUpdateInput> & TripStopUncheckedUpdateInput) | (Without<...> & TripStopUpdateInput)'.
+
+98                     data: { exceptionResolved: true },
+                               ~~~~~~~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:84561:5
+    84561     data: XOR<TripStopUpdateInput, TripStopUncheckedUpdateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: TripStopSelect<DefaultArgs>; omit?: TripStopOmit<DefaultArgs>; include?: TripStopInclude<DefaultArgs>; data: (Without<...> & TripStopUncheckedUpdateInput) | (Without<...> & TripStopUpdateInput); where: TripStopWhereUniqueInput; }'
+src/logistics/refunds.service.ts:42:17 - error TS2559: Type 'string' has no properties in common with type 'UserCreateNestedOneWithoutRefundsInput'.
+
+42                 createdBy,
+                   ~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:100256:5
+    100256     createdBy: UserCreateNestedOneWithoutRefundsInput
+               ~~~~~~~~~
+    The expected type comes from property 'createdBy' which is declared here on type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'
+src/logistics/refunds.service.ts:65:21 - error TS2353: Object literal may only specify known properties, and 'processedBy' does not exist in type '(Without<RefundUpdateInput, RefundUncheckedUpdateInput> & RefundUncheckedUpdateInput) | (Without<...> & RefundUpdateInput)'.
+
+65                     processedBy,
+                       ~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:40356:5
+    40356     data: XOR<RefundUpdateInput, RefundUncheckedUpdateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedUpdateInput) | (Without<...> & RefundUpdateInput); where: RefundWhereUniqueInput; }'
+src/logistics/refunds.service.ts:95:17 - error TS2353: Object literal may only specify known properties, and 'cancelledBy' does not exist in type '(Without<RefundUpdateInput, RefundUncheckedUpdateInput> & RefundUncheckedUpdateInput) | (Without<...> & RefundUpdateInput)'.
+
+95                 cancelledBy,
+                   ~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:40356:5
+    40356     data: XOR<RefundUpdateInput, RefundUncheckedUpdateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedUpdateInput) | (Without<...> & RefundUpdateInput); where: RefundWhereUniqueInput; }'
+src/logistics/returns.service.ts:109:21 - error TS2559: Type 'string' has no properties in common with type 'UserCreateNestedOneWithoutRefundsInput'.
+
+109                     createdBy: approvedBy,
+                        ~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:100256:5
+    100256     createdBy: UserCreateNestedOneWithoutRefundsInput
+               ~~~~~~~~~
+    The expected type comes from property 'createdBy' which is declared here on type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'
+src/logistics/returns.service.ts:211:25 - error TS2353: Object literal may only specify known properties, and 'processedBy' does not exist in type '(Without<RefundUpdateInput, RefundUncheckedUpdateInput> & RefundUncheckedUpdateInput) | (Without<...> & RefundUpdateInput)'.
+
+211                         processedBy: completedBy,
+                            ~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:40356:5
+    40356     data: XOR<RefundUpdateInput, RefundUncheckedUpdateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedUpdateInput) | (Without<...> & RefundUpdateInput); where: RefundWhereUniqueInput; }'
+src/mobile/driver-mobile.controller.ts:58:21 - error TS2353: Object literal may only specify known properties, and 'completedAt' does not exist in type '(Without<TripStopUpdateInput, TripStopUncheckedUpdateInput> & TripStopUncheckedUpdateInput) | (Without<...> & TripStopUpdateInput)'.
+
+58                     completedAt: new Date()
+                       ~~~~~~~~~~~
+
+  node_modules/.prisma/client/index.d.ts:84561:5
+    84561     data: XOR<TripStopUpdateInput, TripStopUncheckedUpdateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: TripStopSelect<DefaultArgs>; omit?: TripStopOmit<DefaultArgs>; include?: TripStopInclude<DefaultArgs>; data: (Without<...> & TripStopUncheckedUpdateInput) | (Without<...> & TripStopUpdateInput); where: TripStopWhereUniqueInput; }'
+src/prisma/seed-cash-session.ts:115:17 - error TS2322: Type '{ tenantId: string; branchId: string; saleId: string; amount: Decimal; reason: string; createdById: string; cashSessionId: string; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ tenantId: string; branchId: string; saleId: string; amount: Decimal; reason: string; createdById: string; cashSessionId: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ tenantId: string; branchId: string; saleId: string; amount: Decimal; reason: string; createdById: string; cashSessionId: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+
+115                 data: {
+                    ~~~~
+
+  node_modules/.prisma/client/index.d.ts:40300:5
+    40300     data: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput); }'
+src/sales/pricing/price-engine.service.ts:127:22 - error TS2339: Property 'businessClientId' does not exist on type '{ id: string; name: string; createdAt: Date; updatedAt: Date; tenantId: string; brandId: string; categoryId: string; type: PriceRuleType; isActive: boolean; productId: string; ... 4 more ...; minQuantity: number; }'.
+
+127             if (rule.businessClientId === businessClientId) score += 100;
+                         ~~~~~~~~~~~~~~~~
+src/sales/pricing/price-engine.service.ts:128:27 - error TS2339: Property 'priceTierId' does not exist on type '{ id: string; name: string; createdAt: Date; updatedAt: Date; tenantId: string; brandId: string; categoryId: string; type: PriceRuleType; isActive: boolean; productId: string; ... 4 more ...; minQuantity: number; }'.
+
+128             else if (rule.priceTierId === clientTierId) score += 50;
+                              ~~~~~~~~~~~
+src/sales/sales.service.ts:258:17 - error TS2322: Type '{ tenantId: string; branchId: string; saleId: string; amount: number; reason: string; createdById: string; cashSessionId: string; }' is not assignable to type 'Exact<(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput), (Without<...> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)>'.
+  Type '{ tenantId: string; branchId: string; saleId: string; amount: number; reason: string; createdById: string; cashSessionId: string; }' is missing the following properties from type '{ tenantId?: never; branchId?: never; orderId?: never; cashSessionId?: never; saleId?: never; createdById?: never; returnId?: never; id?: string; refundNumber: string; amount: Exact<string | number | Decimal | DecimalJsLike, string | ... 2 more ... | DecimalJsLike>; ... 10 more ...; return?: { ...; }; }': refundNumber, tenant, branch, sale, createdBy
+
+258                 data: {
+                    ~~~~
+
+  node_modules/.prisma/client/index.d.ts:40300:5
+    40300     data: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: { tenant?: Exact<boolean | TenantDefaultArgs<InternalArgs & { result: {}; model: {}; query: {}; client: {}; }>, boolean | TenantDefaultArgs<InternalArgs & { ...; }>>; ... 19 more ...; createdBy?: Exact<...>; }; omit?: { ...; }; include?: { ...; }; data: Exact<...>; }'
+
+Found 14 error(s).
+

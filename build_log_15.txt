@@ -1,0 +1,46 @@
+
+> partstack@1.0.0 build
+> nest build
+
+src/logistics/commercial-safety.service.ts:111:17 - error TS2322: Type '{ tenantId: string; orderId: string; amount: Decimal; reason: string; status: "PENDING"; refundNumber: string; createdById: string; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ tenantId: string; orderId: string; amount: Decimal; reason: string; status: "PENDING"; refundNumber: string; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ tenantId: string; orderId: string; amount: Decimal; reason: string; status: "PENDING"; refundNumber: string; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+
+111                 data: {
+                    ~~~~
+
+  node_modules/.prisma/client/index.d.ts:40588:5
+    40588     data: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput); }'
+src/logistics/refunds.service.ts:34:13 - error TS2322: Type '{ tenantId: string; orderId: string; returnId: string; refundNumber: string; amount: number; reason: string; status: "PENDING"; createdById: string; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ tenantId: string; orderId: string; returnId: string; refundNumber: string; amount: number; reason: string; status: "PENDING"; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ tenantId: string; orderId: string; returnId: string; refundNumber: string; amount: number; reason: string; status: "PENDING"; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+
+34             data: {
+               ~~~~
+
+  node_modules/.prisma/client/index.d.ts:40588:5
+    40588     data: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput); }'
+src/logistics/returns.service.ts:101:17 - error TS2322: Type '{ tenantId: string; orderId: string; returnId: string; refundNumber: string; amount: number; reason: string; status: "PENDING"; createdById: string; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ tenantId: string; orderId: string; returnId: string; refundNumber: string; amount: number; reason: string; status: "PENDING"; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ tenantId: string; orderId: string; returnId: string; refundNumber: string; amount: number; reason: string; status: "PENDING"; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+
+101                 data: {
+                    ~~~~
+
+  node_modules/.prisma/client/index.d.ts:40588:5
+    40588     data: XOR<RefundCreateInput, RefundUncheckedCreateInput>
+              ~~~~
+    The expected type comes from property 'data' which is declared here on type '{ select?: RefundSelect<DefaultArgs>; omit?: RefundOmit<DefaultArgs>; include?: RefundInclude<DefaultArgs>; data: (Without<...> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput); }'
+
+Found 3 error(s).
+

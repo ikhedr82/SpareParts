@@ -1,0 +1,26 @@
+Loaded Prisma config from prisma.config.ts.
+
+Prisma config detected, skipping environment variable loading.
+Prisma schema loaded from src\prisma\schema.prisma
+
+Error: Prisma schema validation - (validate wasm)
+Error code: P1012
+error: Error parsing attribute "@relation": The relation field `refund` on Model `Return` must specify the `fields` argument in the @relation attribute. You can run `prisma format` to fix this automatically.
+  -->  src\prisma\schema.prisma:1687
+   | 
+1686 |   returnItems       ReturnItem[]
+1687 |   refund            Refund?
+1688 | 
+   | 
+error: Error parsing attribute "@relation": The relation field `refund` on Model `Return` must specify the `references` argument in the @relation attribute.
+  -->  src\prisma\schema.prisma:1687
+   | 
+1686 |   returnItems       ReturnItem[]
+1687 |   refund            Refund?
+1688 | 
+   | 
+
+Validation Error Count: 2
+[Context: validate]
+
+Prisma CLI Version : 6.19.2

@@ -1,0 +1,108 @@
+// --------------------------------------
+// Logistics Models
+// --------------------------------------
+
+model Driver {
+  id             String         @id @default(uuid())
+  tenantId       String         @map("tenant_id")
+  branchId       String         @map("branch_id")
+  name           String
+  phone          String
+  isActive       Boolean        @default(true) @map("is_active")
+  currentTripId  String?        @unique @map("current_trip_id")
+  createdAt      DateTime       @default(now()) @map("created_at")
+  
+  tenant         Tenant         @relation(fields: [tenantId], references: [id])
+  branch         Branch         @relation(fields: [branchId], references: [id])
+  currentTrip    DeliveryTrip?  @relation("CurrentDriverTrip", fields: [currentTripId], references: [id])
+  trips          DeliveryTrip[] @relation("DriverTrips")
+  
+  @@index([tenantId])
+  @@index([branchId])
+  @@map("drivers")
+}
+
+model Vehicle {
+  id             String         @id @default(uuid())
+  tenantId       String         @map("tenant_id")
+  branchId       String         @map("branch_id")
+  plateNumber    String         @map("plate_number")
+  type           VehicleType
+  capacityKg     Int?           @map("capacity_kg")
+  isActive       Boolean        @default(true) @map("is_active")
+  currentTripId  String?        @unique @map("current_trip_id")
+  createdAt      DateTime       @default(now()) @map("created_at")
+  
+  tenant         Tenant         @relation(fields: [tenantId], references: [id])
+  branch         Branch         @relation(fields: [branchId], references: [id])
+  currentTrip    DeliveryTrip?  @relation("CurrentVehicleTrip", fields: [currentTripId], references: [id])
+  trips          DeliveryTrip[] @relation("VehicleTrips")
+  
+  @@unique([tenantId, plateNumber])
+  @@index([tenantId])
+  @@index([branchId])
+  @@map("vehicles")
+}
+
+model DeliveryTrip {
+  id              String              @id @default(uuid())
+  tenantId        String              @map("tenant_id")
+  branchId        String              @map("branch_id")
+  driverId        String              @map("driver_id")
+  vehicleId       String              @map("vehicle_id")
+  status          DeliveryTripStatus  @default(PLANNED)
+  startedAt       DateTime?           @map("started_at")
+  completedAt     DateTime?           @map("completed_at")
+  totalStops      Int                 @default(0) @map("total_stops")
+  totalPacks      Int                 @default(0) @map("total_packs")
+  createdAt       DateTime            @default(now()) @map("created_at")
+  
+  tenant          Tenant              @relation(fields: [tenantId], references: [id])
+  branch          Branch              @relation(fields: [branchId], references: [id])
+  driver          Driver              @relation("DriverTrips", fields: [driverId], references: [id])
+  vehicle         Vehicle             @relation("VehicleTrips", fields: [vehicleId], references: [id])
+  stops           TripStop[]
+  packs           TripPack[]
+  currentDriver   Driver?             @relation("CurrentDriverTrip")
+  currentVehicle  Vehicle?            @relation("CurrentVehicleTrip")
+  
+  @@index([tenantId])
+  @@index([branchId])
+  @@index([status])
+  @@map("delivery_trips")
+}
+
+model TripStop {
+  id             String         @id @default(uuid())
+  tripId         String         @map("trip_id")
+  orderId        String?        @map("order_id")
+  supplierId     String?        @map("supplier_id")
+  customerId     String?        @map("customer_id")
+  stopType       TripStopType   @map("stop_type")
+  sequence       Int
+  status         TripStopStatus @default(PENDING)
+  arrivalTime    DateTime?      @map("arrival_time")
+  completionTime DateTime?      @map("completion_time")
+  
+  trip           DeliveryTrip   @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  order          Order?         @relation(fields: [orderId], references: [id])
+  supplier       Supplier?      @relation(fields: [supplierId], references: [id])
+  customer       Customer?      @relation(fields: [customerId], references: [id])
+  
+  @@index([tripId])
+  @@map("trip_stops")
+}
+
+model TripPack {
+  id          String        @id @default(uuid())
+  tripId      String        @map("trip_id")
+  packId      String        @unique @map("pack_id")
+  loadedAt    DateTime      @default(now()) @map("loaded_at")
+  deliveredAt DateTime?     @map("delivered_at")
+  
+  trip        DeliveryTrip  @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  pack        Pack          @relation(fields: [packId], references: [id])
+  
+  @@index([tripId])
+  @@map("trip_packs")
+}

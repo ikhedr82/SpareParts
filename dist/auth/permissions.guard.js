@@ -1,0 +1,81 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PermissionsGuard = void 0;
+const common_1 = require("@nestjs/common");
+const core_1 = require("@nestjs/core");
+const permissions_decorator_1 = require("./permissions.decorator");
+const prisma_service_1 = require("../prisma/prisma.service");
+const client_1 = require("@prisma/client");
+let PermissionsGuard = class PermissionsGuard {
+    constructor(reflector, prisma) {
+        this.reflector = reflector;
+        this.prisma = prisma;
+    }
+    async canActivate(context) {
+        var _a, _b;
+        const requiredPermissions = this.reflector.getAllAndOverride(permissions_decorator_1.PERMISSIONS_KEY, [
+            context.getHandler(),
+            context.getClass(),
+        ]);
+        if (!requiredPermissions || requiredPermissions.length === 0) {
+            return true;
+        }
+        const request = context.switchToHttp().getRequest();
+        const user = request.user;
+        if (!user || !user.id) {
+            throw new common_1.ForbiddenException('User not authenticated');
+        }
+        const tenantId = request.tenantId || user.tenantId;
+        const branchId = ((_a = request.query) === null || _a === void 0 ? void 0 : _a.branchId) || ((_b = request.body) === null || _b === void 0 ? void 0 : _b.branchId);
+        const userRoles = await this.prisma.userRole.findMany({
+            where: { userId: user.id },
+            include: {
+                role: {
+                    include: {
+                        permissions: {
+                            include: { permission: true },
+                        },
+                    },
+                },
+            },
+        });
+        const userPermissions = new Set();
+        for (const userRole of userRoles) {
+            const role = userRole.role;
+            if (role.scope === client_1.RoleScope.PLATFORM) {
+                role.permissions.forEach(rp => userPermissions.add(rp.permission.code));
+            }
+            else if (role.scope === client_1.RoleScope.TENANT) {
+                if (userRole.tenantId === tenantId || !tenantId) {
+                    role.permissions.forEach(rp => userPermissions.add(rp.permission.code));
+                }
+            }
+            else if (role.scope === client_1.RoleScope.BRANCH) {
+                if (userRole.tenantId === tenantId && (!branchId || userRole.branchId === branchId)) {
+                    role.permissions.forEach(rp => userPermissions.add(rp.permission.code));
+                }
+            }
+        }
+        const hasPermission = requiredPermissions.some(perm => userPermissions.has(perm));
+        if (!hasPermission) {
+            throw new common_1.ForbiddenException(`Missing required permissions: ${requiredPermissions.join(', ')}`);
+        }
+        return true;
+    }
+};
+exports.PermissionsGuard = PermissionsGuard;
+exports.PermissionsGuard = PermissionsGuard = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [core_1.Reflector,
+        prisma_service_1.PrismaService])
+], PermissionsGuard);
+//# sourceMappingURL=permissions.guard.js.map

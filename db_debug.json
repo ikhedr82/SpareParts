@@ -1,0 +1,73 @@
+User Admin@Aljazeera: {
+  "id": "64efac8f-270a-4293-b4e5-49c47fa79f73",
+  "tenantId": "b59915fa-0656-44c1-a2e0-2baf5ef34670",
+  "email": "admin@aljazeera.com",
+  "passwordHash": "$2b$10$Jh3n6ve5UKjTSns71zsUL.wUn7.X9LzC7P91XbJG3m91NQINsam/K",
+  "isPlatformUser": true,
+  "status": "ACTIVE",
+  "createdAt": "2026-02-27T20:14:05.155Z",
+  "updatedAt": "2026-02-27T23:52:42.426Z",
+  "version": 0,
+  "tenant": {
+    "id": "b59915fa-0656-44c1-a2e0-2baf5ef34670",
+    "name": "Al Jazeera Auto Parts",
+    "subdomain": "aljazeera",
+    "status": "ACTIVE",
+    "suspensionReason": null,
+    "plan": "ENTERPRISE",
+    "defaultLanguage": "AR",
+    "supportedLanguages": [
+      "EN",
+      "AR"
+    ],
+    "createdAt": "2025-08-01T05:00:00.000Z",
+    "updatedAt": "2026-02-27T20:14:04.919Z"
+  }
+}
+All Tenants: [
+  {
+    "id": "b59915fa-0656-44c1-a2e0-2baf5ef34670",
+    "name": "Al Jazeera Auto Parts",
+    "subdomain": "aljazeera",
+    "status": "ACTIVE",
+    "suspensionReason": null,
+    "plan": "ENTERPRISE",
+    "defaultLanguage": "AR",
+    "supportedLanguages": [
+      "EN",
+      "AR"
+    ],
+    "createdAt": "2025-08-01T05:00:00.000Z",
+    "updatedAt": "2026-02-27T20:14:04.919Z"
+  },
+  {
+    "id": "PLATFORM",
+    "name": "System Platform",
+    "subdomain": "system-platform",
+    "status": "ACTIVE",
+    "suspensionReason": null,
+    "plan": "ENTERPRISE",
+    "defaultLanguage": "EN",
+    "supportedLanguages": [
+      "EN",
+      "AR"
+    ],
+    "createdAt": "2026-02-28T00:06:59.716Z",
+    "updatedAt": "2026-02-28T00:06:59.716Z"
+  },
+  {
+    "id": "4f5452e9-80e7-4d92-b202-9ea69f7e8be9",
+    "name": "Test Tenant 2",
+    "subdomain": "test2",
+    "status": "ACTIVE",
+    "suspensionReason": null,
+    "plan": "ENTERPRISE",
+    "defaultLanguage": "EN",
+    "supportedLanguages": [
+      "EN",
+      "AR"
+    ],
+    "createdAt": "2026-02-28T00:08:02.997Z",
+    "updatedAt": "2026-02-28T00:08:02.997Z"
+  }
+]

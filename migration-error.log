@@ -1,0 +1,77 @@
+prisma:cli:bin Failed to initialize the command state: Error: ENOENT: no such file or directory, open 'C:\Users\nayie\AppData\Roaming\prisma-nodejs\Config\commands.json' +964ms
+prisma:config:loadConfigFromFile Config file loaded in 66.55ms +827ms
+prisma:config:loadConfigFromFile No config file found in the current working directory C:\Spare Parts\Project +0ms
+warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).
+For more information, see: https://pris.ly/prisma-config
+
+prisma:getSchema prismaConfig {
+  "config": {
+    "seed": "ts-node src/prisma/seed.ts"
+  },
+  "loadedFromFile": "C:\\Spare Parts\\Project\\package.json"
+} +74ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:cli Failed to read schema information. Using default values: '{}' +0ms
+prisma:engines binaries to download schema-engine, libquery-engine +1036ms
+prisma:getSchema prismaConfig {
+  "config": {
+    "seed": "ts-node src/prisma/seed.ts"
+  },
+  "loadedFromFile": "C:\\Spare Parts\\Project\\package.json"
+} +5ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema prismaConfig {
+  "config": {
+    "seed": "ts-node src/prisma/seed.ts"
+  },
+  "loadedFromFile": "C:\\Spare Parts\\Project\\package.json"
+} +1ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:cli:checkpoint Error from runCheckpointClientCheck() +0ms
+prisma:cli:checkpoint {} +0ms
+prisma:cli:checkpoint Error from tryToReadDataFromSchema() while processing the schema. This is not a fatal error. It will continue without the processed data. +1ms
+prisma:cli:checkpoint {} +0ms
+prisma:loadEnv project root found at C:\Spare Parts\Project\package.json +133ms
+prisma:getSchema prismaConfig {
+  "config": {
+    "seed": "ts-node src/prisma/seed.ts"
+  },
+  "loadedFromFile": "C:\\Spare Parts\\Project\\package.json"
+} +2ms
+prisma:tryLoadEnv Environment variables loaded from C:\Spare Parts\Project\.env +0ms
+Environment variables loaded from .env
+prisma:getSchema prismaConfig {
+  "config": {
+    "seed": "ts-node src/prisma/seed.ts"
+  },
+  "loadedFromFile": "C:\\Spare Parts\\Project\\package.json"
+} +2ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\schema.prisma +0ms
+prisma:getSchema Checking existence of C:\Spare Parts\Project\prisma\schema.prisma +0ms
+prisma:getSchema Reading schema from single file C:\Spare Parts\Project\prisma\schema.prisma +0ms
+Error: Error: Could not find Prisma Schema that is required for this command.
+You can either provide it with `--schema` argument,
+set it in your Prisma Config file (e.g., `prisma.config.ts`),
+set it as `prisma.schema` in your package.json,
+or put it into the default location (`./prisma/schema.prisma`, or `./schema.prisma`.
+Checked following paths:
+
+schema.prisma: file not found
+prisma\schema.prisma: file not found
+
+See also https://pris.ly/d/prisma-schema-location
+    at Oa (C:\Spare Parts\Project\node_modules\prisma\build\index.js:280:2396)
+    at async Ir (C:\Spare Parts\Project\node_modules\prisma\build\index.js:307:1047)
+    at async e.parse (C:\Spare Parts\Project\node_modules\prisma\build\index.js:3765:378)
+    at async e.parse (C:\Spare Parts\Project\node_modules\prisma\build\index.js:4084:1867)
+    at async D4t (C:\Spare Parts\Project\node_modules\prisma\build\index.js:4910:132)

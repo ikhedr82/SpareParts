@@ -1,0 +1,27 @@
+--- PHASE 2: FAILURE SCENARIOS ---
+
+[2.1] Simulating Webhook Duplication...
+Ô£ô Webhook duplication handled (idempotent)
+
+[2.2] Inventory Race Condition (Concurrent Sales)...
+- Seeding COA for tenant e99425e0-2d36-4487-9641-22d084e973e4...
+- Stock initialized to 5 for product 48ccf520-2a97-4800-bd17-220663e0f38c
+- Successes: 1, Failures: 2
+- Final Stock level: 3
+Ô£ô Inventory race condition handled
+
+[2.3] Concurrent Updates (Optimistic Locking)...
+- Order created with ID 9312af42-1671-447d-95c7-c1803aa3c612, version 0
+- Update 1 Status: 200, Body: {"id":"9312af42-1671-447d-95c7-c1803aa3c612","tenantId":"e99425e0-2d36-4487-9641-22d084e973e4","businessClientId":"2ce809ae-517a-4057-b2d7-fb89abf869b7","branchId":"19e086ff-703f-448f-8bd7-2f7d2dec425a","orderNumber":"ORD-1772489731308-2CE8","deliveryAddressId":null,"contactId":null,"subtotal":{"s":1,"e":2,"d":[100]},"tax":{"s":1,"e":0,"d":[0]},"total":{"s":1,"e":2,"d":[100]},"status":"CONFIRMED","notes":"Test order for concurrency","internalNotes":null,"sourceQuoteId":null,"confirmedAt":"2026-03-02T22:15:31.346Z","shippedAt":null,"deliveredAt":null,"cancelledAt":null,"createdAt":"2026-03-02T22:15:31.311Z","updatedAt":"2026-03-02T22:15:31.421Z","version":1,"createdById":null,"returnId":null,"deliveryExceptionId":null,"items":[{"id":"cdcdceb2-70a9-4c0b-bfdb-c63d1f35cf98","orderId":"9312af42-1671-447d-95c7-c1803aa3c612","productId":"48ccf520-2a97-4800-bd17-220663e0f38c","quantity":1,"unitPrice":{"s":1,"e":2,"d":[100]},"createdAt":"2026-03-02T22:15:31.311Z","product":{"id":"48ccf520-2a97-4800-bd17-220663e0f38c","brandId":"fd5a5b63-c844-4237-8a92-bf80696e05e4","categoryId":"365cf61c-2318-4d40-9ac8-336a0dcdc0e9","name":"Oil Filter - Standard - Toyota Corolla (Bosch)","description":"High-quality oil filter for engine protection","weight":0.35,"dimensions":null,"status":"ACTIVE","createdAt":"2026-02-27T20:14:05.247Z","updatedAt":"2026-02-27T20:14:05.247Z","unitOfMeasure":"EA","images":[],"taxRateId":null}}],"businessClient":{"id":"2ce809ae-517a-4057-b2d7-fb89abf869b7","tenantId":"e99425e0-2d36-4487-9641-22d084e973e4","type":"RETAILER","businessName":"B2B Client 0523","registrationNumber":null,"taxId":null,"primaryEmail":"b2b-0523@test.com","primaryPhone":null,"creditLimit":{"s":1,"e":3,"d":[1000]},"currentBalance":{"s":1,"e":2,"d":[100]},"paymentTermsDays":0,"paymentTerms":null,"currency":"USD","priceTierId":null,"status":"ACTIVE","notes":null,"createdAt":"2026-03-02T22:15:31.235Z","updatedAt":"2026-03-02T22:15:31.362Z"},"branch":{"id":"19e086ff-703f-448f-8bd7-2f7d2dec425a","tenantId":"e99425e0-2d36-4487-9641-22d084e973e4","name":"Race Branch","address":null,"addressAr":null,"phone":null,"createdAt":"2026-03-02T22:15:30.825Z","updatedAt":"2026-03-02T22:15:30.825Z"},"deliveryAddress":null,"contact":null}
+- Update 2 Status: 409, Body: {"statusCode":409,"error":"Conflict","conflict":{"entity":"Order","entityId":"9312af42-1671-447d-95c7-c1803aa3c612","yourValue":"status=CONFIRMED, version=0","currentValue":"status=CONFIRMED, version=1","updatedAt":"2026-03-02T22:15:31.421Z","updatedBy":"another session"}}
+- Successes: 1, Conflicts (409): 1
+Ô£ô Concurrent updates handled via optimistic locking
+
+Phase 2 Complete
+ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ
+Ôöé (index) Ôöé scenario                   Ôöé status Ôöé
+Ôö£ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöñ
+Ôöé 0       Ôöé 'Webhook Duplication'      Ôöé 'PASS' Ôöé
+Ôöé 1       Ôöé 'Inventory Race Condition' Ôöé 'PASS' Ôöé
+Ôöé 2       Ôöé 'Concurrent Updates'       Ôöé 'PASS' Ôöé
+ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ

@@ -1,0 +1,28 @@
+C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: Ô¿» Unable to compile TypeScript:
+verify_partial_return_law.ts(74,13): error TS2353: Object literal may only specify known properties, and 'sellingPrice' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'.
+verify_partial_return_law.ts(150,9): error TS2322: Type '{ id: string; tenantId: string; branchId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdBy: { connect: { id: string; }; }; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ id: string; tenantId: string; branchId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdBy: { connect: { id: string; }; }; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ id: string; tenantId: string; branchId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdBy: { connect: { id: string; }; }; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+verify_partial_return_law.ts(179,9): error TS2322: Type '{ id: string; tenantId: string; branchId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdBy: { connect: { id: string; }; }; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ id: string; tenantId: string; branchId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdBy: { connect: { id: string; }; }; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ id: string; tenantId: string; branchId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdBy: { connect: { id: string; }; }; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'tenantId' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+
+    at createTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1893:10
+    at Object.require.extensions.<computed> [as .ts] (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  diagnosticCodes: [ 2353, 2322, 2322 ]
+}

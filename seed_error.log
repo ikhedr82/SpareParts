@@ -1,0 +1,33 @@
+
+> partstack@1.0.0 seed
+> ts-node src/prisma/seed.ts
+
+C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: Ô¿» Unable to compile TypeScript:
+src/prisma/seed.ts(23,9): error TS2322: Type '{ name: string; }' is not assignable to type 'ProductCategoryWhereUniqueInput'.
+  Type '{ name: string; }' is not assignable to type '{ id: string; } & { id?: string; AND?: ProductCategoryWhereInput | ProductCategoryWhereInput[]; OR?: ProductCategoryWhereInput[]; ... 7 more ...; products?: ProductListRelationFilter; }'.
+    Property 'id' is missing in type '{ name: string; }' but required in type '{ id: string; }'.
+src/prisma/seed.ts(29,9): error TS2322: Type '{ name: string; }' is not assignable to type 'ProductCategoryWhereUniqueInput'.
+  Type '{ name: string; }' is not assignable to type '{ id: string; } & { id?: string; AND?: ProductCategoryWhereInput | ProductCategoryWhereInput[]; OR?: ProductCategoryWhereInput[]; ... 7 more ...; products?: ProductListRelationFilter; }'.
+    Property 'id' is missing in type '{ name: string; }' but required in type '{ id: string; }'.
+src/prisma/seed.ts(36,9): error TS2322: Type '{ name: string; }' is not assignable to type 'ProductWhereUniqueInput'.
+  Type '{ name: string; }' is not assignable to type '{ id: string; } & { id?: string; AND?: ProductWhereInput | ProductWhereInput[]; OR?: ProductWhereInput[]; NOT?: ProductWhereInput | ProductWhereInput[]; ... 13 more ...; returnItems?: ReturnItemListRelationFilter; }'.
+    Property 'id' is missing in type '{ name: string; }' but required in type '{ id: string; }'.
+src/prisma/seed.ts(50,9): error TS2322: Type '{ name: string; }' is not assignable to type 'ProductWhereUniqueInput'.
+  Type '{ name: string; }' is not assignable to type '{ id: string; } & { id?: string; AND?: ProductWhereInput | ProductWhereInput[]; OR?: ProductWhereInput[]; NOT?: ProductWhereInput | ProductWhereInput[]; ... 13 more ...; returnItems?: ReturnItemListRelationFilter; }'.
+    Property 'id' is missing in type '{ name: string; }' but required in type '{ id: string; }'.
+
+    at createTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1893:10
+    at Object.require.extensions.<computed> [as .ts] (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  diagnosticCodes: [ 2322, 2322, 2322, 2322 ]
+}

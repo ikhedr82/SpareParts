@@ -1,0 +1,83 @@
+
+> partstack@1.0.0 start:dev
+> nest start --watch
+
+[2J[3J[H[[90m00:56:22[0m] Starting compilation in watch mode...
+
+[[90m00:56:25[0m] Found 0 errors. Watching for file changes.
+
+(node:10968) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +12ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +6ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInventoryModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSalesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReturnsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInventoryController {/inventory}:[39m[38;5;3m +6ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/inventory/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSalesController {/sales}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/sales/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReturnsController {/returns}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/returns, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/returns, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/returns/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPaymentsController {/payments}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/payments/sale/:saleId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20812  - [39m02/02/2026, 00:56:26 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+Application is running on: http://[::1]:3000
+[PaymentsService ERROR] PrismaClientKnownRequestError: 
+Invalid `any).sale.findFirst()` invocation in
+C:\Spare Parts\Project\src\payment\payment.service.ts:12:65
+
+   9 async create(dto: CreatePaymentDto) {
+  10     try {
+  11         // Sale must exist and belong to tenant (auto filtered)
+ÔåÆ 12         const sale = await (this.prisma.client as any).sale.findFirst(
+The table `public.payments` does not exist in the current database.
+    at ei.handleRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+    at async PaymentsService.create (C:\Spare Parts\Project\src\payment\payment.service.ts:12:26)
+    at async C:\Spare Parts\Project\node_modules\@nestjs\core\router\router-execution-context.js:46:28
+    at async C:\Spare Parts\Project\node_modules\@nestjs\core\router\router-proxy.js:9:17
+    at async C:\Spare Parts\Project\node_modules\@nestjs\core\router\router-explorer.js:177:17 {
+  code: 'P2021',
+  meta: { modelName: 'Sale', table: 'public.payments' },
+  clientVersion: '6.19.2'
+}
+[Nest] 20812  - 02/02/2026, 00:56:40   ERROR [ExceptionsHandler] 
+Invalid `any).sale.findFirst()` invocation in
+C:\Spare Parts\Project\src\payment\payment.service.ts:12:65
+
+   9 async create(dto: CreatePaymentDto) {
+  10     try {
+  11         // Sale must exist and belong to tenant (auto filtered)
+ÔåÆ 12         const sale = await (this.prisma.client as any).sale.findFirst(
+The table `public.payments` does not exist in the current database.
+PrismaClientKnownRequestError: 
+Invalid `any).sale.findFirst()` invocation in
+C:\Spare Parts\Project\src\payment\payment.service.ts:12:65
+
+   9 async create(dto: CreatePaymentDto) {
+  10     try {
+  11         // Sale must exist and belong to tenant (auto filtered)
+ÔåÆ 12         const sale = await (this.prisma.client as any).sale.findFirst(
+The table `public.payments` does not exist in the current database.
+    at ei.handleRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:228:13)
+    at ei.handleAndLogRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+    at async PaymentsService.create (C:\Spare Parts\Project\src\payment\payment.service.ts:12:26)
+    at async C:\Spare Parts\Project\node_modules\@nestjs\core\router\router-execution-context.js:46:28
+    at async C:\Spare Parts\Project\node_modules\@nestjs\core\router\router-proxy.js:9:17
+    at async C:\Spare Parts\Project\node_modules\@nestjs\core\router\router-explorer.js:177:17

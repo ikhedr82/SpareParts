@@ -1,0 +1,1 @@
+{"version":3,"file":"mobile.module.js","sourceRoot":"","sources":["../../src/mobile/mobile.module.ts"],"names":[],"mappings":";;;;;;;;;AAAA,2CAAwC;AACxC,+EAA0E;AAC1E,yEAAoE;AACpE,2DAAuD;AAMhD,IAAM,YAAY,GAAlB,MAAM,YAAY;CAAI,CAAA;AAAhB,oCAAY;uBAAZ,YAAY;IAJxB,IAAA,eAAM,EAAC;QACJ,OAAO,EAAE,CAAC,4BAAY,CAAC;QACvB,WAAW,EAAE,CAAC,uDAAyB,EAAE,iDAAsB,CAAC;KACnE,CAAC;GACW,YAAY,CAAI"}

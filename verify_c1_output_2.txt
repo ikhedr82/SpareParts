@@ -1,0 +1,31 @@
+C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: Ô¿» Unable to compile TypeScript:
+verify_chargeback_law.ts(29,13): error TS2353: Object literal may only specify known properties, and 'taxRate' does not exist in type '(Without<BranchCreateInput, BranchUncheckedCreateInput> & BranchUncheckedCreateInput) | (Without<...> & BranchCreateInput)'.
+verify_chargeback_law.ts(45,13): error TS2353: Object literal may only specify known properties, and 'tenant' does not exist in type '(Without<BrandCreateInput, BrandUncheckedCreateInput> & BrandUncheckedCreateInput) | (Without<...> & BrandCreateInput)'.
+verify_chargeback_law.ts(64,9): error TS2322: Type '{ id: string; businessName: string; primaryEmail: string; tenant: { connect: { id: string; }; }; currency: string; }' is not assignable to type '(Without<BusinessClientCreateInput, BusinessClientUncheckedCreateInput> & BusinessClientUncheckedCreateInput) | (Without<...> & BusinessClientCreateInput)'.
+  Type '{ id: string; businessName: string; primaryEmail: string; tenant: { connect: { id: string; }; }; currency: string; }' is not assignable to type 'Without<BusinessClientUncheckedCreateInput, BusinessClientCreateInput> & BusinessClientCreateInput'.
+    Property 'type' is missing in type '{ id: string; businessName: string; primaryEmail: string; tenant: { connect: { id: string; }; }; currency: string; }' but required in type 'BusinessClientCreateInput'.
+verify_chargeback_law.ts(125,13): error TS2322: Type '"DELIVERY"' is not assignable to type 'TripStopType'.
+verify_chargeback_law.ts(176,13): error TS2322: Type '{ connect: { id: string; }; }' is not assignable to type 'string'.
+verify_chargeback_law.ts(233,13): error TS2322: Type '{ connect: { id: string; }; }' is not assignable to type 'string'.
+verify_chargeback_law.ts(295,13): error TS2322: Type '"DELIVERY"' is not assignable to type 'TripStopType'.
+
+    at createTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1893:10
+    at Object.require.extensions.<computed> [as .ts] (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  diagnosticCodes: [
+    2353, 2353,
+    2322, 2322,
+    2322, 2322,
+    2322
+  ]
+}

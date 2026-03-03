@@ -1,0 +1,10 @@
+{
+    "saleId": "eb60cafd-4ace-4304-976f-ef71116251e2",
+    "reason": "Customer changed mind",
+    "items": [
+        {
+            "productId": "489a4281-8142-4c71-9a03-045a9fe6613c",
+            "quantity": 2
+        }
+    ]
+}

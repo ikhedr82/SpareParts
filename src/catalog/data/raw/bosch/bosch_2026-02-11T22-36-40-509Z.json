@@ -1,0 +1,364 @@
+{
+  "manufacturer": "Bosch",
+  "timestamp": "2026-02-11T22:36:40.508Z",
+  "totalProducts": 11,
+  "products": [
+    {
+      "partNumber": "0 986 452 061",
+      "name": "Bosch Oil Filter 0 986 452 061",
+      "description": "Premium oil filter for Toyota engines, high efficiency filtration",
+      "category": "Oil Filters",
+      "brand": "Bosch",
+      "weight": 0.3,
+      "dimensions": "4.5\" x 3.5\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "0986452061",
+        "F026407061"
+      ],
+      "fitment": [
+        {
+          "make": "Toyota",
+          "model": "Camry",
+          "yearStart": 2012,
+          "yearEnd": 2017,
+          "engineType": "2.5L 4-cyl"
+        },
+        {
+          "make": "Toyota",
+          "model": "RAV4",
+          "yearStart": 2013,
+          "yearEnd": 2018,
+          "engineType": "2.5L 4-cyl"
+        },
+        {
+          "make": "Lexus",
+          "model": "ES350",
+          "yearStart": 2013,
+          "yearEnd": 2018,
+          "engineType": "3.5L V6"
+        }
+      ]
+    },
+    {
+      "partNumber": "3330",
+      "name": "Bosch Premium Oil Filter 3330",
+      "description": "Premium FILTECH filtration for extended oil life",
+      "category": "Oil Filters",
+      "brand": "Bosch",
+      "weight": 0.35,
+      "dimensions": "4.8\" x 3.6\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "P3330",
+        "BO3330"
+      ],
+      "fitment": [
+        {
+          "make": "Ford",
+          "model": "F-150",
+          "yearStart": 2011,
+          "yearEnd": 2020,
+          "engineType": "5.0L V8"
+        },
+        {
+          "make": "Ford",
+          "model": "Mustang",
+          "yearStart": 2011,
+          "yearEnd": 2020,
+          "engineType": "5.0L V8"
+        }
+      ]
+    },
+    {
+      "partNumber": "5456",
+      "name": "Bosch Air Filter 5456",
+      "description": "High-flow air filter for improved engine performance",
+      "category": "Air Filters",
+      "brand": "Bosch",
+      "weight": 0.4,
+      "dimensions": "12\" x 9\" x 2\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "WA5456",
+        "C15456"
+      ],
+      "fitment": [
+        {
+          "make": "Honda",
+          "model": "Accord",
+          "yearStart": 2013,
+          "yearEnd": 2017,
+          "engineType": "2.4L 4-cyl"
+        },
+        {
+          "make": "Honda",
+          "model": "CR-V",
+          "yearStart": 2012,
+          "yearEnd": 2016,
+          "engineType": "2.4L 4-cyl"
+        }
+      ]
+    },
+    {
+      "partNumber": "4417",
+      "name": "Bosch Platinum Spark Plug 4417",
+      "description": "Platinum +4 spark plug, extended life design",
+      "category": "Spark Plugs",
+      "brand": "Bosch",
+      "weight": 0.05,
+      "dimensions": "2.5\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "YR7SPP332W",
+        "4417"
+      ],
+      "fitment": [
+        {
+          "make": "Ford",
+          "model": "Focus",
+          "yearStart": 2012,
+          "yearEnd": 2018,
+          "engineType": "2.0L 4-cyl"
+        },
+        {
+          "make": "Ford",
+          "model": "Escape",
+          "yearStart": 2013,
+          "yearEnd": 2019,
+          "engineType": "1.6L 4-cyl Turbo"
+        },
+        {
+          "make": "Mazda",
+          "model": "CX-5",
+          "yearStart": 2013,
+          "yearEnd": 2016,
+          "engineType": "2.0L 4-cyl"
+        }
+      ]
+    },
+    {
+      "partNumber": "8109",
+      "name": "Bosch Double Platinum Spark Plug 8109",
+      "description": "Double platinum for consistent performance",
+      "category": "Spark Plugs",
+      "brand": "Bosch",
+      "weight": 0.05,
+      "dimensions": "2.4\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "ZR5TPP332",
+        "8109"
+      ],
+      "fitment": [
+        {
+          "make": "Nissan",
+          "model": "Altima",
+          "yearStart": 2013,
+          "yearEnd": 2018,
+          "engineType": "2.5L 4-cyl"
+        },
+        {
+          "make": "Nissan",
+          "model": "Rogue",
+          "yearStart": 2014,
+          "yearEnd": 2020,
+          "engineType": "2.5L 4-cyl"
+        }
+      ]
+    },
+    {
+      "partNumber": "BP1109",
+      "name": "Bosch Blue Disc Brake Pad BP1109",
+      "description": "Semi-metallic front brake pads for European vehicles",
+      "category": "Brake Pads",
+      "brand": "Bosch",
+      "weight": 2.5,
+      "dimensions": "6\" x 4\" x 1\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "BE1109",
+        "BC1109"
+      ],
+      "fitment": [
+        {
+          "make": "BMW",
+          "model": "3 Series",
+          "yearStart": 2012,
+          "yearEnd": 2018,
+          "position": "Front"
+        },
+        {
+          "make": "BMW",
+          "model": "4 Series",
+          "yearStart": 2014,
+          "yearEnd": 2020,
+          "position": "Front"
+        }
+      ]
+    },
+    {
+      "partNumber": "BC905",
+      "name": "Bosch QuietCast Premium Ceramic Brake Pads BC905",
+      "description": "Low dust ceramic formula, quiet braking",
+      "category": "Brake Pads",
+      "brand": "Bosch",
+      "weight": 2.8,
+      "dimensions": "6.2\" x 4.3\" x 1.1\"",
+      "images": [],
+      "alternatePartNumbers": [],
+      "fitment": [
+        {
+          "make": "Toyota",
+          "model": "Camry",
+          "yearStart": 2012,
+          "yearEnd": 2017,
+          "position": "Front"
+        },
+        {
+          "make": "Toyota",
+          "model": "Avalon",
+          "yearStart": 2013,
+          "yearEnd": 2018,
+          "position": "Front"
+        }
+      ]
+    },
+    {
+      "partNumber": "24A",
+      "name": "Bosch ICON Wiper Blade 24A",
+      "description": "24\" premium beam wiper blade, all-weather performance",
+      "category": "Wipers",
+      "brand": "Bosch",
+      "weight": 0.25,
+      "dimensions": "24\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "24OE",
+        "ICON24"
+      ],
+      "fitment": [
+        {
+          "make": "Honda",
+          "model": "Accord",
+          "yearStart": 2013,
+          "yearEnd": 2017,
+          "position": "Driver"
+        },
+        {
+          "make": "Toyota",
+          "model": "Camry",
+          "yearStart": 2012,
+          "yearEnd": 2017,
+          "position": "Driver"
+        },
+        {
+          "make": "Nissan",
+          "model": "Altima",
+          "yearStart": 2013,
+          "yearEnd": 2018,
+          "position": "Driver"
+        }
+      ]
+    },
+    {
+      "partNumber": "18A",
+      "name": "Bosch ICON Wiper Blade 18A",
+      "description": "18\" premium beam wiper blade",
+      "category": "Wipers",
+      "brand": "Bosch",
+      "weight": 0.2,
+      "dimensions": "18\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "18OE",
+        "ICON18"
+      ],
+      "fitment": [
+        {
+          "make": "Honda",
+          "model": "Civic",
+          "yearStart": 2012,
+          "yearEnd": 2015,
+          "position": "Driver"
+        },
+        {
+          "make": "Toyota",
+          "model": "Corolla",
+          "yearStart": 2014,
+          "yearEnd": 2019,
+          "position": "Driver"
+        }
+      ]
+    },
+    {
+      "partNumber": "S4 60Ah",
+      "name": "Bosch S4 Battery 12V 60Ah",
+      "description": "Maintenance-free car battery, 540 CCA",
+      "category": "Batteries",
+      "brand": "Bosch",
+      "weight": 38,
+      "dimensions": "9.5\" x 6.9\" x 7.5\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "S4005",
+        "0092S40050"
+      ],
+      "fitment": [
+        {
+          "make": "Toyota",
+          "model": "Corolla",
+          "yearStart": 2010,
+          "yearEnd": 2020
+        },
+        {
+          "make": "Honda",
+          "model": "Civic",
+          "yearStart": 2012,
+          "yearEnd": 2021
+        },
+        {
+          "make": "Nissan",
+          "model": "Sentra",
+          "yearStart": 2013,
+          "yearEnd": 2019
+        }
+      ]
+    },
+    {
+      "partNumber": "S5 AGM",
+      "name": "Bosch S5 AGM Battery 12V 70Ah",
+      "description": "AGM technology for start-stop vehicles, 760 CCA",
+      "category": "Batteries",
+      "brand": "Bosch",
+      "weight": 42,
+      "dimensions": "10.9\" x 6.9\" x 7.5\"",
+      "images": [],
+      "alternatePartNumbers": [
+        "S5A08",
+        "0092S5A080"
+      ],
+      "fitment": [
+        {
+          "make": "BMW",
+          "model": "3 Series",
+          "yearStart": 2012,
+          "yearEnd": 2018
+        },
+        {
+          "make": "Audi",
+          "model": "A4",
+          "yearStart": 2013,
+          "yearEnd": 2020
+        },
+        {
+          "make": "Mercedes-Benz",
+          "model": "C-Class",
+          "yearStart": 2015,
+          "yearEnd": 2021
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,19 @@
+User found: {
+  "id": "295ffedf-d98a-4dd3-984d-707db4b2a9e0",
+  "tenantId": "a3b063ce-5086-4f51-985d-3c8ba93e4d44",
+  "email": "admin@alpha.com",
+  "passwordHash": "$2b$10$6XQTZhqrqDrfCYXRwkod.uStIZ1A7u/0k.1tZIPKrvJq4kiQA66CC",
+  "isPlatformUser": false,
+  "status": "ACTIVE",
+  "createdAt": "2026-02-08T23:31:50.495Z",
+  "updatedAt": "2026-02-08T23:31:50.495Z",
+  "userRoles": [
+    {
+      "id": "71db362f-4c06-4822-b030-b01bbdf3973f",
+      "userId": "295ffedf-d98a-4dd3-984d-707db4b2a9e0",
+      "roleId": "2c928ba8-6280-4961-b917-97d62f2147be",
+      "tenantId": "a3b063ce-5086-4f51-985d-3c8ba93e4d44",
+      "branchId": null
+    }
+  ]
+}

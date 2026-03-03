@@ -1,0 +1,58 @@
+--- PHASE 3: MULTI-CURRENCY & I18N ---
+
+[3.1] Multi-Currency Transaction Validation...
+- Seeding full COA for tenant 3298dd4c-f3c1-45df-b800-3d364cb3581d...
+Ô£ô Sale created successfully
+
+[3.2] Arabic Metadata Rendering...
+
+Ô£ù Arabic verification failed 200 {
+Phase 3 Complete
+  product: {
+    id: 'c2a442b5-9b75-405e-bcfc-9b460fb08c36',
+    brandId: 'fd5a5b63-c844-4237-8a92-bf80696e05e4',
+    categoryId: '365cf61c-2318-4d40-9ac8-336a0dcdc0e9',
+    name: 'Oil Filter - Standard - Toyota Camry (Bosch)',
+    description: 'High-quality oil filter for engine protection',
+    weight: 0.35,
+    dimensions: null,
+    status: 'ACTIVE',
+    createdAt: '2026-02-27T20:14:05.247Z',
+    updatedAt: '2026-03-02T22:50:59.614Z',
+    unitOfMeasure: 'EA',
+    images: [],
+    taxRateId: null,
+    brand: {
+      id: 'fd5a5b63-c844-4237-8a92-bf80696e05e4',
+      name: 'Bosch',
+      country: 'Germany',
+      isOem: true,
+      createdAt: '2026-02-27T20:14:05.220Z',
+      updatedAt: '2026-02-27T20:14:05.220Z'
+    },
+    category: {
+      id: '365cf61c-2318-4d40-9ac8-336a0dcdc0e9',
+      name: 'Engine Parts',
+      parentId: null,
+      createdAt: '2026-02-27T20:14:05.208Z',
+      updatedAt: '2026-03-01T19:36:39.203Z'
+    },
+    taxRate: null,
+    alternateNumbers: []
+  },
+  totalAvailable: 9,
+ÔöîÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö¼ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÉ
+  availability: [
+    {
+      branchId: '06c708b6-30a4-4887-837a-bb28b573a425',
+Ôöé (index) Ôöé scenario              Ôöé status Ôöé
+      branchName: 'Global Branch',
+Ôö£ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö╝ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöñ
+Ôöé 0       Ôöé 'Multi-Currency Sale' Ôöé 'PASS' Ôöé
+Ôöé 1       Ôöé 'Arabic I18N Meta'    Ôöé 'FAIL' Ôöé
+ÔööÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔö┤ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÿ
+      quantity: 9,
+      price: 100
+    }
+  ]
+}

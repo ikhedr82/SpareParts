@@ -1,0 +1,187 @@
+import { ReturnsService } from './returns.service';
+import { CreateReturnDto } from './dto/create-return.dto';
+export declare class ReturnsController {
+    private readonly service;
+    constructor(service: ReturnsService);
+    create(req: any, dto: CreateReturnDto): Promise<{
+        returnItems: {
+            id: string;
+            orderItemId: string | null;
+            productId: string | null;
+            quantity: number;
+            returnId: string;
+            condition: string | null;
+            inspectionNotes: string | null;
+            restockable: boolean;
+        }[];
+    } & {
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ReturnStatus;
+        version: number;
+        branchId: string | null;
+        orderId: string | null;
+        saleId: string | null;
+        reason: import(".prisma/client").$Enums.ReturnReason;
+        deliveryExceptionId: string | null;
+        receivedAt: Date | null;
+        completedAt: Date | null;
+        returnNumber: string;
+        reasonNotes: string | null;
+        requestedBy: string;
+        requestedAt: Date;
+        approvedBy: string | null;
+        approvedAt: Date | null;
+    }>;
+    findAll(req: any): Promise<({
+        refund: {
+            currency: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            tenantId: string;
+            status: import(".prisma/client").$Enums.RefundStatus;
+            amount: import("@prisma/client/runtime/library").Decimal;
+            version: number;
+            branchId: string;
+            orderId: string | null;
+            baseAmount: import("@prisma/client/runtime/library").Decimal;
+            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
+            cashSessionId: string | null;
+            saleId: string | null;
+            refundNumber: string;
+            reason: string;
+            createdById: string;
+            processedById: string | null;
+            processedAt: Date | null;
+            cancelledById: string | null;
+            cancelledAt: Date | null;
+            returnId: string | null;
+            deliveryExceptionId: string | null;
+        };
+        order: {
+            orderNumber: string;
+        };
+        returnItems: {
+            id: string;
+            orderItemId: string | null;
+            productId: string | null;
+            quantity: number;
+            returnId: string;
+            condition: string | null;
+            inspectionNotes: string | null;
+            restockable: boolean;
+        }[];
+    } & {
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ReturnStatus;
+        version: number;
+        branchId: string | null;
+        orderId: string | null;
+        saleId: string | null;
+        reason: import(".prisma/client").$Enums.ReturnReason;
+        deliveryExceptionId: string | null;
+        receivedAt: Date | null;
+        completedAt: Date | null;
+        returnNumber: string;
+        reasonNotes: string | null;
+        requestedBy: string;
+        requestedAt: Date;
+        approvedBy: string | null;
+        approvedAt: Date | null;
+    })[]>;
+    findOne(req: any, id: string): Promise<{
+        refund: {
+            currency: string;
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            tenantId: string;
+            status: import(".prisma/client").$Enums.RefundStatus;
+            amount: import("@prisma/client/runtime/library").Decimal;
+            version: number;
+            branchId: string;
+            orderId: string | null;
+            baseAmount: import("@prisma/client/runtime/library").Decimal;
+            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
+            cashSessionId: string | null;
+            saleId: string | null;
+            refundNumber: string;
+            reason: string;
+            createdById: string;
+            processedById: string | null;
+            processedAt: Date | null;
+            cancelledById: string | null;
+            cancelledAt: Date | null;
+            returnId: string | null;
+            deliveryExceptionId: string | null;
+        };
+        order: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            tenantId: string;
+            status: import(".prisma/client").$Enums.OrderStatus;
+            version: number;
+            branchId: string;
+            notes: string | null;
+            total: import("@prisma/client/runtime/library").Decimal;
+            businessClientId: string;
+            subtotal: import("@prisma/client/runtime/library").Decimal;
+            tax: import("@prisma/client/runtime/library").Decimal;
+            createdById: string | null;
+            cancelledAt: Date | null;
+            returnId: string | null;
+            deliveryExceptionId: string | null;
+            orderNumber: string;
+            deliveryAddressId: string | null;
+            contactId: string | null;
+            internalNotes: string | null;
+            sourceQuoteId: string | null;
+            confirmedAt: Date | null;
+            shippedAt: Date | null;
+            deliveredAt: Date | null;
+        };
+        returnItems: ({
+            orderItem: {
+                id: string;
+                createdAt: Date;
+                orderId: string;
+                productId: string;
+                quantity: number;
+                unitPrice: import("@prisma/client/runtime/library").Decimal;
+            };
+        } & {
+            id: string;
+            orderItemId: string | null;
+            productId: string | null;
+            quantity: number;
+            returnId: string;
+            condition: string | null;
+            inspectionNotes: string | null;
+            restockable: boolean;
+        })[];
+    } & {
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ReturnStatus;
+        version: number;
+        branchId: string | null;
+        orderId: string | null;
+        saleId: string | null;
+        reason: import(".prisma/client").$Enums.ReturnReason;
+        deliveryExceptionId: string | null;
+        receivedAt: Date | null;
+        completedAt: Date | null;
+        returnNumber: string;
+        reasonNotes: string | null;
+        requestedBy: string;
+        requestedAt: Date;
+        approvedBy: string | null;
+        approvedAt: Date | null;
+    }>;
+}

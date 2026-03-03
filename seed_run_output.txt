@@ -1,0 +1,16 @@
+
+> partstack@1.0.0 seed
+> ts-node src/prisma/seed.ts
+
+Seeding permissions...
+Seeding predefined roles...
+Seeding users...
+Ô£à RBAC Seeding completed.
+Platform Admin: platform@admin.com / admin123
+Tenant Admin: admin@alpha.com / tenant123
+Seeding Chart of Accounts for Tenant: 9234b003-ef07-4b29-8f5a-c7adb0cfac9a...
+Ô£à COA Seeding complete for 9234b003-ef07-4b29-8f5a-c7adb0cfac9a
+src/prisma/seed-master-data.ts(579,17): error TS2353: Object literal may only specify known properties, and 'tenantId_name' does not exist in type 'TaxRateWhereUniqueInput'.
+src/prisma/seed-master-data.ts(619,17): error TS2353: Object literal may only specify known properties, and 'tenantId_name' does not exist in type 'SupplierWhereUniqueInput'.
+src/prisma/seed-master-data.ts(640,17): error TS2353: Object literal may only specify known properties, and 'tenantId_email' does not exist in type 'CustomerWhereUniqueInput'.
+

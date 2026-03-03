@@ -1,0 +1,94 @@
+node_modules/@prisma/client/runtime/library.d.ts(73,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+node_modules/@prisma/client/runtime/library.d.ts(401,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+node_modules/@prisma/client/runtime/library.d.ts(2037,5): error TS18028: Private identifiers are only available when targeting ECMAScript 2015 and higher.
+src/accounting/accounting.service.ts(122,34): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/accounting/accounting.service.ts(157,27): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.
+src/accounting/audit.service.ts(18,9): error TS1206: Decorators are not valid here.
+src/orders/dto/create-order.dto.ts(4,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "businessClientId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/create-order.dto.ts(7,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "deliveryAddressId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/create-order.dto.ts(8,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "deliveryAddressId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/create-order.dto.ts(11,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "contactId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/create-order.dto.ts(12,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "contactId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/create-order.dto.ts(15,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "notes"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/create-order.dto.ts(16,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateOrderDto, string> & { name: "notes"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/update-order-status.dto.ts(5,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<UpdateOrderStatusDto, OrderStatus> & { name: "status"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/update-order-status.dto.ts(12,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<UpdateOrderStatusDto, number> & { name: "expectedVersion"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/update-order-status.dto.ts(13,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<UpdateOrderStatusDto, number> & { name: "expectedVersion"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/dto/update-order-status.dto.ts(14,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<UpdateOrderStatusDto, number> & { name: "expectedVersion"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/orders/orders.service.ts(20,9): error TS1206: Decorators are not valid here.
+src/prisma/tenant-aware-prisma.service.ts(9,9): error TS1206: Decorators are not valid here.
+src/purchase-returns/dtos/create-return.dto.ts(5,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<ReturnItemDto, string> & { name: "productId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(6,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<ReturnItemDto, string> & { name: "productId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(9,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<ReturnItemDto, number> & { name: "quantity"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(10,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<ReturnItemDto, number> & { name: "quantity"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(13,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<ReturnItemDto, string> & { name: "reason"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(14,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<ReturnItemDto, string> & { name: "reason"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(19,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreatePurchaseReturnDto, string> & { name: "purchaseOrderId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(20,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreatePurchaseReturnDto, string> & { name: "purchaseOrderId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(23,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreatePurchaseReturnDto, ReturnItemDto[]> & { name: "items"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(24,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreatePurchaseReturnDto, ReturnItemDto[]> & { name: "items"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/purchase-returns/dtos/create-return.dto.ts(25,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreatePurchaseReturnDto, ReturnItemDto[]> & { name: "items"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales-extensions/dtos/void-sale.dto.ts(4,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<VoidSaleDto, string> & { name: "reason"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales-extensions/dtos/void-sale.dto.ts(5,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<VoidSaleDto, string> & { name: "reason"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales-extensions/sales-extensions.service.ts(15,9): error TS1206: Decorators are not valid here.
+src/sales/dto/create-sale.dto.ts(5,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleItemDto, string> & { name: "productId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(8,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleItemDto, number> & { name: "quantity"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(9,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleItemDto, number> & { name: "quantity"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(14,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, string> & { name: "branchId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(15,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, string> & { name: "branchId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(18,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, string> & { name: "customerName"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(19,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, string> & { name: "customerName"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(22,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, string> & { name: "customerId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(23,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, string> & { name: "customerId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(26,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, CreateSaleItemDto[]> & { name: "items"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(27,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, CreateSaleItemDto[]> & { name: "items"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/create-sale.dto.ts(28,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<CreateSaleDto, CreateSaleItemDto[]> & { name: "items"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/refund-sale.dto.ts(4,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<RefundSaleDto, string> & { name: "saleId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/refund-sale.dto.ts(5,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<RefundSaleDto, string> & { name: "saleId"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/refund-sale.dto.ts(8,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<RefundSaleDto, number> & { name: "amount"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/refund-sale.dto.ts(9,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<RefundSaleDto, number> & { name: "amount"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/refund-sale.dto.ts(12,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<RefundSaleDto, string> & { name: "reason"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/dto/refund-sale.dto.ts(13,6): error TS1240: Unable to resolve signature of property decorator when called as an expression.
+  Argument of type 'ClassFieldDecoratorContext<RefundSaleDto, string> & { name: "reason"; private: false; static: false; }' is not assignable to parameter of type 'string | symbol'.
+src/sales/sales.service.ts(19,9): error TS1206: Decorators are not valid here.

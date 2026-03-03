@@ -1,0 +1,22 @@
+­ƒøí´©Å Verifying Commercial Safety Law C1: Chargeback Fraud
+Ô£à Setup Complete
+
+­ƒöì TEST 1: Attempting Phantom Chargeback (No Proof)...
+Ô£à PASS: Phantom chargeback blocked by Law C1 Guard. Message: COMMERCIAL SAFETY C1: Chargeback requires loss proof
+
+­ƒöì TEST 2: Attempting Chargeback with Double Proof...
+Ô£à PASS: Double proof blocked by Law C1 Guard.
+
+­ƒöì TEST 3: Attempting Chargeback on Unreceived Return...
+Ô£à PASS: Blocked unreceived return.
+
+­ƒöì TEST 4: Attempting Chargeback on Invalid Exception Type...
+Ô£à PASS: Blocked invalid exception type.
+
+­ƒöì TEST 5: Processing Valid Return Chargeback...
+Ô£à PASS: Valid return chargeback processed successfully. ID: a9411126-7a79-46ac-8499-c10d3ae75d65
+Ô£à PASS: Chargeback properly linked to Return
+
+­ƒöì TEST 6: Processing Valid Lost Shipment Chargeback...
+Ô£à PASS: Valid lost shipment chargeback processed successfully. ID: dce70462-1f29-4e95-996d-334f3beacc4a
+Ô£à PASS: Chargeback properly linked to DeliveryException

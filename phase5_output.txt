@@ -1,0 +1,36 @@
+--- PHASE 5: PERFORMANCE TESTING ---
+
+[5.1] Simulating 100 Concurrent POS Sales...
+- Completed 100 sales in 665ms
+- Success: 0, Failed: 100
+
+[5.2] Simulating 50 Concurrent B2B Orders...
+- Completed 50 orders in 260ms
+- Success: 0, Failed: 50
+
+[5.3] Post-Load Data Consistency Check...
+PrismaClientValidationError: 
+Invalid `prisma.inventory.findUnique()` invocation in
+C:\Spare Parts\Project\src\tests-production\05-performance.ts:146:45
+
+  143 
+  144 // 3. Post-Load Inventory Check
+  145 console.log(`\n[5.3] Post-Load Data Consistency Check...`);
+ÔåÆ 146 const finalInv = await prisma.inventory.findUnique({
+        where: {
+          branchId_productId: {
+            productId: "00301800-30fa-4021-a817-554dedd1b6f1",
+      +     branchId: String
+          }
+        }
+      })
+
+Argument `branchId` is missing.
+    at throwValidationException (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\core\errorRendering\throwValidationException.ts:45:9)
+    at ei.handleRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:202:7)
+    at ei.handleAndLogRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+    at async runPhase5 (C:\Spare Parts\Project\src\tests-production\05-performance.ts:146:22) {
+  clientVersion: '6.19.2'
+}

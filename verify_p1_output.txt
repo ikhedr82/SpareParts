@@ -1,0 +1,32 @@
+C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859
+    return new TSError(diagnosticText, diagnosticCodes, diagnostics);
+           ^
+TSError: Ô¿» Unable to compile TypeScript:
+verify_partial_return_law.ts(19,34): error TS2322: Type '{ id: string; name: string; }' is not assignable to type '(Without<TenantCreateInput, TenantUncheckedCreateInput> & TenantUncheckedCreateInput) | (Without<...> & TenantCreateInput)'.
+  Type '{ id: string; name: string; }' is not assignable to type 'Without<TenantUncheckedCreateInput, TenantCreateInput> & TenantCreateInput'.
+    Property 'subdomain' is missing in type '{ id: string; name: string; }' but required in type 'TenantCreateInput'.
+verify_partial_return_law.ts(26,13): error TS2353: Object literal may only specify known properties, and 'tenant' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'.
+verify_partial_return_law.ts(40,13): error TS2353: Object literal may only specify known properties, and 'totalAmount' does not exist in type '(Without<OrderCreateInput, OrderUncheckedCreateInput> & OrderUncheckedCreateInput) | (Without<...> & OrderCreateInput)'.
+verify_partial_return_law.ts(92,9): error TS2322: Type '{ id: string; tenantId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdById: string; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ id: string; tenantId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ id: string; tenantId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'createdById' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+verify_partial_return_law.ts(120,9): error TS2322: Type '{ id: string; tenantId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdById: string; }' is not assignable to type '(Without<RefundCreateInput, RefundUncheckedCreateInput> & RefundUncheckedCreateInput) | (Without<...> & RefundCreateInput)'.
+  Type '{ id: string; tenantId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput> & RefundCreateInput'.
+    Type '{ id: string; tenantId: string; amount: number; reason: string; status: "PENDING"; returnId: string; refundNumber: string; createdById: string; }' is not assignable to type 'Without<RefundUncheckedCreateInput, RefundCreateInput>'.
+      Types of property 'createdById' are incompatible.
+        Type 'string' is not assignable to type 'never'.
+
+    at createTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:859:12)
+    at reportTSError (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:863:19)
+    at getOutput (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1077:36)
+    at Object.compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1433:41)
+    at Module.m._compile (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1617:30)
+    at node:internal/modules/cjs/loader:1893:10
+    at Object.require.extensions.<computed> [as .ts] (C:\Spare Parts\Project\node_modules\ts-node\src\index.ts:1621:12)
+    at Module.load (node:internal/modules/cjs/loader:1481:32)
+    at Module._load (node:internal/modules/cjs/loader:1300:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14) {
+  diagnosticCodes: [ 2322, 2353, 2353, 2322, 2322 ]
+}

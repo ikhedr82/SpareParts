@@ -1,0 +1,5 @@
+src/logistics/returns.service.ts(121,21): error TS2559: Type 'string' has no properties in common with type 'UserCreateNestedOneWithoutRefundsInput'.
+src/logistics/returns.service.ts(257,25): error TS2559: Type 'string' has no properties in common with type 'UserUpdateOneWithoutProcessedRefundsNestedInput'.
+src/purchase-returns/purchase-returns.service.ts(178,45): error TS2353: Object literal may only specify known properties, and 'rejectionReason' does not exist in type '(Without<PurchaseReturnUpdateInput, PurchaseReturnUncheckedUpdateInput> & PurchaseReturnUncheckedUpdateInput) | (Without<...> & PurchaseReturnUpdateInput)'.
+src/shared/event-bus.service.ts(2,31): error TS2307: Cannot find module '@nestjs/event-emitter' or its corresponding type declarations.
+src/shared/shared.module.ts(7,36): error TS2307: Cannot find module '@nestjs/event-emitter' or its corresponding type declarations.

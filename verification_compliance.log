@@ -1,0 +1,89 @@
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +41ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +11ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mStripePaymentsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBranchesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInventoryModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTaxModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCustomersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReturnsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCashSessionModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInvoicesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReceiptsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mZReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAnalyticsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSuppliersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAccountingReportsModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAccountingModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPaymentsModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPurchaseOrdersModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 15144  - [39m11/02/2026, 01:07:09 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSalesModule dependencies initialized[39m[38;5;3m +0ms[39m
+
+=== COMPLIANCE VERIFICATION ===
+Tenant: 9234b003-ef07-4b29-8f5a-c7adb0cfac9a, User: admin@alpha.com
+
+Cleaning up old test data...
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+Ô£ô Test data cleaned
+
+--- Test 1: Post Journal Entry ---
+AccountingService.getChartOfAccounts called
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+Client chartOfAccount present: true
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+Ô£ô Created Journal Entry: TEST-COMP-1770764840014
+  isPosted: false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[AuditService] Logged POST_JOURNAL for JournalEntry/87947486-4756-4846-b156-b2b463f09d29
+[AccountingService] Posted Journal Entry 87947486-4756-4846-b156-b2b463f09d29
+Ô£ô Posted Journal Entry: TEST-COMP-1770764840014
+  isPosted: true, postedAt: Wed Feb 11 2026 01:07:25 GMT+0200 (Eastern European Standard Time)
+Ô£à PASS: Journal entry posted correctly
+
+--- Test 2: Immutability Check ---
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+ÔÜá´©Å  WARNING: Posted entry was modified (immutability not enforced yet)
+
+--- Test 3: Reverse Journal Entry ---
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[AuditService] Logged REVERSE_JOURNAL for JournalEntry/87947486-4756-4846-b156-b2b463f09d29
+[AccountingService] Reversed Journal Entry 87947486-4756-4846-b156-b2b463f09d29 with fb047f86-26ac-4aba-ac20-01df493999a3
+Ô£ô Created Reversal: REV-TEST-COMP-1770764840014
+  Reverses: 87947486-4756-4846-b156-b2b463f09d29
+  Reversal is Posted: true
+Ô£à PASS: Reversal created correctly
+
+--- Test 4: Period Locking ---
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+Ô£ô Created Accounting Period: 262b0f23-d9e8-4a3b-84f0-1a4bbf8195be
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+[AuditService] Logged CLOSE_PERIOD for AccountingPeriod/262b0f23-d9e8-4a3b-84f0-1a4bbf8195be
+[AccountingService] Closed Accounting Period 262b0f23-d9e8-4a3b-84f0-1a4bbf8195be
+Ô£ô Closed Period: isClosed=true, closedAt=Wed Feb 11 2026 01:07:32 GMT+0200 (Eastern European Standard Time)
+Ô£à PASS: Period closed correctly
+
+--- Test 5: Audit Trail ---
+[TenantAwarePrismaService] [DEBUG] Context: tenantId=9234b003-ef07-4b29-8f5a-c7adb0cfac9a, isPlatformUser=false
+Ô£ô Audit Trail for TEST-COMP-1770764840014: 2 entries
+  - POST_JOURNAL: Wed Feb 11 2026 01:07:26 GMT+0200 (Eastern European Standard Time)
+  - REVERSE_JOURNAL: Wed Feb 11 2026 01:07:31 GMT+0200 (Eastern European Standard Time)
+Ô£à PASS: Audit trail complete
+
+=== Ô£à ALL COMPLIANCE TESTS PASSED ===
+

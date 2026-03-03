@@ -1,0 +1,71 @@
+import { PrismaService } from '../prisma/prisma.service';
+import { AuditService } from '../shared/audit.service';
+import { OutboxService } from '../shared/outbox.service';
+import { TranslationService } from '../i18n/translation.service';
+export declare class SubstitutionService {
+    private readonly prisma;
+    private readonly auditService;
+    private readonly outbox;
+    private readonly t;
+    constructor(prisma: PrismaService, auditService: AuditService, outbox: OutboxService, t: TranslationService);
+    suggestSubstitution(tenantId: string, pickListItemId: string, substituteProductId: string, reason: string, userId: string, correlationId?: string): Promise<{
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.SubstitutionStatus;
+        version: number;
+        originalProductId: string;
+        substituteProductId: string;
+        respondedAt: Date | null;
+        reason: string | null;
+        requestedBy: string;
+        approvedBy: string | null;
+        pickListItemId: string;
+        priceDelta: import("@prisma/client/runtime/library").Decimal;
+    }>;
+    approveSubstitution(tenantId: string, substitutionId: string, userId: string, correlationId?: string): Promise<{
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.SubstitutionStatus;
+        version: number;
+        originalProductId: string;
+        substituteProductId: string;
+        respondedAt: Date | null;
+        reason: string | null;
+        requestedBy: string;
+        approvedBy: string | null;
+        pickListItemId: string;
+        priceDelta: import("@prisma/client/runtime/library").Decimal;
+    }>;
+    rejectSubstitution(tenantId: string, substitutionId: string, userId: string, correlationId?: string): Promise<{
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.SubstitutionStatus;
+        version: number;
+        originalProductId: string;
+        substituteProductId: string;
+        respondedAt: Date | null;
+        reason: string | null;
+        requestedBy: string;
+        approvedBy: string | null;
+        pickListItemId: string;
+        priceDelta: import("@prisma/client/runtime/library").Decimal;
+    }>;
+    findByPickList(tenantId: string, pickListId: string): Promise<{
+        id: string;
+        createdAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.SubstitutionStatus;
+        version: number;
+        originalProductId: string;
+        substituteProductId: string;
+        respondedAt: Date | null;
+        reason: string | null;
+        requestedBy: string;
+        approvedBy: string | null;
+        pickListItemId: string;
+        priceDelta: import("@prisma/client/runtime/library").Decimal;
+    }[]>;
+}

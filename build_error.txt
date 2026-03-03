@@ -1,0 +1,6 @@
+
+> partstack@1.0.0 build
+> nest build
+
+Found 3 error(s).
+

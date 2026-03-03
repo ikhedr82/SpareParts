@@ -1,0 +1,250 @@
+import { InventoryService } from './inventory.service';
+import { CreateInventoryDto } from './dto/create-inventory.dto';
+import { UpdateInventoryDto } from './dto/update-inventory.dto';
+import { AdjustInventoryDto } from './dto/adjust-inventory.dto';
+export declare class InventoryController {
+    private readonly inventoryService;
+    constructor(inventoryService: InventoryService);
+    create(createInventoryDto: CreateInventoryDto, req: any): Promise<{
+        branch: {
+            id: string;
+            createdAt: Date;
+            tenantId: string;
+            updatedAt: Date;
+            name: string;
+            nameAr: string | null;
+            address: string | null;
+            addressAr: string | null;
+            phone: string | null;
+        };
+        product: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            status: string;
+            brandId: string;
+            categoryId: string;
+            nameAr: string | null;
+            description: string | null;
+            descriptionAr: string | null;
+            weight: number | null;
+            dimensions: string | null;
+            unitOfMeasure: string | null;
+            images: string[];
+            taxRateId: string | null;
+        };
+    } & {
+        id: string;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        quantity: number;
+        allocated: number;
+        sellingPrice: import("@prisma/client/runtime/library").Decimal;
+        barcode: string | null;
+        binLocation: string | null;
+        lastCountedAt: Date | null;
+        updatedAt: Date;
+        version: number;
+    }>;
+    adjust(dto: AdjustInventoryDto, req: any): Promise<{
+        id: string;
+        type: import(".prisma/client").$Enums.InventoryTransactionType;
+        quantityChange: number;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        revenueAmount: import("@prisma/client/runtime/library").Decimal | null;
+        referenceType: import(".prisma/client").$Enums.InventoryReferenceType;
+        referenceId: string;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        userId: string;
+    }>;
+    findAll(branchId?: string): Promise<({
+        branch: {
+            id: string;
+            createdAt: Date;
+            tenantId: string;
+            updatedAt: Date;
+            name: string;
+            nameAr: string | null;
+            address: string | null;
+            addressAr: string | null;
+            phone: string | null;
+        };
+        product: {
+            brand: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                name: string;
+                nameAr: string | null;
+                country: string | null;
+                isOem: boolean;
+            };
+            category: {
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                name: string;
+                nameAr: string | null;
+                parentId: string | null;
+            };
+        } & {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            status: string;
+            brandId: string;
+            categoryId: string;
+            nameAr: string | null;
+            description: string | null;
+            descriptionAr: string | null;
+            weight: number | null;
+            dimensions: string | null;
+            unitOfMeasure: string | null;
+            images: string[];
+            taxRateId: string | null;
+        };
+    } & {
+        id: string;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        quantity: number;
+        allocated: number;
+        sellingPrice: import("@prisma/client/runtime/library").Decimal;
+        barcode: string | null;
+        binLocation: string | null;
+        lastCountedAt: Date | null;
+        updatedAt: Date;
+        version: number;
+    })[]>;
+    findOne(id: string): Promise<{
+        branch: {
+            id: string;
+            createdAt: Date;
+            tenantId: string;
+            updatedAt: Date;
+            name: string;
+            nameAr: string | null;
+            address: string | null;
+            addressAr: string | null;
+            phone: string | null;
+        };
+        product: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            status: string;
+            brandId: string;
+            categoryId: string;
+            nameAr: string | null;
+            description: string | null;
+            descriptionAr: string | null;
+            weight: number | null;
+            dimensions: string | null;
+            unitOfMeasure: string | null;
+            images: string[];
+            taxRateId: string | null;
+        };
+    } & {
+        id: string;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        quantity: number;
+        allocated: number;
+        sellingPrice: import("@prisma/client/runtime/library").Decimal;
+        barcode: string | null;
+        binLocation: string | null;
+        lastCountedAt: Date | null;
+        updatedAt: Date;
+        version: number;
+    }>;
+    update(id: string, updateInventoryDto: UpdateInventoryDto): Promise<{
+        id: string;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        quantity: number;
+        allocated: number;
+        sellingPrice: import("@prisma/client/runtime/library").Decimal;
+        barcode: string | null;
+        binLocation: string | null;
+        lastCountedAt: Date | null;
+        updatedAt: Date;
+        version: number;
+    }>;
+    getLedger(productId: string, branchId?: string): Promise<({
+        user: {
+            id: string;
+            createdAt: Date;
+            tenantId: string | null;
+            updatedAt: Date;
+            version: number;
+            email: string;
+            passwordHash: string;
+            isPlatformUser: boolean;
+            status: string;
+        };
+        product: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            status: string;
+            brandId: string;
+            categoryId: string;
+            nameAr: string | null;
+            description: string | null;
+            descriptionAr: string | null;
+            weight: number | null;
+            dimensions: string | null;
+            unitOfMeasure: string | null;
+            images: string[];
+            taxRateId: string | null;
+        };
+    } & {
+        id: string;
+        type: import(".prisma/client").$Enums.InventoryTransactionType;
+        quantityChange: number;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        revenueAmount: import("@prisma/client/runtime/library").Decimal | null;
+        referenceType: import(".prisma/client").$Enums.InventoryReferenceType;
+        referenceId: string;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        userId: string;
+    })[]>;
+    remove(id: string): Promise<{
+        id: string;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
+        createdAt: Date;
+        tenantId: string;
+        branchId: string;
+        productId: string;
+        quantity: number;
+        allocated: number;
+        sellingPrice: import("@prisma/client/runtime/library").Decimal;
+        barcode: string | null;
+        binLocation: string | null;
+        lastCountedAt: Date | null;
+        updatedAt: Date;
+        version: number;
+    }>;
+}
