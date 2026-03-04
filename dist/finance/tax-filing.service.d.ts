@@ -12,10 +12,10 @@ export declare class TaxFilingService {
         periodEnd: string;
     }, correlationId?: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.TaxFilingStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.TaxFilingStatus;
         version: number;
         periodStart: Date;
         periodEnd: Date;
@@ -27,10 +27,10 @@ export declare class TaxFilingService {
     }>;
     fileTaxReport(tenantId: string, filingId: string, userId: string, correlationId?: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.TaxFilingStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.TaxFilingStatus;
         version: number;
         periodStart: Date;
         periodEnd: Date;
@@ -42,10 +42,10 @@ export declare class TaxFilingService {
     }>;
     findAll(tenantId: string, status?: TaxFilingStatus): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.TaxFilingStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.TaxFilingStatus;
         version: number;
         periodStart: Date;
         periodEnd: Date;
@@ -57,10 +57,10 @@ export declare class TaxFilingService {
     }[]>;
     findOne(tenantId: string, filingId: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.TaxFilingStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.TaxFilingStatus;
         version: number;
         periodStart: Date;
         periodEnd: Date;

@@ -15,9 +15,9 @@ export declare class WarehouseService {
             id: string;
             createdAt: Date;
             status: import(".prisma/client").$Enums.PickListItemStatus;
-            pickListId: string;
             productId: string;
             binLocation: string | null;
+            pickListId: string;
             inventoryId: string;
             requiredQty: number;
             pickedQty: number;

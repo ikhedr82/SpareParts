@@ -13,6 +13,7 @@ import { TranslationService } from '../i18n/translation.service';
 import { PlanEnforcementService } from '../tenant-admin/plan-enforcement.service';
 import { UsageTrackingService } from '../tenant-admin/usage-tracking.service';
 import { withRetry } from '../common/utils/retry.helper';
+import { assertTransition, SALE_TRANSITIONS } from '../common/guards/fsm.guard';
 
 @Injectable()
 export class SalesService {

@@ -4,89 +4,54 @@ export declare class PickListsController {
     private readonly pickListsService;
     constructor(pickListsService: PickListsService);
     findAll(req: any, branchId?: string, status?: string): Promise<({
-        _count: {
-            packs: number;
-            items: number;
-        };
         branch: {
             id: string;
             name: string;
         };
         order: {
-            id: string;
             businessClient: {
                 businessName: string;
             };
+            id: string;
             orderNumber: string;
+        };
+        _count: {
+            items: number;
+            packs: number;
         };
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.PickListStatus;
         version: number;
-        startedAt: Date | null;
-        completedAt: Date | null;
         branchId: string;
         orderId: string;
+        startedAt: Date | null;
+        completedAt: Date | null;
         assignedToId: string | null;
     })[]>;
     findOne(req: any, id: string): Promise<{
         branch: {
             id: string;
-            tenantId: string;
+            name: string;
             createdAt: Date;
             updatedAt: Date;
-            name: string;
-            phone: string | null;
             nameAr: string | null;
+            tenantId: string;
             address: string | null;
+            phone: string | null;
             addressAr: string | null;
         };
-        packs: ({
-            items: ({
-                product: {
-                    id: string;
-                    createdAt: Date;
-                    status: string;
-                    updatedAt: Date;
-                    name: string;
-                    weight: number | null;
-                    brandId: string;
-                    categoryId: string;
-                    description: string | null;
-                    dimensions: string | null;
-                    taxRateId: string | null;
-                    images: string[];
-                    unitOfMeasure: string | null;
-                    descriptionAr: string | null;
-                    nameAr: string | null;
-                };
-            } & {
-                id: string;
-                createdAt: Date;
-                packId: string;
-                productId: string;
-                quantity: number;
-            })[];
-        } & {
-            id: string;
-            status: import(".prisma/client").$Enums.PackStatus;
-            pickListId: string;
-            packNumber: string;
-            weight: import("@prisma/client/runtime/library").Decimal | null;
-            packedAt: Date;
-            deviceInfo: string | null;
-        })[];
         order: {
             businessClient: {
-                id: string;
-                tenantId: string;
-                createdAt: Date;
-                status: string;
-                updatedAt: Date;
-                type: import(".prisma/client").$Enums.BusinessClientType;
                 currency: string;
+                id: string;
+                createdAt: Date;
+                updatedAt: Date;
+                tenantId: string;
+                status: string;
+                type: import(".prisma/client").$Enums.BusinessClientType;
                 notes: string | null;
                 businessName: string;
                 registrationNumber: string | null;
@@ -101,13 +66,13 @@ export declare class PickListsController {
             };
             contact: {
                 id: string;
-                createdAt: Date;
-                email: string | null;
-                updatedAt: Date;
                 name: string;
+                createdAt: Date;
+                updatedAt: Date;
+                email: string | null;
                 phone: string | null;
-                businessClientId: string;
                 position: string | null;
+                businessClientId: string;
                 isPrimary: boolean;
                 canPlaceOrders: boolean;
             };
@@ -116,8 +81,8 @@ export declare class PickListsController {
                 createdAt: Date;
                 updatedAt: Date;
                 type: string;
-                businessClientId: string;
                 country: string;
+                businessClientId: string;
                 isPrimary: boolean;
                 addressLine1: string;
                 addressLine2: string | null;
@@ -127,183 +92,218 @@ export declare class PickListsController {
             };
         } & {
             id: string;
-            tenantId: string;
             createdAt: Date;
-            status: import(".prisma/client").$Enums.OrderStatus;
             updatedAt: Date;
+            tenantId: string;
+            status: import(".prisma/client").$Enums.OrderStatus;
             version: number;
             branchId: string;
-            deliveredAt: Date | null;
+            notes: string | null;
+            total: import("@prisma/client/runtime/library").Decimal;
             businessClientId: string;
+            subtotal: import("@prisma/client/runtime/library").Decimal;
+            tax: import("@prisma/client/runtime/library").Decimal;
+            cancelledAt: Date | null;
+            returnId: string | null;
+            createdById: string | null;
+            deliveryExceptionId: string | null;
             orderNumber: string;
             deliveryAddressId: string | null;
             contactId: string | null;
-            subtotal: import("@prisma/client/runtime/library").Decimal;
-            tax: import("@prisma/client/runtime/library").Decimal;
-            total: import("@prisma/client/runtime/library").Decimal;
-            notes: string | null;
             internalNotes: string | null;
             confirmedAt: Date | null;
             shippedAt: Date | null;
-            cancelledAt: Date | null;
-            createdById: string | null;
-            deliveryExceptionId: string | null;
-            returnId: string | null;
+            deliveredAt: Date | null;
             sourceQuoteId: string | null;
         };
         items: ({
             product: {
                 brand: {
                     id: string;
+                    name: string;
                     createdAt: Date;
                     updatedAt: Date;
-                    name: string;
                     nameAr: string | null;
                     country: string | null;
                     isOem: boolean;
                 };
                 category: {
                     id: string;
+                    name: string;
                     createdAt: Date;
                     updatedAt: Date;
-                    name: string;
                     nameAr: string | null;
                     parentId: string | null;
                 };
             } & {
                 id: string;
-                createdAt: Date;
-                status: string;
-                updatedAt: Date;
                 name: string;
-                weight: number | null;
+                createdAt: Date;
+                updatedAt: Date;
+                nameAr: string | null;
+                status: string;
+                description: string | null;
+                descriptionAr: string | null;
                 brandId: string;
                 categoryId: string;
-                description: string | null;
+                weight: number | null;
                 dimensions: string | null;
                 taxRateId: string | null;
                 images: string[];
                 unitOfMeasure: string | null;
-                descriptionAr: string | null;
-                nameAr: string | null;
             };
         } & {
             id: string;
             createdAt: Date;
             status: import(".prisma/client").$Enums.PickListItemStatus;
-            pickListId: string;
             productId: string;
             binLocation: string | null;
+            pickListId: string;
             inventoryId: string;
             requiredQty: number;
             pickedQty: number;
         })[];
+        packs: ({
+            items: ({
+                product: {
+                    id: string;
+                    name: string;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    nameAr: string | null;
+                    status: string;
+                    description: string | null;
+                    descriptionAr: string | null;
+                    brandId: string;
+                    categoryId: string;
+                    weight: number | null;
+                    dimensions: string | null;
+                    taxRateId: string | null;
+                    images: string[];
+                    unitOfMeasure: string | null;
+                };
+            } & {
+                id: string;
+                createdAt: Date;
+                productId: string;
+                quantity: number;
+                packId: string;
+            })[];
+        } & {
+            id: string;
+            status: import(".prisma/client").$Enums.PackStatus;
+            weight: import("@prisma/client/runtime/library").Decimal | null;
+            pickListId: string;
+            packNumber: string;
+            packedAt: Date;
+            deviceInfo: string | null;
+        })[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.PickListStatus;
         version: number;
-        startedAt: Date | null;
-        completedAt: Date | null;
         branchId: string;
         orderId: string;
+        startedAt: Date | null;
+        completedAt: Date | null;
         assignedToId: string | null;
     }>;
     startPicking(req: any, id: string): Promise<{
         items: ({
             product: {
                 id: string;
-                createdAt: Date;
-                status: string;
-                updatedAt: Date;
                 name: string;
-                weight: number | null;
+                createdAt: Date;
+                updatedAt: Date;
+                nameAr: string | null;
+                status: string;
+                description: string | null;
+                descriptionAr: string | null;
                 brandId: string;
                 categoryId: string;
-                description: string | null;
+                weight: number | null;
                 dimensions: string | null;
                 taxRateId: string | null;
                 images: string[];
                 unitOfMeasure: string | null;
-                descriptionAr: string | null;
-                nameAr: string | null;
             };
         } & {
             id: string;
             createdAt: Date;
             status: import(".prisma/client").$Enums.PickListItemStatus;
-            pickListId: string;
             productId: string;
             binLocation: string | null;
+            pickListId: string;
             inventoryId: string;
             requiredQty: number;
             pickedQty: number;
         })[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.PickListStatus;
         version: number;
-        startedAt: Date | null;
-        completedAt: Date | null;
         branchId: string;
         orderId: string;
+        startedAt: Date | null;
+        completedAt: Date | null;
         assignedToId: string | null;
     }>;
     pickItem(req: any, id: string, dto: PickItemDto): Promise<{
         items: ({
             product: {
                 id: string;
-                createdAt: Date;
-                status: string;
-                updatedAt: Date;
                 name: string;
-                weight: number | null;
+                createdAt: Date;
+                updatedAt: Date;
+                nameAr: string | null;
+                status: string;
+                description: string | null;
+                descriptionAr: string | null;
                 brandId: string;
                 categoryId: string;
-                description: string | null;
+                weight: number | null;
                 dimensions: string | null;
                 taxRateId: string | null;
                 images: string[];
                 unitOfMeasure: string | null;
-                descriptionAr: string | null;
-                nameAr: string | null;
             };
         } & {
             id: string;
             createdAt: Date;
             status: import(".prisma/client").$Enums.PickListItemStatus;
-            pickListId: string;
             productId: string;
             binLocation: string | null;
+            pickListId: string;
             inventoryId: string;
             requiredQty: number;
             pickedQty: number;
         })[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.PickListStatus;
         version: number;
-        startedAt: Date | null;
-        completedAt: Date | null;
         branchId: string;
         orderId: string;
+        startedAt: Date | null;
+        completedAt: Date | null;
         assignedToId: string | null;
     }>;
     cancel(req: any, id: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.PickListStatus;
         version: number;
-        startedAt: Date | null;
-        completedAt: Date | null;
         branchId: string;
         orderId: string;
+        startedAt: Date | null;
+        completedAt: Date | null;
         assignedToId: string | null;
     }>;
 }

@@ -63,13 +63,23 @@ let AuditService = class AuditService {
         });
     }
     async getPlatformAuditLogs(params) {
-        const { page = 1, limit = 20, tenantId, action } = params;
+        const { page = 1, limit = 20, tenantId, action, entityType, search } = params;
         const skip = (page - 1) * limit;
         const where = {};
         if (tenantId)
             where.tenantId = tenantId;
         if (action)
             where.action = action;
+        if (entityType)
+            where.entityType = entityType;
+        if (search) {
+            where.OR = [
+                { action: { contains: search, mode: 'insensitive' } },
+                { entityId: { contains: search, mode: 'insensitive' } },
+                { user: { email: { contains: search, mode: 'insensitive' } } },
+                { tenant: { name: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
         const [items, total] = await Promise.all([
             this.prisma.auditLog.findMany({
                 where,

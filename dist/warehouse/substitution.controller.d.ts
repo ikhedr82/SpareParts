@@ -7,14 +7,14 @@ export declare class SubstitutionController {
         reason: string;
     }, req: any): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;
@@ -22,14 +22,14 @@ export declare class SubstitutionController {
     }>;
     approve(id: string, req: any): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;
@@ -37,14 +37,14 @@ export declare class SubstitutionController {
     }>;
     reject(id: string, req: any): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;
@@ -52,14 +52,14 @@ export declare class SubstitutionController {
     }>;
     findByPickList(pickListId: string, req: any): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;

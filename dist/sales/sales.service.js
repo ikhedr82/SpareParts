@@ -26,6 +26,7 @@ const translation_service_1 = require("../i18n/translation.service");
 const plan_enforcement_service_1 = require("../tenant-admin/plan-enforcement.service");
 const usage_tracking_service_1 = require("../tenant-admin/usage-tracking.service");
 const retry_helper_1 = require("../common/utils/retry.helper");
+const fsm_guard_1 = require("../common/guards/fsm.guard");
 let SalesService = class SalesService {
     constructor(prisma, inventoryLedgerService, accountingService, auditService, outbox, t, planEnforcement, usageTracking, request) {
         this.prisma = prisma;
@@ -263,7 +264,7 @@ let SalesService = class SalesService {
             });
             if (!sale)
                 throw new common_1.NotFoundException(this.t.translate('errors.validation.not_found', (_a = this.request) === null || _a === void 0 ? void 0 : _a.language, { entity: 'Sale' }));
-            assertTransition('Sale', dto.saleId, sale.status, 'REFUNDED', SALE_TRANSITIONS);
+            (0, fsm_guard_1.assertTransition)('Sale', dto.saleId, sale.status, 'REFUNDED', fsm_guard_1.SALE_TRANSITIONS);
             if (Number(dto.amount) > Number(sale.total)) {
                 throw new invariant_exception_1.InvariantException('INV-02', 'Refund amount cannot exceed sale total', {
                     refundAmount: dto.amount,
@@ -335,7 +336,7 @@ let SalesService = class SalesService {
             });
             if (!sale)
                 throw new common_1.NotFoundException(this.t.translate('errors.validation.not_found', (_a = this.request) === null || _a === void 0 ? void 0 : _a.language, { entity: 'Sale' }));
-            assertTransition('Sale', saleId, sale.status, 'VOIDED', SALE_TRANSITIONS);
+            (0, fsm_guard_1.assertTransition)('Sale', saleId, sale.status, 'VOIDED', fsm_guard_1.SALE_TRANSITIONS);
             if (sale.payments.length > 0)
                 throw new common_1.BadRequestException(this.t.translate('errors.sales.cannot_void_with_payments', (_b = this.request) === null || _b === void 0 ? void 0 : _b.language));
             const result = await tx.sale.updateMany({

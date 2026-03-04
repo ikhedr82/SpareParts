@@ -13,20 +13,20 @@ export declare class PurchaseOrdersController {
             unitCost: import("@prisma/client/runtime/library").Decimal;
         }[];
     } & {
-        id: string;
-        tenantId: string;
-        createdAt: Date;
-        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-        updatedAt: Date;
-        version: number;
-        branchId: string;
-        supplierId: string | null;
         currency: string;
         exchangeRate: import("@prisma/client/runtime/library").Decimal;
-        createdById: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
+        version: number;
+        branchId: string;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
+        createdById: string;
         supplierName: string;
         totalCost: import("@prisma/client/runtime/library").Decimal;
+        supplierId: string | null;
     }>;
     findAll(req: any): Promise<({
         items: {
@@ -39,32 +39,42 @@ export declare class PurchaseOrdersController {
         }[];
         createdBy: {
             id: string;
-            tenantId: string | null;
             createdAt: Date;
+            updatedAt: Date;
+            tenantId: string | null;
+            status: string;
             email: string;
             passwordHash: string;
             isPlatformUser: boolean;
-            status: string;
-            updatedAt: Date;
             version: number;
         };
     } & {
-        id: string;
-        tenantId: string;
-        createdAt: Date;
-        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-        updatedAt: Date;
-        version: number;
-        branchId: string;
-        supplierId: string | null;
         currency: string;
         exchangeRate: import("@prisma/client/runtime/library").Decimal;
-        createdById: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
+        version: number;
+        branchId: string;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
+        createdById: string;
         supplierName: string;
         totalCost: import("@prisma/client/runtime/library").Decimal;
+        supplierId: string | null;
     })[]>;
     findOne(id: string, req: any): Promise<{
+        supplier: {
+            id: string;
+            name: string;
+            createdAt: Date;
+            updatedAt: Date;
+            nameAr: string | null;
+            tenantId: string;
+            version: number;
+            balance: import("@prisma/client/runtime/library").Decimal;
+        };
         receipts: ({
             items: {
                 id: string;
@@ -77,38 +87,28 @@ export declare class PurchaseOrdersController {
             id: string;
             tenantId: string;
             notes: string | null;
+            receiptNumber: string;
             purchaseOrderId: string;
             receivedAt: Date;
             receivedById: string;
-            receiptNumber: string;
         })[];
-        supplier: {
-            id: string;
-            tenantId: string;
-            createdAt: Date;
-            updatedAt: Date;
-            version: number;
-            name: string;
-            nameAr: string | null;
-            balance: import("@prisma/client/runtime/library").Decimal;
-        };
         items: ({
             product: {
                 id: string;
-                createdAt: Date;
-                status: string;
-                updatedAt: Date;
                 name: string;
-                weight: number | null;
+                createdAt: Date;
+                updatedAt: Date;
+                nameAr: string | null;
+                status: string;
+                description: string | null;
+                descriptionAr: string | null;
                 brandId: string;
                 categoryId: string;
-                description: string | null;
+                weight: number | null;
                 dimensions: string | null;
                 taxRateId: string | null;
                 images: string[];
                 unitOfMeasure: string | null;
-                descriptionAr: string | null;
-                nameAr: string | null;
             };
         } & {
             id: string;
@@ -120,30 +120,30 @@ export declare class PurchaseOrdersController {
         })[];
         createdBy: {
             id: string;
-            tenantId: string | null;
             createdAt: Date;
+            updatedAt: Date;
+            tenantId: string | null;
+            status: string;
             email: string;
             passwordHash: string;
             isPlatformUser: boolean;
-            status: string;
-            updatedAt: Date;
             version: number;
         };
     } & {
-        id: string;
-        tenantId: string;
-        createdAt: Date;
-        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-        updatedAt: Date;
-        version: number;
-        branchId: string;
-        supplierId: string | null;
         currency: string;
         exchangeRate: import("@prisma/client/runtime/library").Decimal;
-        createdById: string;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
+        version: number;
+        branchId: string;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
+        createdById: string;
         supplierName: string;
         totalCost: import("@prisma/client/runtime/library").Decimal;
+        supplierId: string | null;
     }>;
     receive(id: string, body: {
         items: {
@@ -163,9 +163,9 @@ export declare class PurchaseOrdersController {
         id: string;
         tenantId: string;
         notes: string | null;
+        receiptNumber: string;
         purchaseOrderId: string;
         receivedAt: Date;
         receivedById: string;
-        receiptNumber: string;
     }>;
 }

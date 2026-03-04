@@ -48,6 +48,14 @@ let TenantAdminController = class TenantAdminController {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
         return this.service.findOne(id);
     }
+    async getTenantInvoices(id, req) {
+        (0, auth_utils_1.assertPlatformAdmin)(req.user);
+        return this.service.getTenantInvoices(id);
+    }
+    async getTenantActivity(id, limit, req) {
+        (0, auth_utils_1.assertPlatformAdmin)(req.user);
+        return this.service.getTenantActivity(id, limit);
+    }
     async updateLanguage(id, dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
         return this.service.updateLanguageSettings(req.user.id, id, dto);
@@ -56,9 +64,13 @@ let TenantAdminController = class TenantAdminController {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
         return this.service.getGlobalBillingStats();
     }
-    async getInvoices(req) {
+    async getGlobalBillingActivity(req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.getGlobalInvoices();
+        return this.service.getGlobalBillingActivity();
+    }
+    async getGlobalInvoices(req, page, limit, search) {
+        (0, auth_utils_1.assertPlatformAdmin)(req.user);
+        return this.service.getGlobalInvoices({ page, limit, search });
     }
     async changePlan(id, planId, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
@@ -112,6 +124,23 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TenantAdminController.prototype, "findOne", null);
 __decorate([
+    (0, common_1.Get)(':id/invoices'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], TenantAdminController.prototype, "getTenantInvoices", null);
+__decorate([
+    (0, common_1.Get)(':id/activity'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Query)('limit')),
+    __param(2, (0, common_1.Request)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number, Object]),
+    __metadata("design:returntype", Promise)
+], TenantAdminController.prototype, "getTenantActivity", null);
+__decorate([
     (0, common_1.Patch)(':id/language'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
@@ -128,12 +157,22 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TenantAdminController.prototype, "getStats", null);
 __decorate([
-    (0, common_1.Get)('billing/invoices'),
+    (0, common_1.Get)('billing/activity'),
     __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], TenantAdminController.prototype, "getInvoices", null);
+], TenantAdminController.prototype, "getGlobalBillingActivity", null);
+__decorate([
+    (0, common_1.Get)('billing/invoices'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Query)('page')),
+    __param(2, (0, common_1.Query)('limit')),
+    __param(3, (0, common_1.Query)('search')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number, Number, String]),
+    __metadata("design:returntype", Promise)
+], TenantAdminController.prototype, "getGlobalInvoices", null);
 __decorate([
     (0, common_1.Patch)(':id/plan'),
     __param(0, (0, common_1.Param)('id')),
@@ -154,7 +193,7 @@ let SupportController = class SupportController {
     }
     async create(dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.createSupportTicket(dto.tenantId || null, dto.subject, dto.description, dto.priority);
+        return this.service.createSupportTicket(req.user.id, dto.tenantId || null, dto.subject, dto.description, dto.priority);
     }
     async findAll(req, page, limit, search, status) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
@@ -162,7 +201,7 @@ let SupportController = class SupportController {
     }
     async updateStatus(id, status, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.updateTicketStatus(id, status);
+        return this.service.updateTicketStatus(req.user.id, id, status);
     }
 };
 exports.SupportController = SupportController;
@@ -230,17 +269,18 @@ let PlansController = class PlansController {
     }
     async create(dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.createPlan(dto);
+        return this.service.createPlan(req.user.id, dto);
     }
     async update(id, dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.updatePlan(id, dto);
+        return this.service.updatePlan(req.user.id, id, dto);
     }
     async remove(id, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.deletePlan(id);
+        return this.service.deletePlan(req.user.id, id);
     }
-    async findAll() {
+    async findAll(req) {
+        (0, auth_utils_1.assertPlatformAdmin)(req.user);
         return this.service.findAllPlans();
     }
 };
@@ -272,8 +312,9 @@ __decorate([
 ], PlansController.prototype, "remove", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Request)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PlansController.prototype, "findAll", null);
 exports.PlansController = PlansController = __decorate([
@@ -287,21 +328,23 @@ let CurrenciesController = class CurrenciesController {
     }
     async create(dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.createCurrency(dto);
+        return this.service.createCurrency(req.user.id, dto);
     }
     async update(code, dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.updateCurrency(code, dto);
+        return this.service.updateCurrency(req.user.id, code, dto);
     }
-    async findAll() {
-        return this.service.findAllCurrencies();
+    async findAll(req, page, limit, search) {
+        (0, auth_utils_1.assertPlatformAdmin)(req.user);
+        return this.service.findAllCurrencies({ page, limit, search });
     }
     async createRate(dto, req) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.service.createExchangeRate(req.user.tenantId, dto);
+        return this.service.createExchangeRate(req.user.id, req.user.tenantId, dto);
     }
-    async findAllRates() {
-        return this.service.findAllExchangeRates();
+    async findAllRates(req, page, limit, search) {
+        (0, auth_utils_1.assertPlatformAdmin)(req.user);
+        return this.service.findAllExchangeRates({ page, limit, search });
     }
 };
 exports.CurrenciesController = CurrenciesController;
@@ -324,8 +367,12 @@ __decorate([
 ], CurrenciesController.prototype, "update", null);
 __decorate([
     (0, common_1.Get)(),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Query)('page')),
+    __param(2, (0, common_1.Query)('limit')),
+    __param(3, (0, common_1.Query)('search')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object, Number, Number, String]),
     __metadata("design:returntype", Promise)
 ], CurrenciesController.prototype, "findAll", null);
 __decorate([
@@ -338,8 +385,12 @@ __decorate([
 ], CurrenciesController.prototype, "createRate", null);
 __decorate([
     (0, common_1.Get)('rates'),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Query)('page')),
+    __param(2, (0, common_1.Query)('limit')),
+    __param(3, (0, common_1.Query)('search')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Object, Number, Number, String]),
     __metadata("design:returntype", Promise)
 ], CurrenciesController.prototype, "findAllRates", null);
 exports.CurrenciesController = CurrenciesController = __decorate([
@@ -351,9 +402,9 @@ let AuditLogsController = class AuditLogsController {
     constructor(auditService) {
         this.auditService = auditService;
     }
-    async findAll(req, page, limit, tenantId, action) {
+    async findAll(req, page, limit, tenantId, action, entityType, search) {
         (0, auth_utils_1.assertPlatformAdmin)(req.user);
-        return this.auditService.getPlatformAuditLogs({ page, limit, tenantId, action });
+        return this.auditService.getPlatformAuditLogs({ page, limit, tenantId, action, entityType, search });
     }
 };
 exports.AuditLogsController = AuditLogsController;
@@ -364,8 +415,10 @@ __decorate([
     __param(2, (0, common_1.Query)('limit')),
     __param(3, (0, common_1.Query)('tenantId')),
     __param(4, (0, common_1.Query)('action')),
+    __param(5, (0, common_1.Query)('entityType')),
+    __param(6, (0, common_1.Query)('search')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Number, Number, String, String]),
+    __metadata("design:paramtypes", [Object, Number, Number, String, String, String, String]),
     __metadata("design:returntype", Promise)
 ], AuditLogsController.prototype, "findAll", null);
 exports.AuditLogsController = AuditLogsController = __decorate([

@@ -5,28 +5,28 @@ export declare class UserOffboardingController {
     findAll(req: any): Promise<{
         id: string;
         createdAt: Date;
-        email: string;
-        status: string;
         updatedAt: Date;
+        status: string;
+        email: string;
         userRoles: ({
             role: {
                 id: string;
-                tenantId: string | null;
+                name: string;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
+                tenantId: string | null;
                 version: number;
-                name: string;
+                scope: import(".prisma/client").$Enums.RoleScope;
                 description: string | null;
                 descriptionAr: string | null;
-                nameAr: string | null;
-                scope: import(".prisma/client").$Enums.RoleScope;
             };
         } & {
             id: string;
             tenantId: string | null;
+            roleId: string;
             userId: string;
             branchId: string | null;
-            roleId: string;
         })[];
     }[]>;
     offboard(id: string, body: {

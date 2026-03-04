@@ -196,17 +196,37 @@ let TenantAdminService = class TenantAdminService {
         return { items, total, page: Number(page), limit: Number(limit) };
     }
     async findOne(tenantId) {
+        var _a, _b, _c, _d;
         const tenant = await this.prisma.tenant.findUnique({
             where: { id: tenantId },
             include: {
                 branches: { select: { id: true, name: true } },
-                _count: { select: { users: true } },
+                _count: { select: { users: true, branches: true, inventory: true } },
                 plan: true,
+                subscription: true,
             },
         });
         if (!tenant)
             throw new common_1.NotFoundException(this.t.translate('errors.validation.not_found', 'EN', { entity: 'Tenant' }));
-        return tenant;
+        const usage = await this.usageTracking.getUsage(tenantId);
+        const planLimits = ((_a = tenant.plan) === null || _a === void 0 ? void 0 : _a.limits) || {
+            maxUsers: ((_b = tenant.plan) === null || _b === void 0 ? void 0 : _b.maxUsers) || 10,
+            maxBranches: ((_c = tenant.plan) === null || _c === void 0 ? void 0 : _c.maxBranches) || 2,
+            maxProducts: ((_d = tenant.plan) === null || _d === void 0 ? void 0 : _d.maxProducts) || 1000,
+        };
+        return Object.assign(Object.assign({}, tenant), { _count: Object.assign(Object.assign({}, tenant._count), { products: usage.products }), planLimits });
+    }
+    async getTenantInvoices(tenantId) {
+        return this.prisma.billingInvoice.findMany({
+            where: { tenantId },
+            orderBy: { createdAt: 'desc' },
+        });
+    }
+    async getTenantActivity(tenantId, limit = 10) {
+        return this.auditService.getPlatformAuditLogs({
+            tenantId,
+            limit,
+        });
     }
     async updateLanguageSettings(adminUserId, tenantId, dto) {
         const tenant = await this.prisma.tenant.findUnique({ where: { id: tenantId } });
@@ -269,56 +289,131 @@ let TenantAdminService = class TenantAdminService {
         ]);
         return { items, total, page: Number(page), limit: Number(limit) };
     }
-    async createPlan(dto) {
-        return this.prisma.plan.create({ data: dto });
+    async createPlan(adminUserId, dto) {
+        return this.prisma.$transaction(async (tx) => {
+            const plan = await tx.plan.create({ data: dto });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'CREATE_PLAN', 'Plan', plan.id, null, dto, undefined, undefined, tx);
+            return plan;
+        });
     }
-    async updatePlan(id, dto) {
-        return this.prisma.plan.update({ where: { id }, data: dto });
+    async updatePlan(adminUserId, id, dto) {
+        const oldPlan = await this.prisma.plan.findUnique({ where: { id } });
+        if (!oldPlan)
+            throw new common_1.NotFoundException('Plan not found');
+        return this.prisma.$transaction(async (tx) => {
+            const plan = await tx.plan.update({ where: { id }, data: dto });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'UPDATE_PLAN', 'Plan', id, oldPlan, dto, undefined, undefined, tx);
+            return plan;
+        });
     }
-    async deletePlan(id) {
-        return this.prisma.plan.delete({ where: { id } });
+    async deletePlan(adminUserId, id) {
+        const oldPlan = await this.prisma.plan.findUnique({ where: { id } });
+        if (!oldPlan)
+            throw new common_1.NotFoundException('Plan not found');
+        return this.prisma.$transaction(async (tx) => {
+            const plan = await tx.plan.delete({ where: { id } });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'DELETE_PLAN', 'Plan', id, oldPlan, null, undefined, undefined, tx);
+            return plan;
+        });
     }
     async findAllPlans() {
         return this.prisma.plan.findMany({ orderBy: { createdAt: 'desc' } });
     }
-    async createCurrency(dto) {
-        return this.prisma.currency.create({ data: dto });
+    async createCurrency(adminUserId, dto) {
+        return this.prisma.$transaction(async (tx) => {
+            const curr = await tx.currency.create({ data: dto });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'CREATE_CURRENCY', 'Currency', curr.code, null, dto, undefined, undefined, tx);
+            return curr;
+        });
     }
-    async updateCurrency(code, dto) {
-        return this.prisma.currency.update({ where: { code }, data: dto });
+    async updateCurrency(adminUserId, code, dto) {
+        const oldCurr = await this.prisma.currency.findUnique({ where: { code } });
+        if (!oldCurr)
+            throw new common_1.NotFoundException('Currency not found');
+        return this.prisma.$transaction(async (tx) => {
+            const curr = await tx.currency.update({ where: { code }, data: dto });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'UPDATE_CURRENCY', 'Currency', curr.code, oldCurr, dto, undefined, undefined, tx);
+            return curr;
+        });
     }
-    async findAllCurrencies() {
-        return this.prisma.currency.findMany({ orderBy: { code: 'asc' } });
+    async findAllCurrencies(params = {}) {
+        const { page = 1, limit = 100, search } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.OR = [
+                { code: { contains: search, mode: 'insensitive' } },
+                { name: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+        const [items, total] = await Promise.all([
+            this.prisma.currency.findMany({
+                where,
+                orderBy: { code: 'asc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.currency.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
-    async createExchangeRate(tenantId, dto) {
+    async createExchangeRate(adminUserId, tenantId, dto) {
         if (tenantId !== 'PLATFORM') {
             await this.planEnforcement.checkFeatureAccess(tenantId, 'multiCurrency');
         }
-        return this.prisma.exchangeRate.upsert({
+        const oldRate = await this.prisma.exchangeRate.findUnique({
             where: {
                 fromCurrency_toCurrency: {
                     fromCurrency: dto.fromCurrencyId,
                     toCurrency: dto.toCurrencyId,
                 },
             },
-            update: {
-                rate: dto.rate,
-                source: dto.source || 'Manual',
-                effectiveAt: new Date(),
-            },
-            create: {
-                fromCurrency: dto.fromCurrencyId,
-                toCurrency: dto.toCurrencyId,
-                rate: dto.rate,
-                source: dto.source || 'Manual',
-            },
+        });
+        return this.prisma.$transaction(async (tx) => {
+            const rate = await tx.exchangeRate.upsert({
+                where: {
+                    fromCurrency_toCurrency: {
+                        fromCurrency: dto.fromCurrencyId,
+                        toCurrency: dto.toCurrencyId,
+                    },
+                },
+                update: {
+                    rate: dto.rate,
+                    source: dto.source || 'Manual',
+                    effectiveAt: new Date(),
+                },
+                create: {
+                    fromCurrency: dto.fromCurrencyId,
+                    toCurrency: dto.toCurrencyId,
+                    rate: dto.rate,
+                    source: dto.source || 'Manual',
+                },
+            });
+            await this.auditService.logAction('PLATFORM', adminUserId, oldRate ? 'UPDATE_EXCHANGE_RATE' : 'CREATE_EXCHANGE_RATE', 'ExchangeRate', `${dto.fromCurrencyId}_${dto.toCurrencyId}`, oldRate, dto, undefined, undefined, tx);
+            return rate;
         });
     }
-    async findAllExchangeRates() {
-        return this.prisma.exchangeRate.findMany({
-            include: { fromCurrencyRef: true, toCurrencyRef: true },
-            orderBy: { effectiveAt: 'desc' },
-        });
+    async findAllExchangeRates(params = {}) {
+        const { page = 1, limit = 50, search } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.OR = [
+                { fromCurrency: { contains: search, mode: 'insensitive' } },
+                { toCurrency: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+        const [items, total] = await Promise.all([
+            this.prisma.exchangeRate.findMany({
+                where,
+                include: { fromCurrencyRef: true, toCurrencyRef: true },
+                orderBy: { effectiveAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.exchangeRate.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
     async getPlanStatus(tenantId) {
         var _a;
@@ -361,23 +456,53 @@ let TenantAdminService = class TenantAdminService {
             totalTenants: tenants.length
         };
     }
-    async getGlobalInvoices() {
-        return this.prisma.billingInvoice.findMany({
-            include: { tenant: { select: { name: true, subdomain: true } } },
+    async getGlobalInvoices(params = {}) {
+        const { page = 1, limit = 25, search } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.tenant = {
+                name: { contains: search, mode: 'insensitive' }
+            };
+        }
+        const [items, total] = await Promise.all([
+            this.prisma.billingInvoice.findMany({
+                where,
+                include: { tenant: { select: { name: true, subdomain: true } } },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit)
+            }),
+            this.prisma.billingInvoice.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
+    }
+    async getGlobalBillingActivity() {
+        return this.prisma.auditLog.findMany({
+            where: {
+                action: {
+                    in: ['CREATE_PLAN', 'UPDATE_PLAN', 'DELETE_PLAN', 'CHANGE_PLAN', 'CANCEL_SUBSCRIPTION', 'CREATE_TENANT']
+                }
+            },
+            take: 10,
             orderBy: { createdAt: 'desc' },
-            take: 50
+            include: { user: { select: { email: true } } }
         });
     }
-    async createSupportTicket(tenantId, subject, description, priority) {
-        return this.prisma.supportTicket.create({
-            data: {
-                tenantId,
-                subject,
-                description,
-                priority,
-                status: 'OPEN',
-            },
-            include: { tenant: { select: { name: true } } }
+    async createSupportTicket(adminUserId, tenantId, subject, description, priority) {
+        return this.prisma.$transaction(async (tx) => {
+            const ticket = await tx.supportTicket.create({
+                data: {
+                    tenantId,
+                    subject,
+                    description,
+                    priority,
+                    status: 'OPEN',
+                },
+                include: { tenant: { select: { name: true } } }
+            });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'CREATE_SUPPORT_TICKET', 'SupportTicket', ticket.id, null, { tenantId, subject, priority }, undefined, undefined, tx);
+            return ticket;
         });
     }
     async findAllTickets(params = {}) {
@@ -404,10 +529,17 @@ let TenantAdminService = class TenantAdminService {
         ]);
         return { items, total, page: Number(page), limit: Number(limit) };
     }
-    async updateTicketStatus(id, status) {
-        return this.prisma.supportTicket.update({
-            where: { id },
-            data: { status }
+    async updateTicketStatus(adminUserId, id, status) {
+        const oldTicket = await this.prisma.supportTicket.findUnique({ where: { id } });
+        if (!oldTicket)
+            throw new common_1.NotFoundException('Ticket not found');
+        return this.prisma.$transaction(async (tx) => {
+            const ticket = await tx.supportTicket.update({
+                where: { id },
+                data: { status }
+            });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'UPDATE_SUPPORT_STATUS', 'SupportTicket', id, { status: oldTicket.status }, { status }, undefined, undefined, tx);
+            return ticket;
         });
     }
     async changeTenantPlan(adminUserId, tenantId, planId) {

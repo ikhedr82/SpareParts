@@ -15,19 +15,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;
@@ -37,19 +37,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;
@@ -59,19 +59,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;
@@ -81,19 +81,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;
@@ -103,19 +103,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;
@@ -125,19 +125,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;
@@ -147,19 +147,19 @@ export declare class ManifestService {
         orders: {
             id: string;
             createdAt: Date;
-            sequence: number;
             orderId: string;
+            sequence: number;
             shipmentManifestId: string;
         }[];
     } & {
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: import(".prisma/client").$Enums.ManifestStatus;
         updatedAt: Date;
+        tenantId: string;
+        status: import(".prisma/client").$Enums.ManifestStatus;
         version: number;
-        completedAt: Date | null;
         branchId: string;
+        completedAt: Date | null;
         tripId: string | null;
         manifestRef: string;
         sealedAt: Date | null;

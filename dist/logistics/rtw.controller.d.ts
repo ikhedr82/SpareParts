@@ -6,15 +6,15 @@ export declare class ReturnToWarehouseController {
         reason: string;
     }, req: any): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         version: number;
         branchId: string;
-        tripId: string;
         reason: string;
-        stopId: string;
         receivedAt: Date | null;
         receivedById: string | null;
+        tripId: string;
+        stopId: string;
     }>;
 }
 export declare class RtwListController {
@@ -22,14 +22,14 @@ export declare class RtwListController {
     constructor(rtwService: ReturnToWarehouseService);
     findAll(req: any, branchId?: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         version: number;
         branchId: string;
-        tripId: string;
         reason: string;
-        stopId: string;
         receivedAt: Date | null;
         receivedById: string | null;
+        tripId: string;
+        stopId: string;
     }[]>;
 }

@@ -10,14 +10,14 @@ export declare class SubstitutionService {
     constructor(prisma: PrismaService, auditService: AuditService, outbox: OutboxService, t: TranslationService);
     suggestSubstitution(tenantId: string, pickListItemId: string, substituteProductId: string, reason: string, userId: string, correlationId?: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;
@@ -25,14 +25,14 @@ export declare class SubstitutionService {
     }>;
     approveSubstitution(tenantId: string, substitutionId: string, userId: string, correlationId?: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;
@@ -40,14 +40,14 @@ export declare class SubstitutionService {
     }>;
     rejectSubstitution(tenantId: string, substitutionId: string, userId: string, correlationId?: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;
@@ -55,14 +55,14 @@ export declare class SubstitutionService {
     }>;
     findByPickList(tenantId: string, pickListId: string): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         version: number;
-        reason: string | null;
         originalProductId: string;
         respondedAt: Date | null;
         substituteProductId: string;
+        reason: string | null;
         approvedBy: string | null;
         requestedBy: string;
         pickListItemId: string;

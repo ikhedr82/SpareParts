@@ -11,20 +11,20 @@ export declare class SalesExtensionsService {
     private readonly request;
     constructor(prisma: PrismaService, auditService: AuditService, outbox: OutboxService, t: TranslationService, request: any);
     voidSale(tenantId: string, userId: string, saleId: string, dto: VoidSaleDto): Promise<{
+        currency: string;
         id: string;
-        tenantId: string;
         createdAt: Date;
-        status: string;
         updatedAt: Date;
+        tenantId: string;
+        status: string;
         version: number;
         branchId: string;
-        customerId: string | null;
-        currency: string;
-        businessClientId: string | null;
-        total: import("@prisma/client/runtime/library").Decimal;
         customerName: string | null;
+        total: import("@prisma/client/runtime/library").Decimal;
         cashSessionId: string | null;
         refundedSaleId: string | null;
+        customerId: string | null;
+        businessClientId: string | null;
         voidReason: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;

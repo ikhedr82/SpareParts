@@ -4,14 +4,14 @@ export declare class ChargebackResolutionController {
     constructor(service: ChargebackResolutionService);
     findAll(req: any, status?: any): Promise<{
         id: string;
-        tenantId: string;
         createdAt: Date;
+        tenantId: string;
         status: import(".prisma/client").$Enums.ChargebackStatus;
-        orderId: string;
-        deliveryExceptionId: string | null;
-        returnId: string | null;
         amount: import("@prisma/client/runtime/library").Decimal;
+        orderId: string;
         reason: string;
+        returnId: string | null;
+        deliveryExceptionId: string | null;
         resolvedAt: Date | null;
     }[]>;
     resolve(id: string, body: {
@@ -19,22 +19,22 @@ export declare class ChargebackResolutionController {
     }, req: any): Promise<{
         chargeback: {
             id: string;
-            tenantId: string;
             createdAt: Date;
+            tenantId: string;
             status: import(".prisma/client").$Enums.ChargebackStatus;
-            orderId: string;
-            deliveryExceptionId: string | null;
-            returnId: string | null;
             amount: import("@prisma/client/runtime/library").Decimal;
+            orderId: string;
             reason: string;
+            returnId: string | null;
+            deliveryExceptionId: string | null;
             resolvedAt: Date | null;
         };
         resolution: {
             id: string;
-            tenantId: string;
-            action: string;
             createdAt: Date;
+            tenantId: string;
             notes: string | null;
+            action: string;
             chargebackId: string;
             resolvedById: string;
             ledgerEntryId: string | null;
@@ -45,22 +45,22 @@ export declare class ChargebackResolutionController {
     }, req: any): Promise<{
         chargeback: {
             id: string;
-            tenantId: string;
             createdAt: Date;
+            tenantId: string;
             status: import(".prisma/client").$Enums.ChargebackStatus;
-            orderId: string;
-            deliveryExceptionId: string | null;
-            returnId: string | null;
             amount: import("@prisma/client/runtime/library").Decimal;
+            orderId: string;
             reason: string;
+            returnId: string | null;
+            deliveryExceptionId: string | null;
             resolvedAt: Date | null;
         };
         resolution: {
             id: string;
-            tenantId: string;
-            action: string;
             createdAt: Date;
+            tenantId: string;
             notes: string | null;
+            action: string;
             chargebackId: string;
             resolvedById: string;
             ledgerEntryId: string | null;
