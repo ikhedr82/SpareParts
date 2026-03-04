@@ -24,237 +24,252 @@ export declare class TenantAdminService {
             email: string;
         };
         id: string;
+        name: string;
+        subdomain: string;
         status: string;
         createdAt: Date;
-        name: string;
         updatedAt: Date;
-        planId: string | null;
-        subdomain: string;
+        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
         suspensionReason: string | null;
         baseCurrency: string;
         supportedCurrencies: string[];
-        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
-        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
-        stripeCustomerId: string | null;
         billingEmail: string | null;
+        stripeCustomerId: string | null;
+        planId: string | null;
     }>;
     suspendTenant(adminUserId: string, tenantId: string, dto: SuspendTenantDto): Promise<{
         id: string;
+        name: string;
+        subdomain: string;
         status: string;
         createdAt: Date;
-        name: string;
         updatedAt: Date;
-        planId: string | null;
-        subdomain: string;
+        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
         suspensionReason: string | null;
         baseCurrency: string;
         supportedCurrencies: string[];
-        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
-        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
-        stripeCustomerId: string | null;
         billingEmail: string | null;
+        stripeCustomerId: string | null;
+        planId: string | null;
     }>;
     reactivateTenant(adminUserId: string, tenantId: string): Promise<{
         id: string;
+        name: string;
+        subdomain: string;
         status: string;
         createdAt: Date;
-        name: string;
         updatedAt: Date;
-        planId: string | null;
-        subdomain: string;
+        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
         suspensionReason: string | null;
         baseCurrency: string;
         supportedCurrencies: string[];
-        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
-        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
-        stripeCustomerId: string | null;
         billingEmail: string | null;
+        stripeCustomerId: string | null;
+        planId: string | null;
     }>;
-    findAll(): Promise<{
-        plan: {
-            name: string;
-        };
-        subscription: {
+    findAll(params?: {
+        page?: number;
+        limit?: number;
+        search?: string;
+        status?: string;
+        planId?: string;
+    }): Promise<{
+        items: {
+            plan: {
+                currency: string;
+                name: string;
+                price: import("@prisma/client/runtime/library").Decimal;
+            };
+            subscription: {
+                status: import(".prisma/client").$Enums.SubscriptionStatus;
+                trialEndDate: Date;
+                currentPeriodEnd: Date;
+            };
             id: string;
-            status: import(".prisma/client").$Enums.SubscriptionStatus;
+            name: string;
+            subdomain: string;
+            status: string;
             createdAt: Date;
-            tenantId: string;
-            billingCycle: import(".prisma/client").$Enums.BillingCycle;
-            updatedAt: Date;
+            defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+            supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
+            suspensionReason: string;
+            baseCurrency: string;
+            supportedCurrencies: string[];
             planId: string;
-            startDate: Date;
-            endDate: Date | null;
-            trialEndDate: Date | null;
-            stripeSubscriptionId: string | null;
-            currentPeriodEnd: Date | null;
-        };
-        id: string;
-        status: string;
-        createdAt: Date;
-        name: string;
-        _count: {
-            users: number;
-            branches: number;
-        };
-        planId: string;
-        subdomain: string;
-        suspensionReason: string;
-        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
-        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
-    }[]>;
+            _count: {
+                branches: number;
+                users: number;
+            };
+        }[];
+        total: number;
+        page: number;
+        limit: number;
+    }>;
     findOne(tenantId: string): Promise<{
         plan: {
             currency: string;
             id: string;
-            createdAt: Date;
             name: string;
-            nameAr: string | null;
+            createdAt: Date;
+            updatedAt: Date;
             price: import("@prisma/client/runtime/library").Decimal;
             billingCycle: import(".prisma/client").$Enums.BillingCycle;
             isActive: boolean;
             features: import("@prisma/client/runtime/library").JsonValue | null;
             limits: import("@prisma/client/runtime/library").JsonValue | null;
-            updatedAt: Date;
-        };
-        _count: {
-            users: number;
+            nameAr: string | null;
         };
         branches: {
             id: string;
             name: string;
         }[];
+        _count: {
+            users: number;
+        };
     } & {
         id: string;
+        name: string;
+        subdomain: string;
         status: string;
         createdAt: Date;
-        name: string;
         updatedAt: Date;
-        planId: string | null;
-        subdomain: string;
+        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
         suspensionReason: string | null;
         baseCurrency: string;
         supportedCurrencies: string[];
-        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
-        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
-        stripeCustomerId: string | null;
         billingEmail: string | null;
+        stripeCustomerId: string | null;
+        planId: string | null;
     }>;
     updateLanguageSettings(adminUserId: string, tenantId: string, dto: UpdateTenantLanguageDto): Promise<{
         id: string;
+        name: string;
+        subdomain: string;
         status: string;
         createdAt: Date;
-        name: string;
         updatedAt: Date;
-        planId: string | null;
-        subdomain: string;
+        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
         suspensionReason: string | null;
         baseCurrency: string;
         supportedCurrencies: string[];
-        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
-        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
-        stripeCustomerId: string | null;
         billingEmail: string | null;
+        stripeCustomerId: string | null;
+        planId: string | null;
     }>;
-    findAllUsers(): Promise<{
-        tenant: {
-            id: string;
-            name: string;
-            subdomain: string;
-        };
-        id: string;
-        status: string;
-        createdAt: Date;
-        email: string;
-        isPlatformUser: boolean;
-        userRoles: {
+    findAllUsers(params?: {
+        page?: number;
+        limit?: number;
+        search?: string;
+    }): Promise<{
+        items: {
             tenant: {
+                id: string;
                 name: string;
+                subdomain: string;
             };
-            role: {
-                name: string;
-                scope: import(".prisma/client").$Enums.RoleScope;
-            };
-            branch: {
-                name: string;
-            };
+            id: string;
+            status: string;
+            createdAt: Date;
+            userRoles: {
+                tenant: {
+                    name: string;
+                };
+                role: {
+                    name: string;
+                    scope: import(".prisma/client").$Enums.RoleScope;
+                };
+                branch: {
+                    name: string;
+                };
+            }[];
+            email: string;
+            isPlatformUser: boolean;
         }[];
-    }[]>;
+        total: number;
+        page: number;
+        limit: number;
+    }>;
     createPlan(dto: CreatePlanDto): Promise<{
         currency: string;
         id: string;
-        createdAt: Date;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         price: import("@prisma/client/runtime/library").Decimal;
         billingCycle: import(".prisma/client").$Enums.BillingCycle;
         isActive: boolean;
         features: import("@prisma/client/runtime/library").JsonValue | null;
         limits: import("@prisma/client/runtime/library").JsonValue | null;
-        updatedAt: Date;
+        nameAr: string | null;
     }>;
     updatePlan(id: string, dto: UpdatePlanDto): Promise<{
         currency: string;
         id: string;
-        createdAt: Date;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         price: import("@prisma/client/runtime/library").Decimal;
         billingCycle: import(".prisma/client").$Enums.BillingCycle;
         isActive: boolean;
         features: import("@prisma/client/runtime/library").JsonValue | null;
         limits: import("@prisma/client/runtime/library").JsonValue | null;
-        updatedAt: Date;
+        nameAr: string | null;
     }>;
     deletePlan(id: string): Promise<{
         currency: string;
         id: string;
-        createdAt: Date;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         price: import("@prisma/client/runtime/library").Decimal;
         billingCycle: import(".prisma/client").$Enums.BillingCycle;
         isActive: boolean;
         features: import("@prisma/client/runtime/library").JsonValue | null;
         limits: import("@prisma/client/runtime/library").JsonValue | null;
-        updatedAt: Date;
+        nameAr: string | null;
     }>;
     findAllPlans(): Promise<{
         currency: string;
         id: string;
-        createdAt: Date;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
+        updatedAt: Date;
         price: import("@prisma/client/runtime/library").Decimal;
         billingCycle: import(".prisma/client").$Enums.BillingCycle;
         isActive: boolean;
         features: import("@prisma/client/runtime/library").JsonValue | null;
         limits: import("@prisma/client/runtime/library").JsonValue | null;
-        updatedAt: Date;
+        nameAr: string | null;
     }[]>;
     createCurrency(dto: CreateCurrencyDto): Promise<{
         symbol: string;
-        createdAt: Date;
         name: string;
-        isActive: boolean;
+        createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         code: string;
         precision: number;
     }>;
     updateCurrency(code: string, dto: UpdateCurrencyDto): Promise<{
         symbol: string;
-        createdAt: Date;
         name: string;
-        isActive: boolean;
+        createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         code: string;
         precision: number;
     }>;
     findAllCurrencies(): Promise<{
         symbol: string;
-        createdAt: Date;
         name: string;
-        isActive: boolean;
+        createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         code: string;
         precision: number;
     }[]>;
@@ -264,25 +279,25 @@ export declare class TenantAdminService {
         fromCurrency: string;
         toCurrency: string;
         rate: import("@prisma/client/runtime/library").Decimal;
-        source: string | null;
         effectiveAt: Date;
+        source: string | null;
     }>;
     findAllExchangeRates(): Promise<({
         fromCurrencyRef: {
             symbol: string;
-            createdAt: Date;
             name: string;
-            isActive: boolean;
+            createdAt: Date;
             updatedAt: Date;
+            isActive: boolean;
             code: string;
             precision: number;
         };
         toCurrencyRef: {
             symbol: string;
-            createdAt: Date;
             name: string;
-            isActive: boolean;
+            createdAt: Date;
             updatedAt: Date;
+            isActive: boolean;
             code: string;
             precision: number;
         };
@@ -292,8 +307,8 @@ export declare class TenantAdminService {
         fromCurrency: string;
         toCurrency: string;
         rate: import("@prisma/client/runtime/library").Decimal;
-        source: string | null;
         effectiveAt: Date;
+        source: string | null;
     })[]>;
     getPlanStatus(tenantId: string): Promise<{
         plan: any;
@@ -314,4 +329,85 @@ export declare class TenantAdminService {
         totalTenants: number;
     }>;
     getGlobalInvoices(): Promise<any>;
+    createSupportTicket(tenantId: string | null, subject: string, description: string, priority: any): Promise<any>;
+    findAllTickets(params?: {
+        page?: number;
+        limit?: number;
+        search?: string;
+        status?: string;
+    }): Promise<{
+        items: any;
+        total: any;
+        page: number;
+        limit: number;
+    }>;
+    updateTicketStatus(id: string, status: any): Promise<any>;
+    changeTenantPlan(adminUserId: string, tenantId: string, planId: string): Promise<{
+        id: string;
+        name: string;
+        subdomain: string;
+        status: string;
+        createdAt: Date;
+        updatedAt: Date;
+        defaultLanguage: import(".prisma/client").$Enums.LanguageCode;
+        supportedLanguages: import(".prisma/client").$Enums.LanguageCode[];
+        suspensionReason: string | null;
+        baseCurrency: string;
+        supportedCurrencies: string[];
+        billingEmail: string | null;
+        stripeCustomerId: string | null;
+        planId: string | null;
+    }>;
+    findAllSubscriptions(params?: {
+        page?: number;
+        limit?: number;
+        search?: string;
+        status?: string;
+    }): Promise<{
+        items: ({
+            plan: {
+                currency: string;
+                id: string;
+                name: string;
+                price: import("@prisma/client/runtime/library").Decimal;
+            };
+            tenant: {
+                id: string;
+                name: string;
+                subdomain: string;
+            };
+        } & {
+            id: string;
+            status: import(".prisma/client").$Enums.SubscriptionStatus;
+            createdAt: Date;
+            updatedAt: Date;
+            planId: string;
+            tenantId: string;
+            billingCycle: import(".prisma/client").$Enums.BillingCycle;
+            startDate: Date;
+            endDate: Date | null;
+            trialEndDate: Date | null;
+            currentPeriodEnd: Date | null;
+            stripeSubscriptionId: string | null;
+            provider: string;
+        })[];
+        total: number;
+        page: number;
+        limit: number;
+    }>;
+    cancelSubscription(adminUserId: string, subscriptionId: string): Promise<{
+        id: string;
+        status: import(".prisma/client").$Enums.SubscriptionStatus;
+        createdAt: Date;
+        updatedAt: Date;
+        planId: string;
+        tenantId: string;
+        billingCycle: import(".prisma/client").$Enums.BillingCycle;
+        startDate: Date;
+        endDate: Date | null;
+        trialEndDate: Date | null;
+        currentPeriodEnd: Date | null;
+        stripeSubscriptionId: string | null;
+        provider: string;
+    }>;
 }

@@ -16,13 +16,13 @@ export declare class DriversService {
         branch: {
             id: string;
             name: string;
-            nameAr: string | null;
             createdAt: Date;
             updatedAt: Date;
+            nameAr: string | null;
             tenantId: string;
             address: string | null;
-            addressAr: string | null;
             phone: string | null;
+            addressAr: string | null;
         };
         currentTrip: {
             id: string;

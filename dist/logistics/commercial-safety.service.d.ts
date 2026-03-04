@@ -26,18 +26,18 @@ export declare class CommercialSafetyService {
         businessClientId: string;
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
-        createdById: string | null;
         cancelledAt: Date | null;
         returnId: string | null;
+        createdById: string | null;
         deliveryExceptionId: string | null;
         orderNumber: string;
         deliveryAddressId: string | null;
         contactId: string | null;
         internalNotes: string | null;
-        sourceQuoteId: string | null;
         confirmedAt: Date | null;
         shippedAt: Date | null;
         deliveredAt: Date | null;
+        sourceQuoteId: string | null;
     }>;
     processLoss(tenantId: string, exceptionId: string, userId: string): Promise<void>;
 }

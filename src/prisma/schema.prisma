@@ -39,6 +39,7 @@ model Subscription {
   updatedAt            DateTime           @updatedAt @map("updated_at")
   currentPeriodEnd     DateTime?          @map("current_period_end")
   stripeSubscriptionId String?            @map("stripe_subscription_id")
+  provider             String             @default("STRIPE")
   billingInvoices      BillingInvoice[]
   plan                 Plan               @relation(fields: [planId], references: [id])
   tenant               Tenant             @relation(fields: [tenantId], references: [id])
@@ -176,6 +177,7 @@ model Tenant {
   substitutions         Substitution[]
   supplierInvoices      SupplierInvoice[]
   suppliers             Supplier[]
+  supportTickets        SupportTicket[]
   taxFilings            TaxFiling[]
   taxRates              TaxRate[]
   plan                  Plan?                  @relation(fields: [planId], references: [id])
@@ -2181,4 +2183,31 @@ enum TaxFilingStatus {
   DRAFT
   FILED
   CANCELLED
+}
+
+model SupportTicket {
+  id          String          @id @default(uuid())
+  tenantId    String?         @map("tenant_id")
+  subject     String
+  description String
+  priority    SupportPriority @default(MEDIUM)
+  status      SupportStatus   @default(OPEN)
+  createdAt   DateTime        @default(now()) @map("created_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+  tenant      Tenant?         @relation(fields: [tenantId], references: [id])
+
+  @@map("support_tickets")
+}
+
+enum SupportStatus {
+  OPEN
+  IN_PROGRESS
+  CLOSED
+}
+
+enum SupportPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
 }

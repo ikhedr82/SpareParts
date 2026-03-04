@@ -10,26 +10,26 @@ export declare class ReturnToWarehouseService {
     constructor(prisma: PrismaService, inventorySafety: InventorySafetyService, auditService: AuditService, outbox: OutboxService);
     returnToWarehouse(tenantId: string, tripId: string, stopId: string, reason: string, userId: string, correlationId?: string): Promise<{
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
         version: number;
         branchId: string;
+        tripId: string;
         reason: string;
+        stopId: string;
         receivedAt: Date | null;
         receivedById: string | null;
-        tripId: string;
-        stopId: string;
     }>;
     findAll(tenantId: string, branchId?: string): Promise<{
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
         version: number;
         branchId: string;
+        tripId: string;
         reason: string;
+        stopId: string;
         receivedAt: Date | null;
         receivedById: string | null;
-        tripId: string;
-        stopId: string;
     }[]>;
 }

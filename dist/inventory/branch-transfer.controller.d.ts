@@ -14,14 +14,14 @@ export declare class BranchTransferController {
         }[];
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.BranchTransferStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.BranchTransferStatus;
         notes: string | null;
-        receivedAt: Date | null;
         shippedAt: Date | null;
+        receivedAt: Date | null;
         sourceBranchId: string;
         destBranchId: string;
         requestedById: string;
@@ -39,14 +39,14 @@ export declare class BranchTransferController {
         }[];
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.BranchTransferStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.BranchTransferStatus;
         notes: string | null;
-        receivedAt: Date | null;
         shippedAt: Date | null;
+        receivedAt: Date | null;
         sourceBranchId: string;
         destBranchId: string;
         requestedById: string;
@@ -64,14 +64,14 @@ export declare class BranchTransferController {
         }[];
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.BranchTransferStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.BranchTransferStatus;
         notes: string | null;
-        receivedAt: Date | null;
         shippedAt: Date | null;
+        receivedAt: Date | null;
         sourceBranchId: string;
         destBranchId: string;
         requestedById: string;
@@ -89,14 +89,14 @@ export declare class BranchTransferController {
         }[];
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.BranchTransferStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.BranchTransferStatus;
         notes: string | null;
-        receivedAt: Date | null;
         shippedAt: Date | null;
+        receivedAt: Date | null;
         sourceBranchId: string;
         destBranchId: string;
         requestedById: string;
@@ -114,14 +114,14 @@ export declare class BranchTransferController {
         }[];
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.BranchTransferStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.BranchTransferStatus;
         notes: string | null;
-        receivedAt: Date | null;
         shippedAt: Date | null;
+        receivedAt: Date | null;
         sourceBranchId: string;
         destBranchId: string;
         requestedById: string;
@@ -144,14 +144,14 @@ export declare class BranchTransferController {
         }[];
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.BranchTransferStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.BranchTransferStatus;
         notes: string | null;
-        receivedAt: Date | null;
         shippedAt: Date | null;
+        receivedAt: Date | null;
         sourceBranchId: string;
         destBranchId: string;
         requestedById: string;

@@ -7,10 +7,10 @@ export declare class TaxFilingController {
         periodEnd: string;
     }): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.TaxFilingStatus;
+        updatedAt: Date;
         version: number;
         periodStart: Date;
         periodEnd: Date;
@@ -22,10 +22,10 @@ export declare class TaxFilingController {
     }>;
     findAll(req: any, status?: any): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.TaxFilingStatus;
+        updatedAt: Date;
         version: number;
         periodStart: Date;
         periodEnd: Date;
@@ -37,10 +37,10 @@ export declare class TaxFilingController {
     }[]>;
     findOne(req: any, id: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.TaxFilingStatus;
+        updatedAt: Date;
         version: number;
         periodStart: Date;
         periodEnd: Date;
@@ -52,10 +52,10 @@ export declare class TaxFilingController {
     }>;
     file(req: any, id: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.TaxFilingStatus;
+        updatedAt: Date;
         version: number;
         periodStart: Date;
         periodEnd: Date;

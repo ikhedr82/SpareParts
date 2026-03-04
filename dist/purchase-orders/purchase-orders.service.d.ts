@@ -24,18 +24,18 @@ export declare class PurchaseOrdersService {
             unitCost: import("@prisma/client/runtime/library").Decimal;
         }[];
     } & {
-        currency: string;
-        exchangeRate: import("@prisma/client/runtime/library").Decimal;
         id: string;
-        createdAt: Date;
         tenantId: string;
-        branchId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-        baseAmount: import("@prisma/client/runtime/library").Decimal;
-        createdById: string;
+        branchId: string;
         supplierId: string | null;
+        currency: string;
+        exchangeRate: import("@prisma/client/runtime/library").Decimal;
+        createdById: string;
+        baseAmount: import("@prisma/client/runtime/library").Decimal;
         supplierName: string;
         totalCost: import("@prisma/client/runtime/library").Decimal;
     }>;
@@ -50,42 +50,32 @@ export declare class PurchaseOrdersService {
         }[];
         createdBy: {
             id: string;
-            createdAt: Date;
             tenantId: string | null;
-            updatedAt: Date;
-            version: number;
+            createdAt: Date;
             email: string;
             passwordHash: string;
             isPlatformUser: boolean;
             status: string;
+            updatedAt: Date;
+            version: number;
         };
     } & {
-        currency: string;
-        exchangeRate: import("@prisma/client/runtime/library").Decimal;
         id: string;
-        createdAt: Date;
         tenantId: string;
-        branchId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-        baseAmount: import("@prisma/client/runtime/library").Decimal;
-        createdById: string;
+        branchId: string;
         supplierId: string | null;
+        currency: string;
+        exchangeRate: import("@prisma/client/runtime/library").Decimal;
+        createdById: string;
+        baseAmount: import("@prisma/client/runtime/library").Decimal;
         supplierName: string;
         totalCost: import("@prisma/client/runtime/library").Decimal;
     })[]>;
     findOne(id: string, tenantId: string): Promise<{
-        supplier: {
-            id: string;
-            createdAt: Date;
-            tenantId: string;
-            updatedAt: Date;
-            version: number;
-            name: string;
-            nameAr: string | null;
-            balance: import("@prisma/client/runtime/library").Decimal;
-        };
         receipts: ({
             items: {
                 id: string;
@@ -98,28 +88,38 @@ export declare class PurchaseOrdersService {
             id: string;
             tenantId: string;
             notes: string | null;
-            receiptNumber: string;
             purchaseOrderId: string;
             receivedAt: Date;
             receivedById: string;
+            receiptNumber: string;
         })[];
+        supplier: {
+            id: string;
+            tenantId: string;
+            createdAt: Date;
+            updatedAt: Date;
+            version: number;
+            name: string;
+            nameAr: string | null;
+            balance: import("@prisma/client/runtime/library").Decimal;
+        };
         items: ({
             product: {
                 id: string;
                 createdAt: Date;
+                status: string;
                 updatedAt: Date;
                 name: string;
-                status: string;
+                weight: number | null;
                 brandId: string;
                 categoryId: string;
-                nameAr: string | null;
                 description: string | null;
-                descriptionAr: string | null;
-                weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
             };
         } & {
             id: string;
@@ -131,28 +131,28 @@ export declare class PurchaseOrdersService {
         })[];
         createdBy: {
             id: string;
-            createdAt: Date;
             tenantId: string | null;
-            updatedAt: Date;
-            version: number;
+            createdAt: Date;
             email: string;
             passwordHash: string;
             isPlatformUser: boolean;
             status: string;
+            updatedAt: Date;
+            version: number;
         };
     } & {
-        currency: string;
-        exchangeRate: import("@prisma/client/runtime/library").Decimal;
         id: string;
-        createdAt: Date;
         tenantId: string;
-        branchId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
         updatedAt: Date;
         version: number;
-        status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-        baseAmount: import("@prisma/client/runtime/library").Decimal;
-        createdById: string;
+        branchId: string;
         supplierId: string | null;
+        currency: string;
+        exchangeRate: import("@prisma/client/runtime/library").Decimal;
+        createdById: string;
+        baseAmount: import("@prisma/client/runtime/library").Decimal;
         supplierName: string;
         totalCost: import("@prisma/client/runtime/library").Decimal;
     }>;
@@ -171,9 +171,9 @@ export declare class PurchaseOrdersService {
         id: string;
         tenantId: string;
         notes: string | null;
-        receiptNumber: string;
         purchaseOrderId: string;
         receivedAt: Date;
         receivedById: string;
+        receiptNumber: string;
     }>;
 }

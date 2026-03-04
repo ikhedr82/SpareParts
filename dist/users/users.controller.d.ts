@@ -4,25 +4,25 @@ export declare class UsersController {
     constructor(usersService: UsersService);
     create(body: any, req: any): Promise<{
         id: string;
-        status: string;
         createdAt: Date;
-        version: number;
-        tenantId: string | null;
         updatedAt: Date;
+        tenantId: string | null;
+        status: string;
         email: string;
         passwordHash: string;
         isPlatformUser: boolean;
+        version: number;
     }>;
     findAll(req: any): Promise<({
         userRoles: ({
             role: {
                 id: string;
-                createdAt: Date;
-                version: number;
-                tenantId: string | null;
                 name: string;
-                nameAr: string | null;
+                createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
+                tenantId: string | null;
+                version: number;
                 scope: import(".prisma/client").$Enums.RoleScope;
                 description: string | null;
                 descriptionAr: string | null;
@@ -30,19 +30,19 @@ export declare class UsersController {
         } & {
             id: string;
             tenantId: string | null;
-            branchId: string | null;
             roleId: string;
             userId: string;
+            branchId: string | null;
         })[];
     } & {
         id: string;
-        status: string;
         createdAt: Date;
-        version: number;
-        tenantId: string | null;
         updatedAt: Date;
+        tenantId: string | null;
+        status: string;
         email: string;
         passwordHash: string;
         isPlatformUser: boolean;
+        version: number;
     })[]>;
 }

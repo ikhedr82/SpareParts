@@ -17,23 +17,49 @@ export declare class OrdersService {
     create(dto: CreateOrderDto): Promise<{
         branch: {
             id: string;
-            name: string;
-            nameAr: string | null;
+            tenantId: string;
             createdAt: Date;
             updatedAt: Date;
-            tenantId: string;
+            name: string;
+            phone: string | null;
+            nameAr: string | null;
             address: string | null;
             addressAr: string | null;
-            phone: string | null;
         };
-        businessClient: {
-            currency: string;
+        items: ({
+            product: {
+                id: string;
+                createdAt: Date;
+                status: string;
+                updatedAt: Date;
+                name: string;
+                weight: number | null;
+                brandId: string;
+                categoryId: string;
+                description: string | null;
+                dimensions: string | null;
+                taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
+            };
+        } & {
             id: string;
             createdAt: Date;
-            updatedAt: Date;
+            orderId: string;
+            productId: string;
+            quantity: number;
+            unitPrice: import("@prisma/client/runtime/library").Decimal;
+        })[];
+        businessClient: {
+            id: string;
             tenantId: string;
+            createdAt: Date;
             status: string;
+            updatedAt: Date;
             type: import(".prisma/client").$Enums.BusinessClientType;
+            currency: string;
             notes: string | null;
             businessName: string;
             registrationNumber: string | null;
@@ -46,39 +72,25 @@ export declare class OrdersService {
             paymentTerms: string | null;
             priceTierId: string | null;
         };
-        items: ({
-            product: {
-                id: string;
-                name: string;
-                nameAr: string | null;
-                createdAt: Date;
-                updatedAt: Date;
-                status: string;
-                description: string | null;
-                descriptionAr: string | null;
-                brandId: string;
-                categoryId: string;
-                weight: number | null;
-                dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
-                taxRateId: string | null;
-            };
-        } & {
+        contact: {
             id: string;
             createdAt: Date;
-            orderId: string;
-            productId: string;
-            quantity: number;
-            unitPrice: import("@prisma/client/runtime/library").Decimal;
-        })[];
+            email: string | null;
+            updatedAt: Date;
+            name: string;
+            phone: string | null;
+            businessClientId: string;
+            position: string | null;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
+        };
         deliveryAddress: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             type: string;
-            country: string;
             businessClientId: string;
+            country: string;
             isPrimary: boolean;
             addressLine1: string;
             addressLine2: string | null;
@@ -86,64 +98,78 @@ export declare class OrdersService {
             state: string | null;
             postalCode: string | null;
         };
-        contact: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        };
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.OrderStatus;
+        updatedAt: Date;
         version: number;
         branchId: string;
-        notes: string | null;
-        total: import("@prisma/client/runtime/library").Decimal;
+        deliveredAt: Date | null;
         businessClientId: string;
-        subtotal: import("@prisma/client/runtime/library").Decimal;
-        tax: import("@prisma/client/runtime/library").Decimal;
-        createdById: string | null;
-        cancelledAt: Date | null;
-        returnId: string | null;
-        deliveryExceptionId: string | null;
         orderNumber: string;
         deliveryAddressId: string | null;
         contactId: string | null;
+        subtotal: import("@prisma/client/runtime/library").Decimal;
+        tax: import("@prisma/client/runtime/library").Decimal;
+        total: import("@prisma/client/runtime/library").Decimal;
+        notes: string | null;
         internalNotes: string | null;
-        sourceQuoteId: string | null;
         confirmedAt: Date | null;
         shippedAt: Date | null;
-        deliveredAt: Date | null;
+        cancelledAt: Date | null;
+        createdById: string | null;
+        deliveryExceptionId: string | null;
+        returnId: string | null;
+        sourceQuoteId: string | null;
     }>;
     findAll(businessClientId?: string, status?: OrderStatus): Promise<({
         branch: {
             id: string;
-            name: string;
-            nameAr: string | null;
+            tenantId: string;
             createdAt: Date;
             updatedAt: Date;
-            tenantId: string;
+            name: string;
+            phone: string | null;
+            nameAr: string | null;
             address: string | null;
             addressAr: string | null;
-            phone: string | null;
         };
-        businessClient: {
-            currency: string;
+        items: ({
+            product: {
+                id: string;
+                createdAt: Date;
+                status: string;
+                updatedAt: Date;
+                name: string;
+                weight: number | null;
+                brandId: string;
+                categoryId: string;
+                description: string | null;
+                dimensions: string | null;
+                taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
+            };
+        } & {
             id: string;
             createdAt: Date;
-            updatedAt: Date;
+            orderId: string;
+            productId: string;
+            quantity: number;
+            unitPrice: import("@prisma/client/runtime/library").Decimal;
+        })[];
+        businessClient: {
+            id: string;
             tenantId: string;
+            createdAt: Date;
             status: string;
+            updatedAt: Date;
             type: import(".prisma/client").$Enums.BusinessClientType;
+            currency: string;
             notes: string | null;
             businessName: string;
             registrationNumber: string | null;
@@ -156,23 +182,105 @@ export declare class OrdersService {
             paymentTerms: string | null;
             priceTierId: string | null;
         };
+        contact: {
+            id: string;
+            createdAt: Date;
+            email: string | null;
+            updatedAt: Date;
+            name: string;
+            phone: string | null;
+            businessClientId: string;
+            position: string | null;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
+        };
+        deliveryAddress: {
+            id: string;
+            createdAt: Date;
+            updatedAt: Date;
+            type: string;
+            businessClientId: string;
+            country: string;
+            isPrimary: boolean;
+            addressLine1: string;
+            addressLine2: string | null;
+            city: string;
+            state: string | null;
+            postalCode: string | null;
+        };
+    } & {
+        id: string;
+        tenantId: string;
+        createdAt: Date;
+        status: import(".prisma/client").$Enums.OrderStatus;
+        updatedAt: Date;
+        version: number;
+        branchId: string;
+        deliveredAt: Date | null;
+        businessClientId: string;
+        orderNumber: string;
+        deliveryAddressId: string | null;
+        contactId: string | null;
+        subtotal: import("@prisma/client/runtime/library").Decimal;
+        tax: import("@prisma/client/runtime/library").Decimal;
+        total: import("@prisma/client/runtime/library").Decimal;
+        notes: string | null;
+        internalNotes: string | null;
+        confirmedAt: Date | null;
+        shippedAt: Date | null;
+        cancelledAt: Date | null;
+        createdById: string | null;
+        deliveryExceptionId: string | null;
+        returnId: string | null;
+        sourceQuoteId: string | null;
+    })[]>;
+    findOne(id: string): Promise<{
+        branch: {
+            id: string;
+            tenantId: string;
+            createdAt: Date;
+            updatedAt: Date;
+            name: string;
+            phone: string | null;
+            nameAr: string | null;
+            address: string | null;
+            addressAr: string | null;
+        };
         items: ({
             product: {
+                brand: {
+                    id: string;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    name: string;
+                    nameAr: string | null;
+                    country: string | null;
+                    isOem: boolean;
+                };
+                category: {
+                    id: string;
+                    createdAt: Date;
+                    updatedAt: Date;
+                    name: string;
+                    nameAr: string | null;
+                    parentId: string | null;
+                };
+            } & {
                 id: string;
-                name: string;
-                nameAr: string | null;
                 createdAt: Date;
-                updatedAt: Date;
                 status: string;
-                description: string | null;
-                descriptionAr: string | null;
+                updatedAt: Date;
+                name: string;
+                weight: number | null;
                 brandId: string;
                 categoryId: string;
-                weight: number | null;
+                description: string | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
             };
         } & {
             id: string;
@@ -182,90 +290,14 @@ export declare class OrdersService {
             quantity: number;
             unitPrice: import("@prisma/client/runtime/library").Decimal;
         })[];
-        deliveryAddress: {
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            type: string;
-            country: string;
-            businessClientId: string;
-            isPrimary: boolean;
-            addressLine1: string;
-            addressLine2: string | null;
-            city: string;
-            state: string | null;
-            postalCode: string | null;
-        };
-        contact: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        };
-    } & {
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        tenantId: string;
-        status: import(".prisma/client").$Enums.OrderStatus;
-        version: number;
-        branchId: string;
-        notes: string | null;
-        total: import("@prisma/client/runtime/library").Decimal;
-        businessClientId: string;
-        subtotal: import("@prisma/client/runtime/library").Decimal;
-        tax: import("@prisma/client/runtime/library").Decimal;
-        createdById: string | null;
-        cancelledAt: Date | null;
-        returnId: string | null;
-        deliveryExceptionId: string | null;
-        orderNumber: string;
-        deliveryAddressId: string | null;
-        contactId: string | null;
-        internalNotes: string | null;
-        sourceQuoteId: string | null;
-        confirmedAt: Date | null;
-        shippedAt: Date | null;
-        deliveredAt: Date | null;
-    })[]>;
-    findOne(id: string): Promise<{
-        branch: {
-            id: string;
-            name: string;
-            nameAr: string | null;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            address: string | null;
-            addressAr: string | null;
-            phone: string | null;
-        };
         businessClient: {
-            contacts: {
-                id: string;
-                name: string;
-                createdAt: Date;
-                updatedAt: Date;
-                email: string | null;
-                phone: string | null;
-                position: string | null;
-                businessClientId: string;
-                isPrimary: boolean;
-                canPlaceOrders: boolean;
-            }[];
             addresses: {
                 id: string;
                 createdAt: Date;
                 updatedAt: Date;
                 type: string;
-                country: string;
                 businessClientId: string;
+                country: string;
                 isPrimary: boolean;
                 addressLine1: string;
                 addressLine2: string | null;
@@ -273,14 +305,26 @@ export declare class OrdersService {
                 state: string | null;
                 postalCode: string | null;
             }[];
+            contacts: {
+                id: string;
+                createdAt: Date;
+                email: string | null;
+                updatedAt: Date;
+                name: string;
+                phone: string | null;
+                businessClientId: string;
+                position: string | null;
+                isPrimary: boolean;
+                canPlaceOrders: boolean;
+            }[];
         } & {
-            currency: string;
             id: string;
-            createdAt: Date;
-            updatedAt: Date;
             tenantId: string;
+            createdAt: Date;
             status: string;
+            updatedAt: Date;
             type: import(".prisma/client").$Enums.BusinessClientType;
+            currency: string;
             notes: string | null;
             businessName: string;
             registrationNumber: string | null;
@@ -293,57 +337,25 @@ export declare class OrdersService {
             paymentTerms: string | null;
             priceTierId: string | null;
         };
-        items: ({
-            product: {
-                brand: {
-                    id: string;
-                    name: string;
-                    nameAr: string | null;
-                    createdAt: Date;
-                    updatedAt: Date;
-                    country: string | null;
-                    isOem: boolean;
-                };
-                category: {
-                    id: string;
-                    name: string;
-                    nameAr: string | null;
-                    createdAt: Date;
-                    updatedAt: Date;
-                    parentId: string | null;
-                };
-            } & {
-                id: string;
-                name: string;
-                nameAr: string | null;
-                createdAt: Date;
-                updatedAt: Date;
-                status: string;
-                description: string | null;
-                descriptionAr: string | null;
-                brandId: string;
-                categoryId: string;
-                weight: number | null;
-                dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
-                taxRateId: string | null;
-            };
-        } & {
+        contact: {
             id: string;
             createdAt: Date;
-            orderId: string;
-            productId: string;
-            quantity: number;
-            unitPrice: import("@prisma/client/runtime/library").Decimal;
-        })[];
+            email: string | null;
+            updatedAt: Date;
+            name: string;
+            phone: string | null;
+            businessClientId: string;
+            position: string | null;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
+        };
         deliveryAddress: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             type: string;
-            country: string;
             businessClientId: string;
+            country: string;
             isPrimary: boolean;
             addressLine1: string;
             addressLine2: string | null;
@@ -351,64 +363,78 @@ export declare class OrdersService {
             state: string | null;
             postalCode: string | null;
         };
-        contact: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        };
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.OrderStatus;
+        updatedAt: Date;
         version: number;
         branchId: string;
-        notes: string | null;
-        total: import("@prisma/client/runtime/library").Decimal;
+        deliveredAt: Date | null;
         businessClientId: string;
-        subtotal: import("@prisma/client/runtime/library").Decimal;
-        tax: import("@prisma/client/runtime/library").Decimal;
-        createdById: string | null;
-        cancelledAt: Date | null;
-        returnId: string | null;
-        deliveryExceptionId: string | null;
         orderNumber: string;
         deliveryAddressId: string | null;
         contactId: string | null;
+        subtotal: import("@prisma/client/runtime/library").Decimal;
+        tax: import("@prisma/client/runtime/library").Decimal;
+        total: import("@prisma/client/runtime/library").Decimal;
+        notes: string | null;
         internalNotes: string | null;
-        sourceQuoteId: string | null;
         confirmedAt: Date | null;
         shippedAt: Date | null;
-        deliveredAt: Date | null;
+        cancelledAt: Date | null;
+        createdById: string | null;
+        deliveryExceptionId: string | null;
+        returnId: string | null;
+        sourceQuoteId: string | null;
     }>;
     updateStatus(tenantId: string, id: string, dto: UpdateOrderStatusDto, userId: string): Promise<{
         branch: {
             id: string;
-            name: string;
-            nameAr: string | null;
+            tenantId: string;
             createdAt: Date;
             updatedAt: Date;
-            tenantId: string;
+            name: string;
+            phone: string | null;
+            nameAr: string | null;
             address: string | null;
             addressAr: string | null;
-            phone: string | null;
         };
-        businessClient: {
-            currency: string;
+        items: ({
+            product: {
+                id: string;
+                createdAt: Date;
+                status: string;
+                updatedAt: Date;
+                name: string;
+                weight: number | null;
+                brandId: string;
+                categoryId: string;
+                description: string | null;
+                dimensions: string | null;
+                taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
+            };
+        } & {
             id: string;
             createdAt: Date;
-            updatedAt: Date;
+            orderId: string;
+            productId: string;
+            quantity: number;
+            unitPrice: import("@prisma/client/runtime/library").Decimal;
+        })[];
+        businessClient: {
+            id: string;
             tenantId: string;
+            createdAt: Date;
             status: string;
+            updatedAt: Date;
             type: import(".prisma/client").$Enums.BusinessClientType;
+            currency: string;
             notes: string | null;
             businessName: string;
             registrationNumber: string | null;
@@ -421,39 +447,25 @@ export declare class OrdersService {
             paymentTerms: string | null;
             priceTierId: string | null;
         };
-        items: ({
-            product: {
-                id: string;
-                name: string;
-                nameAr: string | null;
-                createdAt: Date;
-                updatedAt: Date;
-                status: string;
-                description: string | null;
-                descriptionAr: string | null;
-                brandId: string;
-                categoryId: string;
-                weight: number | null;
-                dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
-                taxRateId: string | null;
-            };
-        } & {
+        contact: {
             id: string;
             createdAt: Date;
-            orderId: string;
-            productId: string;
-            quantity: number;
-            unitPrice: import("@prisma/client/runtime/library").Decimal;
-        })[];
+            email: string | null;
+            updatedAt: Date;
+            name: string;
+            phone: string | null;
+            businessClientId: string;
+            position: string | null;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
+        };
         deliveryAddress: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             type: string;
-            country: string;
             businessClientId: string;
+            country: string;
             isPrimary: boolean;
             addressLine1: string;
             addressLine2: string | null;
@@ -461,64 +473,78 @@ export declare class OrdersService {
             state: string | null;
             postalCode: string | null;
         };
-        contact: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        };
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.OrderStatus;
+        updatedAt: Date;
         version: number;
         branchId: string;
-        notes: string | null;
-        total: import("@prisma/client/runtime/library").Decimal;
+        deliveredAt: Date | null;
         businessClientId: string;
-        subtotal: import("@prisma/client/runtime/library").Decimal;
-        tax: import("@prisma/client/runtime/library").Decimal;
-        createdById: string | null;
-        cancelledAt: Date | null;
-        returnId: string | null;
-        deliveryExceptionId: string | null;
         orderNumber: string;
         deliveryAddressId: string | null;
         contactId: string | null;
+        subtotal: import("@prisma/client/runtime/library").Decimal;
+        tax: import("@prisma/client/runtime/library").Decimal;
+        total: import("@prisma/client/runtime/library").Decimal;
+        notes: string | null;
         internalNotes: string | null;
-        sourceQuoteId: string | null;
         confirmedAt: Date | null;
         shippedAt: Date | null;
-        deliveredAt: Date | null;
+        cancelledAt: Date | null;
+        createdById: string | null;
+        deliveryExceptionId: string | null;
+        returnId: string | null;
+        sourceQuoteId: string | null;
     }>;
     cancel(tenantId: string, id: string, userId: string): Promise<{
         branch: {
             id: string;
-            name: string;
-            nameAr: string | null;
+            tenantId: string;
             createdAt: Date;
             updatedAt: Date;
-            tenantId: string;
+            name: string;
+            phone: string | null;
+            nameAr: string | null;
             address: string | null;
             addressAr: string | null;
-            phone: string | null;
         };
-        businessClient: {
-            currency: string;
+        items: ({
+            product: {
+                id: string;
+                createdAt: Date;
+                status: string;
+                updatedAt: Date;
+                name: string;
+                weight: number | null;
+                brandId: string;
+                categoryId: string;
+                description: string | null;
+                dimensions: string | null;
+                taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
+            };
+        } & {
             id: string;
             createdAt: Date;
-            updatedAt: Date;
+            orderId: string;
+            productId: string;
+            quantity: number;
+            unitPrice: import("@prisma/client/runtime/library").Decimal;
+        })[];
+        businessClient: {
+            id: string;
             tenantId: string;
+            createdAt: Date;
             status: string;
+            updatedAt: Date;
             type: import(".prisma/client").$Enums.BusinessClientType;
+            currency: string;
             notes: string | null;
             businessName: string;
             registrationNumber: string | null;
@@ -531,39 +557,25 @@ export declare class OrdersService {
             paymentTerms: string | null;
             priceTierId: string | null;
         };
-        items: ({
-            product: {
-                id: string;
-                name: string;
-                nameAr: string | null;
-                createdAt: Date;
-                updatedAt: Date;
-                status: string;
-                description: string | null;
-                descriptionAr: string | null;
-                brandId: string;
-                categoryId: string;
-                weight: number | null;
-                dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
-                taxRateId: string | null;
-            };
-        } & {
+        contact: {
             id: string;
             createdAt: Date;
-            orderId: string;
-            productId: string;
-            quantity: number;
-            unitPrice: import("@prisma/client/runtime/library").Decimal;
-        })[];
+            email: string | null;
+            updatedAt: Date;
+            name: string;
+            phone: string | null;
+            businessClientId: string;
+            position: string | null;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
+        };
         deliveryAddress: {
             id: string;
             createdAt: Date;
             updatedAt: Date;
             type: string;
-            country: string;
             businessClientId: string;
+            country: string;
             isPrimary: boolean;
             addressLine1: string;
             addressLine2: string | null;
@@ -571,43 +583,31 @@ export declare class OrdersService {
             state: string | null;
             postalCode: string | null;
         };
-        contact: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        };
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.OrderStatus;
+        updatedAt: Date;
         version: number;
         branchId: string;
-        notes: string | null;
-        total: import("@prisma/client/runtime/library").Decimal;
+        deliveredAt: Date | null;
         businessClientId: string;
-        subtotal: import("@prisma/client/runtime/library").Decimal;
-        tax: import("@prisma/client/runtime/library").Decimal;
-        createdById: string | null;
-        cancelledAt: Date | null;
-        returnId: string | null;
-        deliveryExceptionId: string | null;
         orderNumber: string;
         deliveryAddressId: string | null;
         contactId: string | null;
+        subtotal: import("@prisma/client/runtime/library").Decimal;
+        tax: import("@prisma/client/runtime/library").Decimal;
+        total: import("@prisma/client/runtime/library").Decimal;
+        notes: string | null;
         internalNotes: string | null;
-        sourceQuoteId: string | null;
         confirmedAt: Date | null;
         shippedAt: Date | null;
-        deliveredAt: Date | null;
+        cancelledAt: Date | null;
+        createdById: string | null;
+        deliveryExceptionId: string | null;
+        returnId: string | null;
+        sourceQuoteId: string | null;
     }>;
     private findOptimalBranch;
 }

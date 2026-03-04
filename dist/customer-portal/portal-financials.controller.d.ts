@@ -18,13 +18,13 @@ export declare class PortalFinancialsController {
         status: string;
         amount: import("@prisma/client/runtime/library").Decimal;
         version: number;
+        businessClientId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        businessClientId: string | null;
         saleId: string;
         invoiceNumber: string;
+        issuedAt: Date;
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
-        issuedAt: Date;
     }[]>;
 }

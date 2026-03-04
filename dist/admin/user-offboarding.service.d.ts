@@ -15,28 +15,28 @@ export declare class UserOffboardingService {
     findAll(tenantId: string): Promise<{
         id: string;
         createdAt: Date;
-        updatedAt: Date;
-        status: string;
         email: string;
+        status: string;
+        updatedAt: Date;
         userRoles: ({
             role: {
                 id: string;
-                name: string;
-                nameAr: string | null;
+                tenantId: string | null;
                 createdAt: Date;
                 updatedAt: Date;
-                tenantId: string | null;
                 version: number;
-                scope: import(".prisma/client").$Enums.RoleScope;
+                name: string;
                 description: string | null;
                 descriptionAr: string | null;
+                nameAr: string | null;
+                scope: import(".prisma/client").$Enums.RoleScope;
             };
         } & {
             id: string;
             tenantId: string | null;
-            roleId: string;
             userId: string;
             branchId: string | null;
+            roleId: string;
         })[];
     }[]>;
 }

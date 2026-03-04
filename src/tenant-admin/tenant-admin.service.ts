@@ -54,7 +54,17 @@ export class TenantAdminService {
                 },
             });
 
-            // 2. Create tenant admin role
+            // 2. Create manual subscription
+            await (tx.subscription as any).create({
+                data: {
+                    tenantId: tenant.id,
+                    planId: tenant.planId,
+                    status: 'ACTIVE',
+                    provider: 'MANUAL',
+                },
+            });
+
+            // 3. Create tenant admin role
             const adminRole = await tx.role.create({
                 data: {
                     tenantId: tenant.id,
@@ -202,24 +212,53 @@ export class TenantAdminService {
         });
     }
 
-    async findAll() {
-        return this.prisma.tenant.findMany({
-            select: {
-                id: true,
-                name: true,
-                subdomain: true,
-                status: true,
-                planId: true,
-                plan: { select: { name: true } },
-                subscription: true,
-                suspensionReason: true,
-                defaultLanguage: true,
-                supportedLanguages: true,
-                createdAt: true,
-                _count: { select: { users: true, branches: true } },
-            },
-            orderBy: { createdAt: 'desc' },
-        });
+    async findAll(params: { page?: number; limit?: number; search?: string; status?: string; planId?: string } = {}) {
+        const { page = 1, limit = 10, search, status, planId } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { name: { contains: search, mode: 'insensitive' } },
+                { subdomain: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+        if (status) where.status = status;
+        if (planId) where.planId = planId;
+
+        const [items, total] = await Promise.all([
+            this.prisma.tenant.findMany({
+                where,
+                select: {
+                    id: true,
+                    name: true,
+                    subdomain: true,
+                    status: true,
+                    planId: true,
+                    plan: { select: { name: true, price: true, currency: true } },
+                    subscription: {
+                        select: {
+                            status: true,
+                            trialEndDate: true,
+                            currentPeriodEnd: true,
+                        }
+                    },
+                    suspensionReason: true,
+                    defaultLanguage: true,
+                    supportedLanguages: true,
+                    baseCurrency: true,
+                    supportedCurrencies: true,
+                    createdAt: true,
+                    _count: { select: { users: true, branches: true } },
+                },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.tenant.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
 
     async findOne(tenantId: string) {
@@ -227,12 +266,45 @@ export class TenantAdminService {
             where: { id: tenantId },
             include: {
                 branches: { select: { id: true, name: true } },
-                _count: { select: { users: true } },
+                _count: { select: { users: true, branches: true, inventory: true } },
                 plan: true,
+                subscription: true,
             },
         });
         if (!tenant) throw new NotFoundException(this.t.translate('errors.validation.not_found', 'EN', { entity: 'Tenant' }));
-        return tenant;
+
+        // Map inventory count as product count if needed, or get distinct
+        const usage = await this.usageTracking.getUsage(tenantId);
+
+        // Map plan limits
+        const planLimits = (tenant.plan as any)?.limits || {
+            maxUsers: (tenant.plan as any)?.maxUsers || 10,
+            maxBranches: (tenant.plan as any)?.maxBranches || 2,
+            maxProducts: (tenant.plan as any)?.maxProducts || 1000,
+        };
+
+        return {
+            ...tenant,
+            _count: {
+                ...tenant._count,
+                products: usage.products,
+            },
+            planLimits,
+        };
+    }
+
+    async getTenantInvoices(tenantId: string) {
+        return this.prisma.billingInvoice.findMany({
+            where: { tenantId },
+            orderBy: { createdAt: 'desc' },
+        });
+    }
+
+    async getTenantActivity(tenantId: string, limit: number = 10) {
+        return this.auditService.getPlatformAuditLogs({
+            tenantId,
+            limit,
+        });
     }
 
     async updateLanguageSettings(adminUserId: string, tenantId: string, dto: UpdateTenantLanguageDto) {
@@ -281,38 +353,107 @@ export class TenantAdminService {
         });
     }
 
-    async findAllUsers() {
-        return this.prisma.user.findMany({
-            select: {
-                id: true,
-                email: true,
-                status: true,
-                isPlatformUser: true,
-                createdAt: true,
-                tenant: { select: { id: true, name: true, subdomain: true } },
-                userRoles: {
-                    select: {
-                        role: { select: { name: true, scope: true } },
-                        tenant: { select: { name: true } },
-                        branch: { select: { name: true } },
+    async findAllUsers(params: { page?: number; limit?: number; search?: string } = {}) {
+        const { page = 1, limit = 10, search } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { email: { contains: search, mode: 'insensitive' } }
+            ];
+        }
+
+        const [items, total] = await Promise.all([
+            this.prisma.user.findMany({
+                where,
+                select: {
+                    id: true,
+                    email: true,
+                    status: true,
+                    isPlatformUser: true,
+                    createdAt: true,
+                    tenant: { select: { id: true, name: true, subdomain: true } },
+                    userRoles: {
+                        select: {
+                            role: { select: { name: true, scope: true } },
+                            tenant: { select: { name: true } },
+                            branch: { select: { name: true } },
+                        },
                     },
                 },
-            },
-            orderBy: { createdAt: 'desc' },
-        });
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.user.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
 
     // Plans CRUD
-    async createPlan(dto: CreatePlanDto) {
-        return this.prisma.plan.create({ data: dto });
+    async createPlan(adminUserId: string, dto: CreatePlanDto) {
+        return this.prisma.$transaction(async (tx) => {
+            const plan = await tx.plan.create({ data: dto });
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'CREATE_PLAN',
+                'Plan',
+                plan.id,
+                null,
+                dto,
+                undefined,
+                undefined,
+                tx
+            );
+            return plan;
+        });
     }
 
-    async updatePlan(id: string, dto: UpdatePlanDto) {
-        return this.prisma.plan.update({ where: { id }, data: dto });
+    async updatePlan(adminUserId: string, id: string, dto: UpdatePlanDto) {
+        const oldPlan = await this.prisma.plan.findUnique({ where: { id } });
+        if (!oldPlan) throw new NotFoundException('Plan not found');
+
+        return this.prisma.$transaction(async (tx) => {
+            const plan = await tx.plan.update({ where: { id }, data: dto });
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'UPDATE_PLAN',
+                'Plan',
+                id,
+                oldPlan,
+                dto,
+                undefined,
+                undefined,
+                tx
+            );
+            return plan;
+        });
     }
 
-    async deletePlan(id: string) {
-        return this.prisma.plan.delete({ where: { id } });
+    async deletePlan(adminUserId: string, id: string) {
+        const oldPlan = await this.prisma.plan.findUnique({ where: { id } });
+        if (!oldPlan) throw new NotFoundException('Plan not found');
+
+        return this.prisma.$transaction(async (tx) => {
+            const plan = await tx.plan.delete({ where: { id } });
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'DELETE_PLAN',
+                'Plan',
+                id,
+                oldPlan,
+                null,
+                undefined,
+                undefined,
+                tx
+            );
+            return plan;
+        });
     }
 
     async findAllPlans() {
@@ -320,48 +461,148 @@ export class TenantAdminService {
     }
 
     // Currencies CRUD
-    async createCurrency(dto: CreateCurrencyDto) {
-        return this.prisma.currency.create({ data: dto });
+    async createCurrency(adminUserId: string, dto: CreateCurrencyDto) {
+        return this.prisma.$transaction(async (tx) => {
+            const curr = await tx.currency.create({ data: dto });
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'CREATE_CURRENCY',
+                'Currency',
+                curr.code,
+                null,
+                dto,
+                undefined,
+                undefined,
+                tx
+            );
+            return curr;
+        });
     }
 
-    async updateCurrency(code: string, dto: UpdateCurrencyDto) {
-        return this.prisma.currency.update({ where: { code }, data: dto });
+    async updateCurrency(adminUserId: string, code: string, dto: UpdateCurrencyDto) {
+        const oldCurr = await this.prisma.currency.findUnique({ where: { code } });
+        if (!oldCurr) throw new NotFoundException('Currency not found');
+
+        return this.prisma.$transaction(async (tx) => {
+            const curr = await tx.currency.update({ where: { code }, data: dto });
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'UPDATE_CURRENCY',
+                'Currency',
+                curr.code,
+                oldCurr,
+                dto,
+                undefined,
+                undefined,
+                tx
+            );
+            return curr;
+        });
     }
 
-    async findAllCurrencies() {
-        return this.prisma.currency.findMany({ orderBy: { code: 'asc' } });
+    async findAllCurrencies(params: { page?: number; limit?: number; search?: string } = {}) {
+        const { page = 1, limit = 100, search } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { code: { contains: search, mode: 'insensitive' } },
+                { name: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+
+        const [items, total] = await Promise.all([
+            this.prisma.currency.findMany({
+                where,
+                orderBy: { code: 'asc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.currency.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
 
-    async createExchangeRate(tenantId: string, dto: CreateExchangeRateDto) {
+    async createExchangeRate(adminUserId: string, tenantId: string, dto: CreateExchangeRateDto) {
         if (tenantId !== 'PLATFORM') {
             await this.planEnforcement.checkFeatureAccess(tenantId, 'multiCurrency');
         }
-        return this.prisma.exchangeRate.upsert({
+
+        const oldRate = await this.prisma.exchangeRate.findUnique({
             where: {
                 fromCurrency_toCurrency: {
                     fromCurrency: dto.fromCurrencyId,
                     toCurrency: dto.toCurrencyId,
                 },
             },
-            update: {
-                rate: dto.rate,
-                source: dto.source || 'Manual',
-                effectiveAt: new Date(),
-            },
-            create: {
-                fromCurrency: dto.fromCurrencyId,
-                toCurrency: dto.toCurrencyId,
-                rate: dto.rate,
-                source: dto.source || 'Manual',
-            },
+        });
+
+        return this.prisma.$transaction(async (tx) => {
+            const rate = await tx.exchangeRate.upsert({
+                where: {
+                    fromCurrency_toCurrency: {
+                        fromCurrency: dto.fromCurrencyId,
+                        toCurrency: dto.toCurrencyId,
+                    },
+                },
+                update: {
+                    rate: dto.rate,
+                    source: dto.source || 'Manual',
+                    effectiveAt: new Date(),
+                },
+                create: {
+                    fromCurrency: dto.fromCurrencyId,
+                    toCurrency: dto.toCurrencyId,
+                    rate: dto.rate,
+                    source: dto.source || 'Manual',
+                },
+            });
+
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                oldRate ? 'UPDATE_EXCHANGE_RATE' : 'CREATE_EXCHANGE_RATE',
+                'ExchangeRate',
+                `${dto.fromCurrencyId}_${dto.toCurrencyId}`,
+                oldRate,
+                dto,
+                undefined,
+                undefined,
+                tx
+            );
+
+            return rate;
         });
     }
 
-    async findAllExchangeRates() {
-        return this.prisma.exchangeRate.findMany({
-            include: { fromCurrencyRef: true, toCurrencyRef: true },
-            orderBy: { effectiveAt: 'desc' },
-        });
+    async findAllExchangeRates(params: { page?: number; limit?: number; search?: string } = {}) {
+        const { page = 1, limit = 50, search } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { fromCurrency: { contains: search, mode: 'insensitive' } },
+                { toCurrency: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+
+        const [items, total] = await Promise.all([
+            this.prisma.exchangeRate.findMany({
+                where,
+                include: { fromCurrencyRef: true, toCurrencyRef: true },
+                orderBy: { effectiveAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.exchangeRate.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
 
     async getPlanStatus(tenantId: string) {
@@ -410,11 +651,237 @@ export class TenantAdminService {
         };
     }
 
-    async getGlobalInvoices() {
-        return (this.prisma as any).billingInvoice.findMany({
-            include: { tenant: { select: { name: true, subdomain: true } } },
+    async getGlobalInvoices(params: { page?: number; limit?: number; search?: string } = {}) {
+        const { page = 1, limit = 25, search } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.tenant = {
+                name: { contains: search, mode: 'insensitive' }
+            };
+        }
+
+        const [items, total] = await Promise.all([
+            (this.prisma as any).billingInvoice.findMany({
+                where,
+                include: { tenant: { select: { name: true, subdomain: true } } },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit)
+            }),
+            (this.prisma as any).billingInvoice.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
+    }
+
+    async getGlobalBillingActivity() {
+        // Fetch recent audit logs related to billing/subscriptions
+        return this.prisma.auditLog.findMany({
+            where: {
+                action: {
+                    in: ['CREATE_PLAN', 'UPDATE_PLAN', 'DELETE_PLAN', 'CHANGE_PLAN', 'CANCEL_SUBSCRIPTION', 'CREATE_TENANT']
+                }
+            },
+            take: 10,
             orderBy: { createdAt: 'desc' },
-            take: 50
+            include: { user: { select: { email: true } } }
+        });
+    }
+
+    // Support Tickets
+    async createSupportTicket(adminUserId: string, tenantId: string | null, subject: string, description: string, priority: any) {
+        return this.prisma.$transaction(async (tx) => {
+            const ticket = await (tx as any).supportTicket.create({
+                data: {
+                    tenantId,
+                    subject,
+                    description,
+                    priority,
+                    status: 'OPEN',
+                },
+                include: { tenant: { select: { name: true } } }
+            });
+
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'CREATE_SUPPORT_TICKET',
+                'SupportTicket',
+                ticket.id,
+                null,
+                { tenantId, subject, priority },
+                undefined,
+                undefined,
+                tx
+            );
+
+            return ticket;
+        });
+    }
+
+    async findAllTickets(params: { page?: number; limit?: number; search?: string; status?: string } = {}) {
+        const { page = 1, limit = 10, search, status } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { subject: { contains: search, mode: 'insensitive' } },
+                { description: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+        if (status) where.status = status;
+
+        const [items, total] = await Promise.all([
+            (this.prisma as any).supportTicket.findMany({
+                where,
+                include: { tenant: { select: { name: true, subdomain: true } } },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            (this.prisma as any).supportTicket.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
+    }
+
+    async updateTicketStatus(adminUserId: string, id: string, status: any) {
+        const oldTicket = await (this.prisma as any).supportTicket.findUnique({ where: { id } });
+        if (!oldTicket) throw new NotFoundException('Ticket not found');
+
+        return this.prisma.$transaction(async (tx) => {
+            const ticket = await (tx as any).supportTicket.update({
+                where: { id },
+                data: { status }
+            });
+
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'UPDATE_SUPPORT_STATUS',
+                'SupportTicket',
+                id,
+                { status: oldTicket.status },
+                { status },
+                undefined,
+                undefined,
+                tx
+            );
+
+            return ticket;
+        });
+    }
+
+    async changeTenantPlan(adminUserId: string, tenantId: string, planId: string) {
+        const tenant = await this.prisma.tenant.findUnique({
+            where: { id: tenantId },
+            include: { subscription: true }
+        });
+
+        if (!tenant) throw new NotFoundException('Tenant not found');
+
+        return this.prisma.$transaction(async (tx) => {
+            // Update tenant's current plan
+            const updatedTenant = await tx.tenant.update({
+                where: { id: tenantId },
+                data: { planId }
+            });
+
+            // Update or create subscription
+            if (tenant.subscription) {
+                await tx.subscription.update({
+                    where: { id: tenant.subscription.id },
+                    data: { planId, status: 'ACTIVE' } // Force active for manual change
+                });
+            } else {
+                await tx.subscription.create({
+                    data: {
+                        tenantId,
+                        planId,
+                        status: 'ACTIVE',
+                        billingCycle: 'MONTHLY',
+                        startDate: new Date(),
+                    }
+                });
+            }
+
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'CHANGE_PLAN',
+                'Tenant',
+                tenantId,
+                { oldPlanId: tenant.planId },
+                { newPlanId: planId },
+                undefined,
+                undefined,
+                tx
+            );
+
+            return updatedTenant;
+        });
+    }
+
+    async findAllSubscriptions(params: { page?: number; limit?: number; search?: string; status?: string } = {}) {
+        const { page = 1, limit = 10, search, status } = params;
+        const skip = (page - 1) * Number(limit);
+
+        const where: any = {};
+        if (search) {
+            where.OR = [
+                { tenant: { name: { contains: search, mode: 'insensitive' } } },
+                { tenant: { subdomain: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
+        if (status) where.status = status;
+
+        const [items, total] = await Promise.all([
+            this.prisma.subscription.findMany({
+                where,
+                include: {
+                    tenant: { select: { id: true, name: true, subdomain: true } },
+                    plan: { select: { id: true, name: true, price: true, currency: true } },
+                },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.subscription.count({ where }),
+        ]);
+
+        return { items, total, page: Number(page), limit: Number(limit) };
+    }
+
+    async cancelSubscription(adminUserId: string, subscriptionId: string) {
+        const sub = await this.prisma.subscription.findUnique({
+            where: { id: subscriptionId },
+            include: { tenant: true }
+        });
+        if (!sub) throw new NotFoundException('Subscription not found');
+
+        return this.prisma.$transaction(async (tx) => {
+            const updated = await tx.subscription.update({
+                where: { id: subscriptionId },
+                data: { status: 'CANCELED', endDate: new Date() }
+            });
+
+            await this.auditService.logAction(
+                'PLATFORM',
+                adminUserId,
+                'CANCEL_SUBSCRIPTION',
+                'Subscription',
+                subscriptionId,
+                { status: sub.status },
+                { status: 'CANCELED' },
+                undefined,
+                undefined,
+                tx
+            );
+
+            return updated;
         });
     }
 }

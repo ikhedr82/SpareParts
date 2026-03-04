@@ -8,9 +8,9 @@ export declare class PacksController {
             product: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 status: string;
                 description: string | null;
                 descriptionAr: string | null;
@@ -18,9 +18,9 @@ export declare class PacksController {
                 categoryId: string;
                 weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
             };
         } & {
             id: string;
@@ -53,18 +53,18 @@ export declare class PacksController {
                 businessClientId: string;
                 subtotal: import("@prisma/client/runtime/library").Decimal;
                 tax: import("@prisma/client/runtime/library").Decimal;
-                createdById: string | null;
                 cancelledAt: Date | null;
                 returnId: string | null;
+                createdById: string | null;
                 deliveryExceptionId: string | null;
                 orderNumber: string;
                 deliveryAddressId: string | null;
                 contactId: string | null;
                 internalNotes: string | null;
-                sourceQuoteId: string | null;
                 confirmedAt: Date | null;
                 shippedAt: Date | null;
                 deliveredAt: Date | null;
+                sourceQuoteId: string | null;
             };
             items: {
                 id: string;
@@ -94,26 +94,26 @@ export declare class PacksController {
                 brand: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     country: string | null;
                     isOem: boolean;
                 };
                 category: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     parentId: string | null;
                 };
             } & {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 status: string;
                 description: string | null;
                 descriptionAr: string | null;
@@ -121,9 +121,9 @@ export declare class PacksController {
                 categoryId: string;
                 weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
             };
         } & {
             id: string;
@@ -146,9 +146,9 @@ export declare class PacksController {
             product: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 status: string;
                 description: string | null;
                 descriptionAr: string | null;
@@ -156,9 +156,9 @@ export declare class PacksController {
                 categoryId: string;
                 weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
             };
         } & {
             id: string;
@@ -182,26 +182,26 @@ export declare class PacksController {
                 brand: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     country: string | null;
                     isOem: boolean;
                 };
                 category: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     parentId: string | null;
                 };
             } & {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 status: string;
                 description: string | null;
                 descriptionAr: string | null;
@@ -209,9 +209,9 @@ export declare class PacksController {
                 categoryId: string;
                 weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
             };
         } & {
             id: string;

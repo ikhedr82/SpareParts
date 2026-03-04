@@ -11,7 +11,6 @@ export declare class AuditService {
         };
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
         userId: string;
         action: string;
@@ -20,6 +19,7 @@ export declare class AuditService {
         oldValue: Prisma.JsonValue | null;
         newValue: Prisma.JsonValue | null;
         ipAddress: string | null;
+        createdAt: Date;
         correlationId: string | null;
     })[]>;
     getRecentActivity(tenantId: string, limit?: number): Promise<({
@@ -29,7 +29,6 @@ export declare class AuditService {
         };
     } & {
         id: string;
-        createdAt: Date;
         tenantId: string;
         userId: string;
         action: string;
@@ -38,6 +37,38 @@ export declare class AuditService {
         oldValue: Prisma.JsonValue | null;
         newValue: Prisma.JsonValue | null;
         ipAddress: string | null;
+        createdAt: Date;
         correlationId: string | null;
     })[]>;
+    getPlatformAuditLogs(params: {
+        page?: number;
+        limit?: number;
+        tenantId?: string;
+        action?: string;
+    }): Promise<{
+        items: ({
+            tenant: {
+                name: string;
+                subdomain: string;
+            };
+            user: {
+                email: string;
+            };
+        } & {
+            id: string;
+            tenantId: string;
+            userId: string;
+            action: string;
+            entityType: string;
+            entityId: string;
+            oldValue: Prisma.JsonValue | null;
+            newValue: Prisma.JsonValue | null;
+            ipAddress: string | null;
+            createdAt: Date;
+            correlationId: string | null;
+        })[];
+        total: number;
+        page: number;
+        limit: number;
+    }>;
 }

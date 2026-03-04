@@ -11,9 +11,9 @@ export declare class WarehouseMobileController {
             product: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 status: string;
                 description: string | null;
                 descriptionAr: string | null;
@@ -21,9 +21,9 @@ export declare class WarehouseMobileController {
                 categoryId: string;
                 weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
             };
         } & {
             id: string;

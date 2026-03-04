@@ -9,9 +9,9 @@ export declare class PortalSubstitutionsController {
         originalProduct: {
             id: string;
             name: string;
-            nameAr: string | null;
             createdAt: Date;
             updatedAt: Date;
+            nameAr: string | null;
             status: string;
             description: string | null;
             descriptionAr: string | null;
@@ -19,16 +19,16 @@ export declare class PortalSubstitutionsController {
             categoryId: string;
             weight: number | null;
             dimensions: string | null;
-            unitOfMeasure: string | null;
-            images: string[];
             taxRateId: string | null;
+            images: string[];
+            unitOfMeasure: string | null;
         };
         substituteProduct: {
             id: string;
             name: string;
-            nameAr: string | null;
             createdAt: Date;
             updatedAt: Date;
+            nameAr: string | null;
             status: string;
             description: string | null;
             descriptionAr: string | null;
@@ -36,9 +36,9 @@ export declare class PortalSubstitutionsController {
             categoryId: string;
             weight: number | null;
             dimensions: string | null;
-            unitOfMeasure: string | null;
-            images: string[];
             taxRateId: string | null;
+            images: string[];
+            unitOfMeasure: string | null;
         };
     } & {
         id: string;
@@ -47,12 +47,12 @@ export declare class PortalSubstitutionsController {
         status: import(".prisma/client").$Enums.SubstitutionStatus;
         type: string;
         source: string;
-        originalProductId: string;
-        substituteProductId: string;
         confidenceScore: import("@prisma/client/runtime/library").Decimal;
         orderId: string | null;
         orderItemId: string | null;
+        originalProductId: string;
         respondedAt: Date | null;
+        substituteProductId: string;
     })[]>;
     approve(req: any, id: string): Promise<{
         success: boolean;

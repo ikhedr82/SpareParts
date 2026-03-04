@@ -20,103 +20,87 @@ export declare class PurchaseReturnsService {
         }[];
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     }>;
     approveReturn(tenantId: string, userId: string, returnId: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     }>;
     rejectReturn(tenantId: string, userId: string, returnId: string, reason: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     }>;
     shipReturn(tenantId: string, userId: string, returnId: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     }>;
     completeReturn(tenantId: string, userId: string, returnId: string): Promise<{
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     }>;
     findOne(tenantId: string, returnId: string): Promise<{
-        purchaseOrder: {
-            currency: string;
-            exchangeRate: import("@prisma/client/runtime/library").Decimal;
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            status: import(".prisma/client").$Enums.PurchaseOrderStatus;
-            version: number;
-            branchId: string;
-            baseAmount: import("@prisma/client/runtime/library").Decimal;
-            createdById: string;
-            supplierId: string | null;
-            supplierName: string;
-            totalCost: import("@prisma/client/runtime/library").Decimal;
-        };
         items: ({
             product: {
                 id: string;
-                name: string;
-                nameAr: string | null;
                 createdAt: Date;
-                updatedAt: Date;
                 status: string;
-                description: string | null;
-                descriptionAr: string | null;
+                updatedAt: Date;
+                name: string;
+                weight: number | null;
                 brandId: string;
                 categoryId: string;
-                weight: number | null;
+                description: string | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
+                descriptionAr: string | null;
+                nameAr: string | null;
             };
         } & {
             id: string;
@@ -126,23 +110,36 @@ export declare class PurchaseReturnsService {
             reason: string | null;
             purchaseReturnId: string;
         })[];
+        purchaseOrder: {
+            id: string;
+            tenantId: string;
+            createdAt: Date;
+            status: import(".prisma/client").$Enums.PurchaseOrderStatus;
+            updatedAt: Date;
+            version: number;
+            branchId: string;
+            supplierId: string | null;
+            currency: string;
+            exchangeRate: import("@prisma/client/runtime/library").Decimal;
+            createdById: string;
+            baseAmount: import("@prisma/client/runtime/library").Decimal;
+            supplierName: string;
+            totalCost: import("@prisma/client/runtime/library").Decimal;
+        };
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     }>;
     findAll(tenantId: string): Promise<({
-        purchaseOrder: {
-            id: string;
-        };
         items: {
             id: string;
             createdAt: Date;
@@ -151,17 +148,20 @@ export declare class PurchaseReturnsService {
             reason: string | null;
             purchaseReturnId: string;
         }[];
+        purchaseOrder: {
+            id: string;
+        };
     } & {
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.PurchaseReturnStatus;
+        updatedAt: Date;
         version: number;
-        reason: string | null;
         createdById: string;
         purchaseOrderId: string;
         rejectionReason: string | null;
+        reason: string | null;
         totalValue: import("@prisma/client/runtime/library").Decimal;
     })[]>;
 }

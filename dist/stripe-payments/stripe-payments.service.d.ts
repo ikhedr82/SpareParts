@@ -35,10 +35,10 @@ export declare class StripePaymentsService {
             exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
             saleId: string;
             sessionId: string | null;
-            reference: string | null;
             method: import(".prisma/client").$Enums.PaymentMethod;
             isRefund: boolean;
             refundedPaymentId: string | null;
+            reference: string | null;
         };
     } & {
         currency: string;

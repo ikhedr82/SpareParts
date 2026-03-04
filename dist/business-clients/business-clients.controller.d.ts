@@ -8,18 +8,6 @@ export declare class BusinessClientsController {
     private readonly businessClientsService;
     constructor(businessClientsService: BusinessClientsService);
     create(createBusinessClientDto: CreateBusinessClientDto): Promise<{
-        contacts: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        }[];
         addresses: {
             id: string;
             createdAt: Date;
@@ -33,6 +21,18 @@ export declare class BusinessClientsController {
             city: string;
             state: string | null;
             postalCode: string | null;
+        }[];
+        contacts: {
+            id: string;
+            name: string;
+            createdAt: Date;
+            updatedAt: Date;
+            email: string | null;
+            phone: string | null;
+            position: string | null;
+            businessClientId: string;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
         }[];
     } & {
         currency: string;
@@ -55,18 +55,6 @@ export declare class BusinessClientsController {
         priceTierId: string | null;
     }>;
     findAll(type?: BusinessClientType): Promise<({
-        contacts: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        }[];
         addresses: {
             id: string;
             createdAt: Date;
@@ -80,6 +68,18 @@ export declare class BusinessClientsController {
             city: string;
             state: string | null;
             postalCode: string | null;
+        }[];
+        contacts: {
+            id: string;
+            name: string;
+            createdAt: Date;
+            updatedAt: Date;
+            email: string | null;
+            phone: string | null;
+            position: string | null;
+            businessClientId: string;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
         }[];
     } & {
         currency: string;
@@ -102,25 +102,6 @@ export declare class BusinessClientsController {
         priceTierId: string | null;
     })[]>;
     findOne(id: string): Promise<{
-        sales: {
-            currency: string;
-            id: string;
-            createdAt: Date;
-            updatedAt: Date;
-            tenantId: string;
-            status: string;
-            version: number;
-            branchId: string;
-            customerId: string | null;
-            customerName: string | null;
-            total: import("@prisma/client/runtime/library").Decimal;
-            baseAmount: import("@prisma/client/runtime/library").Decimal;
-            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-            voidReason: string | null;
-            cashSessionId: string | null;
-            refundedSaleId: string | null;
-            businessClientId: string | null;
-        }[];
         invoices: {
             currency: string;
             id: string;
@@ -130,26 +111,33 @@ export declare class BusinessClientsController {
             status: string;
             amount: import("@prisma/client/runtime/library").Decimal;
             version: number;
+            businessClientId: string | null;
             baseAmount: import("@prisma/client/runtime/library").Decimal;
             exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-            businessClientId: string | null;
             saleId: string;
             invoiceNumber: string;
+            issuedAt: Date;
             subtotal: import("@prisma/client/runtime/library").Decimal;
             tax: import("@prisma/client/runtime/library").Decimal;
-            issuedAt: Date;
         }[];
-        contacts: {
+        sales: {
+            currency: string;
             id: string;
-            name: string;
             createdAt: Date;
             updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
+            tenantId: string;
+            status: string;
+            version: number;
+            branchId: string;
+            customerName: string | null;
+            total: import("@prisma/client/runtime/library").Decimal;
+            cashSessionId: string | null;
+            refundedSaleId: string | null;
+            customerId: string | null;
+            businessClientId: string | null;
+            voidReason: string | null;
+            baseAmount: import("@prisma/client/runtime/library").Decimal;
+            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
         }[];
         addresses: {
             id: string;
@@ -164,6 +152,18 @@ export declare class BusinessClientsController {
             city: string;
             state: string | null;
             postalCode: string | null;
+        }[];
+        contacts: {
+            id: string;
+            name: string;
+            createdAt: Date;
+            updatedAt: Date;
+            email: string | null;
+            phone: string | null;
+            position: string | null;
+            businessClientId: string;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
         }[];
     } & {
         currency: string;
@@ -186,18 +186,6 @@ export declare class BusinessClientsController {
         priceTierId: string | null;
     }>;
     update(id: string, updateBusinessClientDto: UpdateBusinessClientDto): Promise<{
-        contacts: {
-            id: string;
-            name: string;
-            createdAt: Date;
-            updatedAt: Date;
-            email: string | null;
-            phone: string | null;
-            position: string | null;
-            businessClientId: string;
-            isPrimary: boolean;
-            canPlaceOrders: boolean;
-        }[];
         addresses: {
             id: string;
             createdAt: Date;
@@ -211,6 +199,18 @@ export declare class BusinessClientsController {
             city: string;
             state: string | null;
             postalCode: string | null;
+        }[];
+        contacts: {
+            id: string;
+            name: string;
+            createdAt: Date;
+            updatedAt: Date;
+            email: string | null;
+            phone: string | null;
+            position: string | null;
+            businessClientId: string;
+            isPrimary: boolean;
+            canPlaceOrders: boolean;
         }[];
     } & {
         currency: string;

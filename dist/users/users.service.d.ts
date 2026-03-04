@@ -8,25 +8,25 @@ export declare class UsersService {
     constructor(prisma: PrismaService, planEnforcement: PlanEnforcementService, usageTracking: UsageTrackingService);
     create(tenantId: string, email: string, password: string, roleId?: string): Promise<{
         id: string;
-        status: string;
         createdAt: Date;
-        version: number;
-        tenantId: string | null;
         updatedAt: Date;
+        tenantId: string | null;
+        status: string;
         email: string;
         passwordHash: string;
         isPlatformUser: boolean;
+        version: number;
     }>;
     findAll(tenantId: string): Promise<({
         userRoles: ({
             role: {
                 id: string;
-                createdAt: Date;
-                version: number;
-                tenantId: string | null;
                 name: string;
-                nameAr: string | null;
+                createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
+                tenantId: string | null;
+                version: number;
                 scope: import(".prisma/client").$Enums.RoleScope;
                 description: string | null;
                 descriptionAr: string | null;
@@ -34,19 +34,19 @@ export declare class UsersService {
         } & {
             id: string;
             tenantId: string | null;
-            branchId: string | null;
             roleId: string;
             userId: string;
+            branchId: string | null;
         })[];
     } & {
         id: string;
-        status: string;
         createdAt: Date;
-        version: number;
-        tenantId: string | null;
         updatedAt: Date;
+        tenantId: string | null;
+        status: string;
         email: string;
         passwordHash: string;
         isPlatformUser: boolean;
+        version: number;
     })[]>;
 }

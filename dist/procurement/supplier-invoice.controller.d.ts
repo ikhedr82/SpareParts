@@ -13,20 +13,20 @@ export declare class SupplierInvoiceController {
             supplierInvoiceId: string;
         }[];
     } & {
-        currency: string;
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.SupplierInvoiceStatus;
-        amount: import("@prisma/client/runtime/library").Decimal;
+        updatedAt: Date;
         version: number;
-        invoiceNumber: string;
         supplierId: string | null;
+        currency: string;
         purchaseOrderId: string;
-        postedAt: Date | null;
+        invoiceNumber: string;
         invoiceDate: Date;
+        amount: import("@prisma/client/runtime/library").Decimal;
         mismatchDetails: import("@prisma/client/runtime/library").JsonValue | null;
+        postedAt: Date | null;
     }>;
     findAll(req: any, status?: any): Promise<({
         items: {
@@ -39,20 +39,20 @@ export declare class SupplierInvoiceController {
             supplierInvoiceId: string;
         }[];
     } & {
-        currency: string;
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.SupplierInvoiceStatus;
-        amount: import("@prisma/client/runtime/library").Decimal;
+        updatedAt: Date;
         version: number;
-        invoiceNumber: string;
         supplierId: string | null;
+        currency: string;
         purchaseOrderId: string;
-        postedAt: Date | null;
+        invoiceNumber: string;
         invoiceDate: Date;
+        amount: import("@prisma/client/runtime/library").Decimal;
         mismatchDetails: import("@prisma/client/runtime/library").JsonValue | null;
+        postedAt: Date | null;
     })[]>;
     findOne(req: any, id: string): Promise<{
         items: {
@@ -65,20 +65,20 @@ export declare class SupplierInvoiceController {
             supplierInvoiceId: string;
         }[];
     } & {
-        currency: string;
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.SupplierInvoiceStatus;
-        amount: import("@prisma/client/runtime/library").Decimal;
+        updatedAt: Date;
         version: number;
-        invoiceNumber: string;
         supplierId: string | null;
+        currency: string;
         purchaseOrderId: string;
-        postedAt: Date | null;
+        invoiceNumber: string;
         invoiceDate: Date;
+        amount: import("@prisma/client/runtime/library").Decimal;
         mismatchDetails: import("@prisma/client/runtime/library").JsonValue | null;
+        postedAt: Date | null;
     }>;
     match(req: any, id: string): Promise<{
         items: {
@@ -91,20 +91,20 @@ export declare class SupplierInvoiceController {
             supplierInvoiceId: string;
         }[];
     } & {
-        currency: string;
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.SupplierInvoiceStatus;
-        amount: import("@prisma/client/runtime/library").Decimal;
+        updatedAt: Date;
         version: number;
-        invoiceNumber: string;
         supplierId: string | null;
+        currency: string;
         purchaseOrderId: string;
-        postedAt: Date | null;
+        invoiceNumber: string;
         invoiceDate: Date;
+        amount: import("@prisma/client/runtime/library").Decimal;
         mismatchDetails: import("@prisma/client/runtime/library").JsonValue | null;
+        postedAt: Date | null;
     }>;
     post(req: any, id: string): Promise<{
         items: {
@@ -117,19 +117,19 @@ export declare class SupplierInvoiceController {
             supplierInvoiceId: string;
         }[];
     } & {
-        currency: string;
         id: string;
-        createdAt: Date;
-        updatedAt: Date;
         tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.SupplierInvoiceStatus;
-        amount: import("@prisma/client/runtime/library").Decimal;
+        updatedAt: Date;
         version: number;
-        invoiceNumber: string;
         supplierId: string | null;
+        currency: string;
         purchaseOrderId: string;
-        postedAt: Date | null;
+        invoiceNumber: string;
         invoiceDate: Date;
+        amount: import("@prisma/client/runtime/library").Decimal;
         mismatchDetails: import("@prisma/client/runtime/library").JsonValue | null;
+        postedAt: Date | null;
     }>;
 }

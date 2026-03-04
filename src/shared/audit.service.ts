@@ -81,4 +81,38 @@ export class AuditService {
             take: limit,
         });
     }
+
+    async getPlatformAuditLogs(params: { page?: number; limit?: number; tenantId?: string; action?: string; entityType?: string; search?: string }) {
+        const { page = 1, limit = 20, tenantId, action, entityType, search } = params;
+        const skip = (page - 1) * limit;
+
+        const where: Prisma.AuditLogWhereInput = {};
+        if (tenantId) where.tenantId = tenantId;
+        if (action) where.action = action;
+        if (entityType) where.entityType = entityType;
+        if (search) {
+            where.OR = [
+                { action: { contains: search, mode: 'insensitive' } },
+                { entityId: { contains: search, mode: 'insensitive' } },
+                { user: { email: { contains: search, mode: 'insensitive' } } },
+                { tenant: { name: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
+
+        const [items, total] = await Promise.all([
+            this.prisma.auditLog.findMany({
+                where,
+                include: {
+                    user: { select: { email: true } },
+                    tenant: { select: { name: true, subdomain: true } },
+                },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: limit,
+            }),
+            this.prisma.auditLog.count({ where }),
+        ]);
+
+        return { items, total, page, limit };
+    }
 }

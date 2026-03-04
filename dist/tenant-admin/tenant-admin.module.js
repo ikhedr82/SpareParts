@@ -23,7 +23,7 @@ exports.TenantAdminModule = TenantAdminModule;
 exports.TenantAdminModule = TenantAdminModule = __decorate([
     (0, common_1.Module)({
         imports: [prisma_module_1.PrismaModule],
-        controllers: [tenant_admin_controller_1.TenantAdminController, tenant_admin_controller_1.PlatformUsersController, tenant_admin_controller_1.PlansController, tenant_admin_controller_1.CurrenciesController, tenant_admin_controller_1.PlanStatusController, billing_controller_1.BillingController, stripe_webhook_controller_1.StripeWebhookController],
+        controllers: [tenant_admin_controller_1.TenantAdminController, tenant_admin_controller_1.PlatformUsersController, tenant_admin_controller_1.PlansController, tenant_admin_controller_1.CurrenciesController, tenant_admin_controller_1.PlanStatusController, billing_controller_1.BillingController, stripe_webhook_controller_1.StripeWebhookController, tenant_admin_controller_1.SupportController, tenant_admin_controller_1.AuditLogsController],
         providers: [tenant_admin_service_1.TenantAdminService, plan_enforcement_service_1.PlanEnforcementService, billing_service_1.BillingService, usage_tracking_service_1.UsageTrackingService, stripe_service_1.StripeService],
         exports: [tenant_admin_service_1.TenantAdminService, plan_enforcement_service_1.PlanEnforcementService, billing_service_1.BillingService, usage_tracking_service_1.UsageTrackingService, stripe_service_1.StripeService],
     })

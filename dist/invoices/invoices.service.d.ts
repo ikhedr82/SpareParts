@@ -12,15 +12,15 @@ export declare class InvoicesService {
             status: string;
             version: number;
             branchId: string;
-            customerId: string | null;
             customerName: string | null;
             total: import("@prisma/client/runtime/library").Decimal;
-            baseAmount: import("@prisma/client/runtime/library").Decimal;
-            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-            voidReason: string | null;
             cashSessionId: string | null;
             refundedSaleId: string | null;
+            customerId: string | null;
             businessClientId: string | null;
+            voidReason: string | null;
+            baseAmount: import("@prisma/client/runtime/library").Decimal;
+            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
         };
     } & {
         currency: string;
@@ -31,14 +31,14 @@ export declare class InvoicesService {
         status: string;
         amount: import("@prisma/client/runtime/library").Decimal;
         version: number;
+        businessClientId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        businessClientId: string | null;
         saleId: string;
         invoiceNumber: string;
+        issuedAt: Date;
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
-        issuedAt: Date;
     })[]>;
     findOne(id: string): import("@prisma/client/runtime/library").DynamicModelExtensionFluentApi<import(".prisma/client").Prisma.TypeMap<import("@prisma/client/runtime/library").InternalArgs & {
         result: {};
@@ -72,15 +72,15 @@ export declare class InvoicesService {
             status: string;
             version: number;
             branchId: string;
-            customerId: string | null;
             customerName: string | null;
             total: import("@prisma/client/runtime/library").Decimal;
-            baseAmount: import("@prisma/client/runtime/library").Decimal;
-            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-            voidReason: string | null;
             cashSessionId: string | null;
             refundedSaleId: string | null;
+            customerId: string | null;
             businessClientId: string | null;
+            voidReason: string | null;
+            baseAmount: import("@prisma/client/runtime/library").Decimal;
+            exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
         };
     } & {
         currency: string;
@@ -91,14 +91,14 @@ export declare class InvoicesService {
         status: string;
         amount: import("@prisma/client/runtime/library").Decimal;
         version: number;
+        businessClientId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        businessClientId: string | null;
         saleId: string;
         invoiceNumber: string;
+        issuedAt: Date;
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
-        issuedAt: Date;
     }>;
     findBySale(saleId: string): import("@prisma/client/runtime/library").DynamicModelExtensionFluentApi<import(".prisma/client").Prisma.TypeMap<import("@prisma/client/runtime/library").InternalArgs & {
         result: {};
@@ -114,13 +114,13 @@ export declare class InvoicesService {
         status: string;
         amount: import("@prisma/client/runtime/library").Decimal;
         version: number;
+        businessClientId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        businessClientId: string | null;
         saleId: string;
         invoiceNumber: string;
+        issuedAt: Date;
         subtotal: import("@prisma/client/runtime/library").Decimal;
         tax: import("@prisma/client/runtime/library").Decimal;
-        issuedAt: Date;
     }>;
 }

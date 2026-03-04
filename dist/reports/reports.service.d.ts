@@ -15,9 +15,9 @@ export declare class ReportsService {
     getAgingReport(tenantId: string, type: 'CUSTOMER' | 'SUPPLIER'): Promise<{
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         tenantId: string;
         version: number;
         balance: import("@prisma/client/runtime/library").Decimal;

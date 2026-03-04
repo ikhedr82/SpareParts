@@ -14,19 +14,19 @@ export declare class RefundsController {
         version: number;
         branchId: string;
         orderId: string | null;
+        cashSessionId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        cashSessionId: string | null;
         saleId: string | null;
-        refundNumber: string;
         reason: string;
-        createdById: string;
-        processedById: string | null;
-        processedAt: Date | null;
-        cancelledById: string | null;
         cancelledAt: Date | null;
+        processedAt: Date | null;
+        refundNumber: string;
         returnId: string | null;
+        cancelledById: string | null;
+        createdById: string;
         deliveryExceptionId: string | null;
+        processedById: string | null;
     }>;
     processRefund(req: any, id: string): Promise<{
         currency: string;
@@ -39,19 +39,19 @@ export declare class RefundsController {
         version: number;
         branchId: string;
         orderId: string | null;
+        cashSessionId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        cashSessionId: string | null;
         saleId: string | null;
-        refundNumber: string;
         reason: string;
-        createdById: string;
-        processedById: string | null;
-        processedAt: Date | null;
-        cancelledById: string | null;
         cancelledAt: Date | null;
+        processedAt: Date | null;
+        refundNumber: string;
         returnId: string | null;
+        cancelledById: string | null;
+        createdById: string;
         deliveryExceptionId: string | null;
+        processedById: string | null;
     }>;
     findAll(req: any, status?: string, orderId?: string): Promise<({
         order: {
@@ -71,18 +71,18 @@ export declare class RefundsController {
         version: number;
         branchId: string;
         orderId: string | null;
+        cashSessionId: string | null;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-        cashSessionId: string | null;
         saleId: string | null;
-        refundNumber: string;
         reason: string;
-        createdById: string;
-        processedById: string | null;
-        processedAt: Date | null;
-        cancelledById: string | null;
         cancelledAt: Date | null;
+        processedAt: Date | null;
+        refundNumber: string;
         returnId: string | null;
+        cancelledById: string | null;
+        createdById: string;
         deliveryExceptionId: string | null;
+        processedById: string | null;
     })[]>;
 }

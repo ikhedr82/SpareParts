@@ -27,12 +27,12 @@ export declare class ReturnsController {
         deliveryExceptionId: string | null;
         receivedAt: Date | null;
         completedAt: Date | null;
-        returnNumber: string;
-        reasonNotes: string | null;
-        requestedBy: string;
-        requestedAt: Date;
-        approvedBy: string | null;
         approvedAt: Date | null;
+        approvedBy: string | null;
+        reasonNotes: string | null;
+        requestedAt: Date;
+        requestedBy: string;
+        returnNumber: string;
     }>;
     approveReturn(req: any, id: string): Promise<{
         id: string;
@@ -47,12 +47,12 @@ export declare class ReturnsController {
         deliveryExceptionId: string | null;
         receivedAt: Date | null;
         completedAt: Date | null;
-        returnNumber: string;
-        reasonNotes: string | null;
-        requestedBy: string;
-        requestedAt: Date;
-        approvedBy: string | null;
         approvedAt: Date | null;
+        approvedBy: string | null;
+        reasonNotes: string | null;
+        requestedAt: Date;
+        requestedBy: string;
+        returnNumber: string;
     }>;
     rejectReturn(req: any, id: string, dto: RejectReturnDto): Promise<{
         id: string;
@@ -67,12 +67,12 @@ export declare class ReturnsController {
         deliveryExceptionId: string | null;
         receivedAt: Date | null;
         completedAt: Date | null;
-        returnNumber: string;
-        reasonNotes: string | null;
-        requestedBy: string;
-        requestedAt: Date;
-        approvedBy: string | null;
         approvedAt: Date | null;
+        approvedBy: string | null;
+        reasonNotes: string | null;
+        requestedAt: Date;
+        requestedBy: string;
+        returnNumber: string;
     }>;
     receiveReturn(req: any, id: string, dto: ReceiveReturnDto): Promise<{
         returnItems: {
@@ -98,12 +98,12 @@ export declare class ReturnsController {
         deliveryExceptionId: string | null;
         receivedAt: Date | null;
         completedAt: Date | null;
-        returnNumber: string;
-        reasonNotes: string | null;
-        requestedBy: string;
-        requestedAt: Date;
-        approvedBy: string | null;
         approvedAt: Date | null;
+        approvedBy: string | null;
+        reasonNotes: string | null;
+        requestedAt: Date;
+        requestedBy: string;
+        returnNumber: string;
     }>;
     completeReturn(req: any, id: string): Promise<{
         id: string;
@@ -118,12 +118,12 @@ export declare class ReturnsController {
         deliveryExceptionId: string | null;
         receivedAt: Date | null;
         completedAt: Date | null;
-        returnNumber: string;
-        reasonNotes: string | null;
-        requestedBy: string;
-        requestedAt: Date;
-        approvedBy: string | null;
         approvedAt: Date | null;
+        approvedBy: string | null;
+        reasonNotes: string | null;
+        requestedAt: Date;
+        requestedBy: string;
+        returnNumber: string;
     }>;
     findAll(req: any, status?: string, orderId?: string): Promise<({
         refund: {
@@ -137,19 +137,19 @@ export declare class ReturnsController {
             version: number;
             branchId: string;
             orderId: string | null;
+            cashSessionId: string | null;
             baseAmount: import("@prisma/client/runtime/library").Decimal;
             exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
-            cashSessionId: string | null;
             saleId: string | null;
-            refundNumber: string;
             reason: string;
-            createdById: string;
-            processedById: string | null;
-            processedAt: Date | null;
-            cancelledById: string | null;
             cancelledAt: Date | null;
+            processedAt: Date | null;
+            refundNumber: string;
             returnId: string | null;
+            cancelledById: string | null;
+            createdById: string;
             deliveryExceptionId: string | null;
+            processedById: string | null;
         };
         order: {
             orderNumber: string;
@@ -177,11 +177,11 @@ export declare class ReturnsController {
         deliveryExceptionId: string | null;
         receivedAt: Date | null;
         completedAt: Date | null;
-        returnNumber: string;
-        reasonNotes: string | null;
-        requestedBy: string;
-        requestedAt: Date;
-        approvedBy: string | null;
         approvedAt: Date | null;
+        approvedBy: string | null;
+        reasonNotes: string | null;
+        requestedAt: Date;
+        requestedBy: string;
+        returnNumber: string;
     })[]>;
 }

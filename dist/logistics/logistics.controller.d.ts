@@ -17,22 +17,22 @@ export declare class LogisticsController {
             completionTime: Date | null;
             exceptionResolved: boolean;
             failureReason: string | null;
+            tripId: string;
             orderId: string | null;
             supplierId: string | null;
             customerId: string | null;
-            tripId: string;
         }[];
     } & {
         id: string;
-        mode: import(".prisma/client").$Enums.FulfillmentMode;
+        tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.DeliveryTripStatus;
+        version: number;
         startedAt: Date | null;
         completedAt: Date | null;
         totalStops: number;
         totalPacks: number;
-        createdAt: Date;
-        version: number;
-        tenantId: string;
+        mode: import(".prisma/client").$Enums.FulfillmentMode;
         branchId: string;
         driverId: string | null;
         vehicleId: string | null;
@@ -40,15 +40,15 @@ export declare class LogisticsController {
     }>;
     dispatchTrip(req: any, tripId: string, dto: DispatchTripDto): Promise<{
         id: string;
-        mode: import(".prisma/client").$Enums.FulfillmentMode;
+        tenantId: string;
+        createdAt: Date;
         status: import(".prisma/client").$Enums.DeliveryTripStatus;
+        version: number;
         startedAt: Date | null;
         completedAt: Date | null;
         totalStops: number;
         totalPacks: number;
-        createdAt: Date;
-        version: number;
-        tenantId: string;
+        mode: import(".prisma/client").$Enums.FulfillmentMode;
         branchId: string;
         driverId: string | null;
         vehicleId: string | null;

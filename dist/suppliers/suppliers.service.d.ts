@@ -6,9 +6,9 @@ export declare class SuppliersService {
     create(dto: CreateSupplierDto): Promise<{
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         tenantId: string;
         version: number;
         balance: import("@prisma/client/runtime/library").Decimal;
@@ -16,9 +16,9 @@ export declare class SuppliersService {
     findAll(): Promise<{
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         tenantId: string;
         version: number;
         balance: import("@prisma/client/runtime/library").Decimal;
@@ -36,16 +36,16 @@ export declare class SuppliersService {
             branchId: string;
             baseAmount: import("@prisma/client/runtime/library").Decimal;
             createdById: string;
-            supplierId: string | null;
             supplierName: string;
             totalCost: import("@prisma/client/runtime/library").Decimal;
+            supplierId: string | null;
         }[];
     } & {
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         tenantId: string;
         version: number;
         balance: import("@prisma/client/runtime/library").Decimal;
@@ -53,9 +53,9 @@ export declare class SuppliersService {
     update(id: string, dto: CreateSupplierDto): Promise<{
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         tenantId: string;
         version: number;
         balance: import("@prisma/client/runtime/library").Decimal;
@@ -63,9 +63,9 @@ export declare class SuppliersService {
     remove(id: string): Promise<{
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         tenantId: string;
         version: number;
         balance: import("@prisma/client/runtime/library").Decimal;
@@ -80,9 +80,9 @@ export declare class SuppliersService {
         supplier: {
             id: string;
             name: string;
-            nameAr: string | null;
             createdAt: Date;
             updatedAt: Date;
+            nameAr: string | null;
             tenantId: string;
             version: number;
             balance: import("@prisma/client/runtime/library").Decimal;

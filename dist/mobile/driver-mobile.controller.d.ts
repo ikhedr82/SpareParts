@@ -52,18 +52,18 @@ export declare class DriverMobileController {
                 businessClientId: string;
                 subtotal: import("@prisma/client/runtime/library").Decimal;
                 tax: import("@prisma/client/runtime/library").Decimal;
-                createdById: string | null;
                 cancelledAt: Date | null;
                 returnId: string | null;
+                createdById: string | null;
                 deliveryExceptionId: string | null;
                 orderNumber: string;
                 deliveryAddressId: string | null;
                 contactId: string | null;
                 internalNotes: string | null;
-                sourceQuoteId: string | null;
                 confirmedAt: Date | null;
                 shippedAt: Date | null;
                 deliveredAt: Date | null;
+                sourceQuoteId: string | null;
             };
         } & {
             id: string;
@@ -92,9 +92,9 @@ export declare class DriverMobileController {
         mode: import(".prisma/client").$Enums.FulfillmentMode;
         driverId: string | null;
         vehicleId: string | null;
-        fulfillmentProviderId: string | null;
         totalStops: number;
         totalPacks: number;
+        fulfillmentProviderId: string | null;
     }>;
     completeStop(req: any, stopId: string, body: {
         signature?: string;

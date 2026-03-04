@@ -48,6 +48,14 @@ let TenantAdminService = class TenantAdminService {
                     status: 'ACTIVE',
                 },
             });
+            await tx.subscription.create({
+                data: {
+                    tenantId: tenant.id,
+                    planId: tenant.planId,
+                    status: 'ACTIVE',
+                    provider: 'MANUAL',
+                },
+            });
             const adminRole = await tx.role.create({
                 data: {
                     tenantId: tenant.id,
@@ -140,24 +148,52 @@ let TenantAdminService = class TenantAdminService {
             return updated;
         });
     }
-    async findAll() {
-        return this.prisma.tenant.findMany({
-            select: {
-                id: true,
-                name: true,
-                subdomain: true,
-                status: true,
-                planId: true,
-                plan: { select: { name: true } },
-                subscription: true,
-                suspensionReason: true,
-                defaultLanguage: true,
-                supportedLanguages: true,
-                createdAt: true,
-                _count: { select: { users: true, branches: true } },
-            },
-            orderBy: { createdAt: 'desc' },
-        });
+    async findAll(params = {}) {
+        const { page = 1, limit = 10, search, status, planId } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.OR = [
+                { name: { contains: search, mode: 'insensitive' } },
+                { subdomain: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+        if (status)
+            where.status = status;
+        if (planId)
+            where.planId = planId;
+        const [items, total] = await Promise.all([
+            this.prisma.tenant.findMany({
+                where,
+                select: {
+                    id: true,
+                    name: true,
+                    subdomain: true,
+                    status: true,
+                    planId: true,
+                    plan: { select: { name: true, price: true, currency: true } },
+                    subscription: {
+                        select: {
+                            status: true,
+                            trialEndDate: true,
+                            currentPeriodEnd: true,
+                        }
+                    },
+                    suspensionReason: true,
+                    defaultLanguage: true,
+                    supportedLanguages: true,
+                    baseCurrency: true,
+                    supportedCurrencies: true,
+                    createdAt: true,
+                    _count: { select: { users: true, branches: true } },
+                },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.tenant.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
     async findOne(tenantId) {
         const tenant = await this.prisma.tenant.findUnique({
@@ -198,25 +234,40 @@ let TenantAdminService = class TenantAdminService {
             return updated;
         });
     }
-    async findAllUsers() {
-        return this.prisma.user.findMany({
-            select: {
-                id: true,
-                email: true,
-                status: true,
-                isPlatformUser: true,
-                createdAt: true,
-                tenant: { select: { id: true, name: true, subdomain: true } },
-                userRoles: {
-                    select: {
-                        role: { select: { name: true, scope: true } },
-                        tenant: { select: { name: true } },
-                        branch: { select: { name: true } },
+    async findAllUsers(params = {}) {
+        const { page = 1, limit = 10, search } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.OR = [
+                { email: { contains: search, mode: 'insensitive' } }
+            ];
+        }
+        const [items, total] = await Promise.all([
+            this.prisma.user.findMany({
+                where,
+                select: {
+                    id: true,
+                    email: true,
+                    status: true,
+                    isPlatformUser: true,
+                    createdAt: true,
+                    tenant: { select: { id: true, name: true, subdomain: true } },
+                    userRoles: {
+                        select: {
+                            role: { select: { name: true, scope: true } },
+                            tenant: { select: { name: true } },
+                            branch: { select: { name: true } },
+                        },
                     },
                 },
-            },
-            orderBy: { createdAt: 'desc' },
-        });
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.user.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
     }
     async createPlan(dto) {
         return this.prisma.plan.create({ data: dto });
@@ -315,6 +366,124 @@ let TenantAdminService = class TenantAdminService {
             include: { tenant: { select: { name: true, subdomain: true } } },
             orderBy: { createdAt: 'desc' },
             take: 50
+        });
+    }
+    async createSupportTicket(tenantId, subject, description, priority) {
+        return this.prisma.supportTicket.create({
+            data: {
+                tenantId,
+                subject,
+                description,
+                priority,
+                status: 'OPEN',
+            },
+            include: { tenant: { select: { name: true } } }
+        });
+    }
+    async findAllTickets(params = {}) {
+        const { page = 1, limit = 10, search, status } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.OR = [
+                { subject: { contains: search, mode: 'insensitive' } },
+                { description: { contains: search, mode: 'insensitive' } },
+            ];
+        }
+        if (status)
+            where.status = status;
+        const [items, total] = await Promise.all([
+            this.prisma.supportTicket.findMany({
+                where,
+                include: { tenant: { select: { name: true, subdomain: true } } },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.supportTicket.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
+    }
+    async updateTicketStatus(id, status) {
+        return this.prisma.supportTicket.update({
+            where: { id },
+            data: { status }
+        });
+    }
+    async changeTenantPlan(adminUserId, tenantId, planId) {
+        const tenant = await this.prisma.tenant.findUnique({
+            where: { id: tenantId },
+            include: { subscription: true }
+        });
+        if (!tenant)
+            throw new common_1.NotFoundException('Tenant not found');
+        return this.prisma.$transaction(async (tx) => {
+            const updatedTenant = await tx.tenant.update({
+                where: { id: tenantId },
+                data: { planId }
+            });
+            if (tenant.subscription) {
+                await tx.subscription.update({
+                    where: { id: tenant.subscription.id },
+                    data: { planId, status: 'ACTIVE' }
+                });
+            }
+            else {
+                await tx.subscription.create({
+                    data: {
+                        tenantId,
+                        planId,
+                        status: 'ACTIVE',
+                        billingCycle: 'MONTHLY',
+                        startDate: new Date(),
+                    }
+                });
+            }
+            await this.auditService.logAction('PLATFORM', adminUserId, 'CHANGE_PLAN', 'Tenant', tenantId, { oldPlanId: tenant.planId }, { newPlanId: planId }, undefined, undefined, tx);
+            return updatedTenant;
+        });
+    }
+    async findAllSubscriptions(params = {}) {
+        const { page = 1, limit = 10, search, status } = params;
+        const skip = (page - 1) * Number(limit);
+        const where = {};
+        if (search) {
+            where.OR = [
+                { tenant: { name: { contains: search, mode: 'insensitive' } } },
+                { tenant: { subdomain: { contains: search, mode: 'insensitive' } } },
+            ];
+        }
+        if (status)
+            where.status = status;
+        const [items, total] = await Promise.all([
+            this.prisma.subscription.findMany({
+                where,
+                include: {
+                    tenant: { select: { id: true, name: true, subdomain: true } },
+                    plan: { select: { id: true, name: true, price: true, currency: true } },
+                },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: Number(limit),
+            }),
+            this.prisma.subscription.count({ where }),
+        ]);
+        return { items, total, page: Number(page), limit: Number(limit) };
+    }
+    async cancelSubscription(adminUserId, subscriptionId) {
+        const sub = await this.prisma.subscription.findUnique({
+            where: { id: subscriptionId },
+            include: { tenant: true }
+        });
+        if (!sub)
+            throw new common_1.NotFoundException('Subscription not found');
+        return this.prisma.$transaction(async (tx) => {
+            const updated = await tx.subscription.update({
+                where: { id: subscriptionId },
+                data: { status: 'CANCELED', endDate: new Date() }
+            });
+            await this.auditService.logAction('PLATFORM', adminUserId, 'CANCEL_SUBSCRIPTION', 'Subscription', subscriptionId, { status: sub.status }, { status: 'CANCELED' }, undefined, undefined, tx);
+            return updated;
         });
     }
 };

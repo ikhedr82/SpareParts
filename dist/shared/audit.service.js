@@ -62,6 +62,29 @@ let AuditService = class AuditService {
             take: limit,
         });
     }
+    async getPlatformAuditLogs(params) {
+        const { page = 1, limit = 20, tenantId, action } = params;
+        const skip = (page - 1) * limit;
+        const where = {};
+        if (tenantId)
+            where.tenantId = tenantId;
+        if (action)
+            where.action = action;
+        const [items, total] = await Promise.all([
+            this.prisma.auditLog.findMany({
+                where,
+                include: {
+                    user: { select: { email: true } },
+                    tenant: { select: { name: true, subdomain: true } },
+                },
+                orderBy: { createdAt: 'desc' },
+                skip,
+                take: limit,
+            }),
+            this.prisma.auditLog.count({ where }),
+        ]);
+        return { items, total, page, limit };
+    }
 };
 exports.AuditService = AuditService;
 exports.AuditService = AuditService = __decorate([

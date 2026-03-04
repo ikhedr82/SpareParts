@@ -14,35 +14,35 @@ export declare class PublicInventoryService {
                 brand: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     country: string | null;
                     isOem: boolean;
                 };
                 taxRate: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     tenantId: string;
                     percentage: import("@prisma/client/runtime/library").Decimal;
                 };
                 category: {
                     id: string;
                     name: string;
-                    nameAr: string | null;
                     createdAt: Date;
                     updatedAt: Date;
+                    nameAr: string | null;
                     parentId: string | null;
                 };
             } & {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 status: string;
                 description: string | null;
                 descriptionAr: string | null;
@@ -50,9 +50,9 @@ export declare class PublicInventoryService {
                 categoryId: string;
                 weight: number | null;
                 dimensions: string | null;
-                unitOfMeasure: string | null;
-                images: string[];
                 taxRateId: string | null;
+                images: string[];
+                unitOfMeasure: string | null;
             };
             id: string;
             createdAt: Date;
@@ -61,12 +61,12 @@ export declare class PublicInventoryService {
             version: number;
             branchId: string;
             productId: string;
-            allocated: number;
-            costPrice: import("@prisma/client/runtime/library").Decimal;
             sellingPrice: import("@prisma/client/runtime/library").Decimal;
             barcode: string | null;
+            costPrice: import("@prisma/client/runtime/library").Decimal;
             binLocation: string | null;
             lastCountedAt: Date | null;
+            allocated: number;
         }[];
         pagination: {
             page: number;
@@ -80,28 +80,20 @@ export declare class PublicInventoryService {
             brand: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 country: string | null;
                 isOem: boolean;
             };
             taxRate: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 tenantId: string;
                 percentage: import("@prisma/client/runtime/library").Decimal;
-            };
-            category: {
-                id: string;
-                name: string;
-                nameAr: string | null;
-                createdAt: Date;
-                updatedAt: Date;
-                parentId: string | null;
             };
             alternateNumbers: {
                 id: string;
@@ -112,12 +104,20 @@ export declare class PublicInventoryService {
                 manufacturer: string | null;
                 isSuperseded: boolean;
             }[];
+            category: {
+                id: string;
+                name: string;
+                createdAt: Date;
+                updatedAt: Date;
+                nameAr: string | null;
+                parentId: string | null;
+            };
         } & {
             id: string;
             name: string;
-            nameAr: string | null;
             createdAt: Date;
             updatedAt: Date;
+            nameAr: string | null;
             status: string;
             description: string | null;
             descriptionAr: string | null;
@@ -125,9 +125,9 @@ export declare class PublicInventoryService {
             categoryId: string;
             weight: number | null;
             dimensions: string | null;
-            unitOfMeasure: string | null;
-            images: string[];
             taxRateId: string | null;
+            images: string[];
+            unitOfMeasure: string | null;
         };
         totalAvailable: number;
         availability: {
@@ -146,26 +146,26 @@ export declare class PublicInventoryService {
             brand: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 country: string | null;
                 isOem: boolean;
             };
             category: {
                 id: string;
                 name: string;
-                nameAr: string | null;
                 createdAt: Date;
                 updatedAt: Date;
+                nameAr: string | null;
                 parentId: string | null;
             };
         } & {
             id: string;
             name: string;
-            nameAr: string | null;
             createdAt: Date;
             updatedAt: Date;
+            nameAr: string | null;
             status: string;
             description: string | null;
             descriptionAr: string | null;
@@ -173,9 +173,9 @@ export declare class PublicInventoryService {
             categoryId: string;
             weight: number | null;
             dimensions: string | null;
-            unitOfMeasure: string | null;
-            images: string[];
             taxRateId: string | null;
+            images: string[];
+            unitOfMeasure: string | null;
         };
     } & {
         id: string;
@@ -186,12 +186,12 @@ export declare class PublicInventoryService {
         branchId: string;
         productId: string;
         quantity: number;
-        allocated: number;
-        costPrice: import("@prisma/client/runtime/library").Decimal;
         sellingPrice: import("@prisma/client/runtime/library").Decimal;
         barcode: string | null;
+        costPrice: import("@prisma/client/runtime/library").Decimal;
         binLocation: string | null;
         lastCountedAt: Date | null;
+        allocated: number;
     })[]>;
     getCategories(tenantId: string): Promise<({
         _count: {
@@ -200,9 +200,9 @@ export declare class PublicInventoryService {
     } & {
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         parentId: string | null;
     })[]>;
     getBrands(tenantId: string): Promise<({
@@ -212,9 +212,9 @@ export declare class PublicInventoryService {
     } & {
         id: string;
         name: string;
-        nameAr: string | null;
         createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
         country: string | null;
         isOem: boolean;
     })[]>;

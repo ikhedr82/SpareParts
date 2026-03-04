@@ -10,21 +10,21 @@ export declare class PaymentsService {
     private readonly t;
     constructor(prisma: TenantAwarePrismaService, accountingService: AccountingService, auditService: AuditService, t: TranslationService);
     create(userId: string, correlationId: string, dto: CreatePaymentDto): Promise<{
-        currency: string;
         id: string;
-        createdAt: Date;
         tenantId: string;
-        amount: import("@prisma/client/runtime/library").Decimal;
-        paidAt: Date;
+        createdAt: Date;
         version: number;
+        currency: string;
+        amount: import("@prisma/client/runtime/library").Decimal;
         baseAmount: import("@prisma/client/runtime/library").Decimal;
         exchangeRateUsed: import("@prisma/client/runtime/library").Decimal;
         saleId: string;
+        paidAt: Date;
         sessionId: string | null;
-        reference: string | null;
         method: import(".prisma/client").$Enums.PaymentMethod;
         isRefund: boolean;
         refundedPaymentId: string | null;
+        reference: string | null;
     }>;
     findBySale(saleId: string): Promise<any>;
 }

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TenantAdminController, PlatformUsersController, PlansController, CurrenciesController, PlanStatusController } from './tenant-admin.controller';
+import { TenantAdminController, PlatformUsersController, PlansController, CurrenciesController, PlanStatusController, SupportController, AuditLogsController } from './tenant-admin.controller';
 import { BillingController } from './billing.controller';
 import { TenantAdminService } from './tenant-admin.service';
 import { PlanEnforcementService } from './plan-enforcement.service';
@@ -12,7 +12,7 @@ import { StripeWebhookController } from './stripe-webhook.controller';
 
 @Module({
     imports: [PrismaModule],
-    controllers: [TenantAdminController, PlatformUsersController, PlansController, CurrenciesController, PlanStatusController, BillingController, StripeWebhookController],
+    controllers: [TenantAdminController, PlatformUsersController, PlansController, CurrenciesController, PlanStatusController, BillingController, StripeWebhookController, SupportController, AuditLogsController],
     providers: [TenantAdminService, PlanEnforcementService, BillingService, UsageTrackingService, StripeService],
     exports: [TenantAdminService, PlanEnforcementService, BillingService, UsageTrackingService, StripeService],
 })

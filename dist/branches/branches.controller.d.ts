@@ -4,14 +4,14 @@ export declare class BranchesController {
     constructor(branchesService: BranchesService);
     findAll(): import("@prisma/client/runtime/library").PrismaPromise<{
         id: string;
-        createdAt: Date;
-        tenantId: string;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
+        tenantId: string;
         address: string | null;
-        addressAr: string | null;
         phone: string | null;
+        addressAr: string | null;
     }[]>;
     findOne(id: string): import("@prisma/client/runtime/library").DynamicModelExtensionFluentApi<import(".prisma/client").Prisma.TypeMap<import("@prisma/client/runtime/library").InternalArgs & {
         result: {};
@@ -20,24 +20,24 @@ export declare class BranchesController {
         client: {};
     }, {}>, "Branch", "findUnique", null> & import("@prisma/client/runtime/library").PrismaPromise<{
         id: string;
-        createdAt: Date;
-        tenantId: string;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
+        tenantId: string;
         address: string | null;
-        addressAr: string | null;
         phone: string | null;
+        addressAr: string | null;
     }>;
     create(body: any, req: any): Promise<{
         id: string;
-        createdAt: Date;
-        tenantId: string;
         name: string;
-        nameAr: string | null;
+        createdAt: Date;
         updatedAt: Date;
+        nameAr: string | null;
+        tenantId: string;
         address: string | null;
-        addressAr: string | null;
         phone: string | null;
+        addressAr: string | null;
     }>;
 }
