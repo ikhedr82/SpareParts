@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+  <!-- App Icon: Rounded square background + centered cube logo -->
+  <rect width="512" height="512" rx="108" fill="url(#abg)"/>
+  <g transform="translate(128, 108)">
+    <!-- Cube -->
+    <path d="M128 24L24 84V204L128 264L232 204V84L128 24Z" fill="url(#ag1)" opacity="0.9"/>
+    <path d="M128 24L232 84V204L128 264V144L232 84" fill="url(#ag2)" opacity="0.65"/>
+    <path d="M24 84L128 24L232 84L128 144L24 84Z" fill="url(#ag3)" opacity="0.95"/>
+    <!-- Gear accents -->
+    <rect x="216" y="32" width="28" height="18" rx="4" fill="#6EE7B7" transform="rotate(15, 230, 41)"/>
+    <rect x="236" y="56" width="28" height="18" rx="4" fill="#6EE7B7" transform="rotate(45, 250, 65)"/>
+    <rect x="242" y="88" width="28" height="18" rx="4" fill="#6EE7B7" transform="rotate(75, 256, 97)"/>
+  </g>
+  <!-- Wordmark below -->
+  <text x="256" y="420" text-anchor="middle" font-family="'Inter', 'Segoe UI', system-ui, sans-serif" font-size="72" font-weight="800" letter-spacing="-1" fill="white" opacity="0.95">
+    Partivo
+  </text>
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="512" y2="512">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+    <linearGradient id="ag1" x1="24" y1="24" x2="232" y2="264" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="ag2" x1="128" y1="24" x2="232" y2="264" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="ag3" x1="24" y1="24" x2="232" y2="144" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+</svg>
