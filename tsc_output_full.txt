@@ -1,2 +1,0 @@
-src/scripts/import-catalog.ts(35,22): error TS2554: Expected 2 arguments, but got 1.
-src/scripts/import-catalog.ts(112,49): error TS2554: Expected 3 arguments, but got 2.

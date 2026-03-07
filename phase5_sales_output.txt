@@ -1,8 +1,0 @@
---- PHASE 5: PERFORMANCE TESTING (SALES ONLY) ---
-
-[5.1] Simulating 100 Concurrent POS Sales...
-- Completed 100 sales in 10589ms
-- Success: 1, Conflicts (409): 0, Other Failed: 99
-- Sample Failure: 500 {"statusCode":500,"message":"Internal server error"}
-
-Sales Performance Test Complete

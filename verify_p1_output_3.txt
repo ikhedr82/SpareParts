@@ -1,8 +1,0 @@
-­ƒöì Verifying Commercial Safety Law P1: Partial Return Fraud
-Ô£à Setup Complete: Order ($100), Return (1 item @ $50)
-
-­ƒº¬ TEST 1: Attempting Over-Refund (Exploit)...
-Ô£à PASS: Exploit Blocked. Message: COMMERCIAL SAFETY P1: Refund amount (100) exceeds value of returned goods (50)
-
-­ƒº¬ TEST 2: Attempting Valid Refund...
-Ô£à PASS: Valid refund processed successfully.

@@ -1,1 +1,81 @@
-node_modules
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+*.log
+*.txt
+!README.txt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Temporary & debug files
+*.tmp
+*.temp
+db_debug.json
+return_body.json
+sales_list.json
+
+# Debug / verification scripts (root level temp files)
+check_*.js
+check_*.ts
+debug-*.ts
+get-*.js
+list_*.js
+list_*.ts
+read_*.js
+test_*.ts
+verify_*.ts
+verify_*.txt
+dist_list.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Expo / React Native
+.expo/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Misc
+*.tgz
+.cache/
