@@ -90,6 +90,29 @@ partivo/
 └── scripts/               # Utility scripts
 ```
 
+## Monorepo Structure
+
+Partivo is managed as a single Git monorepo to ensure atomic commits and consistent branding across all applications.
+
+- **Main Repository**: Root directory containing backend services and global configuration.
+- **Frontend Portal**: Next.js 14 application containing Platform Admin, Tenant Admin, and Public Website.
+- **Customer Portal**: Dedicated Next.js application for B2B customer self-service.
+- **Mobile Applications**: React Native (Expo) app containing both Driver and POS modules.
+
+## Branch Strategy
+
+We follow a professional SaaS branching model:
+
+- `main`: **Production** (the stable version, always deployable).
+- `stage`: **Staging** (pre-production verification and UAT).
+- `develop`: **Active Development** (integration branch for new features).
+
+### Development Workflow
+
+1. Developers commit new features/fixes to `develop`.
+2. When ready for testing, `develop` is merged into `stage`.
+3. After verification on staging, `stage` is merged into `main` for production release.
+
 ## Getting Started
 
 ### Prerequisites
@@ -102,25 +125,26 @@ partivo/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/partivo.git
-cd partivo
+git clone https://github.com/ikhedr82/SpareParts.git
+cd SpareParts
 
-# Install backend dependencies
+# Install all dependencies (Monorepo root)
 npm install
 
-# Install frontend dependencies
+# Install submodule dependencies
 cd frontend && npm install && cd ..
-
-# Install customer portal dependencies
 cd admin-panel && npm install && cd ..
-
-# Install mobile app dependencies
 cd mobile-app && npm install && cd ..
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
+Environment variables are managed via `.env` files. These files are **ignored by Git** for security.
+
+1. Create a `.env` file in the root directory for backend services.
+2. Create respective `.env.local` files in `frontend/`, `admin-panel/`, and `mobile-app/` for client-side configuration.
+
+**Root `.env` example:**
 
 ```env
 # Database
@@ -145,11 +169,11 @@ npm run start:dev
 cd frontend
 npm run dev
 
-# Customer Portal — new terminal
+# Customer Portal (Next.js) — new terminal
 cd admin-panel
 npm run dev
 
-# Mobile App — new terminal
+# Mobile App (Expo) — new terminal
 cd mobile-app
 npx expo start
 ```
