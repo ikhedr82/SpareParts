@@ -1,0 +1,141 @@
+{
+    "common": {
+        "loading": "جاري التحميل...",
+        "error": "حدث خطأ ما",
+        "retry": "إعادة المحاولة",
+        "cancel": "إلغاء",
+        "confirm": "تأكيد",
+        "save": "حفظ",
+        "back": "رجوع",
+        "logout": "تسجيل الخروج",
+        "offline": "أنت غير متصل",
+        "no_data": "لا توجد بيانات",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "welcome": "مرحباً",
+        "items": "عناصر",
+        "notes": "ملاحظات",
+        "phone": "الهاتف",
+        "address": "العنوان",
+        "search": "بحث",
+        "today": "اليوم",
+        "total": "الإجمالي",
+        "status": "الحالة"
+    },
+    "auth": {
+        "login": "تسجيل الدخول",
+        "logging_in": "جاري تسجيل الدخول...",
+        "login_failed": "فشل تسجيل الدخول",
+        "enter_credentials": "الرجاء إدخال البريد الإلكتروني وكلمة المرور",
+        "invalid_credentials": "بيانات الاعتماد غير صحيحة",
+        "session_expired": "انتهت الجلسة. الرجاء تسجيل الدخول مرة أخرى."
+    },
+    "driver": {
+        "app_title": "تطبيق السائق",
+        "my_deliveries": "توصيلاتي",
+        "delivery_count": "{{count}} توصيلات",
+        "no_deliveries": "لا توجد توصيلات مُعيَّنة",
+        "no_deliveries_desc": "تحقق لاحقاً من مهام التوصيل الجديدة.",
+        "delivery_detail": "تفاصيل التوصيل",
+        "customer": "العميل",
+        "order_items": "عناصر الطلب",
+        "delivery_notes": "ملاحظات التوصيل",
+        "navigate": "التنقل",
+        "open_maps": "فتح في الخرائط",
+        "status": {
+            "ASSIGNED": "مُعيَّن",
+            "ACCEPTED": "مقبول",
+            "PICKED_UP": "تم الاستلام",
+            "IN_TRANSIT": "في الطريق",
+            "DELIVERED": "تم التسليم",
+            "CANCELLED": "ملغي",
+            "FAILED": "فشل"
+        },
+        "actions": {
+            "accept": "قبول التوصيل",
+            "start": "بدء التوصيل",
+            "picked_up": "تم الاستلام",
+            "in_transit": "في الطريق",
+            "mark_delivered": "تحديد كمُسلَّم",
+            "report_issue": "الإبلاغ عن مشكلة",
+            "complete": "إتمام التوصيل"
+        },
+        "proof": {
+            "title": "إثبات التسليم",
+            "capture_photo": "التقاط صورة",
+            "capture_signature": "التقاط التوقيع",
+            "add_notes": "إضافة ملاحظات التسليم",
+            "photo_captured": "تم التقاط الصورة",
+            "signature_captured": "تم التقاط التوقيع",
+            "required": "الرجاء التقاط التوقيع أو صورة إثبات أولاً."
+        },
+        "issue": {
+            "title": "الإبلاغ عن مشكلة",
+            "customer_absent": "العميل غير موجود",
+            "wrong_address": "عنوان خاطئ",
+            "damaged_goods": "بضائع تالفة",
+            "access_denied": "تم رفض الوصول",
+            "other": "أخرى",
+            "describe": "صف المشكلة..."
+        }
+    },
+    "pos": {
+        "app_title": "تطبيق نقطة البيع",
+        "dashboard": "لوحة التحكم",
+        "sales_today": "مبيعات اليوم",
+        "revenue": "الإيرادات",
+        "transactions": "المعاملات",
+        "recent_sales": "المبيعات الأخيرة",
+        "no_sales": "لا توجد مبيعات اليوم",
+        "product_search": "البحث عن المنتجات",
+        "search_placeholder": "البحث بالاسم أو الرقم أو الباركود...",
+        "scan_barcode": "مسح الباركود",
+        "no_products": "لم يتم العثور على منتجات",
+        "cart": {
+            "title": "السلة",
+            "empty": "السلة فارغة",
+            "empty_desc": "أضف منتجات لبدء عملية البيع.",
+            "add": "إضافة إلى السلة",
+            "remove": "إزالة",
+            "quantity": "الكمية",
+            "subtotal": "المجموع الفرعي",
+            "tax": "الضريبة",
+            "discount": "الخصم",
+            "total": "الإجمالي",
+            "clear": "تفريغ السلة",
+            "checkout": "الدفع"
+        },
+        "checkout": {
+            "title": "الدفع",
+            "payment_method": "طريقة الدفع",
+            "cash": "نقدي",
+            "card": "بطاقة",
+            "transfer": "تحويل بنكي",
+            "amount_due": "المبلغ المستحق",
+            "process": "معالجة الدفع",
+            "processing": "جاري المعالجة...",
+            "success": "تم الدفع بنجاح!",
+            "receipt": "عرض الإيصال",
+            "new_sale": "بيع جديد",
+            "print_receipt": "طباعة الإيصال"
+        },
+        "history": {
+            "title": "سجل المبيعات",
+            "no_history": "لا توجد سجلات مبيعات",
+            "order_id": "طلب #",
+            "date": "التاريخ",
+            "amount": "المبلغ",
+            "method": "الطريقة"
+        },
+        "offline": {
+            "pending": "في انتظار المزامنة",
+            "pending_count": "{{count}} معاملات معلقة",
+            "sync_now": "مزامنة الآن",
+            "syncing": "جاري المزامنة..."
+        }
+    },
+    "languages": {
+        "en": "الإنجليزية",
+        "ar": "العربية"
+    }
+}

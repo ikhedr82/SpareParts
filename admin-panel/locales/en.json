@@ -1,0 +1,101 @@
+{
+    "portal": {
+        "title": "Customer Portal",
+        "subtitle": "Business Client Access",
+        "nav": {
+            "orders": "My Orders",
+            "catalog": "Product Catalog",
+            "pricing": "Pricing & Quotes",
+            "financials": "Account & Finance",
+            "substitutions": "Substitutions"
+        },
+        "dashboard": {
+            "title": "Dashboard",
+            "subtitle": "Your business overview at a glance",
+            "pending_orders": "Pending Orders",
+            "total_spent": "Total Spent",
+            "pending_subs": "Pending Substitutions",
+            "available_credit": "Available Credit",
+            "recent_orders": "Recent Orders",
+            "no_recent_orders": "No recent orders to display"
+        },
+        "financials": {
+            "title": "Account & Finance",
+            "credit_limit": "Credit Limit",
+            "current_balance": "Current Balance",
+            "available_credit": "Available Credit",
+            "payment_terms": "Payment Terms",
+            "invoices": "Invoices"
+        },
+        "substitutions": {
+            "title": "Substitution Requests",
+            "pending_count": "pending",
+            "no_pending": "No pending substitutions",
+            "no_pending_desc": "You will be notified when a substitution request is made for your orders.",
+            "original": "Original Product",
+            "proposed": "Proposed Substitute",
+            "approve": "Approve",
+            "reject": "Reject",
+            "approve_confirm": "Are you sure you want to approve this substitution?",
+            "reject_confirm": "Are you sure you want to reject this substitution? The item will be cancelled."
+        }
+    },
+    "nav": {
+        "dashboard": "Dashboard",
+        "procurement": "Procurement",
+        "pricing": "Pricing & Quotes",
+        "inventory": "Inventory",
+        "logistics": "Logistics",
+        "tenants": "Tenants",
+        "plans": "Plans",
+        "currencies": "Currencies",
+        "settings": "Settings"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "An error occurred",
+        "error_occurred": "An error occurred. Please try again.",
+        "no_data": "No data available",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "create": "Create",
+        "search": "Search",
+        "filter": "Filter",
+        "back": "Back",
+        "confirm": "Confirm",
+        "actions": "Actions",
+        "status": "Status",
+        "total": "Total",
+        "amount": "Amount",
+        "price": "Price",
+        "date": "Date",
+        "order": "Order",
+        "items": "Items",
+        "details": "Details",
+        "language": "Language",
+        "no_results": "No results found",
+        "retry": "Retry"
+    },
+    "orders": {
+        "new_order": "New Order"
+    },
+    "inventory": {
+        "product": "Product",
+        "available": "Available",
+        "search_placeholder": "Search by name, SKU, or brand..."
+    },
+    "finance": {
+        "invoice_no": "Invoice #",
+        "no_invoices": "No invoices found"
+    },
+    "auth": {
+        "login": "Login",
+        "logout": "Logout"
+    },
+    "languages": {
+        "en": "English",
+        "ar": "Arabic"
+    }
+}

@@ -1,0 +1,67 @@
+// --------------------------------------
+// 9. Warehouse Picking & Packing
+// --------------------------------------
+
+model PickList {
+  id          String          @id @default(uuid())
+  tenantId    String          @map("tenant_id")
+  branchId    String          @map("branch_id")
+  orderId     String          @unique @map("order_id")
+  status      PickListStatus  @default(CREATED)
+  createdAt   DateTime        @default(now()) @map("created_at")
+  startedAt   DateTime?       @map("started_at")
+  completedAt DateTime?       @map("completed_at")
+  tenant      Tenant          @relation(fields: [tenantId], references: [id])
+  branch      Branch          @relation(fields: [branchId], references: [id])
+  order       Order           @relation(fields: [orderId], references: [id])
+  items       PickListItem[]
+  packs       Pack[]
+  @@index([tenantId])
+  @@index([branchId])
+  @@index([status])
+  @@map("pick_lists")
+}
+
+model PickListItem {
+  id          String              @id @default(uuid())
+  pickListId  String              @map("pick_list_id")
+  productId   String              @map("product_id")
+  inventoryId String              @map("inventory_id")
+  requiredQty Int                 @map("required_qty")
+  pickedQty   Int                 @default(0) @map("picked_qty")
+  binLocation String?             @map("bin_location")
+  status      PickListItemStatus  @default(PENDING)
+  createdAt   DateTime            @default(now()) @map("created_at")
+  pickList    PickList            @relation(fields: [pickListId], references: [id], onDelete: Cascade)
+  product     Product             @relation(fields: [productId], references: [id])
+  @@index([pickListId])
+  @@index([productId])
+  @@map("pick_list_items")
+}
+
+model Pack {
+  id         String     @id @default(uuid())
+  pickListId String     @map("pick_list_id")
+  packNumber String     @map("pack_number")
+  weight     Decimal?   @db.Decimal(10, 2)
+  packedAt   DateTime   @default(now()) @map("packed_at")
+  status     PackStatus @default(OPEN)
+  pickList   PickList   @relation(fields: [pickListId], references: [id])
+  items      PackItem[]
+  @@unique([pickListId, packNumber])
+  @@index([pickListId])
+  @@map("packs")
+}
+
+model PackItem {
+  id        String   @id @default(uuid())
+  packId    String   @map("pack_id")
+  productId String   @map("product_id")
+  quantity  Int
+  createdAt DateTime @default(now()) @map("created_at")
+  pack      Pack     @relation(fields: [packId], references: [id], onDelete: Cascade)
+  product   Product  @relation(fields: [productId], references: [id])
+  @@index([packId])
+  @@index([productId])
+  @@map("pack_items")
+}

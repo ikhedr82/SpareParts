@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* RTL Support & Logical CSS */
+[dir='rtl'] body {
+  font-family: var(--font-arabic), Arial, Helvetica, sans-serif;
+}
+
+/* Logical Properties for better RTL support */
+.padding-inline-start { padding-inline-start: 1rem; }
+.padding-inline-end { padding-inline-end: 1rem; }
+.margin-inline-start { margin-inline-start: 1rem; }
+.margin-inline-end { margin-inline-end: 1rem; }
+
+[dir='rtl'] .text-left { text-align: right; }
+[dir='rtl'] .text-right { text-align: left; }
+
+[dir='rtl'] th,
+[dir='rtl'] td {
+  text-align: right;
+}
+
+[dir='rtl'] input,
+[dir='rtl'] textarea,
+[dir='rtl'] select {
+  text-align: right;
+}
+
+/* RTL Icon Flipping */
+[dir='rtl'] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Dropdown & Action Menu Fixes */
+.dropdown-menu, 
+.action-menu,
+[role="menu"] {
+  min-width: max-content !important;
+  white-space: normal !important;
+  text-align: inherit;
+}
+
+[dir='rtl'] .dropdown-menu,
+[dir='rtl'] .action-menu,
+[dir='rtl'] [role="menu"] {
+  text-align: right;
+}
+
+/* Table fixes for long Arabic labels */
+.table-fixed-layout {
+  table-layout: auto;
+}
+
+.table-cell-nowrap {
+  white-space: nowrap;
+}
+
+.table-cell-wrap {
+  white-space: normal;
+  min-width: 150px;
+}

@@ -1,0 +1,141 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "retry": "Retry",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "save": "Save",
+        "back": "Back",
+        "logout": "Logout",
+        "offline": "You are offline",
+        "no_data": "No data available",
+        "email": "Email",
+        "password": "Password",
+        "welcome": "Welcome",
+        "items": "items",
+        "notes": "Notes",
+        "phone": "Phone",
+        "address": "Address",
+        "search": "Search",
+        "today": "Today",
+        "total": "Total",
+        "status": "Status"
+    },
+    "auth": {
+        "login": "Login",
+        "logging_in": "Logging in...",
+        "login_failed": "Login Failed",
+        "enter_credentials": "Please enter email and password",
+        "invalid_credentials": "Invalid credentials",
+        "session_expired": "Session expired. Please log in again."
+    },
+    "driver": {
+        "app_title": "Driver App",
+        "my_deliveries": "My Deliveries",
+        "delivery_count": "{{count}} deliveries",
+        "no_deliveries": "No deliveries assigned",
+        "no_deliveries_desc": "Check back soon for new delivery assignments.",
+        "delivery_detail": "Delivery Details",
+        "customer": "Customer",
+        "order_items": "Order Items",
+        "delivery_notes": "Delivery Notes",
+        "navigate": "Navigate",
+        "open_maps": "Open in Maps",
+        "status": {
+            "ASSIGNED": "Assigned",
+            "ACCEPTED": "Accepted",
+            "PICKED_UP": "Picked Up",
+            "IN_TRANSIT": "In Transit",
+            "DELIVERED": "Delivered",
+            "CANCELLED": "Cancelled",
+            "FAILED": "Failed"
+        },
+        "actions": {
+            "accept": "Accept Delivery",
+            "start": "Start Delivery",
+            "picked_up": "Picked Up",
+            "in_transit": "On The Way",
+            "mark_delivered": "Mark Delivered",
+            "report_issue": "Report Issue",
+            "complete": "Complete Delivery"
+        },
+        "proof": {
+            "title": "Proof of Delivery",
+            "capture_photo": "Take Photo",
+            "capture_signature": "Capture Signature",
+            "add_notes": "Add Delivery Notes",
+            "photo_captured": "Photo captured",
+            "signature_captured": "Signature captured",
+            "required": "Please capture signature or photo proof first."
+        },
+        "issue": {
+            "title": "Report Issue",
+            "customer_absent": "Customer Absent",
+            "wrong_address": "Wrong Address",
+            "damaged_goods": "Damaged Goods",
+            "access_denied": "Access Denied",
+            "other": "Other",
+            "describe": "Describe the issue..."
+        }
+    },
+    "pos": {
+        "app_title": "POS App",
+        "dashboard": "Dashboard",
+        "sales_today": "Sales Today",
+        "revenue": "Revenue",
+        "transactions": "Transactions",
+        "recent_sales": "Recent Sales",
+        "no_sales": "No sales today",
+        "product_search": "Search Products",
+        "search_placeholder": "Search by name, SKU, or barcode...",
+        "scan_barcode": "Scan Barcode",
+        "no_products": "No products found",
+        "cart": {
+            "title": "Cart",
+            "empty": "Cart is empty",
+            "empty_desc": "Add products to start a sale.",
+            "add": "Add to Cart",
+            "remove": "Remove",
+            "quantity": "Qty",
+            "subtotal": "Subtotal",
+            "tax": "Tax",
+            "discount": "Discount",
+            "total": "Total",
+            "clear": "Clear Cart",
+            "checkout": "Checkout"
+        },
+        "checkout": {
+            "title": "Checkout",
+            "payment_method": "Payment Method",
+            "cash": "Cash",
+            "card": "Card",
+            "transfer": "Bank Transfer",
+            "amount_due": "Amount Due",
+            "process": "Process Payment",
+            "processing": "Processing...",
+            "success": "Payment Successful!",
+            "receipt": "View Receipt",
+            "new_sale": "New Sale",
+            "print_receipt": "Print Receipt"
+        },
+        "history": {
+            "title": "Sales History",
+            "no_history": "No sales records",
+            "order_id": "Order #",
+            "date": "Date",
+            "amount": "Amount",
+            "method": "Method"
+        },
+        "offline": {
+            "pending": "Pending Sync",
+            "pending_count": "{{count}} transactions pending",
+            "sync_now": "Sync Now",
+            "syncing": "Syncing..."
+        }
+    },
+    "languages": {
+        "en": "English",
+        "ar": "Arabic"
+    }
+}

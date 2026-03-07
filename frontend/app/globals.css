@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-inter), var(--font-arabic), system-ui, sans-serif;
+}
+
+/* =============================================
+   RTL Support — Applied when dir="rtl" on <html>
+   ============================================= */
+
+/* Arabic font rendering enhancements */
+[dir='rtl'] body {
+  font-family: var(--font-arabic), var(--font-inter), system-ui, sans-serif;
+  letter-spacing: normal;
+}
+
+/* Flex direction reversal for RTL */
+[dir='rtl'] .flex {
+  /* Tailwind's flex already handles RTL via logical properties in v4 */
+}
+
+/* Text alignment */
+[dir='rtl'] .text-left {
+  text-align: right;
+}
+
+[dir='rtl'] .text-right {
+  text-align: left;
+}
+
+/* Table alignment for RTL */
+[dir='rtl'] th,
+[dir='rtl'] td {
+  text-align: right;
+}
+
+/* Input text direction */
+[dir='rtl'] input,
+[dir='rtl'] textarea,
+[dir='rtl'] select {
+  text-align: right;
+}
+
+/* Sidebar icon spacing adjustment for RTL */
+[dir='rtl'] .gap-3>svg:first-child,
+[dir='rtl'] .gap-2>svg:first-child {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Dropdown / Popover position mirroring */
+[dir='rtl'] [data-radix-popper-content-wrapper] {
+  direction: rtl;
+}
+
+/* Badge / Chip margin reversal */
+[dir='rtl'] .inline-flex>span+span {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+/* Breadcrumb separator mirroring */
+[dir='rtl'] .breadcrumb-separator {
+  transform: scaleX(-1);
+}
+
+/* Number and currency fields: forced LTR in RTL context */
+[dir='rtl'] input[type="number"],
+[dir='rtl'] input[type="tel"],
+[dir='rtl'] input[inputmode="decimal"],
+[dir='rtl'] input[inputmode="numeric"],
+[dir='rtl'] .ltr-content {
+  direction: ltr;
+  text-align: right;
+}
+
+/* Button icon spacing reversal */
+[dir='rtl'] button>svg+span,
+[dir='rtl'] button>span+svg {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Modal close button position */
+[dir='rtl'] [data-radix-dialog-close],
+[dir='rtl'] .dialog-close {
+  left: 1rem;
+  right: auto;
+}
+
+/* Horizontal scroll reversal */
+[dir='rtl'] .overflow-x-auto {
+  direction: rtl;
+}
+
+/* Border radius mirroring for cards and panels */
+[dir='rtl'] .rounded-l-lg {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+[dir='rtl'] .rounded-r-lg {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+/* Padding/margin logical property support */
+[dir='rtl'] .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+[dir='rtl'] .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
+}
+
+[dir='rtl'] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir='rtl'] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
