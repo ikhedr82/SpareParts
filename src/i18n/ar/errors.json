@@ -1,0 +1,112 @@
+{
+    "validation": {
+        "required_field": "الحقل '{{field}}' مطلوب.",
+        "invalid_format": "صيغة غير صالحة للحقل '{{field}}'.",
+        "invalid_enum": "'{{value}}' ليست قيمة صالحة للحقل '{{field}}'. القيم الصالحة: {{values}}.",
+        "min_value": "يجب أن يكون '{{field}}' على الأقل {{min}}.",
+        "max_value": "يجب ألا يتجاوز '{{field}}' القيمة {{max}}.",
+        "not_found": "{{entity}} غير موجود.",
+        "already_exists": "{{entity}} موجود بالفعل.",
+        "invalid_id": "صيغة المعرّف غير صالحة."
+    },
+    "auth": {
+        "invalid_credentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+        "unauthorized": "غير مصرح. يرجى تسجيل الدخول.",
+        "forbidden": "ليس لديك صلاحية لتنفيذ هذا الإجراء.",
+        "token_expired": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.",
+        "account_suspended": "تم تعليق هذا الحساب.",
+        "tenant_suspended": "تم تعليق هذا المستأجر. السبب: {{reason}}."
+    },
+    "inventory": {
+        "insufficient_stock": "مخزون غير كافٍ للمنتج '{{product}}'. المتاح: {{available}}، المطلوب: {{requested}}.",
+        "product_not_found": "المنتج غير موجود في مخزون هذا الفرع.",
+        "negative_quantity": "لا يمكن أن تكون الكمية سالبة.",
+        "concurrency_conflict": "تم تعديل سجل المخزون من قبل مستخدم آخر. يرجى المحاولة مرة أخرى.",
+        "invalid_adjustment_reason": "رمز السبب مطلوب لتعديلات المخزون."
+    },
+    "sales": {
+        "no_open_session": "لا يمكن إنشاء عملية بيع: لا توجد جلسة نقدية مفتوحة لهذا الفرع.",
+        "already_voided": "تم إلغاء عملية البيع هذه بالفعل.",
+        "already_refunded": "تم استرداد عملية البيع هذه بالفعل.",
+        "cannot_void_with_payments": "لا يمكن إلغاء عملية بيع بها مدفوعات. استخدم الاسترداد بدلاً من ذلك.",
+        "void_reason_required": "السبب مطلوب لإلغاء عملية البيع.",
+        "refund_exceeds_total": "لا يمكن أن يتجاوز مبلغ الاسترداد إجمالي البيع الأصلي.",
+        "invalid_payment_method": "طريقة دفع غير صالحة.",
+        "session_already_open": "توجد جلسة نقدية مفتوحة بالفعل لهذا الفرع.",
+        "session_already_closed": "تم إغلاق هذه الجلسة النقدية بالفعل.",
+        "no_items": "يجب أن تحتوي عملية البيع على عنصر واحد على الأقل."
+    },
+    "orders": {
+        "invalid_transition": "لا يمكن نقل {{entity}} من '{{from}}' إلى '{{to}}'.",
+        "already_cancelled": "تم إلغاء هذا الطلب بالفعل.",
+        "cannot_cancel_delivered": "لا يمكن إلغاء طلب تم تسليمه.",
+        "no_items": "يجب أن يحتوي الطلب على عنصر واحد على الأقل.",
+        "quantity_exceeds": "لا يمكن أن تتجاوز كمية الإرجاع كمية الطلب."
+    },
+    "quotes": {
+        "not_convertible": "عرض السعر ليس في حالة قابلة للتحويل.",
+        "expired": "انتهت صلاحية عرض السعر هذا.",
+        "already_converted": "تم تحويل عرض السعر هذا إلى طلب بالفعل.",
+        "invalid_validity_period": "يجب أن تكون فترة الصلاحية تاريخاً مستقبلياً.",
+        "concurrent_update": "تم تحديث عرض السعر من قِبل عملية أخرى. يرجى المحاولة مرة أخرى."
+    },
+    "logistics": {
+        "driver_unavailable": "هذا السائق مُعيّن بالفعل لرحلة نشطة.",
+        "vehicle_unavailable": "هذه المركبة مُعيّنة بالفعل لرحلة نشطة أو خارج الخدمة.",
+        "no_stops": "يجب أن تحتوي رحلة التوصيل على محطة واحدة على الأقل.",
+        "no_packs_loaded": "لا يمكن الإرسال: لم يتم تحميل أي طرود.",
+        "trip_not_started": "لم تبدأ الرحلة بعد.",
+        "stop_already_completed": "تم إكمال هذه المحطة بالفعل.",
+        "invalid_trip_transition": "لا يمكن نقل الرحلة من '{{from}}' إلى '{{to}}'.",
+        "driver_required": "وضع الأسطول الداخلي يتطلب سائق ومركبة.",
+        "provider_required": "وضع التوصيل هذا يتطلب مزود خدمة.",
+        "driver_inactive": "السائق غير نشط.",
+        "driver_busy": "السائق مشغول حالياً برحلة نشطة.",
+        "vehicle_inactive": "المركبة غير نشطة.",
+        "vehicle_busy": "المركبة مشغولة حالياً برحلة نشطة."
+    },
+    "warehouse": {
+        "picklist_not_found": "قائمة الالتقاط غير موجودة.",
+        "wrong_item_scanned": "تم مسح عنصر خاطئ. المتوقع '{{expected}}'، تم المسح '{{scanned}}'.",
+        "pack_already_sealed": "تم ختم هذا الطرد بالفعل.",
+        "cannot_modify_sealed": "لا يمكن تعديل طرد مختوم.",
+        "quantity_exceeds_requested": "الكمية المُلتقطة تتجاوز الكمية المطلوبة.",
+        "substitution_shortage_only": "يمكن استبدال عناصر النقص فقط.",
+        "substitution_same_sku": "لا يمكن الاستبدال بنفس المنتج.",
+        "substitution_pending": "يوجد طلب استبدال معلّق لهذا العنصر بالفعل."
+    },
+    "accounting": {
+        "period_closed": "لا يمكن الترحيل إلى فترة محاسبية مغلقة.",
+        "unbalanced_entry": "القيد غير متوازن. المدين ({{debits}}) يجب أن يساوي الدائن ({{credits}}).",
+        "entry_already_posted": "تم ترحيل هذا القيد بالفعل.",
+        "entry_already_reversed": "تم عكس هذا القيد بالفعل.",
+        "reversal_reason_required": "السبب مطلوب لعكس القيد اليومي.",
+        "account_not_found": "حساب بالرمز '{{code}}' غير موجود.",
+        "entry_not_posted": "لا يمكن عكس قيد غير مرحّل. احذفه بدلاً من ذلك.",
+        "report_already_generated": "تم إنشاء التقرير لهذه الفترة بالفعل."
+    },
+    "procurement": {
+        "po_not_editable": "أمر الشراء ليس في حالة قابلة للتعديل.",
+        "po_already_received": "تم استلام أمر الشراء هذا بالفعل.",
+        "receive_quantity_exceeded": "الكمية المستلمة تتجاوز الكمية المطلوبة.",
+        "return_quantity_exceeded": "كمية الإرجاع تتجاوز الكمية المستلمة.",
+        "po_not_received": "يجب أن يكون أمر الشراء في حالة 'مُستلم' لمعالجة الإرجاع.",
+        "receive_exceeds_ordered": "لا يمكن استلام كمية أكثر من الكمية المطلوبة."
+    },
+    "payments": {
+        "stripe_failed": "فشلت عملية الدفع. يرجى المحاولة مرة أخرى."
+    },
+    "tenant": {
+        "already_suspended": "هذا المستأجر معلّق بالفعل.",
+        "already_active": "هذا المستأجر نشط بالفعل.",
+        "language_not_supported": "اللغة '{{language}}' ليست ضمن اللغات المدعومة.",
+        "default_must_be_supported": "يجب أن تكون اللغة الافتراضية ضمن قائمة اللغات المدعومة."
+    },
+    "fsm": {
+        "invalid_transition": "انتقال حالة غير صالح لـ {{entity}} ({{id}}): '{{from}}' → '{{to}}' غير مسموح به."
+    },
+    "plan": {
+        "limit_exceeded": "تم تجاوز حد الخطة لـ {{limit}}. يرجى ترقية خطتك.",
+        "feature_disabled": "الميزة '{{feature}}' غير متوفرة في خطتك الحالية. يرجى الترقية."
+    }
+}

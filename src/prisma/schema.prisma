@@ -71,6 +71,8 @@ model BillingInvoice {
   stripeInvoiceId String?       @map("stripe_invoice_id")
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
+  periodStart     DateTime?     @map("period_start")
+  periodEnd       DateTime?     @map("period_end")
   subscription    Subscription? @relation(fields: [subscriptionId], references: [id])
   tenant          Tenant        @relation(fields: [tenantId], references: [id])
 
@@ -124,6 +126,7 @@ model Tenant {
   status                String                 @default("ACTIVE")
   createdAt             DateTime               @default(now()) @map("created_at")
   updatedAt             DateTime               @updatedAt @map("updated_at")
+  deletedAt             DateTime?              @map("deleted_at")
   defaultLanguage       LanguageCode           @default(EN) @map("default_language")
   supportedLanguages    LanguageCode[]         @default([EN, AR]) @map("supported_languages")
   suspensionReason      String?                @map("suspension_reason")
@@ -186,6 +189,8 @@ model Tenant {
   users                 User[]
   vehicles              Vehicle[]
   zReports              ZReport[]
+  featureFlags          FeatureFlag[]
+  apiKeys               ApiKey[]
 
   @@map("tenants")
 }
@@ -2210,4 +2215,45 @@ enum SupportPriority {
   MEDIUM
   HIGH
   CRITICAL
+}
+
+model FeatureFlag {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  type        String   @default("BOOLEAN")
+  value       String   @default("false")
+  isGlobal    Boolean  @default(true) @map("is_global")
+  tenantId    String?  @map("tenant_id")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  tenant      Tenant?  @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@map("feature_flags")
+}
+
+model SystemConfig {
+  key         String   @id
+  value       String
+  description String?
+  type        String   @default("STRING")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("system_configs")
+}
+
+model ApiKey {
+  id         String    @id @default(uuid())
+  name       String
+  secretHash String    @unique @map("secret_hash")
+  tenantId   String?   @map("tenant_id")
+  expiresAt  DateTime? @map("expires_at")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  lastUsedAt DateTime? @map("last_used_at")
+  tenant     Tenant?   @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@map("api_keys")
 }

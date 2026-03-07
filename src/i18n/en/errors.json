@@ -1,0 +1,112 @@
+{
+    "validation": {
+        "required_field": "The field '{{field}}' is required.",
+        "invalid_format": "Invalid format for '{{field}}'.",
+        "invalid_enum": "'{{value}}' is not a valid value for '{{field}}'. Valid values: {{values}}.",
+        "min_value": "'{{field}}' must be at least {{min}}.",
+        "max_value": "'{{field}}' must not exceed {{max}}.",
+        "not_found": "{{entity}} not found.",
+        "already_exists": "{{entity}} already exists.",
+        "invalid_id": "Invalid ID format."
+    },
+    "auth": {
+        "invalid_credentials": "Invalid email or password.",
+        "unauthorized": "Unauthorized. Please log in.",
+        "forbidden": "You do not have permission to perform this action.",
+        "token_expired": "Your session has expired. Please log in again.",
+        "account_suspended": "This account has been suspended.",
+        "tenant_suspended": "This tenant has been suspended. Reason: {{reason}}."
+    },
+    "inventory": {
+        "insufficient_stock": "Insufficient stock for product '{{product}}'. Available: {{available}}, Requested: {{requested}}.",
+        "product_not_found": "Product not found in inventory for this branch.",
+        "negative_quantity": "Quantity cannot be negative.",
+        "concurrency_conflict": "This inventory record was modified by another user. Please retry.",
+        "invalid_adjustment_reason": "A reason code is required for stock adjustments."
+    },
+    "sales": {
+        "no_open_session": "Cannot create sale: No open cash session for this branch.",
+        "already_voided": "This sale has already been voided.",
+        "already_refunded": "This sale has already been refunded.",
+        "cannot_void_with_payments": "Cannot void sale with payments. Use Refund instead.",
+        "void_reason_required": "A reason is required to void a sale.",
+        "refund_exceeds_total": "Refund amount cannot exceed the original sale total.",
+        "invalid_payment_method": "Invalid payment method.",
+        "session_already_open": "A cash session is already open for this branch.",
+        "session_already_closed": "This cash session has already been closed.",
+        "no_items": "Sale must contain at least one item."
+    },
+    "orders": {
+        "invalid_transition": "Cannot transition {{entity}} from '{{from}}' to '{{to}}'.",
+        "already_cancelled": "This order has already been cancelled.",
+        "cannot_cancel_delivered": "Cannot cancel a delivered order.",
+        "no_items": "Order must contain at least one item.",
+        "quantity_exceeds": "Return quantity cannot exceed the order quantity."
+    },
+    "quotes": {
+        "not_convertible": "Quote is not in a convertible state.",
+        "expired": "This quote has expired.",
+        "already_converted": "This quote has already been converted to an order.",
+        "invalid_validity_period": "The validity period must be a future date.",
+        "concurrent_update": "Quote was updated by another process. Please retry."
+    },
+    "logistics": {
+        "driver_unavailable": "This driver is already assigned to an active trip.",
+        "vehicle_unavailable": "This vehicle is already assigned to an active trip or is out of service.",
+        "no_stops": "A delivery trip must have at least one stop.",
+        "no_packs_loaded": "Cannot dispatch: no packs have been loaded.",
+        "trip_not_started": "Trip has not been started yet.",
+        "stop_already_completed": "This stop has already been completed.",
+        "invalid_trip_transition": "Cannot transition trip from '{{from}}' to '{{to}}'.",
+        "driver_required": "Internal fleet mode requires a driver and vehicle.",
+        "provider_required": "This fulfillment mode requires a fulfillment provider.",
+        "driver_inactive": "Driver is not active.",
+        "driver_busy": "Driver already has an active trip.",
+        "vehicle_inactive": "Vehicle is not active.",
+        "vehicle_busy": "Vehicle already has an active trip."
+    },
+    "warehouse": {
+        "picklist_not_found": "Pick list not found.",
+        "wrong_item_scanned": "Wrong item scanned. Expected '{{expected}}', got '{{scanned}}'.",
+        "pack_already_sealed": "This pack has already been sealed.",
+        "cannot_modify_sealed": "Cannot modify a sealed pack.",
+        "quantity_exceeds_requested": "Picked quantity exceeds the requested amount.",
+        "substitution_shortage_only": "Can only substitute SHORTAGE items.",
+        "substitution_same_sku": "Cannot substitute with the same SKU.",
+        "substitution_pending": "A pending substitution already exists for this item."
+    },
+    "accounting": {
+        "period_closed": "Cannot post to a closed accounting period.",
+        "unbalanced_entry": "Journal entry is unbalanced. Debits ({{debits}}) must equal Credits ({{credits}}).",
+        "entry_already_posted": "This journal entry has already been posted.",
+        "entry_already_reversed": "This journal entry has already been reversed.",
+        "reversal_reason_required": "A reason is required to reverse a journal entry.",
+        "account_not_found": "Chart of account with code '{{code}}' not found.",
+        "entry_not_posted": "Cannot reverse an unposted entry. Delete it instead.",
+        "report_already_generated": "Report has already been generated for this period."
+    },
+    "procurement": {
+        "po_not_editable": "Purchase order is not in an editable state.",
+        "po_already_received": "This purchase order has already been received.",
+        "receive_quantity_exceeded": "Received quantity exceeds the ordered amount.",
+        "return_quantity_exceeded": "Return quantity exceeds the received amount.",
+        "po_not_received": "Purchase order must be in RECEIVED status to process a return.",
+        "receive_exceeds_ordered": "Cannot receive more than the ordered quantity."
+    },
+    "payments": {
+        "stripe_failed": "Payment processing failed. Please try again."
+    },
+    "tenant": {
+        "already_suspended": "This tenant is already suspended.",
+        "already_active": "This tenant is already active.",
+        "language_not_supported": "Language '{{language}}' is not in the supported languages list.",
+        "default_must_be_supported": "Default language must be in the supported languages list."
+    },
+    "fsm": {
+        "invalid_transition": "Invalid state transition for {{entity}} ({{id}}): '{{from}}' → '{{to}}' is not allowed."
+    },
+    "plan": {
+        "limit_exceeded": "Plan limit exceeded for {{limit}}. Please upgrade your plan.",
+        "feature_disabled": "The feature '{{feature}}' is not available in your current plan. Please upgrade."
+    }
+}
