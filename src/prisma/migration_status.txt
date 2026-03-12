@@ -1,0 +1,2 @@
+Environment variables loaded from ..\..\.env
+Error: Could not load `--schema` from provided path `src\prisma\schema.prisma`: file or directory not found
