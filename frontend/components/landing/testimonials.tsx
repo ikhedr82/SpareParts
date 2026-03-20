@@ -15,34 +15,34 @@ export const Testimonials = () => {
 
   const fallbackTestimonials = [
     {
-      authorName: t("landing.testimonials.author1"),
-      authorNameAr: t("landing.testimonials.author1"),
+      author: t("landing.testimonials.author1"),
+      authorAr: t("landing.testimonials.author1"),
       role: t("landing.testimonials.role1"),
       roleAr: t("landing.testimonials.role1"),
       company: "Partivo Client",
       companyAr: "عميل بارتيفو",
-      content: t("landing.testimonials.quote1"),
-      contentAr: t("landing.testimonials.quote1"),
+      quote: t("landing.testimonials.quote1"),
+      quoteAr: t("landing.testimonials.quote1"),
     },
     {
-      authorName: t("landing.testimonials.author2"),
-      authorNameAr: t("landing.testimonials.author2"),
+      author: t("landing.testimonials.author2"),
+      authorAr: t("landing.testimonials.author2"),
       role: t("landing.testimonials.role2"),
       roleAr: t("landing.testimonials.role2"),
       company: "Fleet Manager",
       companyAr: "مدير أسطول",
-      content: t("landing.testimonials.quote2"),
-      contentAr: t("landing.testimonials.quote2"),
+      quote: t("landing.testimonials.quote2"),
+      quoteAr: t("landing.testimonials.quote2"),
     },
     {
-      authorName: t("landing.testimonials.author3"),
-      authorNameAr: t("landing.testimonials.author3"),
+      author: t("landing.testimonials.author3"),
+      authorAr: t("landing.testimonials.author3"),
       role: t("landing.testimonials.role3"),
       roleAr: t("landing.testimonials.role3"),
       company: "Retail Owner",
       companyAr: "صاحب متجر",
-      content: t("landing.testimonials.quote3"),
-      contentAr: t("landing.testimonials.quote3"),
+      quote: t("landing.testimonials.quote3"),
+      quoteAr: t("landing.testimonials.quote3"),
     },
   ];
 
@@ -77,10 +77,10 @@ export const Testimonials = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {displayTestimonials.slice(0, 3).map((item: any, index: number) => {
-          const author = isAr ? (item.authorNameAr || item.authorName) : item.authorName;
+          const author = isAr ? (item.authorAr || item.author) : item.author;
           const role = isAr ? (item.roleAr || item.role) : item.role;
           const company = isAr ? (item.companyAr || item.company) : item.company;
-          const content = isAr ? (item.contentAr || item.content) : item.content;
+          const content = isAr ? (item.quoteAr || item.quote) : item.quote;
 
           return (
             <motion.div
@@ -96,14 +96,14 @@ export const Testimonials = () => {
                 &quot;{content}&quot;
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20">
-                  {author[0]}
+                <div className="w-12 h-12 flex-shrink-0 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20">
+                  {author ? author[0] : '?'}
                 </div>
                 <div className="text-start rtl:text-right">
                   <h4 className="font-bold text-white text-lg leading-tight">
-                    {author}
+                    {author || 'Anonymous'}
                   </h4>
-                  <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1">
+                  <p className="text-[10px] text-slate-500 font-black uppercase tracking-widest mt-1 line-clamp-1">
                     {role} @ {company}
                   </p>
                 </div>
