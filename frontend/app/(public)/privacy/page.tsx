@@ -3,10 +3,30 @@
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { Section } from "@/components/landing/section";
 import { motion } from "framer-motion";
+import { useCMSLegal } from "@/lib/hooks/use-cms-content";
 
 export default function PrivacyPage() {
   const { t, language } = useLanguage();
   const isAr = language === 'ar';
+  const { data: legal, isLoading } = useCMSLegal('privacy');
+
+  const title = isAr ? (legal?.titleAr || 'سياسة الخصوصية') : (legal?.titleEn || 'Privacy Policy');
+  const content = isAr ? (legal?.contentAr || 'Content is being updated...') : (legal?.contentEn || 'Content is being updated...');
+
+  if (isLoading) {
+      return (
+          <Section id="privacy" className="py-32 bg-slate-950 text-white min-h-screen">
+              <div className="max-w-4xl mx-auto px-4 animate-pulse">
+                  <div className="h-12 w-64 bg-slate-800 rounded-xl mb-12" />
+                  <div className="space-y-6">
+                      <div className="h-6 w-full bg-slate-800 rounded-lg" />
+                      <div className="h-6 w-full bg-slate-800 rounded-lg" />
+                      <div className="h-6 w-3/4 bg-slate-800 rounded-lg" />
+                  </div>
+              </div>
+          </Section>
+      );
+  }
 
   return (
     <Section id="privacy" className="py-32 bg-slate-950 text-white min-h-screen">
@@ -17,46 +37,14 @@ export default function PrivacyPage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-6xl font-black mb-12 tracking-tight text-white leading-tight">
-            {t("landing.nav.privacy")}
+            {title}
           </h1>
           
-          <div className="space-y-12 text-slate-400 leading-relaxed text-lg" dir="auto">
-            <section>
-              <h2 className="text-2xl font-bold text-blue-400 mb-4">{isAr ? "نظرة عامة" : "Overview"}</h2>
-              <p>
-                {isAr 
-                  ? "تلتزم منصة بارتيفو (Partivo) بحماية خصوصيتك وضمان أمن بياناتك. توضح هذه السياسة كيفية جمعنا واستخدامنا وحماية بياناتك كتاجر أو مستخدم للمنصة."
-                  : "Partivo Commerce Platform is committed to protecting your privacy and ensuring the security of your data. This policy outlines how we collect, use, and safeguard your data as a merchant or platform user."}
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-blue-400 mb-4">{isAr ? "البيانات التي نجمعها" : "Data We Collect"}</h2>
-              <p>
-                {isAr
-                  ? "نجمع المعلومات اللازمة لتقديم خدمات السحابية لتجارة قطع الغيار، بما في ذلك بيانات الاتصال، معلومات التسجيل الضريبي، وبيانات المخزون والمبيعات."
-                  : "We collect information necessary to provide cloud-based spare parts commerce services, including contact details, tax registration information, and inventory/sales data."}
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-blue-400 mb-4">{isAr ? "أمن البيانات وعزلها" : "Data Security & Isolation"}</h2>
-              <p>
-                {isAr
-                  ? "يتم تخزين جميع بيانات المستأجرين في بيئات معزولة منطقياً لضمان عدم تداخل البيانات بين التجار. نستخدم تشفير SSL للبيانات أثناء الانتقال والتشفير للبيانات المخزنة."
-                  : "All tenant data is stored in logically isolated environments to ensure no data crossover between merchants. We use SSL encryption for data in transit and AES encryption for data at rest."}
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-blue-400 mb-4">{isAr ? "الامتثال للقوانين" : "Legal Compliance"}</h2>
-              <p>
-                {isAr
-                  ? "نلتزم بقوانين حماية البيانات في دولة الإمارات العربية المتحدة والمعايير الدولية (GDPR) لضمان أعلى مستويات الخصوصية لمستخدمينا."
-                  : "We comply with UAE data protection laws and international standards (GDPR) to ensure the highest levels of privacy for our users."}
-              </p>
-            </section>
-          </div>
+          <div 
+            className="prose prose-invert prose-lg max-w-none text-slate-300 leading-relaxed font-medium"
+            dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br/>') }}
+            dir="auto"
+          />
         </motion.div>
       </div>
     </Section>
