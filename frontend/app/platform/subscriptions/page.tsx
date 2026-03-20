@@ -9,6 +9,7 @@ import { SkeletonTable, EmptyState, DataTable, StatusBadge } from '@/components/
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
 import { formatDate, formatCurrency } from '@/lib/formatters';
 import {
@@ -231,7 +232,7 @@ export default function PlatformSubscriptionsPage() {
                                         <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl hover:bg-slate-50">
                                             <MoreHorizontal className="h-5 w-5 text-slate-400" />
                                         </Button>
-                                        <div className={`absolute ${isRtl ? 'left-0' : 'right-0'} bottom-full mb-2 z-20 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2 w-56 hidden group-focus-within/actions:block hover:block`}>
+                                        <div className={`absolute ${isRtl ? 'left-0' : 'right-0'} top-full mt-2 z-50 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2 w-56 hidden group-focus-within/actions:block hover:block`}>
                                             <button
                                                 onClick={() => { setSelectedSubscription(sub); setModalMode('force_renewal'); }}
                                                 className="w-full text-start px-5 py-3 text-xs font-black text-slate-700 hover:bg-slate-50 flex items-center gap-3 uppercase tracking-widest"
@@ -316,25 +317,30 @@ export default function PlatformSubscriptionsPage() {
                             </div>
                         </div>
                         <form onSubmit={e => { e.preventDefault(); overrideMutation.mutate({ id: selectedSubscription.id, data: overrideForm }); }} className="space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Next Billing Date</label>
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.subscriptions.form_next_billing') || 'Next Billing Date'}
+                                </Label>
                                 <Input
                                     type="date"
                                     required
                                     value={overrideForm.nextBillingDate}
                                     onChange={e => setOverrideForm(f => ({ ...f, nextBillingDate: e.target.value }))}
-                                    className="rounded-2xl h-12 border-slate-200 font-semibold"
+                                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Billing Cycle</label>
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.subscriptions.form_cycle') || 'Billing Cycle'}
+                                </Label>
                                 <select
+                                    required
                                     value={overrideForm.billingCycle}
                                     onChange={e => setOverrideForm(f => ({ ...f, billingCycle: e.target.value as any }))}
-                                    className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none font-semibold text-sm bg-white"
+                                    className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
                                 >
-                                    <option value="MONTHLY">Monthly</option>
-                                    <option value="YEARLY">Yearly</option>
+                                    <option value="MONTHLY">{t('common.monthly')}</option>
+                                    <option value="YEARLY">{t('common.yearly')}</option>
                                 </select>
                             </div>
                             <div className="flex gap-4 pt-4">
@@ -362,15 +368,17 @@ export default function PlatformSubscriptionsPage() {
                             </div>
                         </div>
                         <form onSubmit={e => { e.preventDefault(); changePlanMutation.mutate({ tenantId: selectedSubscription.tenantId, planId: selectedPlanId }); }} className="space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Select Plan</label>
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.subscriptions.form_select_plan') || 'Select Strategy'}
+                                </Label>
                                 <select
                                     required
                                     value={selectedPlanId}
                                     onChange={e => setSelectedPlanId(e.target.value)}
-                                    className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none font-semibold text-sm bg-white transition-all focus:ring-2 focus:ring-indigo-100"
+                                    className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
                                 >
-                                    <option value="">Choose a plan...</option>
+                                    <option value="">{t('platform.subscriptions.choose_plan') || 'Select Strategy'}</option>
                                     {plans?.map(p => (
                                         <option key={p.id} value={p.id}>{p.name}</option>
                                     ))}

@@ -14,7 +14,9 @@ export class PublicInventoryService {
         brandId?: string,
         search?: string,
     ) {
-        const skip = (page - 1) * limit;
+        const parsedPage = Number(page);
+        const parsedLimit = Number(limit);
+        const skip = (parsedPage - 1) * parsedLimit;
         const where: any = {
             tenantId,
             quantity: { gt: 0 }, // Initial filter
@@ -69,7 +71,7 @@ export class PublicInventoryService {
                     { product: { name: 'asc' } },
                 ],
                 skip,
-                take: limit,
+                take: parsedLimit,
             }),
             this.prisma.inventory.count({ where }),
         ]);
@@ -84,10 +86,10 @@ export class PublicInventoryService {
         return {
             items: availableItems,
             pagination: {
-                page,
-                limit,
+                page: parsedPage,
+                limit: parsedLimit,
                 total: total, // Approximate total (includes allocated-only items)
-                totalPages: Math.ceil(total / limit),
+                totalPages: Math.ceil(total / parsedLimit),
             },
         };
     }
@@ -140,6 +142,7 @@ export class PublicInventoryService {
     }
 
     async search(tenantId: string, query: string, limit: number = 20) {
+        const parsedLimit = Number(limit);
         const products = await this.prisma.inventory.findMany({
             where: {
                 tenantId,
@@ -164,7 +167,7 @@ export class PublicInventoryService {
                     },
                 },
             },
-            take: limit,
+            take: parsedLimit,
             distinct: ['productId'],
         });
 

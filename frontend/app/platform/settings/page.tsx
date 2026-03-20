@@ -122,35 +122,37 @@ export default function SettingsPage() {
                             </DialogTitle>
                         </DialogHeader>
                         <div className={`space-y-6 pt-4 ${isRtl ? 'text-right' : 'text-left'}`}>
-                            <div className="space-y-2">
-                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                                    {t('platform.settings.key')}
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.settings.key') || 'Configuration Token'}
                                 </Label>
                                 <Input
                                     placeholder="CONFIG_KEY"
-                                    className="font-mono uppercase transition-all focus:ring-2 focus:ring-slate-900"
+                                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-slate-900 transition-all font-mono font-bold uppercase"
                                     value={newConfig.key}
                                     onChange={(e) => setNewConfig({ ...newConfig, key: e.target.value.toUpperCase() })}
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                                    {t('platform.settings.value')}
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.settings.value') || 'Configuration Value'}
                                 </Label>
                                 <Input
                                     placeholder={t('platform.settings.value') + "..."}
                                     value={newConfig.value}
                                     onChange={(e) => setNewConfig({ ...newConfig, value: e.target.value })}
+                                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-slate-900 transition-all font-semibold"
                                 />
                             </div>
-                            <div className="space-y-2">
-                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                                    {t('platform.settings.type')}
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.settings.type') || 'Data Archetype'}
                                 </Label>
                                 <Input
                                     placeholder="STRING, NUMBER, JSON..."
                                     value={newConfig.type}
                                     onChange={(e) => setNewConfig({ ...newConfig, type: e.target.value.toUpperCase() })}
+                                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-slate-900 transition-all font-bold uppercase"
                                 />
                             </div>
                         </div>

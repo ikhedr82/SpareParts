@@ -44,4 +44,28 @@ export class UsageTrackingService {
             this.recordMetric(tenantId, 'ORDERS', usage.orders),
         ]);
     }
+
+    async checkLimit(tenantId: string, limitKey: string): Promise<boolean> {
+        const tenant = await this.prisma.tenant.findUnique({
+            where: { id: tenantId },
+            include: { plan: true },
+        });
+
+        if (!tenant || !tenant.plan) return true;
+
+        const limits = tenant.plan.limits as any;
+        const limitValue = limits?.[limitKey];
+
+        if (limitValue === undefined || limitValue === null) return true;
+
+        const usage = await this.getUsage(tenantId);
+        const usageMap: Record<string, number> = {
+            maxUsers: usage.users,
+            maxBranches: usage.branches,
+            maxProducts: usage.products,
+            maxOrdersPerMonth: usage.orders,
+        };
+
+        return (usageMap[limitKey] || 0) < limitValue;
+    }
 }

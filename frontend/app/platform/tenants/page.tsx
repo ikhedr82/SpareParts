@@ -15,6 +15,7 @@ import { SkeletonTable, EmptyState, DataTable, StatusBadge } from '@/components/
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@/components/ui/card';
 import { formatCurrency, formatDate } from '@/lib/formatters';
 import Link from 'next/link';
@@ -401,7 +402,7 @@ export default function PlatformTenantsPage() {
                                         <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl hover:bg-slate-50">
                                             <MoreHorizontal className="h-5 w-5 text-slate-400" />
                                         </Button>
-                                        <div className={`absolute ${isRtl ? 'left-0' : 'right-0'} bottom-full mb-2 z-20 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2 w-56 hidden group-focus-within/menu:block hover:block`}>
+                                        <div className={`absolute ${isRtl ? 'left-0' : 'right-0'} top-full mt-2 z-50 bg-white border border-slate-100 rounded-2xl shadow-2xl py-2 w-56 hidden group-focus-within/menu:block hover:block`}>
                                             <button onClick={() => { setSelectedTenant(tenant); setEditForm({ name: tenant.name, billingEmail: tenant.billingEmail || '' }); setModalMode('edit'); }} className="w-full text-start px-5 py-3 text-xs font-black text-slate-700 hover:bg-slate-50 flex items-center gap-3 uppercase tracking-widest">
                                                 <MoreHorizontal className="h-4 w-4 text-slate-400" /> {t('common.edit') || 'Edit Profile'}
                                             </button>
@@ -454,31 +455,48 @@ export default function PlatformTenantsPage() {
                             </div>
                         </CardHeader>
                         <form onSubmit={e => { e.preventDefault(); createMutation.mutate(createForm); }} className="p-8 space-y-6">
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.tenants.tenant_name_label')}</label>
-                                    <Input required value={createForm.name} onChange={e => setCreateForm(f => ({ ...f, name: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.tenants.form_name')}
+                                    </Label>
+                                    <Input
+                                        required
+                                        value={createForm.name}
+                                        onChange={(e) => setCreateForm({ ...createForm, name: e.target.value })}
+                                        className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
+                                        placeholder="e.g. Global Logistics"
+                                    />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.tenants.subdomain_label')}</label>
-                                    <div className="flex">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.tenants.form_subdomain')}
+                                    </Label>
+                                    <div className="relative group">
                                         <Input
                                             required
                                             value={createForm.subdomain}
-                                            onChange={e => setCreateForm(f => ({ ...f, subdomain: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '') }))}
-                                            className={`${isRtl ? 'rounded-e-2xl border-e-0' : 'rounded-s-2xl border-s-0'} h-12 border-slate-200 font-semibold flex-1`}
+                                            onChange={(e) => setCreateForm({ ...createForm, subdomain: e.target.value.toLowerCase().replace(/[^a-z0-9]/g, '') })}
+                                            className={`h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold ${isRtl ? 'pl-24' : 'pr-24'}`}
+                                            placeholder="subdomain"
                                         />
-                                        <div className={`h-12 flex items-center px-4 bg-slate-50 border border-slate-200 ${isRtl ? 'rounded-s-2xl border-s-0' : 'rounded-e-2xl border-l-0'} text-[10px] font-black text-slate-400 tracking-widest uppercase`}>.partivo.net</div>
+                                        <div className={`absolute ${isRtl ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 text-xs font-black text-slate-400 group-focus-within:text-indigo-500 transition-colors`}>
+                                            .partivo.com
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Monetization Blueprint</label>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.tenants.form_plan')}
+                                    </Label>
                                     <select
+                                        required
                                         value={createForm.planId}
                                         onChange={e => setCreateForm(f => ({ ...f, planId: e.target.value }))}
-                                        className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-100 font-semibold text-sm bg-white"
+                                        className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
                                     >
                                         <option value="">{t('platform.tenants.select_plan')}</option>
                                         {plans?.map(p => (
@@ -486,12 +504,15 @@ export default function PlatformTenantsPage() {
                                         ))}
                                     </select>
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Settlement Currency</label>
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.tenants.form_currency')}
+                                    </Label>
                                     <select
+                                        required
                                         value={createForm.baseCurrency}
                                         onChange={e => setCreateForm(f => ({ ...f, baseCurrency: e.target.value }))}
-                                        className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-100 font-semibold text-sm bg-white"
+                                        className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
                                     >
                                         {currencies?.map(c => (
                                             <option key={c.code} value={c.code}>{c.code} - {c.name}</option>
@@ -499,16 +520,22 @@ export default function PlatformTenantsPage() {
                                     </select>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Administrative Vector (Email)</label>
-                                    <Input type="email" required value={createForm.adminEmail} onChange={e => setCreateForm(f => ({ ...f, adminEmail: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.tenants.form_owner_email')}
+                                    </Label>
+                                    <Input type="email" required value={createForm.adminEmail} onChange={e => setCreateForm(f => ({ ...f, adminEmail: e.target.value }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Access Key (Password)</label>
-                                    <Input type="password" required minLength={8} value={createForm.adminPassword} onChange={e => setCreateForm(f => ({ ...f, adminPassword: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.tenants.form_owner_password')}
+                                    </Label>
+                                    <Input type="password" required minLength={8} value={createForm.adminPassword} onChange={e => setCreateForm(f => ({ ...f, adminPassword: e.target.value }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                                 </div>
                             </div>
+
                             <div className="flex gap-4 pt-6">
                                 <Button type="button" variant="outline" onClick={closeModal} className="flex-1 h-14 rounded-2xl border-slate-200 font-black uppercase tracking-widest">{t('common.cancel')}</Button>
                                 <Button
@@ -599,18 +626,18 @@ export default function PlatformTenantsPage() {
                                 <Building2 className="h-8 w-8 text-indigo-600" />
                             </div>
                             <div>
-                                <h3 className="text-2xl font-black text-slate-900 tracking-tight">Edit Identity</h3>
+                                <h3 className="text-2xl font-black text-slate-900 tracking-tight">{t('platform.tenants.edit_identity')}</h3>
                                 <p className="text-slate-400 font-bold text-sm uppercase tracking-tighter">{selectedTenant.subdomain}</p>
                             </div>
                         </div>
                         <form onSubmit={e => { e.preventDefault(); if (selectedTenant) updateMutation.mutate({ tenantId: selectedTenant.id, data: editForm }); }} className="space-y-6">
                             <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Entity Name</label>
+                                <Label className="text-xs font-black text-slate-400 uppercase tracking-widest" required>{t('platform.tenants.entity_name')}</Label>
                                 <Input required value={editForm.name} onChange={e => setEditForm(f => ({ ...f, name: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Billing Email</label>
-                                <Input type="email" value={editForm.billingEmail} onChange={e => setEditForm(f => ({ ...f, billingEmail: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+                                <Label className="text-xs font-black text-slate-400 uppercase tracking-widest" required>{t('platform.tenants.billing_email')}</Label>
+                                <Input type="email" required value={editForm.billingEmail} onChange={e => setEditForm(f => ({ ...f, billingEmail: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
                             </div>
                             <div className="flex gap-4 pt-4">
                                 <Button type="button" variant="outline" onClick={closeModal} className="flex-1 h-14 rounded-2xl border-slate-200 font-black uppercase tracking-widest">{t('common.cancel')}</Button>
@@ -632,12 +659,12 @@ export default function PlatformTenantsPage() {
                                 <X className="h-8 w-8" />
                             </div>
                             <div>
-                                <h3 className="text-2xl font-black tracking-tight">Terminate Node</h3>
+                                <h3 className="text-2xl font-black tracking-tight">{t('platform.tenants.terminate_node')}</h3>
                                 <p className="text-rose-400 font-bold text-sm uppercase tracking-tighter">{selectedTenant.name}</p>
                             </div>
                         </div>
                         <p className="text-slate-600 text-sm font-medium mb-8 leading-relaxed">
-                            WARNING: This action initiates permanent decommissioning of the ecosystem node. This is a non-reversible terminal operation.
+                            {t('platform.tenants.termination_warning')}
                         </p>
                         <div className="flex gap-4">
                             <Button variant="outline" onClick={closeModal} className="flex-1 h-14 rounded-2xl border-slate-200 font-black uppercase tracking-widest">{t('common.cancel')}</Button>
@@ -647,7 +674,7 @@ export default function PlatformTenantsPage() {
                                 className="flex-1 h-14 rounded-2xl bg-slate-900 hover:bg-black text-white font-black uppercase tracking-widest shadow-2xl transition-all flex items-center justify-center gap-2"
                             >
                                 {deleteMutation.isPending && <Loader2 className="h-5 w-5 animate-spin" />}
-                                Confirm Termination
+                                {t('platform.tenants.confirm_termination')}
                             </button>
                         </div>
                     </Card>

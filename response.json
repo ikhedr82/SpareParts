@@ -1,0 +1,52 @@
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+*   Trying 127.0.0.1:3000...
+* Connected to localhost (127.0.0.1) port 3000
+* using HTTP/1.x
+> POST /api/platform/tenants HTTP/1.1
+
+> Host: localhost:3000
+
+> User-Agent: curl/8.13.0
+
+> Accept: */*
+
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZGFmNzY2Yi1iMjcyLTRhYmQtODdiMS1lMTM0ZTdjY2M0NjQiLCJlbWFpbCI6InBsYXRmb3JtQGFkbWluLmNvbSIsInRlbmFudElkIjpudWxsLCJicmFuY2hJZCI6bnVsbCwicm9sZXMiOlsiUExBVEZPUk1fU1VQRVJfQURNSU4iXSwiaXNQbGF0Zm9ybVVzZXIiOnRydWUsImlhdCI6MTc3MzUyNjIxMiwiZXhwIjoxNzczNTI5ODEyfQ.zGTVIAHLpDGsfdQbAfc-iR8QhkmLn5V2yfs0iH1Q_40
+
+> Content-Type: application/json
+
+> Content-Length: 337
+
+> 
+
+} [337 bytes data]
+* upload completely sent off: 337 bytes
+< HTTP/1.1 500 Internal Server Error
+
+< X-Powered-By: Express
+
+< Access-Control-Allow-Origin: *
+
+< X-Correlation-ID: 89708013-3f4a-42cc-bf83-646d654425d1
+
+< X-Language: EN
+
+< Content-Type: application/json; charset=utf-8
+
+< Content-Length: 52
+
+< ETag: W/"34-rlKccw1E+/fV8niQk4oFitDfPro"
+
+< Date: Sat, 14 Mar 2026 22:10:13 GMT
+
+< Connection: keep-alive
+
+< Keep-Alive: timeout=5
+
+< 
+
+{ [52 bytes data]
+* Connection #0 to host localhost left intact
+{"statusCode":500,"message":"Internal server error"}

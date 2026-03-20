@@ -168,14 +168,14 @@ export class OnboardingService {
                         logistics: false,
                     },
                     limits: {
-                        maxUsers: 2,
-                        maxBranches: 1,
-                        maxProducts: 100,
-                        maxOrdersPerMonth: 500,
+                        maxUsers: 5, // Increased from 2 for better free trial experience
+                        maxBranches: 2, // Increased from 1
+                        maxProducts: 500, // Increased from 100
+                        maxOrdersPerMonth: 1000, // Increased from 500
                     },
                 },
             });
-            this.logger.log('[Onboarding] Created default FREE plan');
+            this.logger.log('[Onboarding] Created default FREE plan with updated limits');
         }
 
         return freePlan;

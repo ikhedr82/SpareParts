@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import {
     Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter
 } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import { SkeletonTable, EmptyState, DataTable, StatusBadge } from '@/components/ui-harden';
 import { formatCurrency } from '@/lib/formatters';
 
@@ -269,82 +270,117 @@ export default function PlatformPlansPage() {
                             if (modalMode === 'create') createMutation.mutate(form);
                             else if (selectedPlan) updateMutation.mutate({ id: selectedPlan.id, dto: form });
                         }} className="p-8 space-y-6">
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_name')}</label>
-                                    <Input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-medium" />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_currency')}</label>
-                                    <Input required value={form.currency} onChange={e => setForm(f => ({ ...f, currency: e.target.value.toUpperCase() }))} className="rounded-2xl h-12 border-slate-200 font-medium" />
-                                </div>
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.plans.form_name')}
+                                </Label>
+                                <Input
+                                    required
+                                    value={form.name}
+                                    onChange={e => setForm({ ...form, name: e.target.value })}
+                                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
+                                    placeholder="e.g. Enterprise Node"
+                                />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_price')}</label>
-                                    <Input type="number" step="0.01" required value={form.price} onChange={e => setForm(f => ({ ...f, price: parseFloat(e.target.value) }))} className="rounded-2xl h-12 border-slate-200 font-medium" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.plans.form_price')}
+                                    </Label>
+                                    <Input
+                                        type="number"
+                                        required
+                                        value={form.price}
+                                        onChange={e => setForm({ ...form, price: Number(e.target.value) })}
+                                        className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
+                                    />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_cycle')}</label>
-                                    <select value={form.billingCycle} onChange={e => setForm(f => ({ ...f, billingCycle: e.target.value as any }))} className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-100 transition-all text-sm font-semibold bg-white">
-                                        <option value="MONTHLY">{t('common.monthly')}</option>
-                                        <option value="YEARLY">{t('common.yearly')}</option>
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.plans.form_currency')}
+                                    </Label>
+                                    <select
+                                        required
+                                        value={form.currency}
+                                        onChange={e => setForm({ ...form, currency: e.target.value })}
+                                        className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
+                                    >
+                                        <option value="USD">USD</option>
+                                        <option value="SAR">SAR</option>
+                                        <option value="EGP">EGP</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_users')}</label>
-                                    <Input type="number" required value={form.maxUsers} onChange={e => setForm(f => ({ ...f, maxUsers: parseInt(e.target.value) }))} className="rounded-2xl h-12 border-slate-200 font-medium" />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.plans.form_users')}
+                                    </Label>
+                                    <Input
+                                        type="number"
+                                        required
+                                        value={form.maxUsers}
+                                        onChange={e => setForm({ ...form, maxUsers: Number(e.target.value) })}
+                                        className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
+                                    />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_branches')}</label>
-                                    <Input type="number" required value={form.maxBranches} onChange={e => setForm(f => ({ ...f, maxBranches: parseInt(e.target.value) }))} className="rounded-2xl h-12 border-slate-200 font-medium" />
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.plans.form_branches')}
+                                    </Label>
+                                    <Input
+                                        type="number"
+                                        required
+                                        value={form.maxBranches}
+                                        onChange={e => setForm({ ...form, maxBranches: Number(e.target.value) })}
+                                        className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
+                                    />
                                 </div>
                             </div>
 
                             <div className="space-y-4">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.plans.form_features')}</label>
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                    {t('platform.plans.form_features')}
+                                </Label>
                                 <div className="flex gap-2">
                                     <Input
                                         value={featureInput}
                                         onChange={e => setFeatureInput(e.target.value)}
-                                        onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addFeature())}
-                                        placeholder={t('platform.plans.feature_placeholder')}
-                                        className="rounded-2xl h-12 border-slate-200"
+                                        onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); if (featureInput.trim()) { setForm({ ...form, features: [...(form.features || []), featureInput.trim()] }); setFeatureInput(''); } } }}
+                                        placeholder={t('platform.plans.add_feature_placeholder')}
+                                        className="h-12 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold px-4"
                                     />
-                                    <Button type="button" onClick={addFeature} className="rounded-2xl h-12 w-12 bg-slate-100 text-slate-600 hover:bg-slate-200 p-0 shadow-none border-none">
-                                        <Plus className="h-6 w-6" />
+                                    <Button
+                                        type="button"
+                                        onClick={() => { if (featureInput.trim()) { setForm({ ...form, features: [...(form.features || []), featureInput.trim()] }); setFeatureInput(''); } }}
+                                        className="h-12 w-12 rounded-2xl bg-indigo-50 text-indigo-600 hover:bg-indigo-100 border-none p-0 transition-all"
+                                    >
+                                        <Plus className="h-5 w-5" />
                                     </Button>
                                 </div>
-                                <div className="flex flex-wrap gap-2">
-                                    {form.features?.map((feat, i) => (
-                                        <Badge key={i} className="px-3 py-1.5 flex items-center gap-2 rounded-xl bg-indigo-50 text-indigo-700 border-none font-bold text-[10px] tracking-widest uppercase">
+                                <div className="flex flex-wrap gap-2 mt-2">
+                                    {form.features?.map((feat, idx) => (
+                                        <Badge key={idx} variant="secondary" className="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-600 border-none font-bold text-[10px] tracking-widest uppercase flex items-center gap-2">
                                             {feat}
-                                            <X className={`h-3 w-3 cursor-pointer text-indigo-400 hover:text-indigo-600 ${isRtl ? 'mr-1' : ''}`} onClick={() => removeFeature(i)} />
+                                            <button type="button" onClick={() => setForm({ ...form, features: form.features?.filter((_, i) => i !== idx) })} className="hover:text-rose-500 transition-colors">
+                                                <X className="h-3 w-3" />
+                                            </button>
                                         </Badge>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                <input
-                                    type="checkbox"
-                                    className="h-5 w-5 rounded-lg border-slate-300 text-indigo-600 focus:ring-indigo-100 cursor-pointer"
-                                    checked={form.isActive}
-                                    onChange={e => setForm(f => ({ ...f, isActive: e.target.checked }))}
-                                    id="isActive"
-                                />
-                                <label htmlFor="isActive" className="text-sm font-bold text-slate-700 cursor-pointer">{t('platform.plans.active_toggle')}</label>
-                            </div>
-
-                            <div className="flex gap-4 pt-4">
-                                <Button type="button" variant="outline" onClick={closeModal} className="flex-1 rounded-2xl font-black h-12 border-slate-200">{t('common.cancel') || 'Abort'}</Button>
-                                <Button type="submit" disabled={createMutation.isPending || updateMutation.isPending} className="flex-1 rounded-2xl bg-indigo-600 text-white font-black h-12 shadow-xl shadow-indigo-100 active:scale-95 transition-all">
-                                    {(createMutation.isPending || updateMutation.isPending) && <Loader2 className="h-5 w-5 mr-2 animate-spin" />}
-                                    {t('common.save') || 'Commit Parameters'}
+                            <div className="flex gap-4 pt-6">
+                                <Button type="button" variant="outline" onClick={closeModal} className="flex-1 h-14 rounded-2xl border-slate-200 font-black uppercase tracking-widest">{t('common.cancel')}</Button>
+                                <Button
+                                    type="submit"
+                                    disabled={createMutation.isPending || updateMutation.isPending}
+                                    className="flex-1 h-14 rounded-2xl bg-indigo-600 text-white font-black uppercase tracking-widest shadow-2xl shadow-indigo-100 active:scale-95 transition-all"
+                                >
+                                    {(createMutation.isPending || updateMutation.isPending) && <Loader2 className={`h-5 w-5 ${isRtl ? 'ml-3' : 'mr-3'} animate-spin`} />}
+                                    {t('common.save')}
                                 </Button>
                             </div>
                         </form>

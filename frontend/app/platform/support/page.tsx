@@ -12,6 +12,7 @@ import { useToast } from '@/components/toast';
 import { SkeletonTable, EmptyState, DataTable, StatusBadge } from '@/components/ui-harden';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { formatDate } from '@/lib/formatters';
@@ -238,22 +239,26 @@ export default function PlatformSupportPage() {
                         </CardHeader>
 
                         <form onSubmit={(e) => { e.preventDefault(); createMutation.mutate(createForm); }} className="p-8 space-y-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.support.form_subject')}</label>
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.support.form_subject')}
+                                </Label>
                                 <Input
                                     required
                                     value={createForm.subject}
                                     onChange={e => setCreateForm(f => ({ ...f, subject: e.target.value }))}
                                     placeholder={t('platform.support.subject_placeholder')}
-                                    className="rounded-2xl h-12 border-slate-200 font-medium"
+                                    className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold"
                                 />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.support.form_tenant')}</label>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                        {t('platform.support.form_tenant')}
+                                    </Label>
                                     <select
-                                        className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-100 transition-all text-sm font-semibold bg-white"
+                                        className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
                                         value={createForm.tenantId}
                                         onChange={e => setCreateForm(f => ({ ...f, tenantId: e.target.value }))}
                                     >
@@ -263,10 +268,12 @@ export default function PlatformSupportPage() {
                                         ))}
                                     </select>
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.support.form_priority')}</label>
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.support.form_priority')}
+                                    </Label>
                                     <select
-                                        className="w-full h-12 px-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-100 transition-all text-sm font-semibold bg-white"
+                                        className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none"
                                         value={createForm.priority}
                                         onChange={e => setCreateForm(f => ({ ...f, priority: e.target.value as any }))}
                                     >
@@ -278,12 +285,14 @@ export default function PlatformSupportPage() {
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">{t('platform.support.form_desc')}</label>
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.support.form_desc')}
+                                </Label>
                                 <textarea
                                     required
                                     rows={4}
-                                    className="w-full px-5 py-4 rounded-2xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-100 transition-all text-sm font-medium resize-none bg-white font-sans"
+                                    className="w-full px-5 py-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all text-sm font-semibold resize-none outline-none font-sans"
                                     value={createForm.description}
                                     onChange={e => setCreateForm(f => ({ ...f, description: e.target.value }))}
                                     placeholder={t('platform.support.desc_placeholder')}

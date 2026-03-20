@@ -1,11 +1,11 @@
-import { Inter, Noto_Sans_Arabic } from 'next/font/google'
+import { Inter, Cairo } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '@/lib/i18n/LanguageContext'
 import { ToastProvider } from '@/components/toast'
 import { QueryProvider } from '@/lib/query-provider'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const notoArabic = Noto_Sans_Arabic({ subsets: ['arabic'], variable: '--font-arabic' })
+const cairo = Cairo({ subsets: ['arabic'], variable: '--font-cairo' })
 
 export const metadata = {
   title: 'Partivo — Multi-Tenant Spare Parts Commerce',
@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className={`${inter.variable} ${notoArabic.variable}`}>
+      <body className={`${inter.variable} ${cairo.variable}`}>
         <QueryProvider>
           <LanguageProvider>
             <ToastProvider>

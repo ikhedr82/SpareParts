@@ -1,0 +1,7 @@
+Loaded Prisma config from prisma.config.ts.
+
+Prisma config detected, skipping environment variable loading.
+Error: 
+EPERM: operation not permitted, rename 'C:\Spare Parts\Project\node_modules\.prisma\client\query_engine-windows.dll.node.tmp7564' -> 'C:\Spare Parts\Project\node_modules\.prisma\client\query_engine-windows.dll.node'
+
+

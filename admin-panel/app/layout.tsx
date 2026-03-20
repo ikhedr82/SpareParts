@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { LanguageProvider, useLanguage } from '@/lib/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/language-switcher';
+import { BrandLogo } from '@/components/brand-logo';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const notoArabic = Noto_Sans_Arabic({ subsets: ['arabic'], variable: '--font-arabic' });
@@ -33,7 +34,7 @@ function PortalShell({ children }: { children: React.ReactNode }) {
       <aside className="w-64 bg-white shadow-md hidden md:flex flex-col border-e border-gray-200">
         <div className="p-5 border-b border-gray-200 flex items-center justify-between">
           <div>
-            <img src="/brand/logo.svg" alt="Partivo" className="h-8" />
+            <BrandLogo height={32} className="w-auto" />
             <p className="text-xs text-gray-400">{t('portal.subtitle')}</p>
           </div>
           <LanguageSwitcher />

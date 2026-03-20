@@ -28,6 +28,7 @@ export default function PlatformLayout({
                     <NavItem href="/platform/features" icon={Flag} label={t('platform.nav.features')} />
                     <NavItem href="/platform/settings" icon={Settings} label={t('platform.nav.settings')} />
                     <NavItem href="/platform/api-keys" icon={Key} label={t('platform.nav.api_keys')} />
+                    <NavItem href="/platform/cms" icon={Globe} label={t('platform.nav.cms')} />
                 </>
             }
         >

@@ -1059,7 +1059,7 @@ model AccountingPeriod {
 
 model AuditLog {
   id            String   @id @default(uuid())
-  tenantId      String   @map("tenant_id")
+  tenantId      String?  @map("tenant_id")
   userId        String   @map("user_id")
   action        String
   entityType    String   @map("entity_type")
@@ -1069,7 +1069,7 @@ model AuditLog {
   ipAddress     String?  @map("ip_address")
   createdAt     DateTime @default(now()) @map("created_at")
   correlationId String?  @map("correlation_id")
-  tenant        Tenant   @relation(fields: [tenantId], references: [id])
+  tenant        Tenant?  @relation(fields: [tenantId], references: [id])
   user          User     @relation(fields: [userId], references: [id])
 
   @@index([tenantId, entityType, entityId])
@@ -1682,7 +1682,7 @@ model Chargeback {
 
 model OutboxEvent {
   id            String    @id @default(uuid())
-  tenantId      String    @map("tenant_id")
+  tenantId      String?   @map("tenant_id")
   topic         String
   payload       Json
   status        String    @default("PENDING")
@@ -1690,7 +1690,7 @@ model OutboxEvent {
   correlationId String?   @map("correlation_id")
   createdAt     DateTime  @default(now()) @map("created_at")
   processedAt   DateTime? @map("processed_at")
-  tenant        Tenant    @relation(fields: [tenantId], references: [id])
+  tenant        Tenant?   @relation(fields: [tenantId], references: [id])
 
   @@index([tenantId])
   @@index([status])
@@ -2256,4 +2256,60 @@ model ApiKey {
 
   @@index([tenantId])
   @@map("api_keys")
+}
+
+model LandingTestimonial {
+  id        String   @id @default(uuid())
+  author    String
+  role      String
+  quote     String
+  company   String?
+  authorAr  String?  @map("author_ar")
+  roleAr    String?  @map("role_ar")
+  quoteAr   String?  @map("quote_ar")
+  companyAr String?  @map("company_ar")
+  avatar    String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("landing_testimonials")
+}
+
+model LandingFAQ {
+  id         String   @id @default(uuid())
+  question   String
+  answer     String
+  questionAr String?  @map("question_ar")
+  answerAr   String?  @map("answer_ar")
+  category   String?
+  order      Int      @default(0)
+  isActive   Boolean  @default(true) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("landing_faqs")
+}
+
+model LandingPageContent {
+  id        String   @id @default(uuid())
+  key       String   @unique // "hero", "features", "how-it-works", "cta", "footer"
+  contentEn Json     @map("content_en")
+  contentAr Json     @map("content_ar")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("landing_page_content")
+}
+
+model LegalContent {
+  id        String   @id @default(uuid())
+  type      String   @unique // "privacy", "terms"
+  titleEn   String   @map("title_en")
+  titleAr   String   @map("title_ar")
+  contentEn String   @map("content_en") @db.Text
+  contentAr String   @map("content_ar") @db.Text
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("legal_content")
 }

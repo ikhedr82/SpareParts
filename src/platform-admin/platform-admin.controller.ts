@@ -3,6 +3,7 @@ import { InfrastructureService } from './infrastructure.service';
 import { FeatureFlagService } from './feature-flag.service';
 import { SystemConfigService } from './system-config.service';
 import { ApiKeyService } from './api-key.service';
+import { CmsService } from './cms.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { assertPlatformAdmin } from '../auth/utils/auth-utils';
 
@@ -14,6 +15,7 @@ export class PlatformAdminController {
         private readonly featureService: FeatureFlagService,
         private readonly configService: SystemConfigService,
         private readonly apiKeyService: ApiKeyService,
+        private readonly cmsService: CmsService,
     ) { }
 
     @Get('health')
@@ -86,5 +88,81 @@ export class PlatformAdminController {
     async getApiKeyMetrics(@Param('id') id: string, @Request() req) {
         assertPlatformAdmin(req.user);
         return this.apiKeyService.getMetrics(id);
+    }
+
+    // CMS - Page Content
+    @Get('cms/content')
+    async getAllPageContent(@Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.findAllPageContent();
+    }
+
+    @Post('cms/content')
+    async upsertPageContent(@Body() data: any, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.upsertPageContent(data.key, data);
+    }
+
+    // CMS - Testimonials
+    @Get('cms/testimonials')
+    async getAllTestimonials(@Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.findAllTestimonials();
+    }
+
+    @Post('cms/testimonials')
+    async createTestimonial(@Body() data: any, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.createTestimonial(data);
+    }
+
+    @Patch('cms/testimonials/:id')
+    async updateTestimonial(@Param('id') id: string, @Body() data: any, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.updateTestimonial(id, data);
+    }
+
+    @Delete('cms/testimonials/:id')
+    async deleteTestimonial(@Param('id') id: string, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.deleteTestimonial(id);
+    }
+
+    // CMS - FAQs
+    @Get('cms/faqs')
+    async getAllFAQs(@Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.findAllFAQs();
+    }
+
+    @Post('cms/faqs')
+    async createFAQ(@Body() data: any, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.createFAQ(data);
+    }
+
+    @Patch('cms/faqs/:id')
+    async updateFAQ(@Param('id') id: string, @Body() data: any, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.updateFAQ(id, data);
+    }
+
+    @Delete('cms/faqs/:id')
+    async deleteFAQ(@Param('id') id: string, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.deleteFAQ(id);
+    }
+
+    // CMS - Legal
+    @Get('cms/legal')
+    async getAllLegal(@Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.findAllLegal();
+    }
+
+    @Post('cms/legal')
+    async upsertLegal(@Body() data: any, @Request() req) {
+        assertPlatformAdmin(req.user);
+        return this.cmsService.upsertLegal(data.type, data);
     }
 }

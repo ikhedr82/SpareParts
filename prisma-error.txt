@@ -1,0 +1,105 @@
+PrismaClientValidationError: 
+Invalid `any).auditLog.create()` invocation in
+C:\Spare Parts\Project\src\shared\audit.service.ts:42:44
+
+  39 const prisma = tx || this.prisma;
+  40 
+  41 try {
+→ 42     await (prisma as any).auditLog.create({
+           data: {
+             tenantId: null,
+             userId: "fdaf766b-b272-4abd-87b1-e134e7ccc464",
+             action: "CREATE_TENANT",
+             entityType: "Tenant",
+             entityId: "c90c8ae1-d9e8-4589-9477-567478e5f788",
+             oldValue: undefined,
+             newValue: {
+               name: "Khedr",
+               subdomain: "khedr",
+               planId: "f3c893a9-18c2-4ad9-a889-5bba59e87eca",
+               adminEmail: "admin@khedr.com",
+               languages: {
+                 default: "EN",
+                 supported: [
+                   "EN",
+                   "AR"
+                 ]
+               },
+               currencies: {
+                 base: "USD",
+                 supported: [
+                   "USD"
+                 ]
+               }
+             },
+             correlationId: null,
+             ipAddress: null,
+         +   tenant: {
+         +     create: TenantCreateWithoutAuditLogsInput | TenantUncheckedCreateWithoutAuditLogsInput,
+         +     connectOrCreate: TenantCreateOrConnectWithoutAuditLogsInput,
+         +     connect: TenantWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `tenant` is missing.
+
+{
+  "name": "PrismaClientValidationError",
+  "clientVersion": "6.19.2"
+}
+
+PrismaClientValidationError: 
+Invalid `any).auditLog.create()` invocation in
+C:\Spare Parts\Project\src\shared\audit.service.ts:42:44
+
+  39 const prisma = tx || this.prisma;
+  40 
+  41 try {
+→ 42     await (prisma as any).auditLog.create({
+           data: {
+             tenantId: null,
+             userId: "fdaf766b-b272-4abd-87b1-e134e7ccc464",
+             action: "CREATE_TENANT",
+             entityType: "Tenant",
+             entityId: "c90c8ae1-d9e8-4589-9477-567478e5f788",
+             oldValue: undefined,
+             newValue: {
+               name: "Khedr",
+               subdomain: "khedr",
+               planId: "f3c893a9-18c2-4ad9-a889-5bba59e87eca",
+               adminEmail: "admin@khedr.com",
+               languages: {
+                 default: "EN",
+                 supported: [
+                   "EN",
+                   "AR"
+                 ]
+               },
+               currencies: {
+                 base: "USD",
+                 supported: [
+                   "USD"
+                 ]
+               }
+             },
+             correlationId: null,
+             ipAddress: null,
+         +   tenant: {
+         +     create: TenantCreateWithoutAuditLogsInput | TenantUncheckedCreateWithoutAuditLogsInput,
+         +     connectOrCreate: TenantCreateOrConnectWithoutAuditLogsInput,
+         +     connect: TenantWhereUniqueInput
+         +   }
+           }
+         })
+
+Argument `tenant` is missing.
+    at throwValidationException (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\core\errorRendering\throwValidationException.ts:45:9)
+    at ei.handleRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:202:7)
+    at ei.handleAndLogRequestError (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+    at async AuditService.logAction (C:\Spare Parts\Project\src\shared\audit.service.ts:42:13)
+    at async <anonymous> (C:\Spare Parts\Project\src\tenant-admin\tenant-admin.service.ts:108:17)
+    at async Proxy._transactionWithCallback (C:\Spare Parts\Project\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:722:18)
+    at async TenantAdminService.createTenant (C:\Spare Parts\Project\src\tenant-admin\tenant-admin.service.ts:44:20)

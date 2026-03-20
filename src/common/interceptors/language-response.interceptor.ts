@@ -38,9 +38,6 @@ export class LanguageResponseInterceptor implements NestInterceptor {
         );
     }
 
-    /**
-     * Recursively walk the response and swap Arabic fields into their base counterparts.
-     */
     private localizeResponse(data: any): any {
         if (data === null || data === undefined) return data;
 
@@ -50,8 +47,17 @@ export class LanguageResponseInterceptor implements NestInterceptor {
         }
 
         // Handle Date, Decimal, and other non-plain objects
-        if (typeof data !== 'object' || data instanceof Date) {
+        if (typeof data !== 'object' || data === null || data instanceof Date) {
             return data;
+        }
+
+        // Convert Prisma Decimal to primitive Number globally to prevent React {s, e, d} crashes
+        if (typeof (data as any).toNumber === 'function') {
+            return (data as any).toNumber();
+        }
+
+        if (typeof (data as any).toJSON === 'function') {
+            return (data as any).toJSON();
         }
 
         const result: Record<string, any> = {};
@@ -71,16 +77,15 @@ export class LanguageResponseInterceptor implements NestInterceptor {
                 result[key] = (arValue && String(arValue).trim()) ? arValue : value;
             } else {
                 // Recurse into nested objects
-                result[key] = this.localizeResponse(value);
+                result[key] = typeof value === 'object' && value !== null && !(value instanceof Date) && typeof (value as any).toJSON !== 'function'
+                    ? this.localizeResponse(value)
+                    : value;
             }
         }
 
         return result;
     }
 
-    /**
-     * Strip raw Arabic fields from non-AR responses to keep payload clean.
-     */
     private stripArabicFields(data: any): any {
         if (data === null || data === undefined) return data;
 
@@ -88,8 +93,16 @@ export class LanguageResponseInterceptor implements NestInterceptor {
             return data.map((item) => this.stripArabicFields(item));
         }
 
-        if (typeof data !== 'object' || data instanceof Date) {
+        if (typeof data !== 'object' || data === null || data instanceof Date) {
             return data;
+        }
+
+        if (typeof (data as any).toNumber === 'function') {
+            return (data as any).toNumber();
+        }
+
+        if (typeof (data as any).toJSON === 'function') {
+            return (data as any).toJSON();
         }
 
         const result: Record<string, any> = {};
@@ -100,7 +113,9 @@ export class LanguageResponseInterceptor implements NestInterceptor {
                 continue;
             }
 
-            result[key] = this.stripArabicFields(value);
+            result[key] = typeof value === 'object' && value !== null && !(value instanceof Date) && typeof (value as any).toJSON !== 'function'
+                ? this.stripArabicFields(value)
+                : value;
         }
 
         return result;

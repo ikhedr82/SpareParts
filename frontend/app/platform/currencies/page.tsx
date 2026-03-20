@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent, CardDescription, CardFooter } from '@/components/ui/card';
 import { formatDate } from '@/lib/formatters';
+import { Label } from '@/components/ui/label';
 import {
     Globe, Plus, Loader2, MoreHorizontal, X, Edit, Trash2, AlertCircle, RefreshCw, ArrowRightLeft,
     TrendingUp, Coins, Search, ShieldCheck
@@ -391,21 +392,27 @@ export default function PlatformCurrenciesPage() {
                             if (modalMode === 'create') createMutation.mutate(form);
                             else if (selectedCurrency) updateMutation.mutate({ id: selectedCurrency.id, dto: form });
                         }} className="p-6 space-y-5">
-                            <div>
-                                <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('platform.currencies_manage.iso_code') || 'Currency Code (ISO)'}</label>
-                                <Input required maxLength={3} value={form.code} onChange={e => setForm(f => ({ ...f, code: e.target.value.toUpperCase() }))} placeholder="e.g. USD" className="rounded-xl h-11 uppercase" />
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.currencies_manage.iso_code') || 'Currency Code (ISO)'}
+                                </Label>
+                                <Input required maxLength={3} value={form.code} onChange={e => setForm(f => ({ ...f, code: e.target.value.toUpperCase() }))} placeholder="e.g. USD" className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold uppercase" />
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('platform.currencies_manage.name_label') || 'Currency Name'}</label>
-                                <Input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="e.g. US Dollar" className="rounded-xl h-11" />
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.currencies_manage.name_label') || 'Currency Name'}
+                                </Label>
+                                <Input required value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="e.g. US Dollar" className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('platform.currencies_manage.symbol_label') || 'Symbol'}</label>
-                                <Input required value={form.symbol} onChange={e => setForm(f => ({ ...f, symbol: e.target.value }))} placeholder="e.g. $" className="rounded-xl h-11" />
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.currencies_manage.symbol_label') || 'Symbol'}
+                                </Label>
+                                <Input required value={form.symbol} onChange={e => setForm(f => ({ ...f, symbol: e.target.value }))} placeholder="e.g. $" className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                             </div>
-                            <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
-                                <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-indigo-600" checked={form.isActive} onChange={e => setForm(f => ({ ...f, isActive: e.target.checked }))} id="isActive" />
-                                <label htmlFor="isActive" className="text-sm font-bold text-slate-700">{t('platform.currencies_manage.active_label') || 'Active and available'}</label>
+                            <div className="flex items-center gap-3 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                                <input type="checkbox" className="h-5 w-5 rounded-lg border-slate-300 text-indigo-600 focus:ring-indigo-500" checked={form.isActive} onChange={e => setForm(f => ({ ...f, isActive: e.target.checked }))} id="isActive" />
+                                <Label htmlFor="isActive" className="text-sm font-bold text-slate-700 cursor-pointer">{t('platform.currencies_manage.active_label') || 'Active and available'}</Label>
                             </div>
                             <div className="flex justify-end gap-3 pt-6 border-t border-slate-100">
                                 <Button type="button" variant="outline" onClick={closeModal} className="rounded-xl h-11 px-6">{t('common.cancel') || 'Cancel'}</Button>
@@ -432,29 +439,37 @@ export default function PlatformCurrenciesPage() {
                             </div>
                         </CardHeader>
                         <form onSubmit={e => { e.preventDefault(); rateMutation.mutate(rateForm); }} className="p-6 space-y-5">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('common.from') || 'From'}</label>
-                                    <select required value={rateForm.fromCurrencyId} onChange={e => setRateForm(f => ({ ...f, fromCurrencyId: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white font-medium">
+                            <div className="grid grid-cols-2 gap-8">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('common.from') || 'From'}
+                                    </Label>
+                                    <select required value={rateForm.fromCurrencyId} onChange={e => setRateForm(f => ({ ...f, fromCurrencyId: e.target.value }))} className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none">
                                         <option value="">{t('common.select') || 'Select...'}</option>
                                         {currencyData?.items.map(c => <option key={c.id} value={c.code}>{c.code}</option>)}
                                     </select>
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('common.to') || 'To'}</label>
-                                    <select required value={rateForm.toCurrencyId} onChange={e => setRateForm(f => ({ ...f, toCurrencyId: e.target.value }))} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white font-medium">
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('common.to') || 'To'}
+                                    </Label>
+                                    <select required value={rateForm.toCurrencyId} onChange={e => setRateForm(f => ({ ...f, toCurrencyId: e.target.value }))} className="w-full h-14 px-4 rounded-2xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold text-sm outline-none">
                                         <option value="">{t('common.select') || 'Select...'}</option>
                                         {currencyData?.items.map(c => <option key={c.id} value={c.code}>{c.code}</option>)}
                                     </select>
                                 </div>
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('platform.currencies_manage.rate_label') || 'Rate'}</label>
-                                <Input type="number" step="0.0000000001" required value={rateForm.rate} onChange={e => setRateForm(f => ({ ...f, rate: parseFloat(e.target.value) }))} className="rounded-xl h-11" />
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                    {t('platform.currencies_manage.rate_label') || 'Rate'}
+                                </Label>
+                                <Input type="number" step="0.0000000001" required value={rateForm.rate} onChange={e => setRateForm(f => ({ ...f, rate: parseFloat(e.target.value) }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                             </div>
-                            <div>
-                                <label className="block text-sm font-bold text-slate-700 mb-1.5">{t('platform.currencies_manage.source_label') || 'Source'}</label>
-                                <Input type="text" value={rateForm.source} onChange={e => setRateForm(f => ({ ...f, source: e.target.value }))} className="rounded-xl h-11" placeholder="Manual" />
+                            <div className="space-y-4">
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                    {t('platform.currencies_manage.source_label') || 'Source'}
+                                </Label>
+                                <Input type="text" value={rateForm.source} onChange={e => setRateForm(f => ({ ...f, source: e.target.value }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" placeholder="Manual" />
                             </div>
                             <div className="flex justify-end gap-3 pt-6 border-t border-slate-100">
                                 <Button type="button" variant="outline" onClick={closeModal} className="rounded-xl h-11 px-6">{t('common.cancel') || 'Cancel'}</Button>

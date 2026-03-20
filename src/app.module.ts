@@ -46,6 +46,7 @@ import { PlatformAdminModule } from './platform-admin/platform-admin.module';
 import { I18nModule } from './i18n/i18n.module';
 import { LanguageResponseInterceptor } from './common/interceptors/language-response.interceptor';
 import { OnboardingModule } from './onboarding/onboarding.module';
+import { PublicInfoModule } from './public-info/public-info.module';
 
 @Module({
     imports: [
@@ -91,6 +92,7 @@ import { OnboardingModule } from './onboarding/onboarding.module';
         PlatformAdminModule,
         I18nModule,
         OnboardingModule,
+        PublicInfoModule,
     ],
     providers: [
         {
@@ -117,6 +119,7 @@ export class AppModule implements NestModule {
             .exclude(
                 { path: 'auth/(.*)', method: RequestMethod.ALL },
                 { path: 'onboarding/(.*)', method: RequestMethod.ALL },
+                { path: 'api/public/(.*)', method: RequestMethod.ALL },
             )
             .forRoutes({ path: '*', method: RequestMethod.ALL });
 

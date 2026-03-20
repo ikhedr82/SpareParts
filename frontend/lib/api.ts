@@ -36,6 +36,9 @@ apiClient.interceptors.response.use(
         } else {
             // Structured error log — replace console.error with Sentry/DataDog in production
             console.error(`[API Error] ${method} ${url} → HTTP ${status ?? 'N/A'}: ${message}`);
+            if (error.response?.data) {
+                console.error('API Error Response Data:', JSON.stringify(error.response.data, null, 2));
+            }
         }
 
         return Promise.reject(error);

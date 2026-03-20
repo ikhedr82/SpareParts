@@ -140,6 +140,20 @@ async function main() {
     });
     await assignPermissions(cashier.id, ['CREATE_SALE', 'TAKE_PAYMENT', 'VIEW_INVENTORY']);
 
+    const driverRole = await prisma.role.upsert({
+        where: { tenantId_name_scope: { tenantId: tenant.id, name: 'DRIVER', scope: RoleScope.BRANCH } },
+        update: {},
+        create: { tenantId: tenant.id, name: 'DRIVER', scope: RoleScope.BRANCH },
+    });
+    await assignPermissions(driverRole.id, ['VIEW_ORDERS', 'UPDATE_ORDER_STATUS']);
+
+    const customerRole = await prisma.role.upsert({
+        where: { tenantId_name_scope: { tenantId: tenant.id, name: 'CUSTOMER', scope: RoleScope.TENANT } },
+        update: {},
+        create: { tenantId: tenant.id, name: 'CUSTOMER', scope: RoleScope.TENANT },
+    });
+    await assignPermissions(customerRole.id, ['VIEW_ORDERS', 'CREATE_ORDER']);
+
     console.log('Seeding users...');
 
     const bcrypt = require('bcrypt');
@@ -209,9 +223,51 @@ async function main() {
         });
     }
 
+    // 6.5 POS Cashier User
+    const cashierUserPassword = await bcrypt.hash('Pos123!', 10);
+    const cashierUser = await prisma.user.upsert({
+        where: { email: 'cashier@alpha.com' },
+        update: {},
+        create: { email: 'cashier@alpha.com', passwordHash: cashierUserPassword, tenantId: tenant.id },
+    });
+    await prisma.userRole.upsert({
+        where: { userId_roleId_tenantId_branchId: { userId: cashierUser.id, roleId: cashier.id, tenantId: tenant.id, branchId: branch.id } },
+        update: {},
+        create: { userId: cashierUser.id, roleId: cashier.id, tenantId: tenant.id, branchId: branch.id }
+    });
+
+    // 6.6 Driver User
+    const driverUserPassword = await bcrypt.hash('Driver123!', 10);
+    const driverUser = await prisma.user.upsert({
+        where: { email: 'driver@alpha.com' },
+        update: {},
+        create: { email: 'driver@alpha.com', passwordHash: driverUserPassword, tenantId: tenant.id },
+    });
+    await prisma.userRole.upsert({
+        where: { userId_roleId_tenantId_branchId: { userId: driverUser.id, roleId: driverRole.id, tenantId: tenant.id, branchId: branch.id } },
+        update: {},
+        create: { userId: driverUser.id, roleId: driverRole.id, tenantId: tenant.id, branchId: branch.id }
+    });
+
+    // 6.7 Customer User
+    const customerUserPassword = await bcrypt.hash('Customer123!', 10);
+    const customerUser = await prisma.user.upsert({
+        where: { email: 'customer1@alpha.com' },
+        update: {},
+        create: { email: 'customer1@alpha.com', passwordHash: customerUserPassword, tenantId: tenant.id },
+    });
+    await prisma.userRole.upsert({
+        where: { userId_roleId_tenantId_branchId: { userId: customerUser.id, roleId: customerRole.id, tenantId: tenant.id, branchId: null } },
+        update: {},
+        create: { userId: customerUser.id, roleId: customerRole.id, tenantId: tenant.id, branchId: null }
+    });
+
     console.log('✅ RBAC Seeding completed.');
     console.log('Platform Admin: platform@admin.com / admin123');
     console.log('Tenant Admin: admin@alpha.com / tenant123');
+    console.log('POS Cashier: cashier@alpha.com / Pos123!');
+    console.log('Driver: driver@alpha.com / Driver123!');
+    console.log('Customer: customer1@alpha.com / Customer123!');
 
     // 7. Seed Chart of Accounts
     await import('./seed-coa').then(m => m.seedCOA(prisma, tenant.id));

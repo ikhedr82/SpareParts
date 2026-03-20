@@ -35,12 +35,13 @@ export class AuditService {
             return;
         }
 
+        const dbTenantId = tenantId === 'PLATFORM' ? null : tenantId;
         const prisma = tx || this.prisma;
 
         try {
             await (prisma as any).auditLog.create({
                 data: {
-                    tenantId,
+                    tenantId: dbTenantId ?? undefined,
                     userId,
                     action,
                     entityType,
@@ -84,7 +85,9 @@ export class AuditService {
 
     async getPlatformAuditLogs(params: { page?: number; limit?: number; tenantId?: string; action?: string; entityType?: string; search?: string }) {
         const { page = 1, limit = 20, tenantId, action, entityType, search } = params;
-        const skip = (page - 1) * limit;
+        const parsedPage = Number(page);
+        const parsedLimit = Number(limit);
+        const skip = (parsedPage - 1) * parsedLimit;
 
         const where: Prisma.AuditLogWhereInput = {};
         if (tenantId) where.tenantId = tenantId;
@@ -108,11 +111,11 @@ export class AuditService {
                 },
                 orderBy: { createdAt: 'desc' },
                 skip,
-                take: limit,
+                take: parsedLimit,
             }),
             this.prisma.auditLog.count({ where }),
         ]);
 
-        return { items, total, page, limit };
+        return { items, total, page: parsedPage, limit: parsedLimit };
     }
 }

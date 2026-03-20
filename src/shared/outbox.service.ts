@@ -26,9 +26,11 @@ export class OutboxService {
         },
     ) {
         this.logger.debug(`Scheduling outbox event for topic: ${data.topic}`);
+        const dbTenantId = data.tenantId === 'PLATFORM' ? null : data.tenantId;
+
         return tx.outboxEvent.create({
             data: {
-                tenantId: data.tenantId,
+                tenantId: dbTenantId,
                 topic: data.topic,
                 payload: data.payload,
                 correlationId: data.correlationId || null,

@@ -150,15 +150,15 @@ export default function ApiKeysPage() {
 
                         {!revealedKey ? (
                             <div className={`space-y-6 pt-4 ${isRtl ? 'text-right' : 'text-left'}`}>
-                                <div className="space-y-2">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                                        {t('platform.api_keys.description_label')}
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.api_keys.description_label') || 'Key Label (Description)'}
                                     </Label>
                                     <Input
-                                        placeholder="e.g. CI/CD Integration"
+                                        placeholder={t('platform.api_keys.placeholder') || "e.g. CI/CD Integration"}
                                         value={newKeyData.name}
                                         onChange={(e) => setNewKeyData({ ...newKeyData, name: e.target.value })}
-                                        className="rounded-xl border-slate-200 focus:ring-2 focus:ring-emerald-500"
+                                        className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-emerald-50 transition-all font-semibold"
                                     />
                                 </div>
                                 <p className="text-xs text-slate-500 bg-amber-50 p-4 rounded-xl border border-amber-100 flex gap-3">
@@ -175,9 +175,9 @@ export default function ApiKeysPage() {
                             </div>
                         ) : (
                             <div className={`space-y-6 pt-4 ${isRtl ? 'text-right' : 'text-left'}`}>
-                                <div className="space-y-2">
+                                <div className="space-y-4">
                                     <Label className="text-[10px] font-black uppercase tracking-widest text-emerald-600">
-                                        {t('platform.api_keys.raw_label')}
+                                        {t('platform.api_keys.raw_label') || 'Secret Access Key'}
                                     </Label>
                                     <div className="flex gap-2">
                                         <Input
@@ -265,14 +265,14 @@ function MetricsModal({ isOpen, onClose, apiKey }: { isOpen: boolean; onClose: (
                     ) : metrics ? (
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <MetricSummaryCard title="Total Requests (7d)" value={metrics.volume.reduce((a: any, b: any) => a + b.requests, 0).toLocaleString()} icon={TrendingUp} color="indigo" />
-                                <MetricSummaryCard title="Peak Volume" value={Math.max(...metrics.volume.map((v: any) => v.requests)).toLocaleString()} icon={Activity} color="emerald" />
-                                <MetricSummaryCard title="Avg Error Rate" value={`${(metrics.volume.reduce((a: any, b: any) => a + b.errors, 0) / metrics.volume.reduce((a: any, b: any) => a + b.requests, 0) * 100).toFixed(2)}%`} icon={AlertCircle} color="rose" />
+                                <MetricSummaryCard title={t('platform.revenue.total_requests') || "Total Requests (7d)"} value={metrics.volume.reduce((a: any, b: any) => a + b.requests, 0).toLocaleString()} icon={TrendingUp} color="indigo" />
+                                <MetricSummaryCard title={t('platform.api_keys.peak_volume') || "Peak Volume"} value={Math.max(...metrics.volume.map((v: any) => v.requests)).toLocaleString()} icon={Activity} color="emerald" />
+                                <MetricSummaryCard title={t('platform.api_keys.error_rate')} value={`${(metrics.volume.reduce((a: any, b: any) => a + b.errors, 0) / metrics.volume.reduce((a: any, b: any) => a + b.requests, 0) * 100).toFixed(2)}%`} icon={AlertCircle} color="rose" />
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                                 <div className="space-y-4">
-                                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Request Volume (last 7 days)</h4>
+                                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">{t('platform.api_keys.volume_title')}</h4>
                                     <div className="h-64 w-full bg-slate-50 rounded-[2rem] p-6 border border-slate-100">
                                         <ResponsiveContainer width="100%" height="100%">
                                             <ReBarChart data={metrics.volume}>
@@ -289,7 +289,7 @@ function MetricsModal({ isOpen, onClose, apiKey }: { isOpen: boolean; onClose: (
                                 </div>
 
                                 <div className="space-y-4">
-                                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Method Distribution</h4>
+                                    <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">{t('platform.api_keys.method_dist_title')}</h4>
                                     <div className="h-64 w-full bg-slate-50 rounded-[2rem] p-6 border border-slate-100 flex items-center justify-center">
                                         <ResponsiveContainer width="100%" height="100%">
                                             <PieChart>
@@ -320,7 +320,7 @@ function MetricsModal({ isOpen, onClose, apiKey }: { isOpen: boolean; onClose: (
                             </div>
 
                             <div className="space-y-4">
-                                <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">Response Breakdown</h4>
+                                <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest px-1">{t('platform.api_keys.response_breakdown')}</h4>
                                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                                     {metrics.statusCodes.map((s: any) => (
                                         <div key={s.code} className="p-4 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center">
@@ -333,7 +333,7 @@ function MetricsModal({ isOpen, onClose, apiKey }: { isOpen: boolean; onClose: (
                         </>
                     ) : (
                         <div className="h-64 flex items-center justify-center text-slate-400 font-bold uppercase tracking-widest">
-                            No telemetry data available for this identity
+                            {t('platform.api_keys.no_telemetry')}
                         </div>
                     )}
                 </div>

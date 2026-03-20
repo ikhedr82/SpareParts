@@ -17,6 +17,11 @@
         "billing": "Billing & Plan"
     },
     "common": {
+        "validation": {
+            "required": "This field is mandatory",
+            "invalid_email": "Invalid email address",
+            "min_length": "Minimum length is {{count}} characters"
+        },
         "loading": "Loading...",
         "error": "An error occurred",
         "no_data": "No data available",
@@ -63,15 +68,22 @@
         "all_status": "All Status",
         "suspend": "Suspend",
         "order": "Order",
-        "items": "Items"
+        "items": "Items",
+        "users": "Users",
+        "export": "Export"
     },
     "auth": {
-        "login": "Login",
-        "logout": "Logout",
-        "email": "Email",
-        "password": "Password",
-        "sign_in": "Sign In",
-        "welcome": "Welcome back"
+        "login": {
+            "title": "Welcome Back",
+            "subtitle": "Spare Parts Commerce Platform Access",
+            "email_label": "Corporate Email",
+            "password_label": "Secret Credentials",
+            "sign_in": "Authorize Access",
+            "signing_in": "Provisioning Session...",
+            "error_invalid": "Invalid credentials or unauthorized access node",
+            "demo_hint": "Strategic Demo Context",
+            "logout": "Log Out"
+        }
     },
     "platform": {
         "title": "Platform Admin",
@@ -86,7 +98,29 @@
             "health": "System Health",
             "features": "Feature Flags",
             "settings": "System Settings",
-            "api_keys": "API Keys"
+            "api_keys": "API Keys",
+            "cms": "Content Management"
+        },
+        "cms": {
+            "title": "Content Management Hub",
+            "subtitle": "Manage dynamic content and legal pages for the Partivo Landing Portal",
+            "landing_sections": "Landing Sections",
+            "testimonials": "Testimonials",
+            "faqs": "FAQs",
+            "legal_pages": "Legal Pages",
+            "hero": "Hero Section",
+            "features": "Features Section",
+            "how_it_works": "How It Works",
+            "edit_content": "Edit Content",
+            "save_success": "Content saved successfully",
+            "save_error": "Failed to save content",
+            "title_en": "Title (English)",
+            "title_ar": "Title (Arabic)",
+            "content_en": "Content (English)",
+            "content_ar": "Content (Arabic)",
+            "key": "Section Key",
+            "order": "Display Order",
+            "is_active": "Is Active"
         },
         "subscriptions": {
             "title": "Subscription Lifecycle",
@@ -109,7 +143,12 @@
             "override_billing": "Override Billing",
             "billing_cycle": "Billing Cycle",
             "override_success": "Billing cycle overridden",
-            "renewal_success": "Subscription renewed successfully"
+            "renewal_success": "Subscription renewed successfully",
+            "manual_renewal": "Manual Renewal",
+            "billing_override": "Billing Override",
+            "strategy_shift": "Strategy Shift",
+            "confirm_renewal": "Are you sure you want to force a renewal for this tenant?",
+            "confirm_override": "Apply administrative billing override?"
         },
         "dashboard": {
             "title": "Platform Overview",
@@ -142,6 +181,7 @@
             "create_tenant": "Provision Node",
             "create_title": "Provision Ecosystem Node",
             "create_subtitle": "Deploy a new tenant instance with dedicated resource isolation",
+            "tenant_name": "Entity Identity",
             "tenant_name_label": "Entity Identity",
             "subdomain_label": "Subdomain Vector",
             "monetization_blueprint": "Monetization Blueprint",
@@ -176,7 +216,17 @@
             "pulse_stream": "Ecosystem Pulse",
             "not_found": "Entity Missing",
             "not_found_desc": "The specified tenant descriptor could not be resolved within the secure cluster context.",
-            "back_to_list": "Return to Registry"
+            "back_to_list": "Return to Registry",
+            "terminate_node": "Terminate Node",
+            "confirm_termination": "Confirm Termination",
+            "termination_warning": "WARNING: This action initiates permanent decommissioning of the ecosystem node. This is a non-reversible terminal operation.",
+            "edit_identity": "Edit Identity",
+            "entity_name": "Entity Name",
+            "billing_email": "Billing Email",
+            "update_success": "Tenant identity updated",
+            "update_error": "Update Failed",
+            "delete_success_msg": "Tenant terminated and soft-deleted",
+            "delete_error_msg": "Termination Failed"
         },
         "audit": {
             "title": "System Accountability",
@@ -261,7 +311,11 @@
             "status_codes": "Status Codes",
             "total_requests": "Total Requests",
             "error_rate": "Error Rate",
-            "avg_latency": "Avg Latency"
+            "avg_latency": "Avg Latency",
+            "volume_title": "Request Volume (last 7 days)",
+            "method_dist_title": "Method Distribution",
+            "response_breakdown": "Response Breakdown",
+            "no_telemetry": "No telemetry data available for this identity"
         },
         "plans": {
             "title": "Monetization Blueprints",
@@ -331,10 +385,11 @@
             "symbol_label": "Symbol",
             "active_label": "Active and available",
             "rate_label": "Rate",
-            "source_label": "Source",
+            "source_label": "Exchange Source",
             "set_base": "Set as Platform Base",
             "base_currency": "Platform Base Currency",
-            "base_desc": "This is the primary settlement currency for all platform-wide billing and subscription operations."
+            "base_desc": "This is the primary settlement currency for all platform-wide billing and subscription operations.",
+            "iso_placeholder": "e.g. USD"
         },
         "currencies": {
             "create_success": "Currency registered",
@@ -399,7 +454,8 @@
             "start_date": "Start Date",
             "no_subscriptions": "No subscriptions found",
             "no_invoices": "No transactions detected",
-            "growth_trajectory": "Growth Trajectory"
+            "growth_trajectory": "Growth Trajectory",
+            "mrr_label": "Monthly Recurring Revenue"
         },
         "support": {
             "title": "Support & Concierge",
@@ -442,7 +498,15 @@
             "create_success": "Ticket created successfully",
             "create_error": "Failed to create ticket",
             "status_updated": "Status updated",
-            "status_error": "Failed to update status"
+            "status_error": "Failed to update status",
+            "priority_low": "Low",
+            "priority_medium": "Medium",
+            "priority_high": "High",
+            "priority_critical": "Critical",
+            "origin_tenant": "Tenant Origin",
+            "origin_system": "Internal System",
+            "placeholder_subject": "e.g. API latency in Singapore region",
+            "placeholder_desc": "Provide a detailed technical breakdown..."
         }
     },
     "dashboard": {
@@ -716,102 +780,112 @@
         "nav": {
             "features": "Features",
             "pricing": "Pricing",
+            "about": "About",
+            "contact": "Contact",
+            "docs": "Docs",
             "login": "Log In",
-            "start_free": "Start Free"
+            "start_free": "Start Free",
+            "terms": "Terms",
+            "privacy": "Privacy"
         },
         "footer": {
-            "rights": "All rights reserved."
+            "rights": "All rights reserved.",
+            "description": "Transforming the automotive spare parts supply chain with intelligence, transparency, and global reach.",
+            "tagline": "Partivo Commerce"
         },
         "hero": {
             "badge": "Next-Gen Commerce Platform",
             "title_line1": "Run Your Spare Parts",
             "title_line2": "Business Smarter",
             "subtitle": "All-in-one SaaS platform for spare parts dealers. Manage inventory, sales, logistics, and finance — from a single dashboard.",
-            "cta": "Start Free",
-            "learn_more": "Learn More"
+            "cta_start": "Start Free Trial",
+            "cta_login": "Platform Login",
+            "learn_more": "Explore Features"
         },
         "features": {
-            "section_title": "Everything You Need",
-            "section_subtitle": "From inventory to delivery, manage your entire business with one platform.",
-            "inventory": { "title": "Inventory Management", "desc": "Real-time stock tracking across branches with SKU management and low-stock alerts." },
-            "sales": { "title": "Point of Sale", "desc": "Fast, accurate sales recording with automatic inventory deduction and invoice generation." },
-            "logistics": { "title": "Logistics & Delivery", "desc": "Plan delivery trips, assign drivers, and track fulfillment in real time." },
-            "analytics": { "title": "Analytics & Reports", "desc": "Revenue trends, top products, branch performance, and custom financial reports." },
-            "multi_tenant": { "title": "Multi-Tenant Ready", "desc": "Isolated tenant environments with subscription plans and usage controls." },
-            "security": { "title": "Enterprise Security", "desc": "JWT authentication, RBAC, audit logs, and tenant data isolation." }
-        },
-        "features_page": {
-            "title": "Platform Capabilities",
-            "subtitle": "Explore every module available in the Partivo Commerce Platform.",
-            "sales": "Sales & POS",
-            "sales_desc": "Record transactions, process refunds, manage cash sessions, and track customer payments.",
-            "inventory": "Inventory Management",
-            "inventory_desc": "Full lifecycle management of products with SKU tracking, stock adjustments, and multi-branch allocation.",
-            "warehouse": "Warehouse Operations",
+            "title": "Enterprise Capabilities",
+            "subtitle": "Everything you need to scale your automotive commerce ecosystem.",
+            "inventory_title": "Inventory Management",
+            "inventory_desc": "Real-time stock tracking across branches with SKU management and low-stock alerts.",
+            "sales_title": "Point of Sale",
+            "sales_desc": "Fast, accurate sales recording with automatic inventory deduction and invoice generation.",
+            "logistics_title": "Logistics & Delivery",
+            "logistics_desc": "Plan delivery trips, assign drivers, and track fulfillment in real time.",
+            "analytics_title": "Analytics & Intelligence",
+            "analytics_desc": "Revenue trends, top products, branch performance, and custom financial reports.",
+            "warehouse_title": "Warehouse Operations",
             "warehouse_desc": "Pick list management, packing workflows, and bin-level storage tracking.",
-            "logistics": "Logistics & Delivery",
-            "logistics_desc": "Create delivery trips, assign drivers, track stops, and handle failed delivery retries.",
-            "analytics": "Analytics & BI",
-            "analytics_desc": "Interactive dashboards with revenue trends, sales charts, and branch performance metrics.",
-            "finance": "Financial Controls",
-            "finance_desc": "Invoice management, tax configuration, VAT reports, and profit & loss statements.",
-            "customers": "Customer Management",
-            "customers_desc": "Maintain customer profiles, track balances, and manage business client relationships.",
-            "multi_lang": "Multi-Language & RTL",
-            "multi_lang_desc": "Full English and Arabic support with automatic right-to-left layout mirroring.",
-            "security": "Security & RBAC",
-            "security_desc": "Role-based access control, immutable audit logs, permission management, and tenant isolation.",
-            "substitutions": "Product Substitutions",
-            "substitutions_desc": "Collaborative substitution workflow allowing clients to approve or reject product replacements."
+            "finance_title": "Financial Controls",
+            "finance_desc": "Automated invoicing, tax calculations, and multi-currency settlement logs."
+        },
+        "about": {
+            "title": "Our Strategic Vision",
+            "subtitle": "Partivo is building the digital backbone for the global automotive aftermarket.",
+            "content": "Founded on the principle of resource optimization, Partivo empowers spare parts dealers with enterprise-grade cloud infrastructure. Our mission is to eliminate fragmented logistics and inventory silos, creating a unified commerce ecosystem for every branch, regardless of size or location.",
+            "stat1_value": "10M+",
+            "stat1_label": "SKUs Managed",
+            "stat2_value": "500+",
+            "stat2_label": "Global Branches",
+            "stat3_value": "99.9%",
+            "stat3_label": "System Uptime"
+        },
+        "how_it_works": {
+            "title": "How Partivo Works",
+            "subtitle": "Three simple steps to transform your spare parts operations.",
+            "step1_title": "Connect Your Inventory",
+            "step1_desc": "Import your current stock via CSV or API. Map your parts to brands and categories.",
+            "step2_title": "Empower Your Sales",
+            "step2_desc": "Your team records sales via the cloud-native POS. Inventory is deducted globally in real-time.",
+            "step3_title": "Deliver with Precision",
+            "step3_desc": "Automated logistics assignments ensure parts reach customers faster than ever."
         },
         "pricing": {
-            "title": "Simple, Transparent Pricing",
-            "subtitle": "Start free, upgrade as you grow.",
-            "teaser_title": "Start Building Today",
-            "teaser_subtitle": "Get started with our free plan. No credit card required.",
-            "free_label": "Free Forever",
-            "per_month": "month",
-            "free_name": "Free",
-            "free_users": "Up to 2 users",
-            "free_branch": "1 branch",
-            "free_products": "100 products",
-            "free_orders": "500 orders/month",
-            "free_support": "Community support",
-            "pro_name": "Professional",
-            "pro_users": "Up to 10 users",
-            "pro_branches": "5 branches",
-            "pro_products": "Unlimited products",
-            "pro_orders": "Unlimited orders",
-            "pro_analytics": "Advanced analytics",
-            "pro_logistics": "Logistics module",
-            "pro_support": "Priority support",
-            "enterprise_name": "Enterprise",
+            "title": "Flexible Pricing",
+            "subtitle": "Choose the blueprint that fits your growth trajectory.",
+            "popular": "Most Popular",
+            "per_month": "per month",
             "custom": "Custom",
-            "enterprise_users": "Unlimited users",
-            "enterprise_branches": "Unlimited branches",
-            "enterprise_products": "Unlimited products",
-            "enterprise_api": "API access",
-            "enterprise_sla": "99.9% SLA",
-            "enterprise_support": "Dedicated support",
             "contact_sales": "Contact Sales",
-            "popular": "Most Popular"
+            "start_free": "Start Free",
+            "cta": "Get Started"
         },
-        "signup": {
-            "title": "Create Your Account",
-            "subtitle": "Set up your business in under 2 minutes.",
-            "company_name": "Company Name",
-            "admin_name": "Admin Name",
-            "email": "Admin Email",
-            "password": "Password",
-            "subdomain": "Subdomain",
-            "language": "Preferred Language",
-            "submit": "Create Account",
-            "have_account": "Already have an account?",
-            "subdomain_available": "Subdomain is available",
-            "subdomain_taken": "Subdomain is already taken",
-            "success_title": "Account Created!",
-            "success_desc": "Your tenant environment is ready. Use the credentials below to log in.",
-            "go_login": "Go to Login"
+        "testimonials": {
+            "title": "Trusted by Industry Leaders",
+            "subtitle": "See how dealers around the globe are scaling with Partivo.",
+            "quote1": "Partivo transformed our multi-branch logistics from a nightmare into a streamlined machine.",
+            "author1": "Yousif Al-Hamed",
+            "role1": "CEO, Gulf Parts Corp",
+            "quote2": "The real-time inventory sync saved us thousands in lost sales and overstocking errors.",
+            "author2": "Marco Rossi",
+            "role2": "Operations Director, EuroAuto",
+            "quote3": "Finally, a platform that understands the complexity of automotive sub-numbering and fitment.",
+            "author3": "Sarah Jenkins",
+            "role3": "Wholesale Manager, Apex Spares"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "subtitle": "Everything you need to know about the platform.",
+            "q1": "Is my data isolated from other tenants?",
+            "a1": "Yes, Partivo uses high-fidelity tenant isolation. Your data is stored in logically separate schemas with dedicated access controls.",
+            "q2": "Can I use my own domain?",
+            "a2": "Absolutely. Pro and Enterprise plans support custom domains and SSL termination at the edge.",
+            "q3": "Does it support local tax regulations?",
+            "a3": "Our engine is built for global compliance, supporting VAT, GST, and custom tax rules based on your jurisdiction."
+        },
+        "contact": {
+            "title": "Get in Touch",
+            "subtitle": "Our specialized team is ready to assist with your ecosystem deployment.",
+            "form_name": "Full Name",
+            "form_email": "Work Email",
+            "form_message": "Requirement Details",
+            "form_submit": "Initialize Connection",
+            "success": "Transmission Received"
+        },
+        "cta": {
+            "title": "Ready to Modernize Your Ecosystem?",
+            "subtitle": "Join hundreds of specialized dealers scaling their operations globally with Partivo.",
+            "cta_start": "Start Free Trial",
+            "cta_login": "Platform Login"
         }
     }
 }

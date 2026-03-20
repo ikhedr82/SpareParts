@@ -1,0 +1,47 @@
+* Host localhost:3000 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+*   Trying [::1]:3000...
+*   Trying 127.0.0.1:3000...
+* Connected to localhost (127.0.0.1) port 3000
+* using HTTP/1.x
+> GET /api/platform/tenants/90493880-9459-45a6-8698-ad4ef9aa0ec5/activity?limit=5 HTTP/1.1
+
+> Host: localhost:3000
+
+> User-Agent: curl/8.13.0
+
+> Accept: */*
+
+> Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmZGFmNzY2Yi1iMjcyLTRhYmQtODdiMS1lMTM0ZTdjY2M0NjQiLCJlbWFpbCI6InBsYXRmb3JtQGFkbWluLmNvbSIsInRlbmFudElkIjpudWxsLCJicmFuY2hJZCI6bnVsbCwicm9sZXMiOlsiUExBVEZPUk1fU1VQRVJfQURNSU4iXSwiaXNQbGF0Zm9ybVVzZXIiOnRydWUsImlhdCI6MTc3MzU0MjY0MywiZXhwIjoxNzczNTQ2MjQzfQ.G7GNFq6ngZvlCziG4bghMJszc2a-wgXu-eQMAdTm9xI
+
+> 
+
+* Request completely sent off
+< HTTP/1.1 500 Internal Server Error
+
+< X-Powered-By: Express
+
+< Access-Control-Allow-Origin: *
+
+< X-Correlation-ID: 54b1e272-12f0-48c8-9156-551b0802eee9
+
+< X-Language: EN
+
+< Content-Type: application/json; charset=utf-8
+
+< Content-Length: 52
+
+< ETag: W/"34-rlKccw1E+/fV8niQk4oFitDfPro"
+
+< Date: Sun, 15 Mar 2026 02:44:03 GMT
+
+< Connection: keep-alive
+
+< Keep-Alive: timeout=5
+
+< 
+
+{ [52 bytes data]
+* Connection #0 to host localhost left intact
+{"statusCode":500,"message":"Internal server error"}

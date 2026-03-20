@@ -66,6 +66,7 @@ export class AuditService {
     }
 
     async getRecentActivity(limit: number = 50) {
+        const parsedLimit = Number(limit);
         return (this.prisma.client as any).auditLog.findMany({
             where: {
                 tenantId: this.prisma.tenantId,
@@ -81,7 +82,7 @@ export class AuditService {
             orderBy: {
                 createdAt: 'desc',
             },
-            take: limit,
+            take: parsedLimit,
         });
     }
 }

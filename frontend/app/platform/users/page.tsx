@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Pagination } from '@/components/pagination';
 import { Card, CardContent } from '@/components/ui/card';
 import { formatDate } from '@/lib/formatters';
+import { Label } from '@/components/ui/label';
 import { KPICard } from '@/components/kpi-card';
 import {
     Users, Search, Shield, Building2,
@@ -115,7 +116,7 @@ export default function PlatformUsersPage() {
                     className="h-12 px-6 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-black shadow-xl shadow-indigo-100 flex items-center gap-2"
                 >
                     <Plus className="h-5 w-5" />
-                    Provision Admin
+                    {t('platform.users.provision_admin') || 'Provision Admin'}
                 </Button>
             </div>
 
@@ -283,23 +284,27 @@ export default function PlatformUsersPage() {
                                     <Plus className="h-8 w-8 text-indigo-600" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Provision Admin</h3>
-                                    <p className="text-slate-400 font-bold text-sm uppercase tracking-tighter">New Ecosystem Executive</p>
+                                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">{t('platform.users.provision_title') || 'Provision Admin'}</h3>
+                                    <p className="text-slate-400 font-bold text-sm uppercase tracking-tighter">{t('platform.users.provision_subtitle') || 'New Ecosystem Executive'}</p>
                                 </div>
                             </div>
                             <form onSubmit={e => { e.preventDefault(); createMutation.mutate(createForm); }} className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Email Vector</label>
-                                    <Input required type="email" value={createForm.email} onChange={e => setCreateForm(f => ({ ...f, email: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.users.form_email') || 'Email Vector'}
+                                    </Label>
+                                    <Input required type="email" value={createForm.email} onChange={e => setCreateForm(f => ({ ...f, email: e.target.value }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Access Key (Password)</label>
-                                    <Input required type="password" minLength={8} value={createForm.password} onChange={e => setCreateForm(f => ({ ...f, password: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400" required>
+                                        {t('platform.users.form_password') || 'Access Key (Password)'}
+                                    </Label>
+                                    <Input required type="password" minLength={8} value={createForm.password} onChange={e => setCreateForm(f => ({ ...f, password: e.target.value }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                                 </div>
                                 <div className="flex gap-4 pt-4">
                                     <Button type="button" variant="outline" onClick={() => setModalMode(null)} className="flex-1 h-14 rounded-2xl border-slate-200 font-black uppercase tracking-widest">{t('common.cancel')}</Button>
                                     <Button type="submit" disabled={createMutation.isPending} className="flex-1 h-14 rounded-2xl bg-indigo-600 text-white font-black uppercase tracking-widest shadow-2xl shadow-indigo-100 transition-all active:scale-95">
-                                        {createMutation.isPending ? t('common.loading') : 'Provision Node'}
+                                        {createMutation.isPending ? t('common.loading') : t('platform.users.provision_btn') || 'Provision Node'}
                                     </Button>
                                 </div>
                             </form>
@@ -318,7 +323,7 @@ export default function PlatformUsersPage() {
                                     <ShieldAlert className="h-8 w-8" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-black tracking-tight">Access Suspension</h3>
+                                    <h3 className="text-2xl font-black tracking-tight">{t('platform.users.suspend_title') || 'Access Suspension'}</h3>
                                     <p className="text-rose-400 font-bold text-sm uppercase tracking-tighter">{selectedUser.email}</p>
                                 </div>
                             </div>
@@ -333,7 +338,7 @@ export default function PlatformUsersPage() {
                                     className="flex-1 h-14 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-black uppercase tracking-widest shadow-2xl shadow-rose-100 transition-all flex items-center justify-center gap-2"
                                 >
                                     {suspendMutation.isPending && <Loader2 className="h-5 w-5 animate-spin" />}
-                                    Confirm Suspension
+                                    {t('platform.users.suspend_confirm') || 'Confirm Suspension'}
                                 </button>
                             </div>
                         </Card>
@@ -351,19 +356,21 @@ export default function PlatformUsersPage() {
                                     <Key className="h-8 w-8 text-amber-600" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">Reset Credentials</h3>
+                                    <h3 className="text-2xl font-black text-slate-900 tracking-tight">{t('platform.users.reset_title') || 'Reset Credentials'}</h3>
                                     <p className="text-slate-400 font-bold text-sm uppercase tracking-tighter">{selectedUser.email}</p>
                                 </div>
                             </div>
                             <form onSubmit={e => { e.preventDefault(); resetMutation.mutate({ id: selectedUser.id, password: resetForm.password }); }} className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs font-black text-slate-400 uppercase tracking-widest">New Access Key (Optional)</label>
-                                    <Input type="password" placeholder="Leave empty for emergency default" value={resetForm.password} onChange={e => setResetForm(f => ({ ...f, password: e.target.value }))} className="rounded-2xl h-12 border-slate-200 font-semibold" />
+                                <div className="space-y-4">
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                                        {t('platform.users.form_new_password') || 'New Access Key (Optional)'}
+                                    </Label>
+                                    <Input type="password" placeholder={t('platform.users.reset_placeholder') || 'Leave empty for emergency default'} value={resetForm.password} onChange={e => setResetForm(f => ({ ...f, password: e.target.value }))} className="h-14 rounded-2xl border-slate-200 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all font-semibold" />
                                 </div>
                                 <div className="flex gap-4 pt-4">
                                     <Button type="button" variant="outline" onClick={() => setModalMode(null)} className="flex-1 h-14 rounded-2xl border-slate-200 font-black uppercase tracking-widest">{t('common.cancel')}</Button>
                                     <Button type="submit" disabled={resetMutation.isPending} className="flex-1 h-14 rounded-2xl bg-amber-600 text-white font-black uppercase tracking-widest shadow-2xl shadow-amber-100 transition-all active:scale-95">
-                                        {resetMutation.isPending ? t('common.loading') : 'Reset Key'}
+                                        {resetMutation.isPending ? t('common.loading') : t('platform.users.reset_btn') || 'Reset Key'}
                                     </Button>
                                 </div>
                             </form>

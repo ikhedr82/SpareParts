@@ -40,101 +40,107 @@ export class TenantAdminService {
         // Note: New tenants don't have a plan boundary yet until created, 
         // but we can check the plan they are signing up for.
 
-        return this.prisma.$transaction(async (tx) => {
-            // 1. Create tenant
-            const tenant = await tx.tenant.create({
-                data: {
-                    name: dto.name,
-                    subdomain: dto.subdomain,
-                    planId: dto.planId,
-                    defaultLanguage: dto.defaultLanguage,
-                    supportedLanguages: dto.supportedLanguages,
-                    baseCurrency: dto.baseCurrency,
-                    supportedCurrencies: dto.supportedCurrencies,
-                    status: 'ACTIVE',
-                },
+        try {
+            return await this.prisma.$transaction(async (tx) => {
+                // 1. Create tenant
+                const tenant = await tx.tenant.create({
+                    data: {
+                        name: dto.name,
+                        subdomain: dto.subdomain,
+                        planId: dto.planId,
+                        defaultLanguage: dto.defaultLanguage,
+                        supportedLanguages: dto.supportedLanguages,
+                        baseCurrency: dto.baseCurrency,
+                        supportedCurrencies: dto.supportedCurrencies,
+                        status: 'ACTIVE',
+                    },
+                });
+
+                // 2. Create manual subscription
+                await (tx.subscription as any).create({
+                    data: {
+                        tenantId: tenant.id,
+                        planId: tenant.planId,
+                        status: 'ACTIVE',
+                        provider: 'MANUAL',
+                    },
+                });
+
+                // 3. Create tenant admin role
+                const adminRole = await tx.role.create({
+                    data: {
+                        tenantId: tenant.id,
+                        name: 'Tenant Admin',
+                        scope: 'TENANT',
+                        description: 'Full access administrator for this tenant',
+                    },
+                });
+
+                // 3. Assign all permissions to admin role
+                const allPermissions = await tx.permission.findMany();
+                await tx.rolePermission.createMany({
+                    data: allPermissions.map((perm) => ({
+                        roleId: adminRole.id,
+                        permissionId: perm.id,
+                    })),
+                    skipDuplicates: true,
+                });
+
+                // 4. Create admin user
+                const adminUser = await tx.user.create({
+                    data: {
+                        email: dto.adminEmail,
+                        passwordHash: hashedPassword,
+                        tenantId: tenant.id,
+                    },
+                });
+
+                // 5. Assign admin role to user
+                await tx.userRole.create({
+                    data: {
+                        userId: adminUser.id,
+                        roleId: adminRole.id,
+                        tenantId: tenant.id,
+                    },
+                });
+
+                // 6. Audit
+                await this.auditService.logAction(
+                    'PLATFORM',
+                    adminUserId,
+                    'CREATE_TENANT',
+                    'Tenant',
+                    tenant.id,
+                    null,
+                    {
+                        name: dto.name,
+                        subdomain: dto.subdomain,
+                        planId: dto.planId,
+                        adminEmail: dto.adminEmail,
+                        languages: { default: dto.defaultLanguage, supported: dto.supportedLanguages },
+                        currencies: { base: dto.baseCurrency, supported: dto.supportedCurrencies }
+                    },
+                    undefined,
+                    undefined,
+                    tx,
+                );
+
+                await this.outbox.schedule(tx, {
+                    tenantId: 'PLATFORM',
+                    topic: 'tenant.created',
+                    payload: { tenantId: tenant.id, name: dto.name, subdomain: dto.subdomain },
+                });
+
+                return {
+                    ...tenant,
+                    adminUser: { id: adminUser.id, email: adminUser.email },
+                };
             });
-
-            // 2. Create manual subscription
-            await (tx.subscription as any).create({
-                data: {
-                    tenantId: tenant.id,
-                    planId: tenant.planId,
-                    status: 'ACTIVE',
-                    provider: 'MANUAL',
-                },
-            });
-
-            // 3. Create tenant admin role
-            const adminRole = await tx.role.create({
-                data: {
-                    tenantId: tenant.id,
-                    name: 'Tenant Admin',
-                    scope: 'TENANT',
-                    description: 'Full access administrator for this tenant',
-                },
-            });
-
-            // 3. Assign all permissions to admin role
-            const allPermissions = await tx.permission.findMany();
-            await tx.rolePermission.createMany({
-                data: allPermissions.map((perm) => ({
-                    roleId: adminRole.id,
-                    permissionId: perm.id,
-                })),
-                skipDuplicates: true,
-            });
-
-            // 4. Create admin user
-            const adminUser = await tx.user.create({
-                data: {
-                    email: dto.adminEmail,
-                    passwordHash: hashedPassword,
-                    tenantId: tenant.id,
-                },
-            });
-
-            // 5. Assign admin role to user
-            await tx.userRole.create({
-                data: {
-                    userId: adminUser.id,
-                    roleId: adminRole.id,
-                    tenantId: tenant.id,
-                },
-            });
-
-            // 6. Audit
-            await this.auditService.logAction(
-                'PLATFORM',
-                adminUserId,
-                'CREATE_TENANT',
-                'Tenant',
-                tenant.id,
-                null,
-                {
-                    name: dto.name,
-                    subdomain: dto.subdomain,
-                    planId: dto.planId,
-                    adminEmail: dto.adminEmail,
-                    languages: { default: dto.defaultLanguage, supported: dto.supportedLanguages },
-                    currencies: { base: dto.baseCurrency, supported: dto.supportedCurrencies }
-                },
-                undefined,
-                undefined,
-                tx,
-            );
-
-            await this.outbox.schedule(tx, {
-                tenantId: 'PLATFORM',
-                topic: 'tenant.created',
-                payload: { tenantId: tenant.id, name: dto.name, subdomain: dto.subdomain },
-            });
-
-            return {
-                ...tenant,
-                adminUser: { id: adminUser.id, email: adminUser.email },
-            };
-        });
+        } catch (e) {
+            console.error('CRITICAL TENANT CREATION ERROR:', e);
+            require('fs').writeFileSync('prisma-error.txt', String(e) + '\n\n' + JSON.stringify(e, null, 2) + '\n\n' + e.stack || '');
+            throw e;
+        }
     }
 
     // G-08: Wrapped in $transaction for atomic update + audit
@@ -227,7 +233,7 @@ export class TenantAdminService {
         if (status) where.status = status;
         if (planId) where.planId = planId;
 
-        const [items, total] = await Promise.all([
+        const [itemsRaw, total] = await Promise.all([
             this.prisma.tenant.findMany({
                 where,
                 select: {
@@ -258,6 +264,14 @@ export class TenantAdminService {
             }),
             this.prisma.tenant.count({ where }),
         ]);
+
+        const items = itemsRaw.map(item => {
+            if (item.plan && typeof item.plan.price === 'object' && item.plan.price !== null) {
+                // Cast Prisma Decimal to Number for React
+                (item.plan as any).price = Number(item.plan.price.toString());
+            }
+            return item;
+        });
 
         return { items, total, page: Number(page), limit: Number(limit) };
     }
@@ -639,7 +653,9 @@ export class TenantAdminService {
         const pastDueSubscribers = tenants.filter(t => (t as any).subscription?.status === 'PAST_DUE').length;
         const mrr = tenants.reduce((sum, t) => {
             if ((t as any).subscription?.status === 'ACTIVE' || (t as any).subscription?.status === 'PAST_DUE') {
-                return sum + ((t as any).plan?.price || 0);
+                const price = (t as any).plan?.price;
+                const priceNum = typeof price === 'object' && price !== null ? Number(price.toString()) : Number(price || 0);
+                return sum + priceNum;
             }
             return sum;
         }, 0);

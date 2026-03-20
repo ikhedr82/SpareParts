@@ -6,6 +6,8 @@ import { removeToken } from '@/lib/auth';
 import { LanguageSwitcher } from './language-switcher';
 import { useLanguage } from '@/lib/i18n/LanguageContext';
 
+import { BrandLogo } from './brand-logo';
+
 interface ShellLayoutProps {
     children: React.ReactNode;
     title: string;
@@ -27,7 +29,7 @@ export function ShellLayout({ children, title, navigation }: ShellLayoutProps) {
             <aside className="w-64 bg-white border-e border-slate-200 flex flex-col">
                 <div className="p-6 border-b border-slate-200 flex items-center justify-between">
                     <div>
-                        <img src="/brand/logo.svg" alt="Partivo" className="h-8" />
+                        <BrandLogo className="h-8" />
                         <p className="text-xs text-slate-500 mt-1">{title}</p>
                     </div>
                     <LanguageSwitcher />

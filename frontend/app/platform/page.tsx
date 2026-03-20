@@ -96,11 +96,11 @@ export default function PlatformPage() {
                         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl group-hover:scale-150 transition-transform duration-1000" />
                         <div className="relative z-10">
                             <h3 className="text-xl font-bold tracking-tight flex items-center gap-2 mb-2">
-                                <TrendingUp className="h-5 w-5 text-indigo-300" />
-                                Revenue Pulse
+                                <TrendingUp className={`h-5 w-5 text-indigo-300 ${isRtl ? 'ml-2' : ''}`} />
+                                {t('platform.revenue.expansion_pulse') || 'Revenue Pulse'}
                             </h3>
                             <div className="text-4xl font-black mb-1">{formatCurrency(billingStats?.mrr || 0)}</div>
-                            <div className="text-indigo-200 text-sm font-medium">Monthly Ecosystem Yield</div>
+                            <div className="text-indigo-200 text-sm font-medium">{t('platform.revenue.mrr_label') || 'Monthly Ecosystem Yield'}</div>
 
                             <div className="h-48 mt-8 -mx-4">
                                 <ResponsiveContainer width="100%" height="100%">
@@ -139,7 +139,7 @@ export default function PlatformPage() {
 
                         <Link href="/platform/revenue" className="relative z-10 mt-8">
                             <button className="w-full bg-white text-indigo-600 hover:bg-slate-50 py-4 rounded-2xl font-black text-sm shadow-xl active:scale-[0.98] transition-all">
-                                View Full Ledger
+                                {t('platform.revenue.view_ledger') || 'View Full Ledger'}
                             </button>
                         </Link>
                     </div>
