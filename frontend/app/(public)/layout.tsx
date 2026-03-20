@@ -49,16 +49,16 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                         
                         <div>
                             <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs opacity-50">{t('landing.nav.about')}</h3>
-                            <ul className="space-y-4 text-slate-400 font-bold">
-                                <li><button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="hover:text-blue-400 transition-colors">Home</button></li>
+                            <ul className="space-y-4 text-slate-400 font-bold text-start rtl:text-right">
+                                <li><button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="hover:text-blue-400 transition-colors">{t('landing.nav.home') || (isAr ? 'الرئيسية' : 'Home')}</button></li>
                                 <li><a href="#features" className="hover:text-blue-400 transition-colors">{t('landing.nav.features')}</a></li>
                                 <li><a href="#pricing" className="hover:text-blue-400 transition-colors">{t('landing.nav.pricing')}</a></li>
                             </ul>
                         </div>
 
                         <div>
-                            <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs opacity-50">{t('landing.nav.contact')}</h3>
-                            <ul className="space-y-4 text-slate-400 font-bold">
+                            <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs opacity-50 text-start rtl:text-right">{t('landing.nav.contact')}</h3>
+                            <ul className="space-y-4 text-slate-400 font-bold text-start rtl:text-right">
                                 <li><a href="#contact" className="hover:text-blue-400 transition-colors">{t('landing.nav.contact')}</a></li>
                                 <li><a href="#faq" className="hover:text-blue-400 transition-colors">{t('landing.faq.title')}</a></li>
                                 <li><Link href="/login" className="hover:text-blue-400 transition-colors">{t('landing.nav.login')}</Link></li>

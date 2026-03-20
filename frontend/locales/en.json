@@ -882,10 +882,10 @@
             "success": "Transmission Received"
         },
         "cta": {
-            "title": "Ready to Modernize Your Ecosystem?",
-            "subtitle": "Join hundreds of specialized dealers scaling their operations globally with Partivo.",
+            "title": "Ready to Transform Your Business?",
+            "subtitle": "Join hundreds of spare parts businesses streamlining their operations today.",
             "cta_start": "Start Free Trial",
-            "cta_login": "Platform Login"
+            "cta_login": "Sign In"
         }
     }
 }
