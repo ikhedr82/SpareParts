@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <body className={`${inter.variable} ${cairo.variable}`}>
+      <body className={`${inter.variable} ${cairo.variable}`} suppressHydrationWarning>
         <QueryProvider>
           <LanguageProvider>
             <ToastProvider>
@@ -41,5 +41,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-

@@ -20,7 +20,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
     const copyrightText = content?.copyright || '2026 Partivo Commerce Platform';
 
     return (
-        <div dir={dir} className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30">
+        <div dir={dir} className="min-h-screen bg-slate-950 text-white selection:bg-blue-500/30" suppressHydrationWarning>
             <Navbar />
 
             <main>
