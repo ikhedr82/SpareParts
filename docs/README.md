@@ -1,78 +1,59 @@
-# 📚 Partivo Documentation Index
+# Partivo Documentation System
 
-Complete documentation for the Partivo Commerce Platform.
+> **The official, single source of truth for the Partivo SaaS Platform.**
 
----
+This documentation covers the complete Partivo ecosystem — from executive vision to technical architecture, from user manuals to test scenarios.
 
-## Brand & Design
+## Documentation Structure
 
-| Document | Description |
-|---|---|
-| [brand-system.md](brand-system.md) | Logo usage, color palette, typography, spacing, dark mode |
+| Folder | Contents | Audience |
+|---|---|---|
+| [00-executive](./00-executive/) | Vision, Value Proposition, Market Positioning | Executives, Sales, Investors |
+| [01-platform-overview](./01-platform-overview/) | System Overview with architecture diagram | All stakeholders |
+| [02-architecture](./02-architecture/) | System, Backend, Frontend, Mobile, Database, Multi-Tenancy, Offline, Billing, CRM, Data Contracts | Developers, Architects |
+| [03-platform-admin](./03-platform-admin/) | Functional spec, Technical spec, API reference, User manual | Platform Ops, Support |
+| [04-tenant-admin](./04-tenant-admin/) | Functional spec, Technical spec, API reference, User manual | Tenant Owners, Developers |
+| [05-customer-portal](./05-customer-portal/) | Functional spec, Technical spec, API reference, User manual | B2B Clients, Developers |
+| [06-landing](./06-landing/) | Functional spec, Technical spec, API reference, User manual | Marketing, Sales, Developers |
+| [07-driver-app](./07-driver-app/) | Functional spec, Technical spec, API reference, User manual | Logistics, Drivers |
+| [08-pos-app](./08-pos-app/) | Functional spec, Technical spec, API reference, User manual | Branch Staff, QA |
+| [09-cross-cutting](./09-cross-cutting/) | Auth, RBAC, Permissions Matrix, Error Codes, i18n, Logging | All Developers, QA |
+| [10-operations](./10-operations/) | Deployment Guide, Environment Setup | DevOps, Developers |
+| [11-testing](./11-testing/) | Test Strategy, Test Scenarios | QA, Developers |
+| [12-business-flows](./12-business-flows/) | Order, Billing, Delivery, Onboarding Lifecycles | Business, QA, Sales |
 
-## Platform Admin Portal
+## Per-App Documentation Pattern
 
-| Document | Description |
-|---|---|
-| [platform-admin-portal-functional-spec.md](platform-admin-portal-functional-spec.md) | Epics, features, user stories, acceptance criteria |
-| [platform-admin-portal-non-functional-spec.md](platform-admin-portal-non-functional-spec.md) | Security, performance, localization |
-| [platform-admin-portal-product-structure.md](platform-admin-portal-product-structure.md) | Product architecture and module hierarchy |
+Each application (03–08) follows a standardized four-document structure:
 
-## Tenant Admin Portal
+1. **functional-spec.md** — Business capabilities, features, and workflows.
+2. **technical-spec.md** — Technology stack, project structure, and design patterns.
+3. **api-reference.md** — Authentication, error formats, endpoint groups, and link to Swagger.
+4. **user-manual.md** — Screen-by-screen guide with fields, buttons, actions, modals, error states, and role-based visibility.
 
-| Document | Description |
-|---|---|
-| [tenant-portal-functional-spec.md](tenant-portal-functional-spec.md) | Epics, features, user stories, acceptance criteria |
-| [tenant-portal-nonfunctional-spec.md](tenant-portal-nonfunctional-spec.md) | Security, performance, localization |
-| [tenant-portal-product-structure.md](tenant-portal-product-structure.md) | Product architecture and module hierarchy |
-| [tenant-portal-developer-guide.md](tenant-portal-developer-guide.md) | Project structure, API endpoints, how-to guides |
+## Key Principles
 
-## Customer Portal
+- **Code is truth**: If this documentation contradicts the code, the documentation is wrong.
+- **No placeholders**: Every documented feature exists in the codebase.
+- **Diagrams are Mermaid.js**: All architectural and flow diagrams use standard Mermaid syntax.
+- **Legacy Archive**: Previous documentation is preserved in `_archive/` for reference.
 
-| Document | Description |
-|---|---|
-| [customer-portal-functional-spec.md](customer-portal-functional-spec.md) | Epics, features, user stories, acceptance criteria |
-| [customer-portal-nonfunctional-spec.md](customer-portal-nonfunctional-spec.md) | Security, performance, localization |
-| [customer-portal-product-structure.md](customer-portal-product-structure.md) | Product architecture and module hierarchy |
+## Quick Links
 
-## Self-Service Onboarding
+### For Developers
+- [Backend Architecture](./02-architecture/backend-architecture.md)
+- [Database Design](./02-architecture/database-design.md)
+- [Data Contracts](./02-architecture/data-contracts.md)
+- [Environment Setup](./10-operations/environment-setup.md)
 
-| Document | Description |
-|---|---|
-| [onboarding-functional-spec.md](onboarding-functional-spec.md) | Signup flow, landing pages |
-| [onboarding-nonfunctional-spec.md](onboarding-nonfunctional-spec.md) | Security, validation, subdomain handling |
-| [onboarding-product-structure.md](onboarding-product-structure.md) | Product architecture |
+### For QA
+- [Test Strategy](./11-testing/test-strategy.md)
+- [Test Scenarios](./11-testing/test-scenarios.md)
+- [Permissions Matrix](./09-cross-cutting/permissions-matrix.md)
+- [Error Codes](./09-cross-cutting/error-codes.md)
 
-## Driver Mobile App
-
-| Document | Description |
-|---|---|
-| [driver-app-functional-spec.md](driver-app-functional-spec.md) | Delivery workflow, proof-of-delivery, maps |
-| [driver-app-nonfunctional-spec.md](driver-app-nonfunctional-spec.md) | Security, offline, performance, localization |
-| [driver-app-developer-guide.md](driver-app-developer-guide.md) | Project structure, API endpoints, state management |
-
-## POS Mobile App
-
-| Document | Description |
-|---|---|
-| [pos-app-functional-spec.md](pos-app-functional-spec.md) | Cart, checkout, barcode scanning, sales history |
-| [pos-app-nonfunctional-spec.md](pos-app-nonfunctional-spec.md) | Security, offline, performance, localization |
-| [pos-app-developer-guide.md](pos-app-developer-guide.md) | Navigation, sale flow, cart state management |
-
-## System-Level
-
-| Document | Description |
-|---|---|
-| [TechStack.md](TechStack.md) | Technology stack overview |
-| [DataModel.md](DataModel.md) | Database schema and entity relationships |
-| [SystemImplementationSpec.md](SystemImplementationSpec.md) | Full system implementation specification |
-| [TechnicalDocumentation.md](TechnicalDocumentation.md) | Technical architecture documentation |
-| [OperationalDocumentation.md](OperationalDocumentation.md) | Daily operations and SOPs |
-| [ProductDocumentation.md](ProductDocumentation.md) | Business-facing product documentation |
-| [TestingStrategy.md](TestingStrategy.md) | Testing approach and strategy |
-| [Roadmap.md](Roadmap.md) | Product roadmap |
-| [credentials.md](credentials.md) | Demo accounts and access info |
-
----
-
-**© 2026 Partivo Commerce Platform**
+### For Business / Sales
+- [Executive Vision](./00-executive/vision.md)
+- [Value Proposition](./00-executive/value-proposition.md)
+- [Order Lifecycle](./12-business-flows/order-lifecycle.md)
+- [Onboarding Lifecycle](./12-business-flows/onboarding-lifecycle.md)
