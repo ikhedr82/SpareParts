@@ -886,6 +886,23 @@
             "subtitle": "Join hundreds of spare parts businesses streamlining their operations today.",
             "cta_start": "Start Free Trial",
             "cta_login": "Sign In"
+        },
+        "signup": {
+            "title": "Start Your 14-Day Free Trial",
+            "subtitle": "No credit card required. Full access to all platform features.",
+            "company_name": "Company Name",
+            "admin_name": "Full Name",
+            "email": "Work Email",
+            "password": "Password",
+            "subdomain": "Platform Subdomain",
+            "language": "Platform Language",
+            "submit": "Create Account",
+            "have_account": "Already have an account?",
+            "subdomain_available": "Subdomain available",
+            "subdomain_taken": "Subdomain is taken",
+            "success_title": "Account Created Successfully",
+            "success_desc": "Your dedicated tenant orchestration environment has been provisioned.",
+            "go_login": "Go to Login"
         }
     }
 }

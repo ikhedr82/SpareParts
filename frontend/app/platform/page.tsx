@@ -137,10 +137,8 @@ export default function PlatformPage() {
                             </div>
                         </div>
 
-                        <Link href="/platform/revenue" className="relative z-10 mt-8">
-                            <button className="w-full bg-white text-indigo-600 hover:bg-slate-50 py-4 rounded-2xl font-black text-sm shadow-xl active:scale-[0.98] transition-all">
+                        <Link href="/platform/revenue" className="relative z-10 mt-8 block w-full bg-white text-indigo-600 hover:bg-slate-50 py-4 rounded-2xl font-black text-sm shadow-xl active:scale-[0.98] transition-all text-center">
                                 {t('platform.revenue.view_ledger') || 'View Full Ledger'}
-                            </button>
                         </Link>
                     </div>
                 </div>
@@ -170,32 +168,37 @@ export default function PlatformPage() {
                     ) : (
                         <div className="divide-y divide-slate-50 flex-1">
                             {tenants?.slice(0, 5).map(tenant => (
-                                <div key={tenant.id} className="p-8 hover:bg-slate-50 transition-colors group">
+                                <Link href={`/platform/tenants/${tenant.id}`} key={tenant.id} className="block p-8 hover:bg-slate-50 transition-colors group">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-white border border-transparent group-hover:border-slate-100 transition-all">
-                                                <Building2 className="h-6 w-6 text-slate-400 group-hover:text-indigo-600" />
+                                            <div className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center group-hover:bg-white border border-transparent group-hover:border-slate-200 shadow-sm transition-all text-slate-400 group-hover:text-indigo-600 group-hover:scale-105">
+                                                <Building2 className="h-6 w-6" />
                                             </div>
-                                            <div>
+                                            <div className="text-start rtl:text-right">
                                                 <h3 className="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">{tenant.name}</h3>
                                                 <p className="text-xs text-slate-400 font-medium mt-0.5">
                                                     {tenant.subdomain}.partivo.net · {tenant._count.users} {t('common.users').toLowerCase()}
                                                 </p>
                                             </div>
                                         </div>
-                                        <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase ${tenant.status === 'ACTIVE'
-                                            ? 'bg-emerald-50 text-emerald-600'
-                                            : 'bg-rose-50 text-rose-600'
-                                            }`}>
-                                            {tenant.status === 'ACTIVE' ? (
-                                                <ShieldCheck className="h-3 w-3" />
-                                            ) : (
-                                                <ShieldBan className="h-3 w-3" />
-                                            )}
-                                            {tenant.status === 'ACTIVE' ? t('common.active') : t('common.suspended')}
-                                        </span>
+                                        <div className="flex items-center gap-4">
+                                            <span className={`inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase ${tenant.status === 'ACTIVE'
+                                                ? 'bg-emerald-50 text-emerald-600'
+                                                : 'bg-rose-50 text-rose-600'
+                                                }`}>
+                                                {tenant.status === 'ACTIVE' ? (
+                                                    <ShieldCheck className="h-3 w-3" />
+                                                ) : (
+                                                    <ShieldBan className="h-3 w-3" />
+                                                )}
+                                                {tenant.status === 'ACTIVE' ? t('common.active') : t('common.suspended')}
+                                            </span>
+                                            <span className="text-slate-300 group-hover:text-indigo-500 transition-colors transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 rtl:rotate-180">
+                                                →
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     )}

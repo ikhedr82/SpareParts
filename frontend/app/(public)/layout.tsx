@@ -50,7 +50,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
                         <div>
                             <h3 className="font-bold mb-6 text-white uppercase tracking-widest text-xs opacity-50">{t('landing.nav.about')}</h3>
                             <ul className="space-y-4 text-slate-400 font-bold text-start rtl:text-right">
-                                <li><button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="hover:text-blue-400 transition-colors">{t('landing.nav.home') || (isAr ? 'الرئيسية' : 'Home')}</button></li>
+                                <li><button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="hover:text-blue-400 transition-colors">{t('landing.nav.home') === 'landing.nav.home' ? (isAr ? 'الرئيسية' : 'Home') : t('landing.nav.home')}</button></li>
                                 <li><a href="#features" className="hover:text-blue-400 transition-colors">{t('landing.nav.features')}</a></li>
                                 <li><a href="#pricing" className="hover:text-blue-400 transition-colors">{t('landing.nav.pricing')}</a></li>
                             </ul>

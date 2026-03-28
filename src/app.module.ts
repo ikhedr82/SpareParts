@@ -47,6 +47,9 @@ import { I18nModule } from './i18n/i18n.module';
 import { LanguageResponseInterceptor } from './common/interceptors/language-response.interceptor';
 import { OnboardingModule } from './onboarding/onboarding.module';
 import { PublicInfoModule } from './public-info/public-info.module';
+import { CrmModule } from './crm/crm.module';
+import { BillingModule } from './billing/billing.module';
+import { SyncModule } from './common/sync/sync.module';
 
 @Module({
     imports: [
@@ -93,6 +96,9 @@ import { PublicInfoModule } from './public-info/public-info.module';
         I18nModule,
         OnboardingModule,
         PublicInfoModule,
+        CrmModule,
+        BillingModule,
+        SyncModule,
     ],
     providers: [
         {

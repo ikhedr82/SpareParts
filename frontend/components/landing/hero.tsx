@@ -31,7 +31,7 @@ export const Hero = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] },
+      transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] as const },
     },
   };
 
@@ -83,7 +83,7 @@ export const Hero = () => {
             )}
           >
             {title}{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+            <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
               {language === 'en' ? (
                 <>
                   <Typewriter words={["Smarter", "Faster", "Easier", "Better"]} className="text-blue-400" />
@@ -99,7 +99,7 @@ export const Hero = () => {
             className="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed" 
             dir="auto"
           >
-            {subtitle.split("SaaS").map((part, i, arr) => (
+            {subtitle.split("SaaS").map((part: string, i: number, arr: string[]) => (
               <React.Fragment key={i}>
                 {part}
                 {i < arr.length - 1 && <span dir="ltr" className="font-bold text-blue-400 mx-1">SaaS</span>}
@@ -111,11 +111,11 @@ export const Hero = () => {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center justify-center gap-6"
           >
-            <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-10 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-xl shadow-blue-500/20 transition-all hover:scale-105 active:scale-95 font-bold">
-              {ctaStart}
+            <Button asChild size="lg" className="w-full sm:w-auto text-lg h-14 px-10 bg-blue-600 hover:bg-blue-700 text-white border-0 shadow-xl shadow-blue-500/20 transition-all hover:scale-105 active:scale-95 font-bold">
+              <Link href="/signup">{ctaStart}</Link>
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-10 border-white/20 text-white hover:bg-white/10 hover:text-white bg-transparent backdrop-blur-sm transition-all hover:border-white/40 font-bold">
-              {learnMore}
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-10 border-white/20 text-white hover:bg-white/10 hover:text-white bg-transparent backdrop-blur-sm transition-all hover:border-white/40 font-bold">
+              <a href="#features">{learnMore}</a>
             </Button>
           </motion.div>
         </motion.div>

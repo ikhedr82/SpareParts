@@ -5,6 +5,7 @@ import { Section } from "./section";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { useCMSContent } from "@/lib/hooks/use-cms-content";
+import Link from "next/link";
 
 export const CTA = () => {
   const { t, language } = useLanguage();
@@ -52,11 +53,11 @@ export const CTA = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button size="lg" className="w-full sm:w-auto text-xl h-16 px-10 bg-white text-blue-600 hover:bg-blue-50 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95">
-              {btnPrimary}
+            <Button asChild size="lg" className="w-full sm:w-auto text-xl h-16 px-10 bg-white text-blue-600 hover:bg-blue-50 font-black rounded-2xl shadow-2xl transition-all hover:scale-105 active:scale-95">
+              <Link href="/signup">{btnPrimary}</Link>
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto text-xl h-16 px-10 border-white text-white hover:bg-white/10 font-black rounded-2xl transition-all hover:scale-105 active:scale-95 backdrop-blur-sm bg-transparent">
-              {btnSecondary}
+            <Button asChild size="lg" variant="outline" className="w-full sm:w-auto text-xl h-16 px-10 border-white text-white hover:bg-white/10 font-black rounded-2xl transition-all hover:scale-105 active:scale-95 backdrop-blur-sm bg-transparent">
+              <Link href="/login">{btnSecondary}</Link>
             </Button>
           </div>
         </motion.div>

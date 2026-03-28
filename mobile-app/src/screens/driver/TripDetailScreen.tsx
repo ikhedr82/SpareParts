@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity, Linking, P
 import { useLanguage } from '../../i18n/LanguageContext';
 import apiClient from '../../services/api';
 import BRAND from '../../config/brand';
+import { SyncQueue } from '../../services/SyncQueue';
+import { MediaSyncManager } from '../../services/MediaSyncManager';
 
 type DeliveryStatus = 'ASSIGNED' | 'ACCEPTED' | 'PICKED_UP' | 'IN_TRANSIT' | 'DELIVERED' | 'CANCELLED' | 'FAILED';
 
@@ -17,8 +19,8 @@ export default function DeliveryDetailScreen({ route, navigation }: any) {
     const { delivery } = route.params;
     const { t, isRtl } = useLanguage();
     const [status, setStatus] = useState<DeliveryStatus>(delivery.status);
-    const [proofPhoto, setProofPhoto] = useState(false);
-    const [proofSignature, setProofSignature] = useState(false);
+    const [proofPhoto, setProofPhoto] = useState<string | null>(null);
+    const [proofSignature, setProofSignature] = useState<string | null>(null);
     const [deliveryNotes, setDeliveryNotes] = useState('');
     const [updating, setUpdating] = useState(false);
 
@@ -29,15 +31,41 @@ export default function DeliveryDetailScreen({ route, navigation }: any) {
         }
         setUpdating(true);
         try {
-            await apiClient.patch(`/mobile/driver/trips/${delivery.id}/status`, { status: newStatus, notes: deliveryNotes });
+            // If delivering with media, use dedicated media queue (it will update status when done)
+            if (newStatus === 'DELIVERED' && (proofPhoto || proofSignature)) {
+                if (proofPhoto) {
+                    await MediaSyncManager.enqueueUpload(proofPhoto, 'image/jpeg', '/mobile/driver/upload', delivery.id, 'photo');
+                }
+                if (proofSignature) {
+                    await MediaSyncManager.enqueueUpload(proofSignature, 'image/png', '/mobile/driver/upload', delivery.id, 'signature');
+                }
+                
+                setStatus(newStatus);
+                Alert.alert('✅', t('driver.actions.complete') + ' (Syncing offline)', [
+                    { text: 'OK', onPress: () => navigation.goBack() }
+                ]);
+                return;
+            }
+
+            // Standard Data Queue
+            await SyncQueue.enqueue({
+                type: 'STATUS_CHANGE',
+                entity: 'TRIP',
+                priority: 'MEDIUM',
+                payload: { stopId: delivery.id, status: newStatus, notes: deliveryNotes },
+                version: 1
+            });
+            
             setStatus(newStatus);
             if (newStatus === 'DELIVERED') {
                 Alert.alert('✅', t('driver.actions.complete'), [
                     { text: 'OK', onPress: () => navigation.goBack() }
                 ]);
+            } else if (newStatus === 'FAILED') {
+                navigation.goBack();
             }
         } catch (err: any) {
-            Alert.alert(t('common.error'), err.response?.data?.message || err.message);
+            Alert.alert(t('common.error'), err.message);
         } finally {
             setUpdating(false);
         }
@@ -63,12 +91,12 @@ export default function DeliveryDetailScreen({ route, navigation }: any) {
     };
 
     const handleCapturePhoto = () => {
-        setProofPhoto(true);
+        setProofPhoto('file:///mock/photo.jpg');
         Alert.alert('📷', t('driver.proof.photo_captured'));
     };
 
     const handleCaptureSignature = () => {
-        setProofSignature(true);
+        setProofSignature('file:///mock/signature.png');
         Alert.alert('✍️', t('driver.proof.signature_captured'));
     };
 

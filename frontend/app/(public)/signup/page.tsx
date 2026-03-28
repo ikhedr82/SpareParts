@@ -5,7 +5,6 @@ import { useLanguage } from '@/lib/i18n/LanguageContext';
 import { Loader2, Check, AlertTriangle } from 'lucide-react';
 import Link from 'next/link';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
 export default function SignupPage() {
     const { t } = useLanguage();
@@ -34,7 +33,7 @@ export default function SignupPage() {
     const checkSubdomain = async (subdomain: string) => {
         setSubdomainStatus('checking');
         try {
-            const res = await fetch(`${API_URL}/onboarding/check-subdomain?subdomain=${subdomain}`);
+            const res = await fetch(`/onboarding/check-subdomain?subdomain=${subdomain}`);
             const data = await res.json();
             setSubdomainStatus(data.available ? 'available' : 'taken');
         } catch {
@@ -48,7 +47,7 @@ export default function SignupPage() {
         setError('');
 
         try {
-            const res = await fetch(`${API_URL}/onboarding/signup`, {
+            const res = await fetch('/onboarding/signup', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(form),
@@ -110,7 +109,7 @@ export default function SignupPage() {
                     )}
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.company_name')}</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.company_name')} <span className="text-red-500">*</span></label>
                         <input name="companyName" value={form.companyName} onChange={handleChange} required
                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
                             placeholder="Acme Auto Parts"
@@ -118,7 +117,7 @@ export default function SignupPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.admin_name')}</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.admin_name')} <span className="text-red-500">*</span></label>
                         <input name="adminName" value={form.adminName} onChange={handleChange} required
                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
                             placeholder="Ahmed Al-Rashid"
@@ -126,7 +125,7 @@ export default function SignupPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.email')}</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.email')} <span className="text-red-500">*</span></label>
                         <input name="adminEmail" type="email" value={form.adminEmail} onChange={handleChange} required
                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
                             placeholder="admin@acme.com"
@@ -134,7 +133,7 @@ export default function SignupPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.password')}</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.password')} <span className="text-red-500">*</span></label>
                         <input name="password" type="password" value={form.password} onChange={handleChange} required minLength={8}
                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
                             placeholder="••••••••"
@@ -142,7 +141,7 @@ export default function SignupPage() {
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.subdomain')}</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-1.5">{t('landing.signup.subdomain')} <span className="text-red-500">*</span></label>
                         <div className="flex items-center">
                             <input name="subdomain" value={form.subdomain} onChange={handleChange} required minLength={3} maxLength={63}
                                 pattern="[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?"

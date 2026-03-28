@@ -7,7 +7,8 @@
             "catalog": "كتالوج المنتجات",
             "pricing": "الأسعار والعروض",
             "financials": "الحساب والمالية",
-            "substitutions": "البدائل"
+            "substitutions": "البدائل",
+            "crm": "إدارة العملاء"
         },
         "dashboard": {
             "title": "لوحة التحكم",

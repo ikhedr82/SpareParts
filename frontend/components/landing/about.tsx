@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 import { Section } from "./section";
+import { EcosystemMatrix } from "./ecosystem-matrix";
 
 export const About = () => {
   const { t } = useLanguage();
@@ -53,18 +54,8 @@ export const About = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="relative aspect-square lg:aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl"
         >
-          {/* Placeholder for a high-quality brand image/video */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-emerald-600/20" />
-          <div className="absolute inset-0 flex items-center justify-center p-12">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center rotate-12">
-                <div className="w-10 h-10 border-4 border-white/20 rounded-lg animate-pulse" />
-              </div>
-              <p className="text-slate-400 font-mono text-sm uppercase tracking-widest">Partivo Ecosystem Matrix</p>
-            </div>
-          </div>
+          <EcosystemMatrix />
         </motion.div>
       </div>
     </Section>

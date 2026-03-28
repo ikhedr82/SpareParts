@@ -165,4 +165,21 @@ export class PlatformAdminController {
         assertPlatformAdmin(req.user);
         return this.cmsService.upsertLegal(data.type, data);
     }
+
+    // Sync Monitoring
+    @Get('sync-health')
+    async getSyncHealth(@Request() req) {
+        assertPlatformAdmin(req.user);
+        
+        // This simulates aggregated sync health metrics from Redis/Logs
+        return {
+           totalPending: 145,
+           totalFailed: 12,
+           activeDevices: 34,
+           tenantBreakdown: [
+              { tenantId: 'tenant-1', name: 'Al-Farouk Parts', failed: 2, pending: 45, devices: 10 },
+              { tenantId: 'tenant-2', name: 'AutoMax', failed: 10, pending: 100, devices: 24 }
+           ]
+        };
+    }
 }

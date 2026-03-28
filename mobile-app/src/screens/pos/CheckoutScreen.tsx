@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, ActivityIndicator } fr
 import apiClient from '../../services/api';
 import { useLanguage } from '../../i18n/LanguageContext';
 import BRAND from '../../config/brand';
+import { SyncQueue } from '../../services/SyncQueue';
 
 type PaymentMethod = 'CASH' | 'CARD' | 'TRANSFER';
 
@@ -21,17 +22,56 @@ export default function CheckoutScreen({ route, navigation }: any) {
     ];
 
     const processPayment = async () => {
+        if (!items || items.length === 0) {
+            Alert.alert(t('common.error'), 'Missing items to checkout.');
+            return;
+        }
+
         setProcessing(true);
+        const generatedOrderId = `ORD-${Date.now()}`;
+        const salePayload = {
+            clientOrderId: generatedOrderId,
+            items: items.map((i: any) => ({ productId: i.id, quantity: i.quantity, price: i.price })),
+            paymentMethod: method,
+            subtotal, tax, discount, total,
+        };
+
         try {
-            const res = await apiClient.post('/mobile/pos/checkout', {
-                items: items.map((i: any) => ({ productId: i.id, quantity: i.quantity, price: i.price })),
-                paymentMethod: method,
-                subtotal, tax, discount, total,
-            });
-            setOrderId(res.data?.orderId || `ORD-${Date.now()}`);
+            const res = await apiClient.post('/mobile/pos/checkout', salePayload);
+            setOrderId(res.data?.orderId || generatedOrderId);
             setSuccess(true);
         } catch (err: any) {
-            Alert.alert(t('common.error'), err.response?.data?.message || err.message);
+            // If offline or network error, enqueue for background sync
+            if (!err.response || err.response.status >= 500) {
+                console.log('Network error, enqueueing for offline sync...');
+                
+                await SyncQueue.enqueue({
+                    type: 'CREATE',
+                    entity: 'SALE',
+                    priority: 'HIGH',
+                    payload: salePayload,
+                    version: 1,
+                });
+                
+                // Enqueue payment separately for idempotency tracking
+                await SyncQueue.enqueue({
+                    type: 'CREATE',
+                    entity: 'PAYMENT',
+                    priority: 'HIGH',
+                    payload: {
+                        clientPaymentId: `PAY-${Date.now()}`,
+                        saleId: generatedOrderId,
+                        amount: total,
+                        method
+                    },
+                    version: 1
+                });
+
+                setOrderId(`${generatedOrderId} (Offline)`);
+                setSuccess(true);
+            } else {
+                Alert.alert(t('common.error'), err.response?.data?.message || err.message);
+            }
         } finally {
             setProcessing(false);
         }

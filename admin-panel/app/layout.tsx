@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Package, ShoppingCart, DollarSign, LayoutDashboard,
-  CreditCard, ArrowRightLeft, Tag
+  CreditCard, ArrowRightLeft, Tag, Users
 } from 'lucide-react';
 import { LanguageProvider, useLanguage } from '@/lib/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/language-switcher';
@@ -22,6 +22,7 @@ const navItems = [
   { href: '/pricing', icon: Tag, labelKey: 'portal.nav.pricing' },
   { href: '/financials', icon: CreditCard, labelKey: 'portal.nav.financials' },
   { href: '/substitutions', icon: ArrowRightLeft, labelKey: 'portal.nav.substitutions' },
+  { href: '/crm/customers', icon: Users, labelKey: 'portal.nav.crm' },
 ];
 
 function PortalShell({ children }: { children: React.ReactNode }) {

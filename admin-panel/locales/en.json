@@ -7,7 +7,8 @@
             "catalog": "Product Catalog",
             "pricing": "Pricing & Quotes",
             "financials": "Account & Finance",
-            "substitutions": "Substitutions"
+            "substitutions": "Substitutions",
+            "crm": "CRM"
         },
         "dashboard": {
             "title": "Dashboard",

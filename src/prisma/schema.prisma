@@ -38,11 +38,17 @@ model Subscription {
   createdAt            DateTime           @default(now()) @map("created_at")
   updatedAt            DateTime           @updatedAt @map("updated_at")
   currentPeriodEnd     DateTime?          @map("current_period_end")
+  cancelAtPeriodEnd     Boolean            @default(false) @map("cancel_at_period_end")
+  canceledAt            DateTime?          @map("canceled_at")
+  gracePeriodDays       Int                @default(0) @map("grace_period_days")
+  isGracePeriodActive   Boolean            @default(false) @map("is_grace_period_active")
   stripeSubscriptionId String?            @map("stripe_subscription_id")
+  paymobSubscriptionId String?            @map("paymob_subscription_id")
   provider             String             @default("STRIPE")
   billingInvoices      BillingInvoice[]
   plan                 Plan               @relation(fields: [planId], references: [id])
   tenant               Tenant             @relation(fields: [tenantId], references: [id])
+  changeHistory        SubscriptionChangeHistory[]
 
   @@map("subscriptions")
 }
@@ -63,12 +69,19 @@ model BillingInvoice {
   id              String        @id @default(uuid())
   tenantId        String        @map("tenant_id")
   subscriptionId  String?       @map("subscription_id")
+  invoiceNumber   String        @unique @map("invoice_number")
   amount          Decimal       @db.Decimal(10, 2)
+  subtotal        Decimal       @default(0) @db.Decimal(10, 2)
+  taxAmount       Decimal       @default(0) @db.Decimal(10, 2) @map("tax_amount")
   currency        String        @default("USD")
   status          InvoiceStatus @default(DRAFT)
   dueDate         DateTime      @map("due_date")
   paidAt          DateTime?     @map("paid_at")
   stripeInvoiceId String?       @map("stripe_invoice_id")
+  paymobOrderId   String?       @map("paymob_order_id")
+  dunningCount    Int           @default(0) @map("dunning_count")
+  lastDunningAt   DateTime?     @map("last_dunning_at")
+  nextRetryAt     DateTime?     @map("next_retry_at")
   createdAt       DateTime      @default(now()) @map("created_at")
   updatedAt       DateTime      @updatedAt @map("updated_at")
   periodStart     DateTime?     @map("period_start")
@@ -88,6 +101,46 @@ model BillingEvent {
   tenant    Tenant           @relation(fields: [tenantId], references: [id])
 
   @@map("billing_events")
+}
+
+model WebhookEvent {
+  id          String             @id @default(uuid())
+  provider    String             // stripe, paymob
+  eventId     String             @unique @map("event_id")
+  payload     Json               @default("{}")
+  status      WebhookEventStatus @default(PENDING)
+  processedAt DateTime?          @map("processed_at")
+  error       String?
+  createdAt   DateTime           @default(now()) @map("created_at")
+
+  @@index([provider, eventId])
+  @@map("webhook_events")
+}
+
+model InvoiceSequence {
+  id         String   @id @default(uuid())
+  tenantId   String?  @unique @map("tenant_id") // Optional for global per-year sequence
+  year       Int
+  lastNumber Int      @default(0) @map("last_number")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@unique([tenantId, year])
+  @@map("invoice_sequences")
+}
+
+model SubscriptionChangeHistory {
+  id             String       @id @default(uuid())
+  tenantId       String       @map("tenant_id")
+  subscriptionId String       @map("subscription_id")
+  fromPlanId     String?      @map("from_plan_id")
+  toPlanId       String?      @map("to_plan_id")
+  type           String       // UPGRADE, DOWNGRADE, CANCEL, RENEW
+  reason         String?
+  effectiveAt    DateTime     @default(now()) @map("effective_at")
+  metadata       Json?        @default("{}")
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+
+  @@map("subscription_change_history")
 }
 
 model Currency {
@@ -132,6 +185,7 @@ model Tenant {
   suspensionReason      String?                @map("suspension_reason")
   baseCurrency          String                 @default("USD") @map("base_currency")
   planId                String?                @map("plan_id")
+  vatPercentage         Decimal                @default(0) @db.Decimal(5, 2) @map("vat_percentage")
   supportedCurrencies   String[]               @default(["USD"]) @map("supported_currencies")
   billingEmail          String?                @map("billing_email")
   stripeCustomerId      String?                @map("stripe_customer_id")
@@ -191,6 +245,12 @@ model Tenant {
   zReports              ZReport[]
   featureFlags          FeatureFlag[]
   apiKeys               ApiKey[]
+  leads                 Lead[]
+  opportunities         Opportunity[]
+  deals                 Deal[]
+  crmActivities         Activity[]
+  crmNotes              Note[]
+  creditAccounts        CreditAccount[]
 
   @@map("tenants")
 }
@@ -509,6 +569,7 @@ model Inventory {
   allocated     Int       @default(0)
   /// HC-3: Optimistic concurrency version
   version       Int       @default(0)
+  offlineSyncId String?   @unique @map("offline_sync_id")
   branch        Branch    @relation(fields: [branchId], references: [id])
   product       Product   @relation(fields: [productId], references: [id])
   tenant        Tenant    @relation(fields: [tenantId], references: [id])
@@ -549,6 +610,7 @@ model Sale {
   refundSale       Sale[]          @relation("RefundedSale")
   tenant           Tenant          @relation(fields: [tenantId], references: [id])
   stripePayments   StripePayment[]
+  offlineSyncId    String?         @unique @map("offline_sync_id")
 
   @@map("sales")
 }
@@ -590,7 +652,9 @@ model Payment {
   tenant            Tenant         @relation(fields: [tenantId], references: [id])
   receipt           Receipt?
   stripe            StripePayment?
+  clientPaymentId   String?        @map("client_payment_id")
 
+  @@unique([tenantId, clientPaymentId])
   @@index([tenantId])
   @@index([saleId])
   @@map("payments")
@@ -1106,6 +1170,10 @@ model BusinessClient {
   priceRules         PriceRule[]
   quotes             Quote[]
   sales              Sale[]
+  opportunities      Opportunity[]
+  crmActivities      Activity[]
+  crmNotes           Note[]
+  creditAccount      CreditAccount?
 
   @@index([tenantId])
   @@index([tenantId, status])
@@ -1258,8 +1326,11 @@ model Order {
   revenueLedgers      RevenueLedger[]
   substitutions       Substitution[]
   tripStops           TripStop[]
+  offlineSyncId       String?                @unique @map("offline_sync_id")
+  clientOrderId       String?                @map("client_order_id")
 
   @@unique([tenantId, orderNumber])
+  @@unique([tenantId, clientOrderId])
   @@index([tenantId])
   @@index([businessClientId])
   @@index([branchId])
@@ -1351,6 +1422,8 @@ model InventoryLedger {
   tenant         Tenant                   @relation(fields: [tenantId], references: [id])
   user           User                     @relation(fields: [userId], references: [id])
   revenueLedger  RevenueLedger?
+  offlineSyncId  String?                  @unique @map("offline_sync_id")
+  version        Int                      @default(0)
 
   @@index([branchId])
   @@index([productId])
@@ -1375,6 +1448,7 @@ model PickList {
   branch       Branch         @relation(fields: [branchId], references: [id])
   order        Order          @relation(fields: [orderId], references: [id])
   tenant       Tenant         @relation(fields: [tenantId], references: [id])
+  offlineSyncId String?       @unique @map("offline_sync_id")
 
   @@index([tenantId])
   @@index([branchId])
@@ -1412,6 +1486,8 @@ model Pack {
   items      PackItem[]
   pickList   PickList   @relation(fields: [pickListId], references: [id])
   tripPack   TripPack?
+  offlineSyncId String?   @unique @map("offline_sync_id")
+  version    Int        @default(0)
 
   @@unique([pickListId, packNumber])
   @@index([pickListId])
@@ -1514,6 +1590,7 @@ model DeliveryTrip {
   packs                 TripPack[]
   stops                 TripStop[]
   currentVehicle        Vehicle?             @relation("CurrentVehicleTrip")
+  offlineSyncId         String?              @unique @map("offline_sync_id")
 
   @@index([tenantId])
   @@index([branchId])
@@ -1542,6 +1619,8 @@ model TripStop {
   order              Order?              @relation(fields: [orderId], references: [id])
   supplier           Supplier?           @relation(fields: [supplierId], references: [id])
   trip               DeliveryTrip        @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  offlineSyncId      String?             @unique @map("offline_sync_id")
+  version            Int                 @default(0)
 
   @@index([tripId])
   @@map("trip_stops")
@@ -2120,7 +2199,9 @@ enum BillingCycle {
 enum SubscriptionStatus {
   ACTIVE
   TRIAL
+  GRACE_PERIOD
   PAST_DUE
+  UNPAID
   CANCELED
 }
 
@@ -2131,11 +2212,24 @@ enum InvoiceStatus {
   FAILED
 }
 
+enum WebhookEventStatus {
+  PENDING
+  PROCESSED
+  FAILED
+}
+
 enum BillingEventType {
+  SUBSCRIPTION_CREATED
+  SUBSCRIPTION_CANCELLED
+  SUBSCRIPTION_RENEWED
+  INVOICE_CREATED
+  INVOICE_PAID
+  INVOICE_PAYMENT_FAILED
   UPGRADE
   DOWNGRADE
   PAYMENT_SUCCESS
   PAYMENT_FAILED
+  WEBHOOK_RECEIVED
 }
 
 enum RoleScope {
@@ -2312,4 +2406,165 @@ model LegalContent {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("legal_content")
+}
+
+model Lead {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  name            String
+  company         String?
+  email           String?
+  phone           String?
+  status          LeadStatus        @default(NEW)
+  source          String?
+  notes           String?
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+  opportunities   Opportunity[]
+  activities      Activity[]
+  notes_list      Note[]
+
+  @@index([tenantId])
+  @@map("crm_leads")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  UNQUALIFIED
+  CONVERTED
+}
+
+model Opportunity {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  leadId          String?           @map("lead_id")
+  businessClientId String?          @map("business_client_id")
+  name            String
+  value           Decimal           @db.Decimal(12, 2)
+  stage           OpportunityStage  @default(QUALIFIED)
+  probability     Int               @default(0)
+  expectedCloseDate DateTime?       @map("expected_close_date")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  lead            Lead?             @relation(fields: [leadId], references: [id])
+  businessClient  BusinessClient?   @relation(fields: [businessClientId], references: [id])
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+  deals           Deal[]
+  activities      Activity[]
+  notes           Note[]
+
+  @@index([tenantId])
+  @@map("crm_opportunities")
+}
+
+enum OpportunityStage {
+  LEAD
+  QUALIFIED
+  PROPOSAL
+  WON
+  LOST
+}
+
+model Deal {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  opportunityId   String            @map("opportunity_id")
+  name            String
+  value           Decimal           @db.Decimal(12, 2)
+  status          DealStatus        @default(OPEN)
+  closedAt        DateTime?         @map("closed_at")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  opportunity     Opportunity       @relation(fields: [opportunityId], references: [id])
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+  activities      Activity[]
+  notes           Note[]
+
+  @@index([tenantId])
+  @@map("crm_deals")
+}
+
+enum DealStatus {
+  OPEN
+  WON
+  LOST
+}
+
+model Activity {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  type            ActivityType
+  subject         String
+  description     String?
+  dueDate         DateTime?         @map("due_date")
+  isCompleted     Boolean           @default(false) @map("is_completed")
+  completedAt     DateTime?         @map("completed_at")
+  leadId          String?           @map("lead_id")
+  opportunityId   String?           @map("opportunity_id")
+  dealId          String?           @map("deal_id")
+  businessClientId String?          @map("business_client_id")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  lead            Lead?             @relation(fields: [leadId], references: [id])
+  opportunity     Opportunity?      @relation(fields: [opportunityId], references: [id])
+  deal            Deal?             @relation(fields: [dealId], references: [id])
+  businessClient  BusinessClient?   @relation(fields: [businessClientId], references: [id])
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@map("crm_activities")
+}
+
+enum ActivityType {
+  CALL
+  MEETING
+  FOLLOW_UP
+  REMINDER
+  EMAIL
+}
+
+model Note {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  content         String            @db.Text
+  leadId          String?           @map("lead_id")
+  opportunityId   String?           @map("opportunity_id")
+  dealId          String?           @map("deal_id")
+  businessClientId String?          @map("business_client_id")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  lead            Lead?             @relation(fields: [leadId], references: [id])
+  opportunity     Opportunity?      @relation(fields: [opportunityId], references: [id])
+  deal            Deal?             @relation(fields: [dealId], references: [id])
+  businessClient  BusinessClient?   @relation(fields: [businessClientId], references: [id])
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@map("crm_notes")
+}
+
+model CreditAccount {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  businessClientId String           @unique @map("business_client_id")
+  creditLimit     Decimal           @default(0) @db.Decimal(12, 2) @map("credit_limit")
+  balance         Decimal           @default(0) @db.Decimal(12, 2)
+  status          CreditStatus      @default(ACTIVE)
+  notes           String?
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+  businessClient  BusinessClient    @relation(fields: [businessClientId], references: [id])
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId])
+  @@map("crm_credit_accounts")
+}
+
+enum CreditStatus {
+  ACTIVE
+  ON_HOLD
+  BLOCKED
 }

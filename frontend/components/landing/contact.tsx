@@ -6,9 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { useCMSContent } from "@/lib/hooks/use-cms-content";
 
 export const Contact = () => {
   const { t } = useLanguage();
+  const { data: footerData } = useCMSContent("footer");
+
+  const email   = footerData?.contentEn?.email   || "sales@partivo.com";
+  const phone   = footerData?.contentEn?.phone   || "+1 (800) PARTIVO";
+  const address = footerData?.contentEn?.address || "Dubai Silicon Oasis, UAE";
 
   return (
     <Section id="contact" className="bg-slate-900/50">
@@ -65,23 +71,24 @@ export const Contact = () => {
           transition={{ duration: 0.5 }}
           className="p-8 md:p-12 rounded-[2.5rem] bg-white/5 border border-white/5 backdrop-blur-sm shadow-2xl"
         >
-          <form className="space-y-8">
+          <form className="space-y-8" suppressHydrationWarning>
             <div className="space-y-3">
               <label className="text-sm font-bold text-slate-300 uppercase tracking-widest block text-start rtl:text-right">{t("landing.contact.form_name")}</label>
-              <Input placeholder="John Doe" className="h-14 rounded-2xl bg-slate-950 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 transition-all text-start rtl:text-right" />
+              <Input suppressHydrationWarning placeholder="John Doe" className="h-14 rounded-2xl bg-slate-950 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 transition-all text-start rtl:text-right" />
             </div>
             <div className="space-y-3">
               <label className="text-sm font-bold text-slate-300 uppercase tracking-widest block text-start rtl:text-right">{t("landing.contact.form_email")}</label>
-              <Input type="email" placeholder="john@company.com" className="h-14 rounded-2xl bg-slate-950 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 transition-all text-start rtl:text-right" />
+              <Input suppressHydrationWarning type="email" placeholder="john@company.com" className="h-14 rounded-2xl bg-slate-950 border-white/10 text-white placeholder:text-slate-600 focus:border-blue-500/50 transition-all text-start rtl:text-right" />
             </div>
             <div className="space-y-3">
               <label className="text-sm font-bold text-slate-300 uppercase tracking-widest block text-start rtl:text-right">{t("landing.contact.form_message")}</label>
               <textarea 
+                suppressHydrationWarning
                 className="w-full min-h-[160px] rounded-2xl border border-white/10 bg-slate-950 px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all text-start rtl:text-right"
                 placeholder={t("landing.contact.form_message")}
               />
             </div>
-            <Button size="lg" className="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-lg font-bold shadow-lg shadow-blue-500/20">
+            <Button suppressHydrationWarning size="lg" className="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-lg font-bold shadow-lg shadow-blue-500/20">
               {t("landing.contact.form_submit")}
             </Button>
           </form>

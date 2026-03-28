@@ -8,6 +8,7 @@ import { Check } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface Plan {
   id: string;
@@ -30,12 +31,6 @@ export const Pricing = () => {
         setPlans(response.data);
       } catch (error) {
         console.error("Failed to fetch plans:", error);
-        // Fallback to static plans if API fails
-        setPlans([
-          { id: 'free', name: 'Free', price: 0, currency: 'USD', features: ['2 Users', '1 Branch', '100 Products'] },
-          { id: 'pro', name: 'Pro', price: 49, currency: 'USD', features: ['10 Users', '5 Branches', 'Unlimited Products'], isPopular: true },
-          { id: 'enterprise', name: 'Enterprise', price: 199, currency: 'USD', features: ['Unlimited Users', 'Unlimited Branches', '99.9% SLA'] }
-        ]);
       } finally {
         setLoading(false);
       }
@@ -62,6 +57,8 @@ export const Pricing = () => {
       </Section>
     );
   }
+
+  if (plans.length === 0) return null;
 
   return (
     <Section id="pricing" className="bg-slate-950">
@@ -137,6 +134,7 @@ export const Pricing = () => {
             </ul>
 
             <Button
+              asChild
               className={cn(
                 "w-full h-14 rounded-2xl text-lg font-black transition-all mt-auto shadow-lg",
                 plan.isPopular 
@@ -144,7 +142,7 @@ export const Pricing = () => {
                   : "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-600/20"
               )}
             >
-              {t("landing.pricing.cta")}
+              <Link href="/signup">{t("landing.pricing.cta")}</Link>
             </Button>
           </motion.div>
         ))}

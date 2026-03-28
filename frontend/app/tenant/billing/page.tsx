@@ -13,7 +13,7 @@ export default function TenantBillingPage() {
     const { data: planStatus, isLoading, refetch } = useQuery({
         queryKey: ['plan-status'],
         queryFn: async () => {
-            const res = await apiClient.get('/api/tenant/plan');
+            const res = await apiClient.get('/api/billing/plan');
             return res.data;
         }
     });
@@ -21,14 +21,14 @@ export default function TenantBillingPage() {
     const { data: history } = useQuery({
         queryKey: ['billing-history'],
         queryFn: async () => {
-            const res = await apiClient.get('/api/tenant/billing/history');
+            const res = await apiClient.get('/api/billing/invoices');
             return res.data;
         }
     });
 
-    const handleUpgrade = async (priceId: string) => {
+    const handleUpgrade = async (planId: string, provider: 'STRIPE' | 'PAYMOB' = 'STRIPE') => {
         try {
-            const res = await apiClient.post('/api/tenant/billing/create-checkout-session', { priceId });
+            const res = await apiClient.post('/api/billing/checkout', { planId, provider });
             if (res.data.url) {
                 window.location.href = res.data.url;
             }
@@ -68,6 +68,12 @@ export default function TenantBillingPage() {
                     <div className="flex items-center gap-3 bg-rose-50 text-rose-700 px-6 py-3 rounded-2xl border-2 border-rose-100 animate-bounce">
                         <AlertTriangle className="w-6 h-6" />
                         <span className="font-black text-sm tracking-widest uppercase">Action Required: Payment Overdue</span>
+                    </div>
+                )}
+                {status === 'GRACE_PERIOD' && (
+                    <div className="flex items-center gap-3 bg-amber-50 text-amber-700 px-6 py-3 rounded-2xl border-2 border-amber-100 animate-pulse">
+                        <AlertTriangle className="w-6 h-6" />
+                        <span className="font-black text-sm tracking-widest uppercase italic">Grace Period Active: Payment Pending</span>
                     </div>
                 )}
             </div>
@@ -166,13 +172,22 @@ export default function TenantBillingPage() {
                                     <td className="py-5 px-4 text-sm font-mono text-slate-400">{inv.id.slice(0, 8)}</td>
                                     <td className="py-5 px-4 text-sm font-black text-slate-900">${inv.amount}</td>
                                     <td className="py-5 px-4">
-                                        <span className={`text-[10px] font-black px-3 py-1 rounded-lg tracking-widest uppercase ${inv.status === 'PAID' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'
+                                        <span className={`text-[10px] font-black px-3 py-1 rounded-lg tracking-widest uppercase ${
+                                            inv.status === 'PAID' ? 'bg-emerald-50 text-emerald-600' : 
+                                            inv.status === 'FAILED' ? 'bg-rose-50 text-rose-600' :
+                                            'bg-amber-50 text-amber-600'
                                             }`}>
                                             {inv.status}
                                         </span>
                                     </td>
                                     <td className="py-5 px-4 text-right">
-                                        <button className="text-indigo-600 font-black text-xs hover:underline decoration-2 underline-offset-4 tracking-tight">DOCUMENT.PDF</button>
+                                        <a 
+                                            href={`${apiClient.defaults.baseURL}/api/billing/invoices/${inv.id}/pdf`}
+                                            target="_blank"
+                                            className="text-indigo-600 font-black text-xs hover:underline decoration-2 underline-offset-4 tracking-tight"
+                                        >
+                                            DOCUMENT.PDF
+                                        </a>
                                     </td>
                                 </tr>
                             )) : (

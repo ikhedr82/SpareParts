@@ -102,12 +102,12 @@ export const Navbar = () => {
             <Link href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
               {t("landing.nav.login")}
             </Link>
-            <Button 
-              onClick={() => scrollToSection("pricing")}
-              className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 shadow-lg shadow-blue-600/20"
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-2 text-sm font-medium shadow-lg shadow-blue-600/20 transition-colors"
             >
               {t("landing.nav.start_free")}
-            </Button>
+            </Link>
           </div>
           
           {/* Mobile spacer to balance the left toggle */}
@@ -137,14 +137,13 @@ export const Navbar = () => {
             <span className="text-slate-400 font-medium">{t("landing.nav.login")}</span>
             <LanguageSwitcher />
           </div>
-          <Button 
-            onClick={() => scrollToSection("pricing")}
-            size="lg"
-            className="w-full bg-blue-600 hover:bg-blue-700 h-14 text-lg font-bold rounded-2xl"
+          <Link
+            href="/signup"
+            className="w-full flex items-center justify-center bg-blue-600 hover:bg-blue-700 h-14 text-lg font-bold rounded-2xl transition-colors"
           >
             {t("landing.nav.start_free")}
             <ArrowRight className="ml-2 w-5 h-5 rtl:mr-2 rtl:ml-0 rtl:rotate-180" />
-          </Button>
+          </Link>
         </div>
       </div>
     </nav>

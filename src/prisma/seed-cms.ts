@@ -17,7 +17,7 @@ async function main() {
         learnMore: 'Explore Features',
       },
       contentAr: {
-        badge: 'منصة التجارة من الجيل القادم',
+        badge: 'منصة تجارة قطع الغيار للجيل القادم',
         title: 'أدر أعمال قطع الغيار بذكاء واحترافية',
         subtitle: 'منصة SaaS متكاملة لتجار قطع الغيار. أدر المخزون والمبيعات واللوجستيات والمالية — من لوحة تحكم موحدة.',
         ctaStart: 'ابدأ الفترة التجريبية',
@@ -52,25 +52,25 @@ async function main() {
       },
     },
     {
-        key: 'how-it-works',
-        contentEn: {
-            title: 'How Partivo Works',
-            subtitle: 'Implementation is seamless, results are immediate.',
-            steps: [
-                { step: 1, title: 'Provision Your Node', desc: 'Deploy your dedicated SaaS instance with isolated resources.' },
-                { step: 2, title: 'Import Your Catalog', desc: 'Sync your existing spare parts inventory and supplier lists.' },
-                { step: 3, title: 'Scale Globally', desc: 'Manage unlimited branches and process transactions worldwide.' }
-            ]
-        },
-        contentAr: {
-            title: 'كيف يعمل بارتيفو',
-            subtitle: 'التنفيذ سلس والنتائج فورية.',
-            steps: [
-                { step: 1, title: 'توفير نقطة الوصول', desc: 'قم بنشر مثيل SaaS المخصص الخاص بك مع موارد معزولة.' },
-                { step: 2, title: 'استيراد الكتالوج', desc: 'قم بمزامنة مخزون قطع الغيار الحالي وقوائم الموردين.' },
-                { step: 3, title: 'التوسع عالمياً', desc: 'أدر فروعاً غير محدودة وقم بمعالجة المعاملات في جميع أنحاء العالم.' }
-            ]
-        }
+      key: 'how-it-works',
+      contentEn: {
+        title: 'How Partivo Works',
+        subtitle: 'Implementation is seamless, results are immediate.',
+        steps: [
+          { step: 1, title: 'Provision Your Node', desc: 'Deploy your dedicated SaaS instance with isolated resources.' },
+          { step: 2, title: 'Import Your Catalog', desc: 'Sync your existing spare parts inventory and supplier lists.' },
+          { step: 3, title: 'Scale Globally', desc: 'Manage unlimited branches and process transactions worldwide.' }
+        ]
+      },
+      contentAr: {
+        title: 'كيف يعمل بارتيفو',
+        subtitle: 'التنفيذ سلس والنتائج فورية.',
+        steps: [
+          { step: 1, title: 'توفير نقطة الوصول', desc: 'قم بنشر مثيل SaaS المخصص الخاص بك مع موارد معزولة.' },
+          { step: 2, title: 'استيراد الكتالوج', desc: 'قم بمزامنة مخزون قطع الغيار الحالي وقوائم الموردين.' },
+          { step: 3, title: 'التوسع عالمياً', desc: 'أدر فروعاً غير محدودة وقم بمعالجة المعاملات في جميع أنحاء العالم.' }
+        ]
+      }
     }
   ];
 

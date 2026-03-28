@@ -91,14 +91,29 @@ export class OrdersService {
 
             const total = subtotal + tax;
 
-            // 4. Check credit limit
-            const availableCredit =
-                Number(cart.businessClient.creditLimit) - Number(cart.businessClient.currentBalance);
+            // 4. Check credit limit & status
+            const creditAccount = await tx.creditAccount.findUnique({
+              where: { businessClientId: dto.businessClientId }
+            });
 
-            if (total > availableCredit) {
-                throw new BadRequestException(
-                    `Order total (${total}) exceeds available credit (${availableCredit})`
-                );
+            if (creditAccount) {
+                if (creditAccount.status === 'BLOCKED') {
+                    throw new BadRequestException('Ordering is blocked for this account due to credit status.');
+                }
+                const available = Number(creditAccount.creditLimit) - Number(creditAccount.balance);
+                if (total > available) {
+                    throw new BadRequestException(`Order total (${total}) exceeds available credit (${available})`);
+                }
+            } else {
+                // Fallback to BusinessClient fields if no CreditAccount exists yet
+                const availableCredit =
+                    Number(cart.businessClient.creditLimit) - Number(cart.businessClient.currentBalance);
+
+                if (total > availableCredit) {
+                    throw new BadRequestException(
+                        `Order total (${total}) exceeds available credit (${availableCredit})`
+                    );
+                }
             }
 
             // 5. Validate delivery address and contact if provided
